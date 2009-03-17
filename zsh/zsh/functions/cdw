@@ -1,0 +1,6 @@
+if [[ -x `which $1` ]]
+then
+    builtin cd `which $1`(:h)
+else
+    builtin cd $1
+fi

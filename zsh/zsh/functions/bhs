@@ -1,0 +1,9 @@
+SETUP="Setup.lhs"
+if [[ -f Setup.hs ]]
+then
+    SETUP="Setup.hs"
+fi
+[[ "$0" == "bhsc" ]] && runhaskell $SETUP clean
+runhaskell $SETUP configure --prefix=$HOME --user
+runhaskell $SETUP build
+runhaskell $SETUP install --user

@@ -1,0 +1,49 @@
+!!! General settings
+
+!*visualBell: True
+*scrollBar: False
+*saveLines: 9999
+*cursorColor: #ffffff
+!#f68a00
+
+
+!!! Rxvt settings
+
+*Rxvt*foreground: #eeeeee
+!#e0e080
+!#008800
+*Rxvt*background: black
+!#e0e080
+
+!To set font manually: printf '\e]710;%s\007' "xft:Consolas:size=12"
+!URxvt*font:	xft:Consolas:size=12, \
+URxvt*font:	xft:Bitstream Vera Sans Mono:pixelsize=17,\
+			xft:Arial Unicode MS:pixelsize=16,\
+			xft:Everson Mono Unicode:pixelsize=16
+URxvt*searchable-scrollback: CS-s
+URxvt*cutchars: `"()*<>[]{}|'
+URxvt*secondaryScroll: true
+URxvt.urgentOnBell: true
+!URxvt*termName: rxvt-256color
+
+! TODO I'd like to make these keys send pgup/dn to all apps
+!URxvt*keysym.C-o: 0xff55
+!URxvt*keysym.C-e: 0xff56
+
+!url yanking from urxvt
+URxvt.keysym.C-apostrophe: perl:mark-yank-urls:activate_mark_mode
+URxvt.underlineURLs: true
+URxvt.perl-lib: /home/nathan/.urxvt/
+URxvt.perl-ext: selection,mark-yank-urls
+URxvt.urlLauncher: firefox
+
+
+!!! Xterm settings
+
+*XTerm*foreground: gray90
+*XTerm*background: black
+*XTerm*underLine: true
+XTerm*font: 10x20
+
+UXTerm*faceName: Bitstream Vera Sans Mono
+UXTerm*faceSize: 10

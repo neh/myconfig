@@ -1,0 +1,32 @@
+startup_message off
+defscrollback 5000
+defutf8 on
+shell -$SHELL
+vbell off
+
+# vim/dvorak style window switching
+bindkey "^h" prev
+bindkey "^s" next
+
+# clear screen when exiting apps
+altscreen
+
+# terminfo and termcap for nice 256 color terminal
+# allow bold colors - necessary for some reason
+attrcolor b ".I"
+# set up rxvt title setting
+termcapinfo rxvt* 'hs:ts=\E]0;:fs=\007:ds=\E]0;\007'
+# tell screen how to set colors. AB = background, AF=foreground
+termcapinfo rxvt* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# make screen used terminal scrollbuffer
+termcapinfo rxvt* ti@:te@
+# erase background with current bg color
+defbce "on"
+
+
+#caption always "%?%F%{= KY}%:%{=u kR}%? %h"
+#hardstatus string "%{= ky} %-Lw%{=b KY} %n%f %t %{-}%+Lw %=%{= dd}"
+#hardstatus string "%?%F%{= KY}%:%{=u kR}%? %h"
+caption always "%{= kw} %-Lw%{= gk} %n%f %t %{-}%+Lw %=%{= dd}"
+
+#hardstatus string '%{= KW}%-Lw%{= wk}%50>%n%f* %t%{= KW}%+Lw%<'

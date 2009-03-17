@@ -1,0 +1,17 @@
+# Back button
+"echo 'KeyStrPress F5 KeyStrRelease F5' | xmacroplay :0"
+    b:8
+
+# Back button + super = close window
+"echo 'KeyStrPress Super_L KeyStrPress k KeyStrRelease k KeyStrRelease Super_L' | xmacroplay :0"
+    Mod4 + b:8
+
+# Wheel tilting
+"echo 'KeyStrPress Alt_L KeyStrPress Left KeyStrRelease Left KeyStrRelease Alt_L' | xmacroplay :0"
+    b:6
+"echo 'KeyStrPress Alt_L KeyStrPress Right KeyStrRelease Right KeyStrRelease Alt_L' | xmacroplay :0"
+    b:7
+#"echo 'KeyStrPress Control_L KeyStrPress Shift_L KeyStrPress Tab KeyStrRelease Tab KeyStrRelease Shift_L KeyStrRelease Control_L' | xmacroplay :0"
+    #Shift + b:6
+#"echo 'KeyStrPress Control_L KeyStrPress Tab KeyStrRelease Tab KeyStrRelease Control_L' | xmacroplay :0"
+    #Shift + b:7
