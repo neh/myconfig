@@ -61,8 +61,8 @@ statusBarCmd = "dzen2 -bg '" ++ bg ++ "' -fg '" ++ fg ++ "' -x 0 -y 0 -h 24 -w 1
 i_three = "^i(/home/nathan/.xmonad/three.xbm)"
 i_hgrid = "^i(/home/nathan/.xmonad/hgrid.xbm)"
 i_full = "^i(/home/nathan/.xmonad/full.xbm)"
-i_dp = "^i(/home/nathan/.xmonad/dp.xbm)"
 i_tall = "^i(/home/nathan/.xmonad/tall.xbm)"
+i_dp = "^i(/home/nathan/.xmonad/dp.xbm)"
 
 main = do
   din <- spawnPipe statusBarCmd
