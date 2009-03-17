@@ -120,16 +120,19 @@ myLog h = withWindowSet $
     , ppHiddenNoWindows = id
     , ppTitle           = (" ^fg(#eeeeee)" ++) . dzenEscape
     , ppOrder           = \(workspaces:layout:title:xs) ->
-                           (layout:mywc ws:workspaces:title:xs)
+                           (layout:myWCount ws:workspaces:title:xs)
     , ppOutput          = hPutStrLn h
     }
     where
+      -- myWCount provides a count of open windows, and
+      -- indicates which has focus. e.g. 2/4 means that
+      -- the second window of four is focused.
+      myWCount = W.with (sc ++ "0/0" ++ ec)
+                  (\s -> sc ++ (show (length (W.up s) + 1))
+                  ++ "/" ++
+                  (show (length (W.integrate s))) ++ ec)
       sc = "^fg(#000000)^bg(" ++ fg ++ ") "
       ec = " ^fg(" ++ fg ++ ")^bg(" ++ bg ++ ")"
-      mywc = W.with (sc ++ "0/0" ++ ec)
-             (\s -> sc ++ (show (length (W.up s) + 1))
-             ++ "/" ++
-             (show (length (W.integrate s))) ++ ec)
 
 
 myPConfig = defaultXPConfig
