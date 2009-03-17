@@ -158,7 +158,7 @@ myManageHook = composeAll
   , className =? "Gimp-2.6"              --> doNewWS "gimp"
   , title     =? "Add-ons"               --> doOpenUnder
   , className =? "Savebox"               --> doOpenUnder
-  , title     =? "handy"                 --> doSetRole "handy" >> doCenterFloat 
+  , title     =? "handy"                 --> (doSetRole "handy" >> doCenterFloat) 
   , manageDocks
   ]
   where
