@@ -144,21 +144,21 @@ myPConfig = defaultXPConfig
 -- (stringProperty "WM_WINDOW_ROLE") =? "the-role-string"
 myManageHook :: ManageHook
 myManageHook = composeAll
-  [ className =? "Do"                    --> doIgnore
+  [ className =? "stalonetray"           --> doIgnore
+  , className =? "Do"                    --> doIgnore
   , resource  =? "Dialog"                --> doFloat
   , title     =? "Edit Bookmark"         --> doFloat
   , title     =? "Session Manager"       --> doFloat
   , title     =? "Bulk rename files"     --> doFloat
-  , title     =? "List Changes"          --> doFloat
+  , className =? "Apt-listchanges"       --> doFloat
   , title     =? "Shiretoko Preferences" --> doFloat
   , className =? "feh"                   --> doCenterFloat
-  , title     ~? ".*VirtualBox.*"        --> doNewWS "vm"
-  , className =? "stalonetray"           --> doIgnore
+  , title     =? "handy"                 --> (doSetRole "handy" >> doCenterFloat) 
   , className =? "Mythfrontend.real"     --> doNewHWS "tv"
   , className =? "Gimp-2.6"              --> doNewWS "gimp"
+  , title     ~? ".*VirtualBox.*"        --> doNewWS "vm"
   , title     =? "Add-ons"               --> doOpenUnder
   , className =? "Savebox"               --> doOpenUnder
-  , title     =? "handy"                 --> (doSetRole "handy" >> doCenterFloat) 
   , manageDocks
   ]
   where
