@@ -5,6 +5,7 @@ import Control.Monad (filterM)
 import Data.Char (ord)
 import Data.Ratio
 import System.IO
+import System.Exit
 
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.CycleWS
@@ -57,12 +58,12 @@ fg = "#de8221" --orange
 fn = "-*-fixed-medium-r-*-*-20-*-*-*-*-*-iso8859-*"
 statusBarCmd = "dzen2 -bg '" ++ bg ++ "' -fg '" ++ fg ++ "' -x 0 -y 0 -h 24 -w 1332 -fn '" ++ fn ++ "' -e 'onstart=lower' -ta l"
 
--- icons
-i_three = "^i(/home/nathan/.xmonad/three.xbm)"
-i_hgrid = "^i(/home/nathan/.xmonad/hgrid.xbm)"
-i_full = "^i(/home/nathan/.xmonad/full.xbm)"
-i_tall = "^i(/home/nathan/.xmonad/tall.xbm)"
-i_dp = "^i(/home/nathan/.xmonad/dp.xbm)"
+-- Handier, shorter names for icons
+i_three = "^i($HOME/.xmonad/three.xbm)"
+i_hgrid = "^i($HOME/.xmonad/hgrid.xbm)"
+i_full = "^i($HOME/.xmonad/full.xbm)"
+i_tall = "^i($HOME/.xmonad/tall.xbm)"
+i_dp = "^i($HOME/.xmonad/dp.xbm)"
 
 main = do
   din <- spawnPipe statusBarCmd
@@ -71,10 +72,11 @@ main = do
     { borderWidth        = 0
     , terminal           = "urxvtcd"
     , normalBorderColor  = "#444444"
-    , focusedBorderColor = "#de8221" --orange
+    , focusedBorderColor = fg
     , modMask            = mod4Mask
     , workspaces         = ["0", "comm", "im", "files", "web"]
-    , keys               = \c -> myKeys c sp `M.union` keys defaultConfig c
+    , keys               = myKeys sp
+    --, keys               = \c -> myKeys sp c `M.union` keys defaultConfig c
     , mouseBindings      = myMouse
     , handleEventHook    = ewmhDesktopsEventHook
     , manageHook         = manageSpawn sp <+> myManageHook
@@ -99,13 +101,13 @@ main = do
                            file
     }
     where
+      full = named i_full Full
       tiled = named i_tall (HintedTile 1 (3%100) 0.648 TopLeft Tall)
       rtiled = named i_tall (ResizableTall 1 (3%100) 0.648 [])
       dp = named i_dp (dragPane Vertical 0.03 0.5)
       im = named i_three (withIM (0.13) (Role "buddy_list") $
            ResizableTall 1 (1/100) (0.40) [1])
-      full = named i_full Full
-      gridr = named i_hgrid (Grid True)
+      rgrid = named i_hgrid (Grid True)
       grid = named i_hgrid (Grid False)
       file = named i_three (ThreeCol 1 (3/100) (0.5))
       gimp = named i_three (withIM (0.11) (Role "gimp-toolbox") $
@@ -136,7 +138,7 @@ myLog h = withWindowSet $
 
 
 myPConfig = defaultXPConfig
-  { font              = "-*-fixed-medium-r-*-*-20-*-*-*-*-*-iso8859-*"
+  { font              = fn
   , bgColor           = bg
   , fgColor           = fg
   , height            = 36
@@ -156,9 +158,10 @@ myManageHook = composeAll
   , className =? "Apt-listchanges"       --> doFloat
   , title     =? "Shiretoko Preferences" --> doFloat
   , className =? "feh"                   --> doCenterFloat
+  , className =? "Xmessage"              --> doCenterFloat
   , title     =? "handy"                 --> (doSetRole "handy" >> doCenterFloat) 
   , className =? "Mythfrontend.real"     --> doNewHWS "tv"
-  , className =? "Gimp-2.6"              --> doNewWS "gimp"
+  , className ~? "(Gimp-2.6|Gimp)"       --> doNewWS "gimp"
   , title     ~? ".*VirtualBox.*"        --> doNewWS "vm"
   , title     =? "Add-ons"               --> doOpenUnder
   , className =? "Savebox"               --> doOpenUnder
@@ -169,15 +172,15 @@ myManageHook = composeAll
     doOpenUnder = doF W.swapDown
     role = stringProperty "WM_WINDOW_ROLE"
 
-    doNewHWS tg = (liftX $ addUniqueHiddenWS tg) >> doShift tg
-    addUniqueHiddenWS tg = withWindowSet $ \s ->
-      if null (filter ( (== tg) . W.tag) (W.workspaces s))
-        then addHiddenWorkspace tg
-        else return()
     doNewWS tg = (liftX $ addUniqueWS tg) >> doShift tg
     addUniqueWS tg = withWindowSet $ \s ->
       if null (filter ( (== tg) . W.tag) (W.workspaces s))
         then addWorkspace tg
+        else return()
+    doNewHWS tg = (liftX $ addUniqueHiddenWS tg) >> doShift tg
+    addUniqueHiddenWS tg = withWindowSet $ \s ->
+      if null (filter ( (== tg) . W.tag) (W.workspaces s))
+        then addHiddenWorkspace tg
         else return()
 
     -- Apparently this function is a bad idea, since it likely
@@ -192,7 +195,7 @@ myManageHook = composeAll
       ) >> idHook
 
 
-myKeys conf@(XConfig {XMonad.modMask = modMask}) sp = M.fromList $
+myKeys sp conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   [ ((modMask,                 xK_c     ), spawnHere sp $ XMonad.terminal conf)
   , ((modMask, xK_e), submap . M.fromList $
     [ ((0, xK_e), spawnHere sp "appmenu")
@@ -267,6 +270,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) sp = M.fromList $
     , ((0, xK_r), spawnHere sp "musicmenu rhythmbox-client")
     , ((0, xK_p), spawnHere sp "musicmenu beep-media-player")
     ])
+  , ((modMask .|. shiftMask,   xK_q     ), io (exitWith ExitSuccess))
+  , ((modMask,                 xK_q     ), spawn "xmonad --recompile; xmonad --restart")
   ]
   -- > -- mod-[1..9]       %! Switch to workspace N
   -- > -- mod-shift-[1..9] %! Move client to workspace N
@@ -291,10 +296,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) sp = M.fromList $
                           . W.workspace
                           . W.current) s)
       case filterCurrent of
-        (x:_) -> do
-          killWindow x
-        []    -> do
-          action
+        (x:_) -> killWindow x
+        []    -> action
 
 
 myMouse (XConfig {XMonad.modMask = modMask}) = M.fromList $
