@@ -1,3 +1,7 @@
+{- TODO
+ - try Debug.Trace.trace
+ - try Control.Exception.assert
+ -}
 import XMonad hiding (Tall)
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
@@ -10,6 +14,7 @@ import System.Exit
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.CycleWS
 import XMonad.Actions.DynamicWorkspaces
+import XMonad.Actions.FloatKeys
 import XMonad.Actions.SpawnOn
 import XMonad.Actions.Submap
 import XMonad.Actions.UpdatePointer
@@ -23,12 +28,10 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.Combo
-import XMonad.Layout.DragPane
 import XMonad.Layout.HintedGrid
 import XMonad.Layout.HintedTile
 import XMonad.Layout.IM
 import XMonad.Layout.LayoutHints
-import XMonad.Layout.Named
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Reflect
@@ -58,13 +61,6 @@ fg = "#de8221" --orange
 fn = "-*-fixed-medium-r-*-*-20-*-*-*-*-*-iso8859-*"
 statusBarCmd = "dzen2 -bg '" ++ bg ++ "' -fg '" ++ fg ++ "' -x 0 -y 0 -h 24 -w 1332 -fn '" ++ fn ++ "' -e 'onstart=lower' -ta l"
 
--- Handier, shorter names for icons
-i_three = "^i($HOME/.xmonad/three.xbm)"
-i_hgrid = "^i($HOME/.xmonad/hgrid.xbm)"
-i_full = "^i($HOME/.xmonad/full.xbm)"
-i_tall = "^i($HOME/.xmonad/tall.xbm)"
-i_dp = "^i($HOME/.xmonad/dp.xbm)"
-
 main = do
   din <- spawnPipe statusBarCmd
   sp <- mkSpawner
@@ -79,7 +75,7 @@ main = do
     --, keys               = \c -> myKeys sp c `M.union` keys defaultConfig c
     , mouseBindings      = myMouse
     , handleEventHook    = ewmhDesktopsEventHook
-    , manageHook         = manageSpawn sp <+> myManageHook
+    , manageHook         = manageSpawn sp <+> manageDocks <+> myManageHook
     , logHook            = myLog din >>
                            fadeInactiveLogHook 0x99999999 >>
                            ewmhDesktopsLogHook >>
@@ -87,31 +83,29 @@ main = do
                            setWMName "LG3D"
     , layoutHook         = smartBorders $
                            layoutHints $
-                           toggleLayouts full $
-                           onWorkspace "tv" full $
+                           toggleLayouts Full $
+                           onWorkspace "tv" Full $
                            avoidStruts $
-                           onWorkspace "0" (dp ||| grid) $
-                           onWorkspace "comm" full $
+                           onWorkspace "0" (tp ||| grid) $
+                           onWorkspace "comm" Full $
                            onWorkspace "im" im $
                            onWorkspace "files" file $
                            onWorkspace "gimp" gimp $
-                           onWorkspace "vm" full $
+                           onWorkspace "vm" Full $
                            rtiled |||
-                           dp |||
+                           tp |||
                            file
     }
     where
-      full = named i_full Full
-      tiled = named i_tall (HintedTile 1 (3%100) 0.648 TopLeft Tall)
-      rtiled = named i_tall (ResizableTall 1 (3%100) 0.648 [])
-      dp = named i_dp (dragPane Vertical 0.03 0.5)
-      im = named i_three (withIM (0.13) (Role "buddy_list") $
-           ResizableTall 1 (1/100) (0.40) [1])
-      rgrid = named i_hgrid (Grid True)
-      grid = named i_hgrid (Grid False)
-      file = named i_three (ThreeCol 1 (3/100) (0.5))
-      gimp = named i_three (withIM (0.11) (Role "gimp-toolbox") $
-             reflectHoriz $ withIM (0.15) (Role "gimp-dock") Full)
+      tiled = HintedTile 1 (3%100) 0.648 TopLeft Tall
+      rtiled = ResizableTall 1 (3%100) 0.648 []
+      tp = TwoPane 0.03 0.5
+      im = withIM (0.13) (Role "buddy_list") $ ResizableTall 1 (1/100) (0.40) [1]
+      rgrid = Grid True
+      grid = Grid False
+      file = ThreeCol 1 (3/100) (0.5)
+      gimp = withIM (0.11) (Role "gimp-toolbox") $ reflectHoriz $
+             withIM (0.15) (Role "gimp-dock") Full
 
 
 myLog h = withWindowSet $
@@ -122,7 +116,7 @@ myLog h = withWindowSet $
     , ppHiddenNoWindows = id
     , ppTitle           = (" ^fg(#eeeeee)" ++) . dzenEscape
     , ppOrder           = \(workspaces:layout:title:xs) ->
-                           (layout:myWCount ws:workspaces:title:xs)
+                           (myWCount ws:workspaces:title:xs)
     , ppOutput          = hPutStrLn h
     }
     where
@@ -165,7 +159,6 @@ myManageHook = composeAll
   , title     ~? ".*VirtualBox.*"        --> doNewWS "vm"
   , title     =? "Add-ons"               --> doOpenUnder
   , className =? "Savebox"               --> doOpenUnder
-  , manageDocks
   ]
   where
     unFloat = ask >>= doF . W.sink
@@ -214,6 +207,10 @@ myKeys sp conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,                 xK_r     ), refresh)
 
   , ((modMask,                 xK_u     ), focusUrgent)
+
+  , ((modMask,                 xK_x     ), withFocused (keysMoveWindowTo (960,600) (1%2,1%2)))
+  , ((modMask,                 xK_p     ), withFocused (keysResizeWindow (-30,-30) (1%2,1%2)))
+  , ((modMask,                 xK_y     ), withFocused (keysResizeWindow (30,30) (1%2,1%2)))
 
   , ((modMask,                 xK_o     ), toggleWindow (role =? "handy")
       (spawnHere sp $ XMonad.terminal conf ++
