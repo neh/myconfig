@@ -6,14 +6,6 @@ fi
 
 export __CURRENT_GIT_BRANCH=
 EDITOR='vim -p'
-alias vim='vim -p'
-alias m4a2ogg='for nam in *.m4a; do nice mplayer -vo null -vc null -ao pcm:fast "$nam" -ao pcm:file="$nam.wav" && nice oggenc -q5 "$nam.wav" -o "$(basename "$nam" .m4a).ogg"; rm "$nam.wav"; done'
-alias au='sudo aptitude update'
-alias afu='sudo aptitude full-upgrade'
-alias less='less -Mircaf'
-alias ltail='less +F'
-alias rm='rm --one-file-system'
-alias vless='vim -u /usr/share/vim/vim71/macros/less.vim'
 
 # Nice directory truncation with a proper ellipsis: %30<…<
 
@@ -49,6 +41,14 @@ if [ "$TERM" != "dumb" ]; then
     eval "`dircolors -b`"
     alias ls='ls --color=auto -h'
 fi
+alias vim='vim -p'
+alias m4a2ogg='for nam in *.m4a; do nice mplayer -vo null -vc null -ao pcm:fast "$nam" -ao pcm:file="$nam.wav" && nice oggenc -q5 "$nam.wav" -o "$(basename "$nam" .m4a).ogg"; rm "$nam.wav"; done'
+alias au='sudo aptitude update'
+alias afu='sudo aptitude full-upgrade'
+alias less='less -Mircaf'
+alias ltail='less +F'
+alias rm='rm --one-file-system'
+alias vless='vim -u /usr/share/vim/vim71/macros/less.vim'
 alias df='df -h'
 alias acs='apt-cache search'
 alias acsn='apt-cache search --names-only'
@@ -71,10 +71,7 @@ alias scd='screen -X chdir `pwd`'
 setopt CDABLEVARS
 hit() { hash -d $1=$PWD }
 
-# Some handy quick access dirs
-#hash -d dwl=~/Downloads
-
-# make sure ^S and ^Q are not mapped to stop/start so they're freed up for other things
+# make sure ^S and ^Q are not mapped to stop/start so they're freed up for other things (like screen)
 stty stop "" start ""
 
 bindkey -v
@@ -187,7 +184,30 @@ preexec_functions+='title_preexec'
 precmd_functions+='title_precmd'
 
 
-## Prompts
+## Prompt addons
+
+function zle-keymap-select {
+    # Notification if prompt is in vi command mode
+    #VIMODE="${${KEYMAP/vicmd/${fg_bold[red]}!%b}/(main|viins)/}"
+    if [[ $KEYMAP = vicmd ]]; then
+        local VIMODE="${fg_bold[red]}!%b"
+    else
+        local VIMODE=""
+    fi
+
+    zle reset-prompt
+}
+zle -N zle-keymap-select
+
+# Indicate background jobs
+function jobs_indicator {
+    if [[ $(jobs | wc -l) -gt 0 ]]; then
+        JOBS=" *"
+    else
+        JOBS=""
+    fi
+}
+precmd_functions+='jobs_indicator'
 
 # change user@host color based on where I am
 if [[ "$SSH_CONNECTION" == "" ]]
@@ -200,5 +220,5 @@ else
     esac
 fi
 
-PS1='%{${fg_bold[red]}%}%(?..%?%b%{${fg_no_bold[white]}%}:% )$COLOUR%n@%m%{${fg[default]}%}%b '
+PS1='%{${fg_bold[red]}%}%(?..%?%b%{${fg_no_bold[white]}%}:% )$COLOUR%n@%m%{${fg[default]}%}$JOBS%b $VIMODE'
 RPS1='%{${fg[green]}%}$(get_git_prompt_info) %~%{${fg[default]}%}'
