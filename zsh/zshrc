@@ -90,28 +90,27 @@ compinit -C
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 ## Some functions used to put the current git branch name in my prompt
-# via http://www.jukie.net/~bart/blog/zsh-git-branch
-parse_git_dirty() {
-    [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo '*'
-} 
-parse_git_branch() {
-    git-branch --no-color 2> /dev/null \
-    | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+git_branch() {
+    case $(git status 2> /dev/null | tail -n1) in
+        'nothing to commit'*)
+        DIRTY="%{${fg[green]}%}";;
+        *)
+        DIRTY="%{${fg_bold[red]}%}";;
+    esac
+    BRANCH=$(git-branch --no-color 2> /dev/null \
+    | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')
+    echo "$DIRTY$BRANCH%b"
 }
-preexec_functions+='zsh_preexec_update_git_vars'
-zsh_preexec_update_git_vars() {
+preexec_functions+='preexec_update_git_prompt'
+preexec_update_git_prompt() {
     case "$(history $HISTCMD)" in 
     *git*)
-    export __CURRENT_GIT_BRANCH="$(parse_git_dirty)$(parse_git_branch)"
-    ;;
+    GIT_PROMPT="$(git_branch)";;
     esac
 }
-chpwd_functions+='zsh_chpwd_update_git_vars'
-zsh_chpwd_update_git_vars() {
-    export __CURRENT_GIT_BRANCH="$(parse_git_dirty)$(parse_git_branch)"
-}
-get_git_prompt_info() {
-    echo $__CURRENT_GIT_BRANCH
+chpwd_functions+='chpwd_update_git_prompt'
+chpwd_update_git_prompt() {
+    GIT_PROMPT="$(git_branch)"
 }
 
 
@@ -220,4 +219,4 @@ else
 fi
 
 PS1='%{${fg_bold[red]}%}%(?..%?%b%{${fg_no_bold[white]}%}:% )$COLOUR%n@%m%{${fg[default]}%}$JOBS%b $VIMODE'
-RPS1='%{${fg[green]}%}$(get_git_prompt_info) %~%{${fg[default]}%}'
+RPS1='$GIT_PROMPT %{${fg[green]}%}%~%{${fg[default]}%}'
