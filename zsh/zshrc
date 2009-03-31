@@ -92,12 +92,11 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:
 ## Some functions used to put the current git branch name in my prompt
 # via http://www.jukie.net/~bart/blog/zsh-git-branch
 parse_git_dirty() {
-    [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+    [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo '*'
 } 
 parse_git_branch() {
     git-branch --no-color 2> /dev/null \
-    | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/' \
-    | cat $(parse_git_dirty) -
+    | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 preexec_functions+='zsh_preexec_update_git_vars'
 zsh_preexec_update_git_vars() {
