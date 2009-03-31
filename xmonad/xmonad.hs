@@ -15,9 +15,9 @@ import XMonad.Actions.CopyWindow
 import XMonad.Actions.CycleWS
 import XMonad.Actions.DynamicWorkspaces
 import XMonad.Actions.FloatKeys
-import XMonad.Actions.SpawnOn
 import XMonad.Actions.Submap
 import XMonad.Actions.UpdatePointer
+import XMonad.Actions.WindowBringer
 import XMonad.Actions.WindowGo
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EventHook
@@ -27,7 +27,6 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
-import XMonad.Layout.Combo
 import XMonad.Layout.HintedGrid
 import XMonad.Layout.HintedTile
 import XMonad.Layout.IM
@@ -42,10 +41,8 @@ import XMonad.Layout.ToggleLayouts
 import XMonad.Layout.TwoPane
 import XMonad.Prompt
 import XMonad.Prompt.AppendFile
-import XMonad.Prompt.Input
 import XMonad.Prompt.Man
 import XMonad.Prompt.Shell
-import XMonad.Prompt.Ssh
 import XMonad.Prompt.Window
 import XMonad.Util.Run
  
@@ -63,7 +60,6 @@ statusBarCmd = "dzen2 -bg '" ++ bg ++ "' -fg '" ++ fg ++ "' -x 0 -y 0 -h 24 -w 1
 
 main = do
   din <- spawnPipe statusBarCmd
-  sp <- mkSpawner
   xmonad $ withUrgencyHook NoUrgencyHook defaultConfig
     { borderWidth        = 0
     , terminal           = "urxvtcd"
@@ -71,11 +67,11 @@ main = do
     , focusedBorderColor = fg
     , modMask            = mod4Mask
     , workspaces         = ["0", "comm", "im", "files", "web"]
-    , keys               = myKeys sp
+    , keys               = myKeys
     --, keys               = \c -> myKeys sp c `M.union` keys defaultConfig c
     , mouseBindings      = myMouse
     , handleEventHook    = ewmhDesktopsEventHook
-    , manageHook         = manageSpawn sp <+> manageDocks <+> myManageHook
+    , manageHook         = manageDocks <+> myManageHook
     , logHook            = myLog din >>
                            fadeInactiveLogHook 0x99999999 >>
                            ewmhDesktopsLogHook >>
@@ -124,9 +120,9 @@ myLog h = withWindowSet $
       -- indicates which has focus. e.g. 2/4 means that
       -- the second window of four is focused.
       myWCount = W.with (sc ++ "0/0" ++ ec)
-                  (\s -> sc ++ (show (length (W.up s) + 1))
-                  ++ "/" ++
-                  (show (length (W.integrate s))) ++ ec)
+                   (\s -> sc ++ (show (length (W.up s) + 1))
+                   ++ "/" ++
+                   (show (length (W.integrate s))) ++ ec)
       sc = "^fg(#000000)^bg(" ++ fg ++ ") "
       ec = " ^fg(" ++ fg ++ ")^bg(" ++ bg ++ ")"
 
@@ -139,8 +135,6 @@ myPConfig = defaultXPConfig
   }
 
 
--- Other window properties are available too:
--- (stringProperty "WM_WINDOW_ROLE") =? "the-role-string"
 myManageHook :: ManageHook
 myManageHook = composeAll
   [ className =? "stalonetray"           --> doIgnore
@@ -154,7 +148,7 @@ myManageHook = composeAll
   , className =? "feh"                   --> doCenterFloat
   , className =? "Xmessage"              --> doCenterFloat
   , title     =? "handy"                 --> (doSetRole "handy" >> doCenterFloat) 
-  , className =? "Mythfrontend.real"     --> doNewHWS "tv"
+  , title     ~? "mythfrontend"          --> doNewHWS "tv"
   , className ~? "(Gimp-2.6|Gimp)"       --> doNewWS "gimp"
   , title     ~? ".*VirtualBox.*"        --> doNewWS "vm"
   , title     =? "Add-ons"               --> doOpenUnder
@@ -188,14 +182,13 @@ myManageHook = composeAll
       ) >> idHook
 
 
-myKeys sp conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
-  [ ((modMask,                 xK_c     ), spawnHere sp $ XMonad.terminal conf)
+myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
+  [ ((modMask,                 xK_c     ), spawn $ XMonad.terminal conf)
   , ((modMask, xK_e), submap . M.fromList $
-    [ ((0, xK_e), spawnHere sp "appmenu")
-    , ((0, xK_s), spawnHere sp "screenmenu")
+    [ ((0, xK_e), spawn "appmenu")
+    , ((0, xK_s), spawn "screenmenu")
     , ((0, xK_x), shellPrompt myPConfig)
     , ((0, xK_m), manPrompt myPConfig)
-    , ((0, xK_h), sshPrompt myPConfig)
     , ((0, xK_g), windowPromptGoto myPConfig)
     , ((0, xK_b), windowPromptBring myPConfig)
     , ((0, xK_t), appendFilePrompt myPConfig "/home/nathan/notes/s-o-c")
@@ -209,14 +202,14 @@ myKeys sp conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,                 xK_u     ), focusUrgent)
 
   , ((modMask,                 xK_x     ), withFocused (keysMoveWindowTo (960,600) (1%2,1%2)))
-  , ((modMask,                 xK_p     ), withFocused (keysResizeWindow (-30,-30) (1%2,1%2)))
-  , ((modMask,                 xK_y     ), withFocused (keysResizeWindow (30,30) (1%2,1%2)))
+  , ((modMask,                 xK_p     ), withFocused (keysResizeWindow (-40,-40) (1%2,1%2)))
+  , ((modMask,                 xK_y     ), withFocused (keysResizeWindow (40,40) (1%2,1%2)))
 
   , ((modMask,                 xK_o     ), toggleWindow (role =? "handy")
-      (spawnHere sp $ XMonad.terminal conf ++
+      (spawn $ XMonad.terminal conf ++
       " -title handy -geometry 100x40 -e screen -D -R handy"))
   , ((modMask,                 xK_i     ), toggleWindow (title =? "insp")
-      (spawnHere sp "feh --title insp $HOME/Pictures/cultofdone-wp.png"))
+      (spawn "feh --title insp $HOME/Pictures/cultofdone-wp.png"))
 
   , ((modMask,                 xK_BackSpace), removeWorkspace)
   , ((modMask,                 xK_l     ), selectWorkspace myPConfig)
@@ -260,15 +253,15 @@ myKeys sp conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask,                 xK_apostrophe ), spawn "mpc --no-status toggle")
   , ((modMask,                 xK_m     ), submap . M.fromList $
-    [ ((0, xK_l), spawnHere sp "urxvt -e ncmpc")
-    , ((0, xK_m), spawnHere sp "musicmenu mpc")
-    , ((0, xK_t), spawnHere sp "musicmenu totem")
-    , ((0, xK_b), spawnHere sp "musicmenu banshee")
-    , ((0, xK_r), spawnHere sp "musicmenu rhythmbox-client")
-    , ((0, xK_p), spawnHere sp "musicmenu beep-media-player")
+    [ ((0, xK_l), spawn "urxvt -e ncmpc")
+    , ((0, xK_m), spawn "musicmenu mpc")
+    , ((0, xK_t), spawn "musicmenu totem")
+    , ((0, xK_b), spawn "musicmenu banshee")
+    , ((0, xK_r), spawn "musicmenu rhythmbox-client")
+    , ((0, xK_p), spawn "musicmenu beep-media-player")
     ])
   , ((modMask .|. shiftMask,   xK_q     ), io (exitWith ExitSuccess))
-  , ((modMask,                 xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+  , ((modMask,                 xK_q     ), spawn "xmonad --recompile && xmonad --restart")
   ]
   -- > -- mod-[1..9]       %! Switch to workspace N
   -- > -- mod-shift-[1..9] %! Move client to workspace N
@@ -281,18 +274,26 @@ myKeys sp conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   where
     role = stringProperty "WM_WINDOW_ROLE"
 
-    showDesktop = withWindowSet $ \s ->
-      if null (filter ( (== ".Z") . W.tag) (W.workspaces s))
+    showDesktop = withWindowSet $ \ws ->
+      if null (filter ( (== ".Z") . W.tag) (W.workspaces ws))
         then addWorkspace ".Z"
         else removeWorkspace
 
-    toggleWindow wTest action = withWindowSet $ \s -> do
-      filterCurrent <- filterM (runQuery wTest)
-                       ( (maybe [] W.integrate
-                          . W.stack
-                          . W.workspace
-                          . W.current) s)
+    toggleWindow wTest action = withWindowSet $ \ws -> do
+      filterCurrent <- filterM (runQuery wTest) (W.allWindows ws)
+      --curTag <- gets (W.currentTag . windowset)
       case filterCurrent of
+        --(x:_) -> let wTag = W.findTag x ws
+        --(x:_) -> case W.findTag x ws of
+                   --Just curTag -> killWindow x
+                   --_           -> bringWindow x
+        --(x:_) -> do wTag <- gets (W.findTag x windowset)
+                    --if (wTag) == (Just curTag)
+                      --then killWindow x
+                      --else bringWindow x
+        --(x:_) ->    if (W.findTag x ws == curTag)
+                      --then killWindow x
+                      --else bringWindow x
         (x:_) -> killWindow x
         []    -> action
 
