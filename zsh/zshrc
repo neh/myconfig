@@ -89,8 +89,8 @@ compinit -C
 ## case-insensitive (all),partial-word and then substring completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-## Some functions used to put the current git branch name in my prompt
-git_branch() {
+## Some functions used to put the current vcs branch name in my prompt
+git_prompt() {
     case $(git status 2> /dev/null | tail -n1) in
         'nothing to commit'*)
         DIRTY="%{${fg[green]}%}";;
@@ -101,16 +101,20 @@ git_branch() {
     | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')
     echo "$DIRTY$BRANCH%b"
 }
-preexec_functions+='preexec_update_git_prompt'
-preexec_update_git_prompt() {
-    case "$(history $HISTCMD)" in 
-    *git*)
-    GIT_PROMPT="$(git_branch)";;
-    esac
+preexec_functions+='preexec_update_vcs_prompt'
+preexec_update_vcs_prompt() {
+    if which git &> /dev/null; then
+        case "$(history $HISTCMD)" in 
+        *git*)
+        VCS_PROMPT="$(git_prompt)";;
+        esac
+    fi
 }
-chpwd_functions+='chpwd_update_git_prompt'
-chpwd_update_git_prompt() {
-    GIT_PROMPT="$(git_branch)"
+chpwd_functions+='chpwd_update_vcs_prompt'
+chpwd_update_vcs_prompt() {
+    if which git &> /dev/null; then
+        VCS_PROMPT="$(git_prompt)"
+    fi
 }
 
 
@@ -219,4 +223,4 @@ else
 fi
 
 PS1='%{${fg_bold[red]}%}%(?..%?%b%{${fg_no_bold[white]}%}:% )$COLOUR%n@%m%{${fg[default]}%}$JOBS%b $VIMODE'
-RPS1='$GIT_PROMPT %{${fg[green]}%}%~%{${fg[default]}%}'
+RPS1='$VCS_PROMPT %{${fg[green]}%}%~%{${fg[default]}%}'
