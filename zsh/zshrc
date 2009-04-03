@@ -104,10 +104,7 @@ git_prompt() {
 preexec_functions+='preexec_update_vcs_prompt'
 preexec_update_vcs_prompt() {
     if which git &> /dev/null; then
-        case "$(history $HISTCMD)" in 
-        *git*)
-        VCS_PROMPT="$(git_prompt)";;
-        esac
+        VCS_PROMPT="$(git_prompt)"
     fi
 }
 chpwd_functions+='chpwd_update_vcs_prompt'
