@@ -1,7 +1,3 @@
-{- TODO
- - try Debug.Trace.trace
- - try Control.Exception.assert
- -}
 import XMonad hiding (Tall)
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
@@ -68,7 +64,6 @@ main = do
     , modMask            = mod4Mask
     , workspaces         = ["0", "comm", "im", "files", "web"]
     , keys               = myKeys
-    --, keys               = \c -> myKeys sp c `M.union` keys defaultConfig c
     , mouseBindings      = myMouse
     , handleEventHook    = ewmhDesktopsEventHook
     , manageHook         = manageDocks <+> myManageHook
@@ -280,20 +275,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         else removeWorkspace
 
     toggleWindow wTest action = withWindowSet $ \ws -> do
-      filterCurrent <- filterM (runQuery wTest) (W.allWindows ws)
-      --curTag <- gets (W.currentTag . windowset)
-      case filterCurrent of
-        --(x:_) -> let wTag = W.findTag x ws
-        --(x:_) -> case W.findTag x ws of
-                   --Just curTag -> killWindow x
-                   --_           -> bringWindow x
-        --(x:_) -> do wTag <- gets (W.findTag x windowset)
-                    --if (wTag) == (Just curTag)
-                      --then killWindow x
-                      --else bringWindow x
-        --(x:_) ->    if (W.findTag x ws == curTag)
-                      --then killWindow x
-                      --else bringWindow x
+      filterAll <- filterM (runQuery wTest) (W.allWindows ws)
+      curr <- gets (W.currentTag . windowset)
+      case filterAll of
         (x:_) -> killWindow x
         []    -> action
 
