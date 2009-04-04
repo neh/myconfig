@@ -184,7 +184,7 @@ function zle-keymap-select {
     # Notification if prompt is in vi command mode
     #VIMODE="${${KEYMAP/vicmd/${fg_bold[red]}!%b}/(main|viins)/}"
     if [[ $KEYMAP = vicmd ]]; then
-        local VIMODE="${fg_bold[red]}!%b"
+        local VIMODE="%{${fg_bold[red]}%}!%b"
     else
         local VIMODE=""
     fi
