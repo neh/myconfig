@@ -27,6 +27,7 @@ import XMonad.Layout.HintedGrid
 import XMonad.Layout.HintedTile
 import XMonad.Layout.IM
 import XMonad.Layout.LayoutHints
+import qualified XMonad.Layout.Magnifier as Mag
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Reflect
@@ -89,7 +90,7 @@ main = do
     }
     where
       tiled = HintedTile 1 (3%100) 0.648 TopLeft Tall
-      rtiled = ResizableTall 1 (3%100) 0.648 []
+      rtiled = Mag.magnifier' (ResizableTall 1 (3%100) 0.648 [])
       tp = TwoPane 0.03 0.5
       im = withIM (0.13) (Role "buddy_list") $ ResizableTall 1 (1/100) (0.40) [1]
       rgrid = Grid True
@@ -205,6 +206,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       " -title handy -geometry 100x40 -e screen -D -R handy"))
   , ((modMask,                 xK_i     ), toggleWindow (title =? "insp")
       (spawn "feh --title insp $HOME/Pictures/cultofdone-wp.png"))
+
+  , ((modMask,                 xK_semicolon), sendMessage Mag.Toggle)
 
   , ((modMask,                 xK_BackSpace), removeWorkspace)
   , ((modMask,                 xK_l     ), selectWorkspace myPConfig)
