@@ -90,24 +90,36 @@ compinit -C
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 ## Some functions used to put the current vcs branch name in my prompt
-git_prompt() {
+git_prompt_info() {
+    BRANCH=$(git-branch --no-color 2> /dev/null \
+    | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')
+    case $(git status 2> /dev/null | tail -n1) in
+        'nothing to commit'*)
+        echo "%{${fg[green]}%}$BRANCH%b";;
+        *)
+        echo "%{${fg_bold[red]}%}$BRANCH%b";;
+    esac
+}
+vcs_prompt_update() {
     if which git &> /dev/null; then
-        BRANCH=$(git-branch --no-color 2> /dev/null \
-        | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')
-        case $(git status 2> /dev/null | tail -n1) in
-            'nothing to commit'*)
-            echo "%{${fg[green]}%}$BRANCH%b";;
-            *)
-            echo "%{${fg_bold[red]}%}$BRANCH%b";;
-        esac
+        export VCS_PROMPT="$(git_prompt_info)"
     fi
+    export VCS_PROMPT_INVALID=
 }
-vcs_check() {
-    VCS_PROMPT="$(git_prompt)"
+vcs_preexec_check() {
+    case "$(history $HISTCMD)" in
+        *git*) vcs_prompt_update;;
+    esac
 }
-preexec_functions+='vcs_check'
-precmd_functions+='vcs_check'
-chpwd_functions+='vcs_check'
+vcs_chpwd_check() {
+    [[ $(basename $(pwd)) != '.git' ]] && export VCS_PROMPT_INVALID=1
+}
+vcs_prompt() {
+    test -n "$VCS_PROMPT_INVALID" && vcs_prompt_update
+    echo $VCS_PROMPT
+}
+preexec_functions+='vcs_preexec_check'
+chpwd_functions+='vcs_chpwd_check'
 
 
 ## Window/Tab title setting fun
@@ -210,4 +222,4 @@ case "$SSH_CONNECTION" in
 esac
 
 PS1='%{${fg_bold[red]}%}%(?..%?%b%{${fg_no_bold[white]}%}:% )$COLOUR%n@%m%{${fg[default]}%}$JOBS%b $VIMODE'
-RPS1='$VCS_PROMPT %{${fg[green]}%}%~%{${fg[default]}%}'
+RPS1='$(vcs_prompt) %{${fg[green]}%}%~%{${fg[default]}%}'
