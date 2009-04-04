@@ -205,8 +205,8 @@ precmd_functions+='jobs_indicator'
 
 # change user@host color based on where I am
 case "$SSH_CONNECTION" in
-'') COLOUR="%B%{${fg[green]}%}";;
-*) COLOUR="%B%{${fg[cyan]}%}";;
+    '') COLOUR="%B%{${fg[green]}%}";;
+    *) COLOUR="%B%{${fg[yellow]}%}";;
 esac
 
 PS1='%{${fg_bold[red]}%}%(?..%?%b%{${fg_no_bold[white]}%}:% )$COLOUR%n@%m%{${fg[default]}%}$JOBS%b $VIMODE'
