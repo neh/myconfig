@@ -92,15 +92,14 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:
 ## Some functions used to put the current vcs branch name in my prompt
 git_prompt() {
     if which git &> /dev/null; then
-        case $(git status 2> /dev/null | tail -n1) in
-            'nothing to commit'*)
-            DIRTY="%{${fg[green]}%}";;
-            *)
-            DIRTY="%{${fg_bold[red]}%}";;
-        esac
         BRANCH=$(git-branch --no-color 2> /dev/null \
         | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')
-        echo "$DIRTY$BRANCH%b"
+        case $(git status 2> /dev/null | tail -n1) in
+            'nothing to commit'*)
+            echo "%{${fg[green]}%}$BRANCH%b";;
+            *)
+            echo "%{${fg_bold[red]}%}$BRANCH%b";;
+        esac
     fi
 }
 vcs_check() {
