@@ -91,28 +91,24 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:
 
 ## Some functions used to put the current vcs branch name in my prompt
 git_prompt() {
-    case $(git status 2> /dev/null | tail -n1) in
-        'nothing to commit'*)
-        DIRTY="%{${fg[green]}%}";;
-        *)
-        DIRTY="%{${fg_bold[red]}%}";;
-    esac
-    BRANCH=$(git-branch --no-color 2> /dev/null \
-    | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')
-    echo "$DIRTY$BRANCH%b"
-}
-preexec_functions+='preexec_update_vcs_prompt'
-preexec_update_vcs_prompt() {
     if which git &> /dev/null; then
-        VCS_PROMPT="$(git_prompt)"
+        case $(git status 2> /dev/null | tail -n1) in
+            'nothing to commit'*)
+            DIRTY="%{${fg[green]}%}";;
+            *)
+            DIRTY="%{${fg_bold[red]}%}";;
+        esac
+        BRANCH=$(git-branch --no-color 2> /dev/null \
+        | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')
+        echo "$DIRTY$BRANCH%b"
     fi
 }
-chpwd_functions+='chpwd_update_vcs_prompt'
-chpwd_update_vcs_prompt() {
-    if which git &> /dev/null; then
-        VCS_PROMPT="$(git_prompt)"
-    fi
+vcs_check() {
+    VCS_PROMPT="$(git_prompt)"
 }
+preexec_functions+='vcs_check'
+precmd_functions+='vcs_check'
+chpwd_functions+='vcs_check'
 
 
 ## Window/Tab title setting fun
@@ -209,15 +205,10 @@ function jobs_indicator {
 precmd_functions+='jobs_indicator'
 
 # change user@host color based on where I am
-if [[ "$SSH_CONNECTION" == "" ]]
-then
-    COLOUR="%B%{${fg[green]}%}"
-else
-    case $USER in
-        (nathan|neh) COLOUR="%B%{${fg[cyan]}%}" ;;
-        (*)          COLOUR="%B%{${fg[red]}%}" ;;
-    esac
-fi
+case "$SSH_CONNECTION" in
+'') COLOUR="%B%{${fg[green]}%}";;
+*) COLOUR="%B%{${fg[cyan]}%}";;
+esac
 
 PS1='%{${fg_bold[red]}%}%(?..%?%b%{${fg_no_bold[white]}%}:% )$COLOUR%n@%m%{${fg[default]}%}$JOBS%b $VIMODE'
 RPS1='$VCS_PROMPT %{${fg[green]}%}%~%{${fg[default]}%}'
