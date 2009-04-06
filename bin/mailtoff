@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+
+# 
+# Pipe an html email message to firefox.
+#
+
+import os
+import sys
+import tempfile
+import email
+
+message = email.message_from_file(sys.stdin)
+message.set_type('text/html')
+tmpfile = tempfile.mkstemp('.html', 'mutt-pipetoff')
+os.write(tmpfile[0], message.get_payload())
+os.close(tmpfile[0])
+
+os.system("gnome-open %s" % tmpfile[1])

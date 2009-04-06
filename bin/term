@@ -1,0 +1,9 @@
+#!/bin/bash
+
+case `basename $0` in
+	"wterm"	)	exec /usr/bin/wterm -bg black -fg white -sl 9999 +sb $@;;
+	"gterm"	)	exec gnome-terminal;;
+	"xterm"	)	exec /usr/bin/xterm -fn 7x14 +sb -bg black -fg white $@;;
+	"axterm"	)	exec /usr/bin/xterm -fa "Bitstream Vera Sans Mono" -fs 9 -en UTF-8 +sb -bg black -fg white $@;;
+	"rxvt" )	exec /usr/bin/rxvt -bg \#$[ $RANDOM % 1 ]$[ $RANDOM % 3 ]$[ $RANDOM % 3 ] -fg white -sl 9999 +sb -fn "xft:Bitstream Vera Sans Mono:pixelsize=15,xft:Arial Unicode MS,xft:Everson Mono Unicode" $@;;
+esac

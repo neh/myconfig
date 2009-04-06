@@ -1,0 +1,5 @@
+#!/usr/bin/perl
+
+system "mkdir ~/mnt/iso" unless -d "~/mnt/iso";
+system "sudo mount -o loop -t iso9660 $ARGV[0] ~/mnt/iso";
+system "rox ~/mnt/iso";

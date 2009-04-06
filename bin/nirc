@@ -1,0 +1,15 @@
+#!/bin/bash
+
+IRCHOST="mcp.local"
+XTERM="urxvt"
+[ "$1" != "" ] && IRCHOST="$1"
+
+case `ssh $IRCHOST -t screen -ls 2>/dev/null | grep -c irc` in
+    0) #start a new screen session with irssi running
+    exec urxvt -e ssh $IRCHOST -t screen -US irc irssi
+    ;;
+    1) #connect to the existing session 
+    exec urxvt -e ssh $IRCHOST -t screen -rx irc
+    ;;
+    2) exec urxvt -e echo "There's more than one irc session already running on $IRCHOST. Why?"; sleep 15 ;;
+esac

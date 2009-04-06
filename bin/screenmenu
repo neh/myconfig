@@ -1,0 +1,103 @@
+#!/usr/bin/env ruby
+
+# TODO
+#      - history for frequent connections?
+#      - handle window titles in some way?
+#      - take a command to run?
+
+# - create a new local session
+#   - by choosing new local
+#   - or just typing the name
+# - connect to a local session by choosing it from the list
+# - create a new remote session
+#   - by choosing where
+#     - by choosing new
+#     - or just typing the name
+# - connect to a remote session by choosing it from the list
+
+TERM_CMD = "urxvtcd -e"
+DMENU_CMD = "dmenu $DMENU_OPTS"
+SCREEN_RECONNECT_OPTIONS = "-rx"
+SCREEN_NEW_OPTIONS = "-U"
+LOCALHOST = `hostname`
+HOSTS = %w(ds stuff me pm testdb test mail atdot.ca house mythtv@mythtv.local)
+MENU_NEW_LOCAL = "new local"
+MENU_NEW_REMOTE = "new"
+
+
+class Screen
+  attr_reader :name, :attached
+
+  def initialize(name, attached)
+    @name, @attached = name, attached
+  end
+end
+
+class Host
+  attr_reader :name
+
+  @@list = HOSTS
+  def Host.valid?(n)
+    @@list.collect { |h| return h if h == n }
+  end
+
+  def initialize(name = LOCALHOST)
+    @name = name
+    @screens = []
+    `#{"ssh -t " + @name unless @name == LOCALHOST} screen -ls 2>/dev/null`.split("\n").slice(1..-3).map! { |x|
+      y = x.strip!.split("\t")
+      @screens << Screen.new(y[0], y[1] == "(Attached)")
+    }
+  end
+
+  def newscreen(n = "")
+    n = choosename if n == ""
+    run "#{SCREEN_NEW_OPTIONS} #{"-S \'" + n + "\'" unless n == ""}"
+  end
+
+  def validscreen?(n)
+    @screens.collect { |s| return s.name if s.name == n }
+  end
+
+  def connect(n)
+    run "#{SCREEN_RECONNECT_OPTIONS} \'#{n}\'"
+  end
+
+  def menu(p = "")
+    n = @name == LOCALHOST ? MENU_NEW_LOCAL + "\n" : MENU_NEW_REMOTE + "\n"
+    s = @screens.map { |s| s.attached ? "*#{s.name}" : s.name }
+    h = @name == LOCALHOST ? @@list : []
+    x = `echo "#{n + (s + h).join("\n")}" | #{DMENU_CMD} -p '#{p}'`
+    x.sub(/^\*/, "")
+  end
+
+  private
+
+    def run(cmd)
+      exec "#{TERM_CMD} #{"ssh -t " + @name unless @name == LOCALHOST} screen " + cmd
+    end
+
+    def choosename
+      `echo "" | #{DMENU_CMD} -p 'session name?'`
+    end
+
+end
+
+
+localhost = Host.new(LOCALHOST)
+choice = localhost.menu("screen:")
+case choice
+when "": exit
+when MENU_NEW_LOCAL: localhost.newscreen
+when localhost.validscreen?(choice): localhost.connect(choice)
+when Host.valid?(choice)
+  host = Host.new(choice)
+  remote = host.menu(host.name + " screens:")
+  case remote
+  when "": exit
+  when MENU_NEW_REMOTE: host.newscreen
+  when host.validscreen?(remote): host.connect(remote)
+  else host.newscreen(remote)
+  end
+else localhost.newscreen(choice)
+end

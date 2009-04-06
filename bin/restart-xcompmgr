@@ -1,0 +1,4 @@
+#!/bin/bash
+
+killall xcompmgr
+exec xcompmgr -nFf -I 0.056 -O 0.06 &

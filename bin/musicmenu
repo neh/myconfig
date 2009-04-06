@@ -1,0 +1,70 @@
+#!/usr/bin/env ruby
+
+# This plugin is a simple music player controller. It uses the command
+# line (or other) arguments/commands of various players to present
+# menus (via dmenu) to control each player.
+
+# Squeezebox/Slimserver configuration:
+squeezebox_host = 'localhost'
+squeezebox_port = 9000
+
+#require 'mpd'
+require 'net/http'
+
+players = {
+  "totem" => {
+    "prefix" => '--',
+    "options" => '',
+    "cmds" => %w[play-pause play pause next previous]
+  },
+  "banshee-1" => {
+    "prefix" => '--',
+    "options" => '',
+    "cmds" => %w[play pause stop next previous]
+  },
+  "rhythmbox-client" => {
+    "prefix" => '--',
+    "options" => '',
+    "cmds" => %w[play-pause play pause next previous]
+  },
+  "beep-media-player" => {
+    "prefix" => '--',
+    "options" => '',
+    "cmds" => %w[play-pause play pause fwd rew stop]
+  },
+  "mpc" => {
+    "prefix" => '',
+    "options" => '--no-status',
+    "cmds" => %w[toggle play pause next prev seek random repeat update]
+  },
+  "mpd" => {
+    "cmds" => %w[pause play next previous clear crop shuffle update random repeat seek],
+    "code" => lambda do |cmd|
+                begin
+                  mpd = MPD.new
+                  mpd.send(cmd)
+                ensure
+                  mpd.close
+                end
+              end
+  },
+  "squeezebox" => {
+    "cmds" => %w[pause play power],
+    "code" => lambda do |cmd|
+                Thread.new do
+                  host = squeezebox_host || 'localhost'
+                  port = squeezebox_port || 9000
+                  Net::HTTP.get(host, "/status_header.html?p0=#{cmd}", port)
+                end
+              end
+  }
+}
+
+n = ARGV[0]
+p = players[n]
+
+cmd = `echo "#{p["cmds"].join("\n")}" | dmenu $DMENU_OPTS -p '#{n}:'`
+
+unless cmd == ''
+  p["code"] ? p["code"].call(cmd) : system("#{n} #{p["options"]} #{p["prefix"]+cmd}")
+end

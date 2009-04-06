@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Simple work timer. Takes one argument which needs to be either the number of
+# minutes you want to time, or the letter 'r', which resets the timer. Given
+# a time, your dzen will turn green, then yellow for the last 10% or 3min
+# (whichever is lower), then red for 30sec, then back to the defaults.
+#
+# All this script does is drop dzen colour codes into the file specified in
+# $NTIMER ("export NTIMER=`mktemp`" in .xinitrc can set that up).
+# A dzen instance needs to be running that reads from that file. I have my
+# date/time/load bar include `cat $NTIMER 2>/dev/null` as the first item
+# in its output so that it changes the colour of the whole bar. 
+#
+# Warnings:
+# There is no error checking. Running multiple timers "works", depending on
+# your definition of "works". Timer accuracy depends on how often dzen reads
+# from $NTIMER. Resets will leave stray sleep processes hanging around, but
+# they don't hurt anything, and they'll take care of themselves.
+
+# Default colours
+DEFAULT_COLOURS="^fg(#f68a00)^bg(#222222)"
+WORK_COLOURS="^fg(black)^bg(#00aa00)"
+WARN_COLOURS="^fg(black)^bg(yellow)"
+STOP_COLOURS="^fg(white)^bg(red)"
+
+case "$1" in
+    r        ) # reset the status bar colours and kill any running timers
+    echo "$DEFAULT_COLOURS" > $NTIMER
+    pkill -f $0
+    ;;
+
+    *        ) # just assume it's a number
+    s=`expr $1 \* 60`                                  # change minutes to seconds
+    warn=`echo "$s * 0.10" | bc | sed -n 's/\..*//p'`  # take 10% for cleanup/whatever
+    [ "$warn" -gt "180" ] && warn=180                  # unless 10% is more than 3min
+    work=`expr $s - $warn`
+
+    echo "$WORK_COLOURS" > $NTIMER
+    sleep $work
+    echo "$WARN_COLOURS" > $NTIMER
+    sleep $warn
+    echo "$STOP_COLOURS" > $NTIMER
+    sleep 30
+
+    # see if there are any other timers running and go back to
+    # $WORK_COLOURS if there are, $DEFAULT_COLOURS if not.
+    if [ "`pgrep -f $0 | wc -l`" -le "2" ]
+    then
+        echo "$DEFAULT_COLOURS" > $NTIMER
+    else
+        echo "$WORK_COLOURS" > $NTIMER
+    fi
+    ;;
+esac

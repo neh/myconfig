@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+mail = 0
+print "Searching for existing sessions...\n"
+`screen -ls`.each { |screen|
+	next unless screen =~ /mail/
+	print "Found existing session... Connecting...\n"
+	mail = 1
+}
+
+if mail == 1
+	system 'screen -rx mail'
+else
+	print "Creating new session... Connecting...\n"
+	system 'screen -US mail ~/bin/muttng'
+end

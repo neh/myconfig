@@ -1,0 +1,6 @@
+#!/bin/sh
+# simple popup dictionary, (c) 2007 by Robert Manea
+
+LOOKUP=`sselp`
+
+(echo "$LOOKUP"; dict "$LOOKUP") | dzen2 $DZEN_OPTS -l 20 -p -w 700 -x 300 -y 300 -e 'onstart=scrollhome,uncollapse;button4=scrollup:5;button5=scrolldown:5;button1=exit'

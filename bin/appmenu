@@ -1,0 +1,82 @@
+#!/usr/bin/env ruby
+
+# TODO
+#   - use sqlite?
+#   - make this thing run continually as part of the session?
+
+require 'sdbm'
+
+APPLISTDB = "#{ENV["HOME"]}/.applist.dbm"
+
+case ARGV[0]
+
+when 'update'
+  # Update master app list
+ 
+  # Index system and user .desktop files
+  desktop = %w[GNOME]
+  dirs = []
+  dirs.push ENV["XDG_DATA_DIRS"] ? ENV["XDG_DATA_DIRS"].split(':') : [ "/usr/share", "/usr/local/share" ]
+  dirs.push ENV["XDG_DATA_HOME"] ? ENV["XDG_DATA_HOME"] : "#{ENV["HOME"]}/.local/share/"
+
+  apps = {}
+  dirs.flatten.map{|d| "#{d}/applications/*.desktop".squeeze('/')}.each do |dir|
+    Dir.glob("#{dir}").each do |fname|
+      File.open("#{fname}") do |file|
+        name = cmd = ''
+        onlyshowin = hidein = []
+        hidden = false
+        file.each_line do |line|
+          # English Name only...
+          name = $1 if line =~ /^Name\s*=\s*(.*)$/
+          cmd = $1.sub(/%\w+/, '') if line =~ /^Exec\s*=\s*(.*)$/
+          hidden = true if line =~ /^NoDisplay\s*=\s*true/
+          onlyshowin = $1.split(';') if line =~ /^OnlyShowIn\s*=\s*(.*)$/
+          hidein = $1.split(';') if line =~ /^NotShowIn\s*=\s*(.*)$/
+        end
+        unless hidein.any?{|x| desktop.include?(x)} || onlyshowin.any?{|x| !desktop.include?(x)} || hidden
+          apps[name] = cmd
+        end
+      end
+    end
+  end
+
+  # Index executables in $PATH
+  path_glob = ENV["PATH"].gsub(/,/, '\\,').tr(":",",")
+  Dir.glob("{#{path_glob}}/*").select do |fname|
+    File.file?(fname) && File.executable?(fname)
+  end.map{|fname| File.basename(fname)}.uniq.each{|v| apps[v] = v}
+
+  # Index SSHable hosts (from ~/.ssh/known_hosts)
+  hosts = []
+  ["/etc/ssh/ssh_known_hosts", "#{ENV["HOME"]}/.ssh/known_hosts"].each do |file|
+    next unless File.file?(file) && File.readable?(file)
+    File.open("#{file}") do |file|
+      file.each_line do |line|
+        hosts << $1.split(",") if line =~ /^([\w\d.,@*?!]+)\s+/
+      end
+    end
+  end
+  hosts.flatten.uniq.reject{|h| h =~ /[*?]/ || h[0,1] == '!'}.each { |host|
+    apps["ssh #{host}"] = "urxvt -e ssh -X #{host}"
+  }
+
+
+  # Save to the database file
+  SDBM.open(APPLISTDB) do |dbm|
+    # TODO need to clear out the db here to kill staleness
+    apps.keys.each { |a| dbm[a] = apps[a] }
+  end
+
+else
+  SDBM.open(APPLISTDB) do |dbm|
+    history = dbm['localhistory'] || ''
+    history = history.split(';')
+    cmd = `echo "#{(history + dbm.keys.sort.delete_if { |x| history.include?(x) }).join("\n")}" | dmenu $DMENU_OPTS -p '#'`
+    unless cmd == ''
+      dbm['localhistory'] = history.unshift(cmd).uniq.slice(0..4).join(';')
+      exec "#{dbm[cmd] || cmd}" 
+    end
+  end
+
+end

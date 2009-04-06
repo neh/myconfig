@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+PLAYING = '>'
+#PLAYING = '♪'
+PAUSED = 'P'
+#PAUSED = '॥'
+
+`mpc`.split("\n")[1].slice(/(playing|paused)/) == "playing" ? puts(PLAYING) : puts(PAUSED)

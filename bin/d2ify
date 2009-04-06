@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ffmpeg -i "$1" -pass 1 -s 320x240 -vcodec mpeg4 -vtag XVID -b 500kb -mbd rd -flags +4mv+trell+aic -cmp 2 -subcmp 2 -g 300 -acodec copy null.avi
+
+ffmpeg -i "$1" -pass 2 -s 320x240 -vcodec mpeg4 -vtag XVID -b 500kb -mbd rd -flags +4mv+trell+aic -cmp 2 -subcmp 2 -g 300 -acodec mp3 -ab 128 -ac 2 -async 1 "D2 - `basename \"$1\"`"

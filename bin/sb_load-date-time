@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Creates a basic status bar with dzen. Displays system load, date, and time
+# in the format: 0.00 0.00 0.00  2007-07-22 (Sun) 00:00
+# It also displays a basic 3 month calendar when clicked. It also changes
+# colours as dictated by any script that writes dzen colour codes into the
+# file specified in $NTIMER.
+#
+# Takes x, y, and tw values on the command line:
+#   sb_load-date-time 500 0 380
+
+xpos="$1"
+ypos="$2"
+width="$3"
+
+while true ; do
+    load=`uptime | sed 's/.*: //; s/,//g'`
+    time=`date +"%Y-%m-%d %a %H:%M"`
+    printf "%s %s  %s \n" "`cat $NTIMER 2>/dev/null`" "$load" "$time"
+    echo -e "\n`cal -3`"
+    sleep 10
+done | dzen2 $DZEN_OPTS -x $xpos -y $ypos -l 9 -u -ta l -sa l -tw $width -w 610 -e 'onstart=lower;button1=togglecollapse'

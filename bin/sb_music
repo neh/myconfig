@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Creates a small dzen that displays icons to indicate mpd status.
+# Also:
+#    - A left click pauses/plays the music
+#    - A middle click launches sonata
+#    - A right click launches ncmpc in urxvt
+#    - Scrolling the mouse wheel skips to the next/prev track
+#    - Hovering displays the player status in a full-screen-width popup window
+#
+# Takes x, y, and tw values on the command line:
+#   sb_music 0 0 50
+
+xpos="$1"
+ypos="$2"
+width="$3"
+mpccmd="mpc --no-status"
+terminalcmd="urxvtcd -e"
+
+playing="^i($HOME/bin/play.xbm)"
+paused="^i($HOME/bin/pause.xbm)"
+error="^i($HOME/bin/music.xbm)"
+
+while true ; do
+    status=`mpc 2> /dev/null`
+    state=`echo "$status" | sed -n 's/^\[\(.*\)\].*/\1/p'`
+    case "$state" in
+        "playing" ) echo "^tw()$playing";;
+        "paused"  ) echo "^tw()$paused";;
+        *         ) echo "^tw()$error";;
+    esac
+    echo -e "\n$status\n"
+    sleep 1
+done | dzen2 $DZEN_OPTS -x $xpos -y $ypos -l 5 -ta c -sa c -tw $width -w 0 -e "onstart=raise;entertitle=uncollapse;leavetitle=collapse;button1=exec:$mpccmd toggle;button2=exec:sonata;button3=exec:$terminalcmd ncmpc;button4=exec:$mpccmd prev;button5=exec:$mpccmd next"

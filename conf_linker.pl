@@ -18,6 +18,8 @@ my $files = {'cli' => {'gitconfig' => '.gitconfig',
                        'Xresources' => '.Xresources',
                        'xmonad/xmonad.hs' => '.xmonad/xmonad.hs',
              },
+             'bin' => {'bin' => 'bin',
+             },
 };
 
 foreach my $c (@ARGV) {

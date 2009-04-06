@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ -f "$1" ]; then
+	exec festival --tts "$1" 2>/dev/null
+elif [ "$1" = "clip" ]; then
+	exec /usr/X11R6/bin/xclip -selection primary -o | festival --tts 2>/dev/null
+elif [ "$1" = "" ]; then
+	exec cat - | festival --tts 2>/dev/null;
+else
+	exec echo "$@" | festival --tts 2>/dev/null;
+fi

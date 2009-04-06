@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+use File::Find;
+
+@ARGV = qw(.) unless @ARGV;
+
+find
+sub {
+	if (-d "$_") {
+		chmod (0755, "$_");
+	} else {
+		chmod (0644, "$_");
+	}
+}
+, '.';

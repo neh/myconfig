@@ -1,0 +1,2 @@
+#!/bin/sh
+(awk '/^Package:/ { print $2 }' /var/lib/apt/lists/*universe*Packages ; dpkg --get-selections | awk '$2 = "install" { print $1 }') | sort | uniq -d

@@ -1,0 +1,17 @@
+#!/usr/bin/perl
+
+use strict;
+
+if (! @ARGV) { print "need args, you bastard.\n"; exit }
+my($infile, $username) = @ARGV;
+my $tmpfile = time;
+my $outdir = "/home/$username/FreshlyPrintedPDFs";
+if ( ! -e $outdir && ! -d $outdir) {
+  mkdir("$outdir", 0777);
+  my($name, $passwd, $uid, $gid, $quota, $comment, $gcos, $dir, $shell) = getpwnam("$username");
+  chown($uid, $gid, $outdir);
+}
+
+system("ps2pdf $infile /tmp/$tmpfile.temp");
+system("mv /tmp/$tmpfile.temp $outdir/$tmpfile.pdf");
+unlink($infile, $tmpfile);

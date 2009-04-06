@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec urxvt -e pilot-xfer -p /dev/palm -i "$1"
