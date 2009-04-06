@@ -10,23 +10,37 @@
 !!! Rxvt settings
 
 *Rxvt*foreground: #eeeeee
-!#e0e080
-!#008800
 *Rxvt*background: black
-!#e0e080
 
 !To set font manually: printf '\e]710;%s\007' "xft:Consolas:size=12"
-!URxvt*font:	xft:Consolas:size=12, \
-URxvt*font:	xft:Bitstream Vera Sans Mono:pixelsize=17,\
+URxvt*font:	xft:Liberation Mono:pixelsize=16,\
 			xft:Arial Unicode MS:pixelsize=16,\
 			xft:Everson Mono Unicode:pixelsize=16
 URxvt*searchable-scrollback: CS-s
-URxvt*cutchars: `"()*<>[]{}|'
+URxvt.cutchars: "()*,<>[]{}|'
 URxvt*secondaryScroll: true
 URxvt.urgentOnBell: true
 !URxvt*termName: rxvt-256color
 
-! TODO I'd like to make these keys send pgup/dn to all apps
+!Tango style colors
+!URxvt.color0: #2E3436
+URxvt.color1: #CC0000
+URxvt.color2: #4E9A06
+URxvt.color3: #C4A000
+URxvt.color4: #3465A4
+URxvt.color5: #75507B
+URxvt.color6: #06989A
+URxvt.color7: #D3D7CF
+URxvt.color8: #555753
+URxvt.color9: #EF2929
+URxvt.color10: #8AE234
+URxvt.color11: #FCE94F
+URxvt.color12: #729FCF
+URxvt.color13: #AD7FA8
+URxvt.color14: #34E2E2
+URxvt.color15: #EEEEEC
+
+! TODO I want to make these keys send pgup/dn to all apps
 !URxvt*keysym.C-o: 0xff55
 !URxvt*keysym.C-e: 0xff56
 
