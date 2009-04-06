@@ -159,7 +159,7 @@ function rxvt_title_set {
 # called by zsh before executing a command
 function title_preexec {
     case $TERM in
-        rxvt*)
+        (rxvt*|xterm))
         rxvt_title_set $1
         ;;
 
@@ -175,7 +175,7 @@ function title_preexec {
 # called by zsh before showing the prompt
 function title_precmd {
     case $TERM in
-        rxvt*)
+        (rxvt*|xterm))
         rxvt_title_set '%~'
         ;;
 
