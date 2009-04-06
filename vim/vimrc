@@ -62,8 +62,14 @@ if has("autocmd")
 "    augroup filetypedetect
 "          autocmd! BufNewFile, BufRead
 
+    augroup VCSCommand
+        au User VCSBufferCreated silent! nmap <unique> <buffer> q: bwipeout<cr>
+    augroup END
+
 endif " has("autocmd")
 
+
+let VCSCommandEnableBufferSetup=1
 let mapleader = ","
 syntax on					" always want syntax highlighting
 set autoindent				" always set autoindenting on
@@ -78,8 +84,17 @@ set backspace=indent,eol,start
 set title
 set titlestring=%<%{hostname()}:%F\ %(%m\ %)[%l/%L\ %P]\ %y\ VIM
 set laststatus=2
-"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L] 
 set statusline=%F%m%r%h%w\ [%l,%v\ %p%%\ %L]\ [%{&ff}]
+
+function! GitStatusLine()
+    let gitinfo=VCSCommandGetStatusLine()
+    let dirty=system("git status 2> /dev/null | tail -n1")
+    if dirty =~ 'nothing to commit*'
+        return l:gitinfo
+    else
+        return "%#ErrorMsg#gitinfo#StatusLine#"
+    endif
+endfunction
 
 set tabstop=4
 set shiftwidth=4
@@ -104,25 +119,20 @@ map <silent> <F3> :call BufferList()<CR>
 " keyword completion for python (and ruby?)
 "set iskeyword+=.
 
-" break links when writing. needed for arch revlibs.
-"set backupcopy=no
-
 set background=dark
 if has("gui_running")
     colo mint
     set guioptions=aAim    " don't want a toolbar or menu
-    set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
-    set mousehide          " hide mouse when typing
+    set guifont=Bitstream\ Vera\ Sans\ Mono\ 14
+    set mousehide
 endif
 
-if $TERM =~ '^xterm'
+if $TERM =~ '^screen-bce'
         set t_Co=256 
         colo gardener
-elseif $TERM =~ '^screen-bce'
-        set t_Co=88
-        colo desert256
-        " may need this to fix a problem leaving vim in screen
-        "autocmd VimLeave * :set term=screen
+elseif $TERM =~ '^rxvt-256'
+        set t_Co=256 
+        colo gardener
 elseif $TERM =~ '^rxvt'
         set t_Co=88
         colo inkpot
@@ -191,16 +201,6 @@ map <Leader>par :!par<CR>
 
 " Variables
 let Tlist_Ctags_Cmd = "/usr/bin/exuberant-ctags"
-
-" Quick background dark/light toggle
-"map <F11> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-
-" Custom Tag support for NoteBook app
-function! NoteBookTags()
-	call search("Tags: ", w)
-	exe "normal A"
-endfunction
-map <Leader>t :silent NoteBookTags<CR>	" add/edit notebook tags
 
 " toggle foldcolumn
 function! ToggleFoldColumn()
@@ -272,7 +272,3 @@ function! GitGrepWord()
   call GitGrep('-w -e ', getreg('z'))
 endf
 nmap <C-x>G :call GitGrepWord()<CR>
-
-
-" notetaking functions
-let note_separator = '===================='
