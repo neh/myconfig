@@ -129,10 +129,10 @@ endif
 
 if $TERM =~ '^screen-bce'
         set t_Co=256 
-        colo gardener
+        colo wombat256
 elseif $TERM =~ '^rxvt-256'
         set t_Co=256 
-        colo gardener
+        colo wombat256
 elseif $TERM =~ '^rxvt'
         set t_Co=88
         colo inkpot

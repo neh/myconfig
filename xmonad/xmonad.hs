@@ -3,6 +3,7 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import Control.Monad (filterM)
 import Data.Char (ord)
+import Data.Maybe
 import Data.Ratio
 import System.IO
 import System.Exit
@@ -52,8 +53,10 @@ q ~? x = fmap (=~ x) q
 
 bg = "#222222"
 fg = "#de8221" --orange
-fn = "-*-fixed-medium-r-*-*-20-*-*-*-*-*-iso8859-*"
-statusBarCmd = "dzen2 -bg '" ++ bg ++ "' -fg '" ++ fg ++ "' -x 0 -y 0 -h 24 -w 1332 -fn '" ++ fn ++ "' -e 'onstart=lower' -ta l"
+fn = "-*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-*"
+statusBarCmd = "dzen2 -bg '" ++ bg ++ "' -fg '" ++ fg ++ "' -x 0 -y 0 -h 24 -w 1367 -fn '" ++ fn ++ "' -e 'onstart=lower' -ta l"
+
+i_corner = "^i(.xmonad/corner.xbm)"
 
 main = do
   din <- spawnPipe statusBarCmd
@@ -104,8 +107,10 @@ myLog h = withWindowSet $
   \ws -> dynamicLogWithPP $ defaultPP
     { ppCurrent         = dzenColor "black" fg . pad
     , ppUrgent          = dzenColor "black" "yellow" . pad
-    , ppSep             = " "
+    , ppHidden          = dzenColor fg bg
     , ppHiddenNoWindows = id
+    , ppWsSep           = " "
+    , ppSep             = " "
     , ppTitle           = (" ^fg(#eeeeee)" ++) . dzenEscape
     , ppOrder           = \(workspaces:layout:title:xs) ->
                            (myWCount ws:workspaces:title:xs)
@@ -217,7 +222,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((mod1Mask,                xK_Tab   ), toggleWS )
 
-  , ((modMask,                 xK_w     ), raiseNext (className ~? "(Shiretoko|Firefox)") )
+  , ((modMask,                 xK_w     ), raiseNext (className ~? "(Firefox|Shiretoko|Namoroka)") )
   , ((modMask,                 xK_v     ), raiseNext (title ~? "VIM$") )
 
   , ((modMask,                 xK_F12   ), spawn "gnome-screensaver-command --lock")
@@ -263,6 +268,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   ]
   -- > -- mod-[1..9]       %! Switch to workspace N
   -- > -- mod-shift-[1..9] %! Move client to workspace N
+  -- > -- mod-alt-[1..9]   %! Copy client to workspace N
   ++
   zip (zip (repeat modMask) [xK_1..xK_9]) (map (withNthWorkspace W.greedyView) [0..])
   ++
@@ -281,8 +287,15 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       filterAll <- filterM (runQuery wTest) (W.allWindows ws)
       curr <- gets (W.currentTag . windowset)
       case filterAll of
+        --(x:_) -> do t <- gets (fromJust (W.findTag x ws))
+                    --if t == curr
+        --(x:_) -> if fromJust (W.findTag x ws) == curr
+                     --then killWindow x
+                     --else bringWindow x
         (x:_) -> killWindow x
         []    -> action
+
+--Fixes raiseNextMaybe cycling behaviour in Actions.WindowGo (issue #284)
 
 
 myMouse (XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -291,9 +304,6 @@ myMouse (XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask, button3), (\w -> focus w >> mouseResizeWindow w))
   , ((modMask, button4), (\_ -> prevWS))
   , ((modMask, button5), (\_ -> nextWS))
-  -- TODO figure out why these next two lines work even without modMask actually pressed (kills browser text zooming)
-  --, ((modMask .|. controlMask, button4), (\_ -> windows W.focusUp))
-  --, ((modMask .|. controlMask, button5), (\_ -> windows W.focusDown))
   , ((modMask .|. shiftMask, button4), (\_ -> windows W.swapUp))
   , ((modMask .|. shiftMask, button5), (\_ -> windows W.swapDown))
   ]

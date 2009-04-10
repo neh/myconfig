@@ -2,11 +2,11 @@
 !keycode 113 = Multi_key
 keycode 135 = Super_L
 keycode 117 = Super_L
-add Mod4 = Super_L
+add mod4 = Super_L
 
 keycode 112 = Control_L
 keycode 133 = Control_L
-add Control = Control_L
+add control = Control_L
 
 keycode 110 = Prior
 keycode 115 = Next

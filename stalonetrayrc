@@ -1,0 +1,5 @@
+background "#222222"
+geometry 172x24+1367+0
+icon_gravity NE
+decorations none
+grow_gravity W
