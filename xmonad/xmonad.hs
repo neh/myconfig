@@ -56,7 +56,6 @@ fg = "#de8221" --orange
 fn = "-*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-*"
 statusBarCmd = "dzen2 -bg '" ++ bg ++ "' -fg '" ++ fg ++ "' -x 0 -y 0 -h 24 -w 1367 -fn '" ++ fn ++ "' -e 'onstart=lower' -ta l"
 
-i_corner = "^i(.xmonad/corner.xbm)"
 
 main = do
   din <- spawnPipe statusBarCmd
@@ -106,7 +105,7 @@ main = do
 myLog h = withWindowSet $
   \ws -> dynamicLogWithPP $ defaultPP
     { ppCurrent         = dzenColor "black" fg . pad
-    , ppUrgent          = dzenColor "black" "yellow" . pad
+    , ppUrgent          = dzenColor "black" "yellow" . pad . dzenStrip
     , ppHidden          = dzenColor fg bg
     , ppHiddenNoWindows = id
     , ppWsSep           = " "
