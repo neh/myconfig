@@ -59,6 +59,7 @@ statusBarCmd = "dzen2 -bg '" ++ bg ++ "' -fg '" ++ fg ++ "' -x 0 -y 0 -h 24 -w 1
 
 main = do
   din <- spawnPipe statusBarCmd
+  spawn "xcompmgr -nFf -I 0.056 -O 0.06"
   xmonad $ withUrgencyHook NoUrgencyHook defaultConfig
     { borderWidth        = 0
     , terminal           = "urxvtcd"

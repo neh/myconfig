@@ -14,19 +14,15 @@ export AWT_TOOLKIT="MToolkit"
 export OOO_FORCE_DESKTOP=gnome
 
 stalonetray &
-#mpd 2>/dev/null &
-#mpdscribble &
 gnome-settings-daemon &
 gnome-power-manager &
 gnome-screensaver &
 update-notifier &
-#nm-applet &
 xmodmap $HOME/.xmodmaprc
 xsetroot -cursor_name left_ptr
 xsetroot -solid '#000000'
 xbindkeys &
 gnome-do &
-xcompmgr -nFf -I 0.056 -O 0.06 &
 
 xset b off
 xset m 6 4
