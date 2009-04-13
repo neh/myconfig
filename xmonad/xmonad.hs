@@ -43,6 +43,7 @@ import XMonad.Prompt.Man
 import XMonad.Prompt.Shell
 import XMonad.Prompt.Window
 import XMonad.Util.Run
+import XMonad.Util.NamedWindows
  
 -- Makes ~? usable in manageHook and other places to match
 -- window properties against regexes.
@@ -53,14 +54,14 @@ q ~? x = fmap (=~ x) q
 
 bg = "#222222"
 fg = "#de8221" --orange
-fn = "-*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-*"
-statusBarCmd = "dzen2 -bg '" ++ bg ++ "' -fg '" ++ fg ++ "' -x 0 -y 0 -h 24 -w 1367 -fn '" ++ fn ++ "' -e 'onstart=lower' -ta l"
+fn = "-*-liberation.sans-medium-r-*-*-14-*-*-*-*-*-iso8859-*"
+statusBarCmd = "dzen2 -bg '" ++ bg ++ "' -fg '" ++ fg ++ "' -x 0 -y 0 -h 24 -w 1432 -fn '" ++ fn ++ "' -e 'onstart=lower' -ta l"
 
 
 main = do
   din <- spawnPipe statusBarCmd
   spawn "xcompmgr -nFf -I 0.056 -O 0.06"
-  xmonad $ withUrgencyHook NoUrgencyHook defaultConfig
+  xmonad $ withUrgencyHook LibNotifyUrgencyHook defaultConfig
     { borderWidth        = 0
     , terminal           = "urxvtcd"
     , normalBorderColor  = "#444444"
@@ -126,6 +127,17 @@ myLog h = withWindowSet $
                    (show (length (W.integrate s))) ++ ec)
       sc = "^fg(#000000)^bg(" ++ fg ++ ") "
       ec = " ^fg(" ++ fg ++ ")^bg(" ++ bg ++ ")"
+
+
+data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
+
+instance UrgencyHook LibNotifyUrgencyHook where
+  urgencyHook LibNotifyUrgencyHook w = do
+    name <- getName w
+    ws <- gets windowset
+    whenJust (W.findTag w ws) (flash name)
+    where
+      flash name index = safeSpawn "notify-send" ("Activity in " ++ show name ++ " on workspace " ++ index)
 
 
 myPConfig = defaultXPConfig
