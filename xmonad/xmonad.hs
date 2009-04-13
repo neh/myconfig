@@ -54,8 +54,8 @@ q ~? x = fmap (=~ x) q
 
 bg = "#222222"
 fg = "#de8221" --orange
-fn = "-*-liberation.sans-medium-r-*-*-14-*-*-*-*-*-iso8859-*"
-statusBarCmd = "dzen2 -bg '" ++ bg ++ "' -fg '" ++ fg ++ "' -x 0 -y 0 -h 24 -w 1432 -fn '" ++ fn ++ "' -e 'onstart=lower' -ta l"
+fn = "-*-liberation.sans-medium-r-*-*-15-*-*-*-*-*-iso8859-*"
+statusBarCmd = "dzen2 -bg '" ++ bg ++ "' -fg '" ++ fg ++ "' -x 0 -y 0 -h 24 -w 1402 -fn '" ++ fn ++ "' -e 'onstart=lower' -ta l"
 
 
 main = do

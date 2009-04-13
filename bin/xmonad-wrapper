@@ -26,7 +26,7 @@ gnome-do &
 xset b off
 xset m 6 4
 xrdb -merge $HOME/.Xresources
-sb_load-date-time 1600 0 290 &
+sb_load-date-time 1570 0 320 &
 sb_music 1890 0 30 &
 
 xmonad &
