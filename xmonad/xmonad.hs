@@ -220,7 +220,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask,                 xK_o     ), toggleWindow (role =? "handy")
       (spawn $ XMonad.terminal conf ++
-      " -title handy -geometry 100x40 -e screen -D -R handy"))
+      " -title handy -geometry 100x52 -e screen -D -R handy"))
   , ((modMask,                 xK_i     ), toggleWindow (title =? "insp")
       (spawn "feh --title insp $HOME/Pictures/cultofdone-wp.png"))
 
