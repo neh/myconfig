@@ -24,11 +24,13 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
+import qualified XMonad.Layout.BoringWindows as B
 import XMonad.Layout.HintedGrid
 import XMonad.Layout.HintedTile
 import XMonad.Layout.IM
 import XMonad.Layout.LayoutHints
 import qualified XMonad.Layout.Magnifier as Mag
+import XMonad.Layout.Maximize
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Reflect
@@ -79,6 +81,8 @@ main = do
                            setWMName "LG3D"
     , layoutHook         = smartBorders $
                            layoutHints $
+                           maximize $
+                           B.boringWindows $
                            toggleLayouts Full $
                            onWorkspace "tv" Full $
                            avoidStruts $
@@ -239,9 +243,14 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask,                 xK_F12   ), spawn "gnome-screensaver-command --lock")
 
-  , ((modMask,                 xK_t     ), windows W.focusDown)
-  , ((modMask,                 xK_n     ), windows W.focusUp  )
-  , ((modMask,                 xK_b     ), windows W.focusMaster  )
+  , ((modMask,                 xK_j     ), submap . M.fromList $
+  [ ((0, xK_b), B.markBoring)
+  , ((0, xK_c), B.clearBoring)
+  ])
+  , ((modMask,                 xK_t     ), B.focusDown)
+  , ((modMask,                 xK_n     ), B.focusUp  )
+  , ((modMask,                 xK_b     ), withFocused (sendMessage . maximizeRestore))
+  --, ((modMask,                 xK_b     ), windows W.focusMaster  )
 
   , ((modMask,                 xK_Return), windows W.swapMaster)
   , ((modMask .|. shiftMask,   xK_t     ), windows W.swapDown  )
