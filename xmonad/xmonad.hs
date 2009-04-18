@@ -229,8 +229,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xK_b), withFocused (sendMessage . maximizeRestore))
     , ((0, xK_t), windows W.focusMaster)
     , ((0, xK_f), withFocused (keysMoveWindowTo (960,600) (1%2,1%2)))
+    , ((0, xK_r), refresh)
     ])
   , ((modMask,                 xK_u     ), focusUrgent)
+  , ((modMask,                 xK_k     ), kill1)
 
   , ((modMask,                 xK_o     ), toggleWindow (role =? "handy")
       (spawn $ XMonad.terminal conf ++
@@ -238,15 +240,16 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,                 xK_i     ), toggleWindow (title =? "insp")
       (spawn "feh --title insp $HOME/Pictures/cultofdone-wp.png"))
 
+  , ((modMask, xK_j), submap . M.fromList $
+    [ ((0, xK_m), raiseNext (className =? "MPlayer"))
+    , ((0, xK_f), raiseNext (className =? "Rox"))
+    , ((0, xK_t), raiseNext (title =? "mythfrontend"))
+    ])
   , ((modMask,                 xK_b     ), raiseNext (className ~? "(Firefox|Shiretoko|Namoroka)") )
   , ((modMask,                 xK_v     ), raiseNext (title ~? "VIM$") )
 
-  , ((modMask,                 xK_k     ), kill1)
-
   , ((modMask,                 xK_space ), sendMessage NextLayout)
   , ((modMask .|. shiftMask,   xK_space ), setLayout $ XMonad.layoutHook conf)
-
-  , ((modMask,                 xK_r     ), refresh)
 
   , ((modMask,                 xK_BackSpace), removeWorkspace)
   , ((modMask,                 xK_l     ), selectWorkspace myPConfig)
@@ -285,24 +288,24 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask .|. shiftMask,   xK_q     ), io (exitWith ExitSuccess))
   , ((modMask,                 xK_q     ), spawn "xmonad --recompile && xmonad --restart")
   ]
-  -- > -- mod-[1..9]       %! Switch to workspace N
-  -- > -- mod-shift-[1..9] %! Move client to workspace N
-  -- > -- mod-control-[1..9]   %! Copy client to workspace N
   ++
+  -- mod-[1..9]           %! Switch to workspace N
   zip (zip (repeat modMask) [xK_1..xK_9]) (map (withNthWorkspace W.greedyView) [0..])
   ++
+  -- mod-shift-[1..9]     %! Move client to workspace N
   zip (zip (repeat (modMask .|. shiftMask)) [xK_1..xK_9]) (map (withNthWorkspace W.shift) [0..])
   ++
+  -- mod-control-[1..9]   %! Copy client to workspace N
   zip (zip (repeat (modMask .|. controlMask)) [xK_1..xK_9]) (map (withNthWorkspace copy) [0..])
   where
     role = stringProperty "WM_WINDOW_ROLE"
 
     myExpand = withWindowSet $ \ws ->
-                 if (M.member (fromJust (W.peek ws)) (W.floating ws))
+                 if M.member (fromJust $ W.peek ws) (W.floating ws)
                    then withFocused (keysResizeWindow (40,40) (1%2,1%2))
                    else sendMessage Expand
     myShrink = withWindowSet $ \ws ->
-                 if (M.member (fromJust (W.peek ws)) (W.floating ws))
+                 if M.member (fromJust $ W.peek ws) (W.floating ws)
                    then withFocused (keysResizeWindow (-40,-40) (1%2,1%2))
                    else sendMessage Shrink
 
