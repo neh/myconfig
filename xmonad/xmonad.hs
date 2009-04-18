@@ -210,17 +210,27 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xK_b), windowPromptBring myPConfig)
     , ((0, xK_t), appendFilePrompt myPConfig "/home/nathan/notes/s-o-c")
     ])
-  , ((modMask,                 xK_k     ), kill1)
 
-  , ((modMask,                 xK_space ), sendMessage NextLayout)
+  , ((modMask,                 xK_apostrophe ), spawn "mpc --no-status toggle")
+  , ((modMask,                 xK_m     ), submap . M.fromList $
+    [ ((0, xK_l), spawn "urxvt -e ncmpc")
+    , ((0, xK_m), spawn "musicmenu mpc")
+    , ((0, xK_t), spawn "musicmenu totem")
+    , ((0, xK_b), spawn "musicmenu banshee")
+    , ((0, xK_r), spawn "musicmenu rhythmbox-client")
+    , ((0, xK_p), spawn "musicmenu beep-media-player")
+    ])
 
-  , ((modMask,                 xK_r     ), refresh)
-
+  , ((modMask, xK_w), submap . M.fromList $
+    [ ((0, xK_i), B.markBoring)
+    , ((0, xK_y), B.clearBoring)
+    , ((0, xK_s), withFocused $ windows . W.sink)
+    , ((0, xK_m), sendMessage Mag.Toggle)
+    , ((0, xK_b), withFocused (sendMessage . maximizeRestore))
+    , ((0, xK_t), windows W.focusMaster)
+    , ((0, xK_f), withFocused (keysMoveWindowTo (960,600) (1%2,1%2)))
+    ])
   , ((modMask,                 xK_u     ), focusUrgent)
-
-  , ((modMask,                 xK_x     ), withFocused (keysMoveWindowTo (960,600) (1%2,1%2)))
-  , ((modMask,                 xK_p     ), withFocused (keysResizeWindow (-40,-40) (1%2,1%2)))
-  , ((modMask,                 xK_y     ), withFocused (keysResizeWindow (40,40) (1%2,1%2)))
 
   , ((modMask,                 xK_o     ), toggleWindow (role =? "handy")
       (spawn $ XMonad.terminal conf ++
@@ -228,7 +238,15 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,                 xK_i     ), toggleWindow (title =? "insp")
       (spawn "feh --title insp $HOME/Pictures/cultofdone-wp.png"))
 
-  , ((modMask,                 xK_semicolon), sendMessage Mag.Toggle)
+  , ((modMask,                 xK_b     ), raiseNext (className ~? "(Firefox|Shiretoko|Namoroka)") )
+  , ((modMask,                 xK_v     ), raiseNext (title ~? "VIM$") )
+
+  , ((modMask,                 xK_k     ), kill1)
+
+  , ((modMask,                 xK_space ), sendMessage NextLayout)
+  , ((modMask .|. shiftMask,   xK_space ), setLayout $ XMonad.layoutHook conf)
+
+  , ((modMask,                 xK_r     ), refresh)
 
   , ((modMask,                 xK_BackSpace), removeWorkspace)
   , ((modMask,                 xK_l     ), selectWorkspace myPConfig)
@@ -238,28 +256,17 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((mod1Mask,                xK_Tab   ), toggleWS )
 
-  , ((modMask,                 xK_w     ), raiseNext (className ~? "(Firefox|Shiretoko|Namoroka)") )
-  , ((modMask,                 xK_v     ), raiseNext (title ~? "VIM$") )
-
   , ((modMask,                 xK_F12   ), spawn "gnome-screensaver-command --lock")
 
-  , ((modMask,                 xK_j     ), submap . M.fromList $
-  [ ((0, xK_b), B.markBoring)
-  , ((0, xK_c), B.clearBoring)
-  ])
   , ((modMask,                 xK_t     ), B.focusDown)
   , ((modMask,                 xK_n     ), B.focusUp  )
-  , ((modMask,                 xK_b     ), withFocused (sendMessage . maximizeRestore))
-  --, ((modMask,                 xK_b     ), windows W.focusMaster  )
 
   , ((modMask,                 xK_Return), windows W.swapMaster)
   , ((modMask .|. shiftMask,   xK_t     ), windows W.swapDown  )
   , ((modMask .|. shiftMask,   xK_n     ), windows W.swapUp    )
 
-  , ((modMask .|. shiftMask,   xK_d     ), withFocused $ windows . W.sink)
-
-  , ((modMask,                 xK_comma ), sendMessage Shrink)
-  , ((modMask,                 xK_period), sendMessage Expand)
+  , ((modMask,                 xK_comma ), myShrink)
+  , ((modMask,                 xK_period), myExpand)
   , ((modMask .|. shiftMask,   xK_slash ), sendMessage MirrorShrink)
   , ((modMask .|. shiftMask,   xK_equal ), sendMessage MirrorExpand)
 
@@ -275,29 +282,29 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask,                 xK_f     ), sendMessage ToggleLayout )
 
-  , ((modMask,                 xK_apostrophe ), spawn "mpc --no-status toggle")
-  , ((modMask,                 xK_m     ), submap . M.fromList $
-    [ ((0, xK_l), spawn "urxvt -e ncmpc")
-    , ((0, xK_m), spawn "musicmenu mpc")
-    , ((0, xK_t), spawn "musicmenu totem")
-    , ((0, xK_b), spawn "musicmenu banshee")
-    , ((0, xK_r), spawn "musicmenu rhythmbox-client")
-    , ((0, xK_p), spawn "musicmenu beep-media-player")
-    ])
   , ((modMask .|. shiftMask,   xK_q     ), io (exitWith ExitSuccess))
   , ((modMask,                 xK_q     ), spawn "xmonad --recompile && xmonad --restart")
   ]
   -- > -- mod-[1..9]       %! Switch to workspace N
   -- > -- mod-shift-[1..9] %! Move client to workspace N
-  -- > -- mod-alt-[1..9]   %! Copy client to workspace N
+  -- > -- mod-control-[1..9]   %! Copy client to workspace N
   ++
   zip (zip (repeat modMask) [xK_1..xK_9]) (map (withNthWorkspace W.greedyView) [0..])
   ++
   zip (zip (repeat (modMask .|. shiftMask)) [xK_1..xK_9]) (map (withNthWorkspace W.shift) [0..])
   ++
-  zip (zip (repeat (modMask .|. mod1Mask)) [xK_1..xK_9]) (map (withNthWorkspace copy) [0..])
+  zip (zip (repeat (modMask .|. controlMask)) [xK_1..xK_9]) (map (withNthWorkspace copy) [0..])
   where
     role = stringProperty "WM_WINDOW_ROLE"
+
+    myExpand = withWindowSet $ \ws ->
+                 if (M.member (fromJust (W.peek ws)) (W.floating ws))
+                   then withFocused (keysResizeWindow (40,40) (1%2,1%2))
+                   else sendMessage Expand
+    myShrink = withWindowSet $ \ws ->
+                 if (M.member (fromJust (W.peek ws)) (W.floating ws))
+                   then withFocused (keysResizeWindow (-40,-40) (1%2,1%2))
+                   else sendMessage Shrink
 
     showDesktop = withWindowSet $ \ws ->
       if null (filter ( (== ".Z") . W.tag) (W.workspaces ws))
