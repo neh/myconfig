@@ -1,7 +1,0 @@
-#!/bin/sh
-
-CH=1
-if [ $1 > 1 ]; then
-    CH=$1
-fi
-exec mplayer -vf pp=lb dvd://$CH
