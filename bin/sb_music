@@ -31,4 +31,4 @@ while true ; do
     esac
     echo -e "\n$status\n"
     sleep 1
-done | dzen2 $DZEN_OPTS -x $xpos -y $ypos -l 5 -ta c -sa c -tw $width -w 0 -e "onstart=raise;entertitle=uncollapse;leavetitle=collapse;button1=exec:$mpccmd toggle;button2=exec:sonata;button3=exec:$terminalcmd ncmpc;button4=exec:$mpccmd prev;button5=exec:$mpccmd next"
+done | dzen2 $DZEN_OPTS -x $xpos -y $ypos -l 5 -ta c -sa c -tw $width -w 0 -e "onstart=raise;entertitle=uncollapse;leavetitle=collapse;button1=exec:$mpccmd toggle;button2=exec:pavucontrol;button3=exec:$terminalcmd ncmpc;button4=exec:$mpccmd prev;button5=exec:$mpccmd next"
