@@ -24,6 +24,8 @@ my $files = {'cli' => {'gitconfig' => '.gitconfig',
              },
 };
 
+@ARGV = keys %{$files} if $ARGV[0] eq 'all';
+
 foreach my $c (@ARGV) {
     while (my ($s, $d) = each %{$files->{$c}}) {
         my $source = "$config_dir/$s";
