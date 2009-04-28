@@ -33,12 +33,14 @@ foreach my $c (@ARGV) {
             my $p = "$ENV{'HOME'}/" . join(/\//, @di);
             unless (-d $p) {
                 print "Creating directory $p...\n";
-                system "mkdir -p $p" unless (-d $p);
+                system "mkdir -p $p";
             }
         }
         my $dest = "$ENV{'HOME'}/$d";
         if (-l $dest) {
             print "Skipping $d. Already linked.\n";
+        } elsif (-e "$dest.moved" && -e $dest) {
+            print "Skipping $d. Can't make a backup.\n";
         } else {
             system "mv $dest $dest.moved" if -e "$dest";
             print "Linking $s...\n";
