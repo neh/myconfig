@@ -3,6 +3,7 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import Control.Monad (filterM)
 import Data.Char (ord)
+import Data.List
 import Data.Maybe
 import Data.Ratio
 import System.IO
@@ -46,6 +47,7 @@ import XMonad.Prompt.Shell
 import XMonad.Prompt.Window
 import XMonad.Util.Run
 import XMonad.Util.NamedWindows
+import XMonad.Util.WorkspaceCompare
  
 -- Makes ~? usable in manageHook and other places to match
 -- window properties against regexes.
@@ -131,6 +133,14 @@ myLog h = withWindowSet $
                    (show (length (W.integrate s))) ++ ec)
       sc = "^fg(#000000)^bg(" ++ fg ++ ") "
       ec = " ^fg(" ++ fg ++ ")^bg(" ++ bg ++ ")"
+
+--       clickable t = do
+--         i <- getWsIndex
+--         return $ wrap ("^ca(1,xdotool set_desktop "
+--                        ++ show (maybe 1 i)
+--                        ++ ")")
+--                       ("^ca()")
+--                       (show t)
 
 
 data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
@@ -219,20 +229,22 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xK_b), spawn "musicmenu banshee")
     , ((0, xK_r), spawn "musicmenu rhythmbox-client")
     , ((0, xK_p), spawn "musicmenu beep-media-player")
+    , ((0, xK_v), spawn "pavucontrol")
     ])
 
   , ((modMask, xK_w), submap . M.fromList $
     [ ((0, xK_i), B.markBoring)
-    , ((0, xK_y), B.clearBoring)
-    , ((0, xK_s), withFocused $ windows . W.sink)
+    , ((0, xK_u), B.clearBoring)
     , ((0, xK_m), sendMessage Mag.Toggle)
     , ((0, xK_b), withFocused (sendMessage . maximizeRestore))
     , ((0, xK_t), windows W.focusMaster)
-    , ((0, xK_f), withFocused (keysMoveWindowTo (960,600) (1%2,1%2)))
+    --, ((0, xK_f), )
     , ((0, xK_r), refresh)
     ])
   , ((modMask,                 xK_u     ), focusUrgent)
   , ((modMask,                 xK_k     ), kill1)
+  , ((modMask,                 xK_r     ), toggleFloat)
+  , ((modMask,                 xK_z     ), withFocused (sendMessage . maximizeRestore))
 
   , ((modMask,                 xK_o     ), toggleWindow (role =? "handy")
       (spawn $ XMonad.terminal conf ++
@@ -240,10 +252,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,                 xK_i     ), toggleWindow (title =? "insp")
       (spawn "feh --title insp $HOME/Pictures/cultofdone-wp.png"))
 
-  , ((modMask, xK_j), submap . M.fromList $
+  , ((modMask, xK_g), submap . M.fromList $
     [ ((0, xK_m), raiseNext (className =? "MPlayer"))
     , ((0, xK_f), raiseNext (className =? "Rox"))
-    , ((0, xK_t), raiseNext (title =? "mythfrontend"))
+    , ((0, xK_t), raiseNext (title ~? "mythfrontend(.real)?"))
     ])
   , ((modMask,                 xK_b     ), raiseNext (className ~? "(Firefox|Shiretoko|Namoroka)") )
   , ((modMask,                 xK_v     ), raiseNext (title ~? "VIM$") )
@@ -299,6 +311,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   zip (zip (repeat (modMask .|. controlMask)) [xK_1..xK_9]) (map (withNthWorkspace copy) [0..])
   where
     role = stringProperty "WM_WINDOW_ROLE"
+
+    toggleFloat = withWindowSet $ \ws ->
+                    if M.member (fromJust $ W.peek ws) (W.floating ws)
+                      then withFocused $ windows . W.sink
+                      else withFocused (keysMoveWindowTo (960,600) (1%2,1%2))
 
     myExpand = withWindowSet $ \ws ->
                  if M.member (fromJust $ W.peek ws) (W.floating ws)
