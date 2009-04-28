@@ -3,7 +3,7 @@
 FG="#de8221" #orange
 #FG="#87ceeb" #blue
 BG="#222222"
-FN="-*-liberation.sans-medium-r-*-*-14-*-*-*-*-*-iso8859-*"
+FN="-*-liberation.sans-medium-r-*-*-15-*-*-*-*-*-iso8859-*"
 
 export PATH="$PATH:$HOME/bin"
 export DZEN_OPTS="-h 24 -fg $FG -bg $BG -fn $FN"
