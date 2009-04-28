@@ -223,7 +223,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask,                 xK_apostrophe ), spawn "mpc --no-status toggle")
   , ((modMask,                 xK_m     ), submap . M.fromList $
-    [ ((0, xK_l), spawn "urxvt -e ncmpc")
+    [ ((0, xK_l), spawn $ XMonad.terminal conf ++ " -e ncmpc")
     , ((0, xK_m), spawn "musicmenu mpc")
     , ((0, xK_t), spawn "musicmenu totem")
     , ((0, xK_b), spawn "musicmenu banshee")
@@ -238,7 +238,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xK_m), sendMessage Mag.Toggle)
     , ((0, xK_b), withFocused (sendMessage . maximizeRestore))
     , ((0, xK_t), windows W.focusMaster)
-    --, ((0, xK_f), )
     , ((0, xK_r), refresh)
     ])
   , ((modMask,                 xK_u     ), focusUrgent)
