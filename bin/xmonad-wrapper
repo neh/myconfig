@@ -4,10 +4,11 @@ FG="#de8221" #orange
 #FG="#87ceeb" #blue
 BG="#222222"
 FN="-*-liberation.sans-medium-r-*-*-15-*-*-*-*-*-iso8859-*"
+DMENU_FN="-*-liberation.sans-medium-r-*-*-16-*-*-*-*-*-iso8859-*"
 
 export PATH="$PATH:$HOME/bin"
 export DZEN_OPTS="-h 24 -fg $FG -bg $BG -fn $FN"
-export DMENU_OPTS="-b -i -nf $FG -nb $BG -sf black -sb $FG -fn $FN"
+export DMENU_OPTS="-b -i -nf $FG -nb $BG -sf black -sb $FG -fn $DMENU_FN"
 export NTIMER=`mktemp`
 export AWT_TOOLKIT="MToolkit"
 export OOO_FORCE_DESKTOP=gnome
