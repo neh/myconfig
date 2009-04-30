@@ -82,7 +82,7 @@ main = do
                            updatePointer (Relative 0.01 0.5) >>
                            setWMName "LG3D"
     , layoutHook         = smartBorders $
-                           layoutHints $
+                           layoutHintsWithPlacement (0.5, 0.5) $
                            maximize $
                            B.boringWindows $
                            toggleLayouts Full $
