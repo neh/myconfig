@@ -1,7 +1,6 @@
 #!/bin/bash
 
-FG="#de8221" #orange
-#FG="#87ceeb" #blue
+FG="#b67530" #orange
 BG="#222222"
 FN="-*-liberation.sans-medium-r-*-*-15-*-*-*-*-*-iso8859-*"
 DMENU_FN="-*-liberation.sans-medium-r-*-*-16-*-*-*-*-*-iso8859-*"
