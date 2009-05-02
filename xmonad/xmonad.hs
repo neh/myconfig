@@ -57,7 +57,7 @@ q ~? x = fmap (=~ x) q
 
 
 bg = "#222222"
-fg = "#de8221" --orange
+fg = "#b67530" --orange
 fn = "-*-liberation.sans-medium-r-*-*-15-*-*-*-*-*-iso8859-*"
 statusBarCmd = "dzen2 -bg '" ++ bg ++ "' -fg '" ++ fg ++ "' -x 0 -y 0 -h 24 -w 1402 -fn '" ++ fn ++ "' -e 'onstart=lower' -ta l"
 
@@ -118,7 +118,7 @@ myLog h = withWindowSet $
     , ppHiddenNoWindows = id
     , ppWsSep           = " "
     , ppSep             = " "
-    , ppTitle           = (" ^fg(#eeeeee)" ++) . dzenEscape
+    , ppTitle           = (" ^fg(#dddddd)" ++) . dzenEscape
     , ppOrder           = \(workspaces:layout:title:xs) ->
                            (myWCount ws:workspaces:title:xs)
     , ppOutput          = hPutStrLn h
@@ -131,7 +131,7 @@ myLog h = withWindowSet $
                    (\s -> sc ++ (show (length (W.up s) + 1))
                    ++ "/" ++
                    (show (length (W.integrate s))) ++ ec)
-      sc = "^fg(#000000)^bg(" ++ fg ++ ") "
+      sc = "^bg(#373737)^fg(" ++ fg ++ ") "
       ec = " ^fg(" ++ fg ++ ")^bg(" ++ bg ++ ")"
 
 --       clickable t = do
@@ -236,7 +236,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((0, xK_i), B.markBoring)
     , ((0, xK_u), B.clearBoring)
     , ((0, xK_m), sendMessage Mag.Toggle)
-    , ((0, xK_b), withFocused (sendMessage . maximizeRestore))
     , ((0, xK_t), windows W.focusMaster)
     , ((0, xK_r), refresh)
     ])
