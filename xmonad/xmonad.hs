@@ -113,12 +113,12 @@ main = do
 myLog h = withWindowSet $
   \ws -> dynamicLogWithPP $ defaultPP
     { ppCurrent         = dzenColor "black" fg . pad
-    , ppUrgent          = dzenColor "black" "yellow" . pad . dzenStrip
+    , ppUrgent          = dzenColor "black" "#d7c529" . pad . dzenStrip
     , ppHidden          = dzenColor fg bg
     , ppHiddenNoWindows = id
     , ppWsSep           = " "
-    , ppSep             = " "
-    , ppTitle           = (" ^fg(#dddddd)" ++) . dzenEscape
+    , ppSep             = "  "
+    , ppTitle           = ("^fg(#dddddd)" ++) . dzenEscape
     , ppOrder           = \(workspaces:layout:title:xs) ->
                            (myWCount ws:workspaces:title:xs)
     , ppOutput          = hPutStrLn h
