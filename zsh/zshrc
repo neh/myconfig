@@ -88,8 +88,9 @@ compinit -C
 
 ## case-insensitive (all),partial-word and then substring completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*:*:kill:*:processes' command 'ps -axco pid,user,command'
 
-## Some functions used to put the current vcs branch name in my prompt
+## Some functions used to put the current vcs branch name in my prompt 
 git_prompt_info() {
     BRANCH=$(git-branch --no-color 2> /dev/null \
     | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')
