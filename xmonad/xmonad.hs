@@ -255,7 +255,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xK_f), raiseNext (className =? "Rox"))
     , ((0, xK_t), raiseNext (title ~? "mythfrontend(.real)?"))
     ])
-  , ((modMask,                 xK_b     ), raiseNext (className ~? "(Firefox|Shiretoko|Namoroka|chrome)") )
+  , ((modMask,                 xK_b     ), raiseNext (className ~? "(Firefox|Shiretoko|Namoroka|Chrome)") )
   , ((modMask,                 xK_v     ), raiseNext (title ~? "VIM$") )
 
   , ((modMask,                 xK_space ), sendMessage NextLayout)
