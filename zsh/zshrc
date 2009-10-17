@@ -216,6 +216,15 @@ function jobs_indicator {
 }
 precmd_functions+='jobs_indicator'
 
+function pwd_colour {
+    if [[ -w $PWD ]]; then
+        PWD_COLOUR="%{${fg[green]}%}"
+    else
+        PWD_COLOUR="%{${fg[red]}%}"
+    fi
+}
+precmd_functions+='pwd_colour'
+
 # change user@host color based on where I am
 case "$SSH_CONNECTION" in
     '') COLOUR="%B%{${fg[green]}%}";;
@@ -223,4 +232,4 @@ case "$SSH_CONNECTION" in
 esac
 
 PS1='%{${fg_bold[red]}%}%(?..%?%b%{${fg_no_bold[white]}%}:% )$COLOUR%n@%m%{${fg[default]}%}$JOBS%b $VIMODE'
-RPS1='$(vcs_prompt) %{${fg[green]}%}%~%{${fg[default]}%}'
+RPS1='$(vcs_prompt) ${PWD_COLOUR}%~%{${fg[default]}%}'
