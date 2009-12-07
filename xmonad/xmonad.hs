@@ -18,7 +18,6 @@ import XMonad.Actions.UpdatePointer
 import XMonad.Actions.WindowBringer
 import XMonad.Actions.WindowGo
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.EventHook
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.ManageDocks
@@ -37,7 +36,6 @@ import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Reflect
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.ThreeColumns
-import XMonad.Layout.ThreeColumnsMiddle
 import XMonad.Layout.ToggleLayouts
 import XMonad.Layout.TwoPane
 import XMonad.Prompt
@@ -65,7 +63,8 @@ statusBarCmd = "dzen2 -bg '" ++ bg ++ "' -fg '" ++ fg ++ "' -x 0 -y 0 -h 24 -w 1
 main = do
   din <- spawnPipe statusBarCmd
   spawn "xcompmgr -nFf -I 0.056 -O 0.06"
-  xmonad $ withUrgencyHook LibNotifyUrgencyHook defaultConfig
+  xmonad $ withUrgencyHook NoUrgencyHook
+         $ defaultConfig
     { borderWidth        = 0
     , terminal           = "urxvtcd"
     , normalBorderColor  = "#444444"
@@ -82,18 +81,19 @@ main = do
                            updatePointer (Relative 0.01 0.5) >>
                            setWMName "LG3D"
     , layoutHook         = smartBorders $
-                           layoutHintsWithPlacement (0.5, 0.5) $
+                           layoutHintsToCenter $
+                           --layoutHintsWithPlacement (0.5, 0.5) $
                            maximize $
                            B.boringWindows $
                            toggleLayouts Full $
                            onWorkspace "tv" Full $
+                           onWorkspace "vm" Full $
                            avoidStruts $
                            onWorkspace "0" (tp ||| grid) $
                            onWorkspace "comm" Full $
                            onWorkspace "im" im $
                            onWorkspace "files" file $
                            onWorkspace "gimp" gimp $
-                           onWorkspace "vm" Full $
                            rtiled |||
                            tp |||
                            file
@@ -105,7 +105,7 @@ main = do
       im = withIM (0.13) (Role "buddy_list") $ ResizableTall 1 (1/100) (0.40) [1]
       rgrid = Grid True
       grid = Grid False
-      file = ThreeCol 1 (3/100) (0.5)
+      file = ThreeCol 1 (3/100) (0.33)
       gimp = withIM (0.11) (Role "gimp-toolbox") $ reflectHoriz $
              withIM (0.15) (Role "gimp-dock") Full
 
@@ -143,15 +143,15 @@ myLog h = withWindowSet $
 --                       (show t)
 
 
-data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
+--data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
 
-instance UrgencyHook LibNotifyUrgencyHook where
-  urgencyHook LibNotifyUrgencyHook w = do
-    name <- getName w
-    ws <- gets windowset
-    whenJust (W.findTag w ws) (flash name)
-    where
-      flash name index = safeSpawn "notify-send" ("Activity in " ++ show name ++ " on workspace " ++ index)
+--instance UrgencyHook LibNotifyUrgencyHook where
+  --urgencyHook LibNotifyUrgencyHook w = do
+    --name <- getName w
+    --ws <- gets windowset
+    --whenJust (W.findTag w ws) (flash name)
+    --where
+      --flash name index = safeSpawn "notify-send" ("Activity in " ++ show name ++ " on workspace " ++ index)
 
 
 myPConfig = defaultXPConfig
@@ -247,15 +247,13 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,                 xK_o     ), toggleWindow (role =? "handy")
       (spawn $ XMonad.terminal conf ++
       " -title handy -geometry 100x52 -e screen -D -R handy"))
-  , ((modMask,                 xK_i     ), toggleWindow (title =? "insp")
-      (spawn "feh --title insp $HOME/Pictures/cultofdone-wp.png"))
 
   , ((modMask, xK_g), submap . M.fromList $
     [ ((0, xK_m), raiseNext (className =? "MPlayer"))
     , ((0, xK_f), raiseNext (className =? "Rox"))
     , ((0, xK_t), raiseNext (title ~? "mythfrontend(.real)?"))
     ])
-  , ((modMask,                 xK_b     ), raiseNext (className ~? "(Firefox|Shiretoko|Namoroka|Chrome)") )
+  , ((modMask,                 xK_b     ), raiseNext (className ~? "(Firefox|Shiretoko|Namoroka|Google-chrome)") )
   , ((modMask,                 xK_v     ), raiseNext (title ~? "VIM$") )
 
   , ((modMask,                 xK_space ), sendMessage NextLayout)
@@ -341,7 +339,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         (x:_) -> killWindow x
         []    -> action
 
---Fixes raiseNextMaybe cycling behaviour in Actions.WindowGo (issue #284)
 
 
 myMouse (XConfig {XMonad.modMask = modMask}) = M.fromList $
