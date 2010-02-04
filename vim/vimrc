@@ -64,6 +64,9 @@ if has("autocmd")
 
     " PHP parser check (CTRL-L)
     autocmd FileType php noremap <C-L> :!/usr/bin/php -l %<CR>
+
+    " add html ft to php files for snippet support
+    au BufRead,BufNewFile *.php set filetype=php.html
     
     augroup VCSCommand
         au User VCSBufferCreated silent! nmap <unique> <buffer> q: bwipeout<cr>
