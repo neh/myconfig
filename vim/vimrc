@@ -22,13 +22,13 @@ if has("autocmd")
 	autocmd FileType ruby        setlocal sw=2 ts=2 et
 	autocmd FileType eruby        setlocal sw=2 ts=2 et
     autocmd FileType css         setlocal sw=2 sts=2 et
-    autocmd FileType html        setlocal sw=2 sts=2 et
+    autocmd FileType html        setlocal sw=4 sts=4 et
     autocmd FileType java        setlocal sw=4 sts=4 et
     autocmd FileType javascript  setlocal sw=4 sts=4 et
     autocmd FileType mason       setlocal sw=2 sts=2 et
     autocmd FileType ocaml       setlocal sw=2 sts=2 et
 	autocmd FileType haskell     setlocal sw=2 ts=2 et
-    autocmd FileType php         setlocal sw=2 sts=2 et 
+    autocmd FileType php         setlocal sw=4 sts=4 et 
     autocmd FileType perl        setlocal sw=4 sts=4 et
     autocmd FileType python      setlocal sw=4 sts=4 et tw=72
     autocmd FileType scheme      setlocal sw=2 sts=2 et
@@ -62,6 +62,9 @@ if has("autocmd")
 "    augroup filetypedetect
 "          autocmd! BufNewFile, BufRead
 
+    " PHP parser check (CTRL-L)
+    autocmd FileType php noremap <C-L> :!/usr/bin/php -l %<CR>
+    
     augroup VCSCommand
         au User VCSBufferCreated silent! nmap <unique> <buffer> q: bwipeout<cr>
     augroup END
@@ -70,7 +73,7 @@ endif " has("autocmd")
 
 
 let VCSCommandEnableBufferSetup=1
-let mapleader = ","
+"let mapleader = ","
 syntax on					" always want syntax highlighting
 set autoindent				" always set autoindenting on
 set history=50				" keep 50 lines of command line history
@@ -107,9 +110,12 @@ set formatoptions+=tcroqnw
 let loaded_vimspell = 1
 
 " Some NERDTree mappings for dvorak
-let g:NERDTreeMapOpenInTab="A"
-let g:NERDTreeMapOpenInTabSilent="a"
+let g:NERDTreeMapOpenInTab="a"
+let g:NERDTreeMapOpenInTabSilent="A"
 let g:NERDTreeHighlightCursorline=1
+
+let g:SuperTabMappingForward = '<c-n>'
+let g:SuperTabMappingBackward = '<c-p>'
 
 " TODO need a better key for this
 map <silent> <F3> :call BufferList()<CR>
@@ -131,6 +137,9 @@ if $TERM =~ '^screen-bce'
         set t_Co=256 
         colo wombat256
 elseif $TERM =~ '^rxvt-256'
+        set t_Co=256 
+        colo wombat256
+elseif $TERM =~ '^xterm-256'
         set t_Co=256 
         colo wombat256
 elseif $TERM =~ '^rxvt'
@@ -163,8 +172,8 @@ runtime ftplugin/man.vim
 
 
 " Mappings
-map <C-J> <C-W>j<C-W>_     " move down one window and maximize
-map <C-K> <C-W>k<C-W>_     " move up one window and maximize
+map <C-S-T> <C-W>j<C-W>_     " move down one window and maximize
+map <C-S-N> <C-W>k<C-W>_     " move up one window and maximize
 map <C-H> <C-W>h           " move left one window
 map <C-L> <C-W>l           " move right one window
 map <C-M-J> <C-W>-         " shrink a window vertically
@@ -185,12 +194,13 @@ map <F10> :NERDTreeToggle<CR>
 :imap <C-o> <PageUp>
 :imap <C-e> <PageDown>
 
+" TODO map c-s-[n-t] to move tabs left/right
 :nmap <C-n> :tabprevious<cr>
 :nmap <C-t> :tabnext<cr>
 :map <C-n> :tabprevious<cr>
 :map <C-t> :tabnext<cr>
-:imap <C-n> <ESC>:tabprevious<cr>i
-:imap <C-t> <ESC>:tabnext<cr>i
+":imap <C-n> <ESC>:tabprevious<cr>i
+":imap <C-t> <ESC>:tabnext<cr>i
 ":nmap <C-t> :tabnew<cr>
 ":imap <C-t> <ESC>:tabnew<cr> 
 nmap <tab> :bn<cr>
