@@ -5,6 +5,8 @@ if has("autocmd")
 
 	autocmd!
 
+    filetype on
+	filetype plugin on
 	filetype plugin indent on
 
 	" python settings
