@@ -70,6 +70,8 @@ if has("autocmd")
     " add html ft to php files for snippet support
     au BufRead,BufNewFile *.php set filetype=php.html
     
+    au BufRead,BufNewFile *.snippet? set filetype=snippet
+    
     augroup VCSCommand
         au User VCSBufferCreated silent! nmap <unique> <buffer> q: bwipeout<cr>
     augroup END
@@ -77,6 +79,7 @@ if has("autocmd")
 endif " has("autocmd")
 
 
+let g:snips_author = 'Nathan Howell'
 let VCSCommandEnableBufferSetup=1
 "let mapleader = ","
 syntax on					" always want syntax highlighting
@@ -208,8 +211,8 @@ map <F10> :NERDTreeToggle<CR>
 ":imap <C-t> <ESC>:tabnext<cr>i
 ":nmap <C-t> :tabnew<cr>
 ":imap <C-t> <ESC>:tabnew<cr> 
-nmap <tab> :bn<cr>
-nmap <s-tab> :bp<cr>
+"nmap <tab> :bn<cr>
+"nmap <s-tab> :bp<cr>
 
 " TODO: set up a keymapping for par
 map <Leader>par :!par<CR>
