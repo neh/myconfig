@@ -7,16 +7,7 @@ if has("autocmd")
 
     filetype on
 	filetype plugin on
-	filetype plugin indent on
-
-	" python settings
-	autocmd BufNewFile,BufRead *.ptl setf python
-	
-	" do not make backup files for arch logs
-	autocmd BufNewFile,BufRead ++log* :set nobackup
-
-	" load mail settings when editing mail from mutt
-	autocmd BufRead /tmp/mutt* :source ~/.vim/mail
+	filetype indent on
 
 	autocmd BufNewFile,BufRead *.erb setf eruby
 
@@ -35,7 +26,6 @@ if has("autocmd")
     autocmd FileType python      setlocal sw=4 sts=4 et tw=72
     autocmd FileType scheme      setlocal sw=2 sts=2 et
     autocmd FileType sql         setlocal et
-    autocmd FileType htmlcheetah setlocal sw=2 sts=2 et
     autocmd FileType text        setlocal sw=2 sts=2 et tw=78
 
     " git commit diff viewing
@@ -61,9 +51,6 @@ if has("autocmd")
         "autocmd BufWritePost \.gvimrc :source $HOME/.gvimrc
     "endif
 
-"    augroup filetypedetect
-"          autocmd! BufNewFile, BufRead
-
     " PHP parser check (CTRL-L)
     autocmd FileType php noremap <C-L> :!/usr/bin/php -l %<CR>
 
@@ -78,6 +65,12 @@ if has("autocmd")
 
 endif " has("autocmd")
 
+if v:version > 700
+    " highlight the current line (all the way to the right edge)
+    set cursorline
+    hi CursorLine    term=bold cterm=bold ctermbg=8 gui=bold guibg=#B50DB9
+    "call ExpectCursorSlowDown(now)
+endif
 
 let g:snips_author = 'Nathan Howell'
 let VCSCommandEnableBufferSetup=1
@@ -117,10 +110,19 @@ set formatoptions+=tcroqnw
 
 let loaded_vimspell = 1
 
-" Some NERDTree mappings for dvorak
+" NERDTree mappings and configuration
+map <F10> :NERDTreeToggle<CR>
+map <F11> :NERDTreeMirror<CR>
 let g:NERDTreeMapOpenInTab="a"
 let g:NERDTreeMapOpenInTabSilent="A"
-let g:NERDTreeHighlightCursorline=1
+let g:NERDTreeMapJumpFirstChild="N"
+let g:NERDTreeMapJumpLastChild="T"
+let g:NERDTreeMapJumpNextSibling="<C-S-T>"
+let g:NERDTreeMapJumpPrevSibling="<C-S-N>"
+
+let g:NERDTreeQuitOnOpen=1
+let g:NERDTreeAutoCenter=1
+let g:NERDTreeAutoCenterThreshold=6
 
 let g:SuperTabMappingForward = '<c-n>'
 let g:SuperTabMappingBackward = '<c-p>'
@@ -213,12 +215,6 @@ map <F10> :NERDTreeToggle<CR>
 ":imap <C-t> <ESC>:tabnew<cr> 
 "nmap <tab> :bn<cr>
 "nmap <s-tab> :bp<cr>
-
-" TODO: set up a keymapping for par
-map <Leader>par :!par<CR>
-
-" Variables
-let Tlist_Ctags_Cmd = "/usr/bin/exuberant-ctags"
 
 " toggle foldcolumn
 function! ToggleFoldColumn()
