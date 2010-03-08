@@ -89,6 +89,7 @@ set title
 set titlestring=%<%{hostname()}:%F\ %(%m\ %)[%l/%L\ %P]\ %y\ VIM
 set laststatus=2
 set statusline=%F%m%r%h%w\ [%l,%v\ %p%%\ %L]\ [%{&ff}]
+set completeopt=longest,menuone
 
 function! GitStatusLine()
     let gitinfo=VCSCommandGetStatusLine()
@@ -126,6 +127,20 @@ let g:NERDTreeAutoCenterThreshold=6
 
 let g:SuperTabMappingForward = '<c-n>'
 let g:SuperTabMappingBackward = '<c-p>'
+let g:SuperTabDefaultCompletionType = 'context'
+
+let generate_tags = 1
+let Tlist_Use_Horiz_Window = 0
+nnoremap TT :TlistToggle<CR>
+map <F4> :TlistToggle<CR>
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_File_Fold_Auto_Close = 1
+let Tlist_Compact_Format = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_Inc_Winwidth = 0
+let Tlist_Close_On_Select = 1
+let Tlist_Process_File_Always = 1
 
 " TODO need a better key for this
 map <silent> <F3> :call BufferList()<CR>

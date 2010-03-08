@@ -1548,18 +1548,18 @@ function! s:Tlist_Window_Init()
     set cpoptions&vim
 
     " Create buffer local mappings for jumping to the tags and sorting the list
-    nnoremap <buffer> <silent> <CR>
-                \ :call <SID>Tlist_Window_Jump_To_Tag('useopen')<CR>
     nnoremap <buffer> <silent> o
+                \ :call <SID>Tlist_Window_Jump_To_Tag('useopen')<CR>
+    nnoremap <buffer> <silent> O
                 \ :call <SID>Tlist_Window_Jump_To_Tag('newwin')<CR>
     nnoremap <buffer> <silent> p
                 \ :call <SID>Tlist_Window_Jump_To_Tag('preview')<CR>
     nnoremap <buffer> <silent> P
                 \ :call <SID>Tlist_Window_Jump_To_Tag('prevwin')<CR>
     if v:version >= 700
-    nnoremap <buffer> <silent> t
+    nnoremap <buffer> <silent> a
                 \ :call <SID>Tlist_Window_Jump_To_Tag('checktab')<CR>
-    nnoremap <buffer> <silent> <C-t>
+    nnoremap <buffer> <silent> A
                 \ :call <SID>Tlist_Window_Jump_To_Tag('newtab')<CR>
     endif
     nnoremap <buffer> <silent> <2-LeftMouse>
