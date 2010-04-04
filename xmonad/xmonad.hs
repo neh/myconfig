@@ -62,12 +62,12 @@ statusBarCmd = "dzen2 -bg '" ++ bg ++ "' -fg '" ++ fg ++ "' -x 0 -y 0 -h 24 -w 1
 
 main = do
   din <- spawnPipe statusBarCmd
-  spawn "xcompmgr -nFf -I 0.056 -O 0.06"
+  --spawn "xcompmgr -nFf -I 0.056 -O 0.06"
   xmonad $ withUrgencyHook NoUrgencyHook
          $ defaultConfig
-    { borderWidth        = 0
+    { borderWidth        = 1
     , terminal           = "urxvtcd"
-    , normalBorderColor  = "#444444"
+    , normalBorderColor  = "#222222"
     , focusedBorderColor = fg
     , modMask            = mod4Mask
     , workspaces         = ["0", "comm", "im", "files", "web"]
@@ -76,21 +76,20 @@ main = do
     , handleEventHook    = ewmhDesktopsEventHook
     , manageHook         = manageDocks <+> myManageHook
     , logHook            = myLog din >>
-                           fadeInactiveLogHook 0x99999999 >>
+                           --fadeInactiveLogHook 0x99999999 >>
                            ewmhDesktopsLogHook >>
                            updatePointer (Relative 0.01 0.5) >>
                            setWMName "LG3D"
     , layoutHook         = smartBorders $
-                           layoutHintsToCenter $
-                           --layoutHintsWithPlacement (0.5, 0.5) $
+                           --layoutHintsToCenter $
+                           layoutHintsWithPlacement (0.5, 0.5) $
                            maximize $
                            B.boringWindows $
-                           toggleLayouts Full $
-                           onWorkspace "tv" Full $
-                           onWorkspace "vm" Full $
+                           toggleLayouts (noBorders Full) $
+                           onWorkspace "vm" (noBorders Full) $
                            avoidStruts $
                            onWorkspace "0" (tp ||| grid) $
-                           onWorkspace "comm" Full $
+                           onWorkspace "comm" (noBorders Full) $
                            onWorkspace "im" im $
                            onWorkspace "files" file $
                            onWorkspace "gimp" gimp $
@@ -165,7 +164,7 @@ myPConfig = defaultXPConfig
 myManageHook :: ManageHook
 myManageHook = composeAll
   [ className =? "stalonetray"           --> doIgnore
-  , className =? "Do"                    --> doIgnore
+  , className ~? "(Do|Do.exe)"           --> doIgnore
   , resource  =? "Dialog"                --> doFloat
   , title     =? "Edit Bookmark"         --> doFloat
   , title     =? "Session Manager"       --> doFloat
@@ -276,6 +275,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask .|. shiftMask,   xK_t     ), windows W.swapDown  )
   , ((modMask .|. shiftMask,   xK_n     ), windows W.swapUp    )
 
+  , ((modMask .|. controlMask, xK_h     ), withFocused (keysMoveWindow (-200,0)))
+  , ((modMask .|. controlMask, xK_s     ), withFocused (keysMoveWindow (200,0)))
+  , ((modMask .|. controlMask, xK_t     ), withFocused (keysMoveWindow (0,200)))
+  , ((modMask .|. controlMask, xK_n     ), withFocused (keysMoveWindow (0,-200)))
+
   , ((modMask,                 xK_comma ), myShrink)
   , ((modMask,                 xK_period), myExpand)
   , ((modMask .|. shiftMask,   xK_slash ), sendMessage MirrorShrink)
@@ -290,6 +294,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,                 xK_s     ), nextWS)
   , ((modMask .|. shiftMask,   xK_h     ), shiftToPrev)
   , ((modMask .|. shiftMask,   xK_s     ), shiftToNext)
+
+  , ((modMask,                 xK_Left     ), nextScreen)
+  --, ((modMask,                 xK_Right    ), prevWS)
 
   , ((modMask,                 xK_f     ), sendMessage ToggleLayout )
 
