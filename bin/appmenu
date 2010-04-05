@@ -72,7 +72,9 @@ else
   SDBM.open(APPLISTDB) do |dbm|
     history = dbm['localhistory'] || ''
     history = history.split(';')
-    cmd = `echo "#{(history + dbm.keys.sort.delete_if { |x| history.include?(x) }).join("\n")}" | dmenu $DMENU_OPTS -p '#'`
+    dmenu_opts = '-b -i -nf "#dfd8c3" -nb "#353535" -sf black -sb "#be462a" -fn "-*-terminal-medium-r-*-*-17-*-*-*-*-*-iso8859-*"'
+
+    cmd = `echo "#{(history + dbm.keys.sort.delete_if { |x| history.include?(x) }).join("\n")}" | dmenu #{dmenu_opts} -p '#'`
     unless cmd == ''
       dbm['localhistory'] = history.unshift(cmd).uniq.slice(0..4).join(';')
       exec "#{dbm[cmd] || cmd}" 

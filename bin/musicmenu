@@ -63,7 +63,9 @@ players = {
 n = ARGV[0]
 p = players[n]
 
-cmd = `echo "#{p["cmds"].join("\n")}" | dmenu $DMENU_OPTS -p '#{n}:'`
+dmenu_opts = '-b -i -nf "#dfd8c3" -nb "#444" -sf black -sb "#be462a" -fn "-*-terminal-medium-r-*-*-17-*-*-*-*-*-iso8859-*"'
+
+cmd = `echo "#{p["cmds"].join("\n")}" | dmenu #{dmenu_opts} -p '#{n}:'`
 
 unless cmd == ''
   p["code"] ? p["code"].call(cmd) : system("#{n} #{p["options"]} #{p["prefix"]+cmd}")
