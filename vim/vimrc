@@ -152,21 +152,21 @@ map <silent> <F3> :call BufferList()<CR>
 
 set background=dark
 if has("gui_running")
-    colo mint
+    colo vilight
     set guioptions=aAim    " don't want a toolbar or menu
-    set guifont=Bitstream\ Vera\ Sans\ Mono\ 14
+    set guifont=Liberation\ Mono\ 11
     set mousehide
 endif
 
 if $TERM =~ '^screen-bce'
         set t_Co=256 
-        colo wombat256
+        colo molokai
 elseif $TERM =~ '^rxvt-256'
         set t_Co=256 
-        colo wombat256
+        colo molokai
 elseif $TERM =~ '^xterm-256'
         set t_Co=256 
-        colo wombat256
+        colo molokai
 elseif $TERM =~ '^rxvt'
         set t_Co=88
         colo inkpot
@@ -224,6 +224,10 @@ map <F10> :NERDTreeToggle<CR>
 :nmap <C-t> :tabnext<cr>
 :map <C-n> :tabprevious<cr>
 :map <C-t> :tabnext<cr>
+":nmap <C-N> :tabmove tabpagenr() - 2<cr>
+":nmap <C-T> :tabmove tabpagenr() + 2<cr>
+":map <C-N> :tabmove tabpagenr() - 2<cr>
+":map <C-T> :tabmove tabpagenr() + 2<cr>
 ":imap <C-n> <ESC>:tabprevious<cr>i
 ":imap <C-t> <ESC>:tabnext<cr>i
 ":nmap <C-t> :tabnew<cr>
