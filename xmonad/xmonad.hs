@@ -99,26 +99,26 @@ main = withConnection Session $ \ dbus -> do
                            <+> placeHook (withGaps (24,0,0,0) (inBounds(underMouse (0.5, 0.5))))
                            <+> manageDocks
                            <+> myManageHook
-    , logHook            = myLog dbus >>
-                           --fadeInactiveLogHook 0x99999999 >>
-                           ewmhDesktopsLogHook >>
-                           updatePointer (Relative 0.01 0.5) >>
-                           setWMName "LG3D"
-    , layoutHook         = smartBorders $
-                           layoutHintsWithPlacement (0.5, 0.5) $
-                           maximize $
-                           B.boringWindows $
-                           toggleLayouts (noBorders Full) $
-                           onWorkspace "vm" (noBorders Full) $
-                           avoidStruts $
-                           onWorkspace "0" (tp ||| grid) $
-                           onWorkspace "comm" (noBorders Full) $
-                           onWorkspace "im" im $
-                           onWorkspace "files" file $
-                           onWorkspace "gimp" gimp $
-                           rtiled |||
-                           tp |||
-                           file
+    , logHook            = myLog dbus
+                           -- >> fadeInactiveLogHook 0x99999999
+                           >> ewmhDesktopsLogHook
+                           >> updatePointer (Relative 0.01 0.5)
+                           >> setWMName "LG3D"
+    , layoutHook         = smartBorders
+                           $ layoutHintsWithPlacement (0.5, 0.5)
+                           $ maximize
+                           $ B.boringWindows
+                           $ toggleLayouts (noBorders Full)
+                           $ onWorkspace "vm" (noBorders Full)
+                           $ avoidStruts
+                           $ onWorkspace "0" (tp ||| grid)
+                           $ onWorkspace "comm" (noBorders Full)
+                           $ onWorkspace "im" im
+                           $ onWorkspace "files" file
+                           $ onWorkspace "gimp" gimp
+                           $ rtiled
+                           ||| tp
+                           ||| file
     }
     where
       tiled = HintedTile 1 (3%100) 0.648 TopLeft Tall
