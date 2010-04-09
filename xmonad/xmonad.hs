@@ -94,7 +94,9 @@ main = withConnection Session $ \ dbus -> do
     , keys               = myKeys
     , mouseBindings      = myMouse
     , handleEventHook    = ewmhDesktopsEventHook
-    , manageHook         = placeHook (inBounds(underMouse (0.5, 0.5)))
+                           <+> fullscreenEventHook
+    , manageHook         = myPreManageHook
+                           <+> placeHook (withGaps (24,0,0,0) (inBounds(underMouse (0.5, 0.5))))
                            <+> manageDocks
                            <+> myManageHook
     , logHook            = myLog dbus >>
@@ -103,7 +105,6 @@ main = withConnection Session $ \ dbus -> do
                            updatePointer (Relative 0.01 0.5) >>
                            setWMName "LG3D"
     , layoutHook         = smartBorders $
-                           --layoutHintsToCenter $
                            layoutHintsWithPlacement (0.5, 0.5) $
                            maximize $
                            B.boringWindows $
@@ -217,24 +218,32 @@ myPConfig = defaultXPConfig
   }
 
 
+-- This manageHook is meant to be used before placeHook
+-- to avoid its effects for some apps
+myPreManageHook :: ManageHook
+myPreManageHook = composeAll
+  [ title     =? "handy"                 --> (doSetRole "handy" >> doCenterFloat) 
+  ]
+
+-- And this manageHook goes after the placeHook
 myManageHook :: ManageHook
 myManageHook = composeAll
-  [ className =? "stalonetray"           --> doIgnore
-  , className ~? "(Do|Do.exe)"           --> doIgnore
-  , resource  =? "Dialog"                --> doFloat
-  , title     =? "Edit Bookmark"         --> doFloat
-  , title     =? "Session Manager"       --> doFloat
-  , title     =? "Bulk rename files"     --> doFloat
-  , className =? "Apt-listchanges"       --> doFloat
-  , title     =? "Shiretoko Preferences" --> doFloat
-  , className =? "feh"                   --> doCenterFloat
-  , className =? "Xmessage"              --> doCenterFloat
-  , title     =? "handy"                 --> (doSetRole "handy" >> doCenterFloat) 
-  , title     ~? "mythfrontend"          --> doNewHWS "tv"
-  , className ~? "(Gimp-2.6|Gimp)"       --> doNewWS "gimp"
-  , title     ~? ".*VirtualBox.*"        --> doNewWS "vm"
-  , title     =? "Add-ons"               --> doOpenUnder
-  , className =? "Savebox"               --> doOpenUnder
+  [ className ~? "(Do|Do.exe)"             --> doIgnore
+  , resource  =? "Dialog"                  --> doFloat
+  , title     =? "Options"                 --> doFloat
+  , title     =? "Edit Bookmark"           --> doFloat
+  , title     =? "Session Manager"         --> doFloat
+  , title     =? "Bulk rename files"       --> doFloat
+  , className =? "Apt-listchanges"         --> doFloat
+  , title     =? "Firefox Preferences"     --> doFloat
+  , title     =? "Thunderbird Preferences" --> doFloat
+  , className =? "feh"                     --> doFloat
+  , className =? "Xmessage"                --> doFloat
+  , title     ~? "mythfrontend"            --> doNewHWS "tv"
+  , className ~? "(Gimp-2.6|Gimp)"         --> doNewWS "gimp"
+  , title     ~? ".*VirtualBox.*"          --> doNewWS "vm"
+  , title     =? "Add-ons"                 --> doOpenUnder
+  , className =? "Savebox"                 --> doOpenUnder
   ]
   where
     unFloat = ask >>= doF . W.sink
@@ -252,16 +261,16 @@ myManageHook = composeAll
         then addHiddenWorkspace tg
         else return()
 
-    -- Apparently this function is a bad idea, since it likely
-    -- violates the ICCCM. I only use it as a workaround for
-    -- apps that can't set their own role, like urxvt.
-    doSetRole rl = ask >>= \w ->
-      (liftX $ withDisplay $ \dpy -> do
-        r <- getAtom "WM_WINDOW_ROLE"
-        t <- getAtom "STRING"
-        io $ changeProperty8 dpy w r t propModeReplace
-             (map (fromIntegral . ord) rl)
-      ) >> idHook
+-- Apparently this function is a bad idea, since it likely
+-- violates the ICCCM. I only use it as a workaround for
+-- apps that can't set their own role, like urxvt.
+doSetRole rl = ask >>= \w ->
+  (liftX $ withDisplay $ \dpy -> do
+    r <- getAtom "WM_WINDOW_ROLE"
+    t <- getAtom "STRING"
+    io $ changeProperty8 dpy w r t propModeReplace
+         (map (fromIntegral . ord) rl)
+  ) >> idHook
 
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -308,7 +317,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xK_f), raiseNext (className =? "Rox"))
     , ((0, xK_t), raiseNext (title ~? "mythfrontend(.real)?"))
     ])
-  , ((modMask,                 xK_b     ), raiseNext (className ~? "(Firefox|Shiretoko|Namoroka|Google-chrome)") )
+  , ((modMask,                 xK_b     ), raiseNext (className ~? "(Firefox|Namoroka|Google-chrome)") )
   , ((modMask,                 xK_v     ), raiseNext (title ~? "VIM$") )
 
   , ((modMask,                 xK_space ), sendMessage NextLayout)
@@ -324,8 +333,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask,                 xK_F12   ), spawn "gnome-screensaver-command --lock")
 
-  , ((modMask .|. controlMask, xK_comma ), rotSlavesUp)
-  , ((modMask .|. controlMask, xK_period), rotSlavesDown)
+  , ((modMask .|. controlMask, xK_period), rotSlavesUp)
+  , ((modMask .|. controlMask, xK_comma ), rotSlavesDown)
 
   , ((modMask,                 xK_t     ), B.focusDown)
   , ((modMask,                 xK_n     ), B.focusUp  )
