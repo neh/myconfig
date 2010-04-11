@@ -16,6 +16,7 @@ import DBus.Message
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.CycleWS
 import XMonad.Actions.DynamicWorkspaces
+import qualified XMonad.Actions.DynamicWorkspaceOrder as DO
 import XMonad.Actions.FloatKeys
 import XMonad.Actions.RotSlaves
 import XMonad.Actions.Submap
@@ -96,7 +97,9 @@ main = withConnection Session $ \ dbus -> do
     , handleEventHook    = ewmhDesktopsEventHook
                            <+> fullscreenEventHook
     , manageHook         = myPreManageHook
-                           <+> placeHook (withGaps (24,0,0,0) (inBounds(underMouse (0.5, 0.5))))
+                           <+> placeHook (withGaps (24,0,0,0)
+                                         (inBounds
+                                         (underMouse (0.5, 0.5))))
                            <+> manageDocks
                            <+> myManageHook
     , logHook            = myLog dbus
@@ -108,23 +111,24 @@ main = withConnection Session $ \ dbus -> do
                            $ layoutHintsWithPlacement (0.5, 0.5)
                            $ maximize
                            $ B.boringWindows
-                           $ toggleLayouts (noBorders Full)
-                           $ onWorkspace "vm" (noBorders Full)
+                           $ toggleLayouts Full
+                           $ onWorkspace "vm" Full
                            $ avoidStruts
-                           $ onWorkspace "0" (tp ||| grid)
-                           $ onWorkspace "comm" (noBorders Full)
+                           -- $ onWorkspace "0" (tp ||| grid)
+                           $ onWorkspace "comm" Full
                            $ onWorkspace "im" im
                            $ onWorkspace "files" file
                            $ onWorkspace "gimp" gimp
-                           $ rtiled
-                           ||| tp
+                           $ onWorkspace "read" Full
+                           $ tp
+                           ||| rtiled
                            ||| file
     }
     where
       tiled = HintedTile 1 (3%100) 0.648 TopLeft Tall
       rtiled = Mag.magnifier' (ResizableTall 1 (3%100) 0.648 [])
       tp = TwoPane 0.03 0.5
-      im = withIM (0.13) (Role "buddy_list") $ ResizableTall 1 (1/100) (0.40) [1]
+      im = withIM (0.13) (Role "contact_list") $ ResizableTall 1 (1/100) (0.40) [1]
       rgrid = Grid True
       grid = Grid False
       file = ThreeCol 1 (3/100) (0.33)
@@ -137,10 +141,11 @@ myLog dbus = withWindowSet $ \ws -> do
           { ppCurrent         = pangoStyle "#be462a" "#dfd8c3" "bold"
           , ppUrgent          = pangoUrgent "#d7c529"
           , ppHidden          = wrap " " " "
-          , ppVisible         = pangoColor "#663366" . wrap "<" ">"
+          , ppVisible         = pangoStyle "#dfd8c3" "#333" "bold"
           , ppHiddenNoWindows = id
           , ppWsSep           = ""
           , ppSep             = " "
+          , ppSort            = DO.getSortByOrder
           , ppTitle           = pangoBold "#efefef" . shorten 90
           , ppOrder           = \(workspaces:layout:title:xs) ->
                                  (myWCount ws:workspaces:title:xs)
@@ -156,7 +161,7 @@ myLog dbus = withWindowSet $ \ws -> do
                 (\ (DBus.Error _name _msg) ->
                   return 0)
               return ()
-            }
+          }
   where
       -- myWCount provides a count of open windows, and
       -- indicates which has focus. e.g. 2/4 means that
@@ -237,12 +242,12 @@ myManageHook = composeAll
   , className =? "Apt-listchanges"         --> doFloat
   , title     =? "Firefox Preferences"     --> doFloat
   , title     =? "Thunderbird Preferences" --> doFloat
+  , title     =? "Add-ons"                 --> doFloat
   , className =? "feh"                     --> doFloat
   , className =? "Xmessage"                --> doFloat
   , title     ~? "mythfrontend"            --> doNewHWS "tv"
   , className ~? "(Gimp-2.6|Gimp)"         --> doNewWS "gimp"
   , title     ~? ".*VirtualBox.*"          --> doNewWS "vm"
-  , title     =? "Add-ons"                 --> doOpenUnder
   , className =? "Savebox"                 --> doOpenUnder
   ]
   where
@@ -323,7 +328,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,                 xK_space ), sendMessage NextLayout)
   , ((modMask .|. shiftMask,   xK_space ), setLayout $ XMonad.layoutHook conf)
 
-  , ((modMask,                 xK_BackSpace), removeWorkspace)
+  , ((modMask,                 xK_BackSpace), removeEmptyWorkspace)
   , ((modMask,                 xK_l     ), selectWorkspace myPConfig)
   , ((modMask .|. shiftMask,   xK_p     ), withWorkspace myPConfig (windows . W.shift))
   , ((modMask .|. controlMask, xK_p     ), withWorkspace myPConfig (windows . copy))
@@ -358,10 +363,12 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask,                 xK_minus ), sendMessage ToggleStruts)
   
-  , ((modMask,                 xK_h     ), prevWS)
-  , ((modMask,                 xK_s     ), nextWS)
-  , ((modMask .|. shiftMask,   xK_h     ), shiftToPrev)
-  , ((modMask .|. shiftMask,   xK_s     ), shiftToNext)
+  , ((modMask,                 xK_h     ), DO.moveTo Prev AnyWS)
+  , ((modMask,                 xK_s     ), DO.moveTo Next AnyWS)
+
+  -- move WS left/right
+  , ((modMask .|. shiftMask,   xK_h     ), DO.swapWith Prev AnyWS)
+  , ((modMask .|. shiftMask,   xK_s     ), DO.swapWith Next AnyWS)
 
   , ((modMask,                 xK_Left     ), nextScreen)
   --, ((modMask,                 xK_Right    ), prevWS)
