@@ -38,6 +38,7 @@ import XMonad.Layout.IM
 import XMonad.Layout.LayoutHints
 import qualified XMonad.Layout.Magnifier as Mag
 import XMonad.Layout.Maximize
+import XMonad.Layout.Minimize
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Reflect
@@ -110,6 +111,7 @@ main = withConnection Session $ \ dbus -> do
     , layoutHook         = smartBorders
                            $ layoutHintsWithPlacement (0.5, 0.5)
                            $ maximize
+                           $ minimize
                            $ B.boringWindows
                            $ toggleLayouts Full
                            $ onWorkspace "vm" Full
@@ -119,7 +121,7 @@ main = withConnection Session $ \ dbus -> do
                            $ onWorkspace "im" im
                            $ onWorkspace "files" file
                            $ onWorkspace "gimp" gimp
-                           $ onWorkspace "read" Full
+                           $ onWorkspace "read" read
                            $ tp
                            ||| rtiled
                            ||| file
@@ -134,6 +136,7 @@ main = withConnection Session $ \ dbus -> do
       file = ThreeCol 1 (3/100) (0.33)
       gimp = withIM (0.11) (Role "gimp-toolbox") $ reflectHoriz $
              withIM (0.15) (Role "gimp-dock") Full
+      read = withIM (0.12) (ClassName "Rox") $ Full
 
 
 myLog dbus = withWindowSet $ \ws -> do
@@ -340,6 +343,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask .|. controlMask, xK_period), rotSlavesUp)
   , ((modMask .|. controlMask, xK_comma ), rotSlavesDown)
+
+  , ((modMask,           xK_bracketleft ), withFocused (\f -> sendMessage (MinimizeWin f)))
+  , ((modMask,           xK_bracketright), sendMessage RestoreNextMinimizedWin)
 
   , ((modMask,                 xK_t     ), B.focusDown)
   , ((modMask,                 xK_n     ), B.focusUp  )
