@@ -92,7 +92,7 @@ main = withConnection Session $ \ dbus -> do
     , normalBorderColor  = "#222222"
     , focusedBorderColor = fg
     , modMask            = mod4Mask
-    , workspaces         = ["comm", "im", "files", "web"]
+    , workspaces         = ["im", "comm", "files", "web"]
     , keys               = myKeys
     , mouseBindings      = myMouse
     , handleEventHook    = ewmhDesktopsEventHook
@@ -145,7 +145,7 @@ myLog dbus = withWindowSet $ \ws -> do
           , ppUrgent          = pangoUrgent "#d7c529"
           , ppHidden          = wrap " " " "
           , ppVisible         = pangoStyle "#dfd8c3" "#333" "bold"
-          , ppHiddenNoWindows = id
+          , ppHiddenNoWindows = pangoColor "#dfd8c3"
           , ppWsSep           = ""
           , ppSep             = " "
           , ppSort            = DO.getSortByOrder
@@ -283,7 +283,7 @@ doSetRole rl = ask >>= \w ->
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   [ ((modMask,                 xK_c     ), spawn $ XMonad.terminal conf)
-  , ((modMask, xK_e), submap . M.fromList $
+  , ((modMask, xK_a), submap . M.fromList $
     [ ((0, xK_e), spawn "appmenu")
     , ((0, xK_s), spawn "screenmenu")
     , ((0, xK_x), shellPrompt myPConfig)
@@ -293,7 +293,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xK_t), appendFilePrompt myPConfig "/home/nathan/notes/s-o-c")
     ])
 
-  , ((modMask,                 xK_apostrophe ), spawn "mpc --no-status toggle")
+  --, ((modMask,                 xK_apostrophe ), spawn "mpc --no-status toggle")
+  , ((0            , 0x1008ff14), spawn "mpc --no-status toggle")
+  , ((0            , 0x1008ff16), spawn "mpc --no-status prev")
+  , ((0            , 0x1008ff17), spawn "mpc --no-status next")
   , ((modMask,                 xK_m     ), submap . M.fromList $
     [ ((0, xK_l), spawn $ XMonad.terminal conf ++ " -e ncmpc")
     , ((0, xK_m), spawn "musicmenu mpc")
@@ -337,15 +340,16 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask .|. controlMask, xK_p     ), withWorkspace myPConfig (windows . copy))
   , ((modMask .|. shiftMask,   xK_r     ), renameWorkspace myPConfig)
 
-  , ((mod1Mask,                xK_Tab   ), toggleWS )
+  --, ((mod1Mask,                xK_Tab   ), toggleWS )
+  , ((modMask .|. shiftMask,    xK_Tab   ), toggleWS )
 
   , ((modMask,                 xK_F12   ), spawn "gnome-screensaver-command --lock")
 
   , ((modMask .|. controlMask, xK_period), rotSlavesUp)
   , ((modMask .|. controlMask, xK_comma ), rotSlavesDown)
 
-  , ((modMask,           xK_bracketleft ), withFocused (\f -> sendMessage (MinimizeWin f)))
-  , ((modMask,           xK_bracketright), sendMessage RestoreNextMinimizedWin)
+  , ((modMask,           xK_bracketright ), withFocused (\f -> sendMessage (MinimizeWin f)))
+  , ((modMask,           xK_bracketleft), sendMessage RestoreNextMinimizedWin)
 
   , ((modMask,                 xK_t     ), B.focusDown)
   , ((modMask,                 xK_n     ), B.focusUp  )
@@ -429,12 +433,20 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 
 
+button6     =  6 :: Button
+button7     =  7 :: Button
+button8     =  8 :: Button
 myMouse (XConfig {XMonad.modMask = modMask}) = M.fromList $
   [ ((modMask, button1), (\w -> focus w >> mouseMoveWindow w))
   , ((modMask, button2), (\w -> focus w >> windows W.swapMaster))
   , ((modMask, button3), (\w -> focus w >> mouseResizeWindow w))
-  , ((modMask, button4), (\_ -> prevWS))
-  , ((modMask, button5), (\_ -> nextWS))
+  , ((modMask, button4), (\_ -> DO.moveTo Prev AnyWS))
+  , ((modMask, button5), (\_ -> DO.moveTo Next AnyWS))
+  --, ((0, button6), (\_ -> DO.moveTo Prev AnyWS))
+  --, ((0, button7), (\_ -> DO.moveTo Next AnyWS))
+  , ((modMask .|. controlMask, button4), (\_ -> B.focusUp))
+  , ((modMask .|. controlMask, button5), (\_ -> B.focusDown))
+  , ((0, button8), (\_ -> toggleWS))
   , ((modMask .|. shiftMask, button4), (\_ -> windows W.swapUp))
   , ((modMask .|. shiftMask, button5), (\_ -> windows W.swapDown))
   ]
