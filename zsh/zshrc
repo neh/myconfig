@@ -5,7 +5,7 @@ if [[ "$terminfo[colors]" -ge 8 ]]; then
 fi
 
 export __CURRENT_GIT_BRANCH=
-EDITOR='vim -p'
+export EDITOR="vim"
 
 # Nice directory truncation with a proper ellipsis: %30<…<
 

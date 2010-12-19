@@ -1,117 +1,190 @@
 set nocompatible
-set fileencodings=utf-8
+set background=dark
+
+""" Terminal specific settings
+
+" Make vim update screen window title
+if &term =~ "screen"
+  set t_ts=k
+  set t_fs=\
+endif
+
+" Set up color settings and scheme based on terminal type
+if $TERM =~ '^screen-bce' || $TERM =~ '^rxvt-256' || $TERM =~ '^xterm-256'
+  set t_Co=256
+  colo molokai
+elseif $TERM =~ '^rxvt'
+  set t_Co=88
+  colo inkpot
+elseif $TERM =~ '^linux'
+  set t_Co=8
+else
+  set t_Co=16
+endif
+
+
 
 if has("autocmd")
 
-	autocmd!
+  autocmd!
 
-    filetype on
-	filetype plugin on
-	filetype indent on
+  filetype on
+  filetype plugin on
+  filetype indent on
+  syntax on
 
-	autocmd BufNewFile,BufRead *.erb setf eruby
+  " old titlestring
+  "set titlestring=%<%{hostname()}:%F\ %(%m\ %)[%l/%L\ %P]\ %y\ VIM
+  " new titlestring (short for screen window names)
+  "autocmd BufEnter * let &titlestring = hostname().expand(":%t")
+  autocmd BufEnter * let &titlestring = expand("%f")
 
-    " filetype specific settings
-	autocmd FileType ruby        setlocal sw=2 ts=2 et
-	autocmd FileType eruby        setlocal sw=2 ts=2 et
-    autocmd FileType css         setlocal sw=2 sts=2 et
-    autocmd FileType html        setlocal sw=4 sts=4 et
-    autocmd FileType java        setlocal sw=4 sts=4 et
-    autocmd FileType javascript  setlocal sw=4 sts=4 et
-    autocmd FileType mason       setlocal sw=2 sts=2 et
-    autocmd FileType ocaml       setlocal sw=2 sts=2 et
-	autocmd FileType haskell     setlocal sw=2 ts=2 et
-    autocmd FileType php         setlocal sw=4 sts=4 et 
-    autocmd FileType perl        setlocal sw=4 sts=4 et
-    autocmd FileType python      setlocal sw=4 sts=4 et tw=72
-    autocmd FileType scheme      setlocal sw=2 sts=2 et
-    autocmd FileType sql         setlocal et
-    autocmd FileType text        setlocal sw=2 sts=2 et tw=78
+  """ Filetype specific options
+  " git commit diff viewing
+  au BufRead,BufNewFile COMMIT_EDITMSG setf git
+  autocmd BufNewFile,BufRead *.erb setf eruby
+  " python and makefiles need real tabs
+  autocmd FileType python noexpandtab
+  autocmd FileType make   noexpandtab
+  " add html ft to php files for snippet support
+  au BufRead,BufNewFile *.php set filetype=php.html
+  au BufRead,BufNewFile *.snippet? set filetype=snippet
 
-    " git commit diff viewing
-    au BufRead,BufNewFile COMMIT_EDITMSG     setf git
+  """ Filetype specific commands
+  " re-read vimrc after writing it
+  autocmd BufWritePost \.vimrc :source $HOME/.vimrc
+  autocmd BufWritePost vim/vimrc :source $HOME/.vimrc
+  " Useful when customizing xterm
+  autocmd BufWritePost \.Xdefaults :!xrdb ~/.Xdefaults
+  " PHP syntax check (CTRL-L)
+  autocmd FileType php noremap <C-L> :!/usr/bin/php -l %<CR>
 
-	" TODO set xterm window title. supposedly.
-	"autocmd BufEnter * let &titlestring = $HOSTNAME . ":" . expand("%:p:~")
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
 
-	" When editing a file, always jump to the last known cursor position.
-	" Don't do it when the position is invalid or when inside an event handler
-	" (happens when dropping a file on gvim).
-	autocmd BufReadPost *
-		\ if line("'\"") > 0 && line("'\"") <= line("$") |
-		\   exe "normal g`\"" |
-		\ endif
+  " automatically give executable permissions if file begins with #! and contains
+  " '/bin/' in the path
+  "au bufwritepost * if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod a+x <afile> | endif | endif
 
-	" re-read vimrc after writing it
-	autocmd BufWritePost \.vimrc :source $HOME/.vimrc
-    " Useful when customizing xterm
-	autocmd BufWritePost \.Xdefaults :!xrdb ~/.Xdefaults
-    "if has("gui_running")
-        "autocmd BufWritePost \.vimrc :source $HOME/.gvimrc
-        "autocmd BufWritePost \.gvimrc :source $HOME/.gvimrc
-    "endif
-
-    " PHP parser check (CTRL-L)
-    autocmd FileType php noremap <C-L> :!/usr/bin/php -l %<CR>
-
-    " add html ft to php files for snippet support
-    au BufRead,BufNewFile *.php set filetype=php.html
-    
-    au BufRead,BufNewFile *.snippet? set filetype=snippet
-    
-    augroup VCSCommand
-        au User VCSBufferCreated silent! nmap <unique> <buffer> q: bwipeout<cr>
-    augroup END
+  "augroup VCSCommand
+    "au User VCSBufferCreated silent! nmap <unique> <buffer> q: bwipeout<cr>
+  "augroup END
 
 endif " has("autocmd")
 
-if v:version > 700
-    " highlight the current line (all the way to the right edge)
-    set cursorline
-    hi CursorLine    term=bold cterm=bold ctermbg=8 gui=bold guibg=#B50DB9
-    "call ExpectCursorSlowDown(now)
-endif
 
-let g:snips_author = 'Nathan Howell'
-let VCSCommandEnableBufferSetup=1
-"let mapleader = ","
-syntax on					" always want syntax highlighting
-set autoindent				" always set autoindenting on
-set history=50				" keep 50 lines of command line history
-set ruler					" show the cursor position all the time
-set showcmd					" display incomplete commands
-set incsearch				" do incremental searching
-set hlsearch				" highlight searches
-set startofline			" don't move cursor to start of line
-set showmatch				" show matching brackets
-set backspace=indent,eol,start
+
+""" General options
+set encoding=utf-8
+set fileencodings=utf-8
+let mapleader=","
+set ruler
+set pastetoggle=<F12>
 set title
-set titlestring=%<%{hostname()}:%F\ %(%m\ %)[%l/%L\ %P]\ %y\ VIM
 set laststatus=2
-set statusline=%F%m%r%h%w\ [%l,%v\ %p%%\ %L]\ [%{&ff}]
-set completeopt=longest,menuone
-
-function! GitStatusLine()
-    let gitinfo=VCSCommandGetStatusLine()
-    let dirty=system("git status 2> /dev/null | tail -n1")
-    if dirty =~ 'nothing to commit*'
-        return l:gitinfo
-    else
-        return "%#ErrorMsg#gitinfo#StatusLine#"
-    endif
-endfunction
-
-set tabstop=4
-set shiftwidth=4
-set expandtab
-
-set visualbell t_vb= 		" no bells for me
-
+set visualbell t_vb=
 set formatoptions+=tcroqnw
+set ttyfast
+set history=50
+set nowrap
+set showcmd
+set startofline
+set hidden
+set backspace=indent,eol,start
+"set spell
 
-let loaded_vimspell = 1
 
-" NERDTree mappings and configuration
+set autoindent
+set smartindent
+
+set tabstop=8
+set softtabstop=2
+set shiftwidth=2
+set shiftround
+set expandtab
+set smarttab
+
+set incsearch
+set hlsearch
+
+set matchpairs+=<:>
+set showmatch
+set matchtime=2
+
+set ignorecase
+set smartcase
+
+set scrolloff=3
+set sidescroll=1
+set sidescrolloff=2
+
+set completeopt=longest,menuone
+set wildmenu
+set wildmode=longest,list
+
+set statusline=%F\ %1*%m%r%*%h%w\ %{fugitive#statusline()}%=[%{&ff}\ %{strlen(&fenc)?&fenc:'none'}\ %{&ft}]\ [%LL\ %P\ %l,%v]
+hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
+
+" Put backup/swap files all in one place
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
+
+" show trailing whitespace
+set list listchars=tab:\ \ ,trail:·
+
+" highlight the current line (all the way to the right edge) and column
+set cursorline
+set cursorcolumn
+hi CursorLine term=none cterm=none ctermbg=16 gui=none guibg=#B50DB9
+hi CursorColumn term=none cterm=none ctermbg=16 gui=none guibg=#B50DB9
+
+
+
+""" Key mappings
+" A few dvorak adjustments
+noremap s l
+noremap S L
+noremap t j
+noremap n k
+noremap l n
+noremap L N
+noremap j J
+
+" Window nav mappings
+nmap <C-n> <C-W>W
+nmap <C-t> <C-W>w
+"map <C-S-T> <C-W>j<C-W>_     " move down one window and maximize
+"map <C-S-N> <C-W>k<C-W>_     " move up one window and maximize
+"map <C-H> <C-W>h           " move left one window
+"map <C-L> <C-W>l           " move right one window
+map <C--> <C-W>-
+map <C-=> <C-W>+
+map <M-,> <C-W><
+map <M-.> <C-W>>
+
+" toggle hlsearch
+"map <Leader>h :set hls!<bar>set hls?<CR>
+
+" Load vimrc in a split window and switch to it
+map <Leader>V :sp ~/.vimrc<cr><C-W>w
+
+" In visual mode press * or # to search for the current selection
+vnoremap <silent> * :call VisualSearch('f')<CR>
+vnoremap <silent> # :call VisualSearch('b')<CR>
+
+" Searches for the current selection using Ack
+vnoremap <silent> sf :call VisualSearch('sf')<CR>
+
+
+
+""" Plugin configs and keymaps
+
+""" NERDTree mappings and configuration
 map <F10> :NERDTreeToggle<CR>
 map <F11> :NERDTreeMirror<CR>
 let g:NERDTreeMapOpenInTab="a"
@@ -120,110 +193,89 @@ let g:NERDTreeMapJumpFirstChild="N"
 let g:NERDTreeMapJumpLastChild="T"
 let g:NERDTreeMapJumpNextSibling="<C-S-T>"
 let g:NERDTreeMapJumpPrevSibling="<C-S-N>"
-
 let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeAutoCenter=1
 let g:NERDTreeAutoCenterThreshold=6
 
+""" SuperTab config
 let g:SuperTabMappingForward = '<c-n>'
 let g:SuperTabMappingBackward = '<c-p>'
 let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabLongestHighlight = 1
 
-let generate_tags = 1
-let Tlist_Use_Horiz_Window = 0
-nnoremap TT :TlistToggle<CR>
-map <F4> :TlistToggle<CR>
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_File_Fold_Auto_Close = 1
-let Tlist_Compact_Format = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_Inc_Winwidth = 0
-let Tlist_Close_On_Select = 1
-let Tlist_Process_File_Always = 1
+""" Lusty Juggler config
+let g:LustyJugglerShowKeys = ''
+let g:LustyJugglerAltTabMode = 1
+let g:LustyJugglerSuppressRubyWarning = 1
+nmap <Leader>b :LustyJuggler<cr>
+nmap <C-p> :LustyJugglePrevious<cr>
 
-" TODO need a better key for this
-map <silent> <F3> :call BufferList()<CR>
+""" Lusty Explorer config
+nmap <Leader>f :LustyFilesystemExplorer<cr>
+nmap <Leader>h :LustyFilesystemExplorerFromHere<cr>
+nmap <Leader>e :LustyBufferExplorer<cr>
+nmap <Leader>sb :LustyBufferGrep<cr>
+let g:LustyExplorerSuppressRubyWarning = 1
 
-" keyword completion for perl
-"set iskeyword+=:
-" keyword completion for python (and ruby?)
-"set iskeyword+=.
+""" Ack config
+nmap <Leader>sf :Ack 
 
-set background=dark
-if has("gui_running")
-    colo vilight
-    set guioptions=aAim    " don't want a toolbar or menu
-    set guifont=Liberation\ Mono\ 11
-    set mousehide
-endif
-
-if $TERM =~ '^screen-bce'
-        set t_Co=256 
-        colo molokai
-elseif $TERM =~ '^rxvt-256'
-        set t_Co=256 
-        colo molokai
-elseif $TERM =~ '^xterm-256'
-        set t_Co=256 
-        colo molokai
-elseif $TERM =~ '^rxvt'
-        set t_Co=88
-        colo inkpot
-elseif $TERM =~ '^linux'
-        set t_Co=8
-else
-        set t_Co=16
-endif
-
-let g:no_html_toolbar = 1
-let g:html_tag_case = 'lower'
-let g:html_template = '$HOME/.vim/html_template'
-let g:html_authorname = 'Nathan Howell'
-let g:html_authoremail = 'nath@nhowell.net'
-
-" A few dvorak adjustments
-noremap s l
-noremap S L
-noremap t gj
-noremap T }
-noremap n gk
-noremap N {
-noremap l n
-noremap L N
-noremap j J
-
-runtime ftplugin/man.vim
+""" fugitive (git) config
+map <Leader>gs :Gstatus<cr>
+map <Leader>gd :Gdiff<cr>
+map <Leader>gg :Ggrep 
+map <Leader>glg :Glog<cr>
+map <Leader>gci :Gcommit<cr>
+map <Leader>gmv :Gmove 
+map <Leader>grm :Gremove
 
 
-" Mappings
-map <C-S-T> <C-W>j<C-W>_     " move down one window and maximize
-map <C-S-N> <C-W>k<C-W>_     " move up one window and maximize
-map <C-H> <C-W>h           " move left one window
-map <C-L> <C-W>l           " move right one window
-map <C-M-J> <C-W>-         " shrink a window vertically
-map <C-M-K> <C-W>+         " grow a window vertically
-map <C-M-H> <C-W><         " shrink a window horizontally
-map <C-M-L> <C-W>>         " grow a window horizontally
-nnoremap <silent> <Leader>tl :Tlist<CR>		" open taglist window
-map <Leader>h :set hls!<bar>set hls?<CR>	" toggle hlsearch
-map <Leader>fc :silent ToggleFoldColumn<CR> " toggle foldcolumn
-map <Leader>pt :set paste!<bar>set paste?<CR>	" toggle paste
-set pastetoggle=<f11>
-map <F10> :NERDTreeToggle<CR>
 
-:nmap <C-o> <PageUp>
-:nmap <C-e> <PageDown>
-:map <C-o> <PageUp>
-:map <C-e> <PageDown>
-:imap <C-o> <PageUp>
-:imap <C-e> <PageDown>
+""" Functions
 
-" TODO map c-s-[n-t] to move tabs left/right
-:nmap <C-n> :tabprevious<cr>
-:nmap <C-t> :tabnext<cr>
-:map <C-n> :tabprevious<cr>
-:map <C-t> :tabnext<cr>
+" A visual search mode function
+function! VisualSearch(direction) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'b'
+        execute "normal ?" . l:pattern . "^M"
+    elseif a:direction == 'sf'
+        execute Ack(l:pattern)
+    elseif a:direction == 'f'
+        execute "normal /" . l:pattern . "^M"
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+
+
+" enable a shortcut for tidy using ~/.tidyrc config
+" map <Leader>T :!tidy -config ~/.tidyrc<cr><cr>
+
+" Scrolling commands (I had forgotten all about these, so I probably won't
+" miss them)
+"nmap <C-o> <PageUp>
+"nmap <C-e> <PageDown>
+"map <C-o> <PageUp>
+"map <C-e> <PageDown>
+"imap <C-o> <PageUp>
+"imap <C-e> <PageDown>
+" since I'm using c-o elsewhere
+"noremap <C-> :pop<cr>
+
+
+
+" Tab mappings (delete soon?)
+":nmap <C-n> :tabprevious<cr>
+":nmap <C-t> :tabnext<cr>
+":map <C-n> :tabprevious<cr>
+":map <C-t> :tabnext<cr>
 ":nmap <C-N> :tabmove tabpagenr() - 2<cr>
 ":nmap <C-T> :tabmove tabpagenr() + 2<cr>
 ":map <C-N> :tabmove tabpagenr() - 2<cr>
@@ -235,56 +287,74 @@ map <F10> :NERDTreeToggle<CR>
 "nmap <tab> :bn<cr>
 "nmap <s-tab> :bp<cr>
 
-" toggle foldcolumn
-function! ToggleFoldColumn()
-	if &foldcolumn == 0
-		let &foldcolumn = 2
-	elseif &foldcolumn > 0
-		let &foldcolumn = 0
-	endif
-endfunction
-command! ToggleFoldColumn call ToggleFoldColumn()
 
-" DnD saving for Rox
-function! Save()
-	let tmpname = tempname()
-	let fname = expand('%')
-	if fname == ''
-		let fname = 'TextFile'
-	endif
-	exec 'write !savebox ' . fname . ' > ' . tmpname
-	let newname = system('cat ' . tmpname)
-	let tmp = system('rm ' . tmpname)
-	if tmpname != ''
-		exec 'file ' . escape(newname, ' ')
-		set nomodified
-	endif
-endfunction
-command! Save call Save()
-map <Leader>rs :silent Save<CR>				" DnD Rox savebox
+
+" open taglist window
+"nnoremap <silent> <Leader>tl :Tlist<CR>
+
+"if has("gui_running")
+  "colo vilight
+  "set guioptions=aAim    " don't want a toolbar or menu
+  "set guifont=Liberation\ Mono\ 11
+  "set mousehide
+"endif
+
+"let g:snips_author = 'Nathan Howell'
+"let VCSCommandEnableBufferSetup=1
+
+"let loaded_vimspell = 1
+
+
+
+""" Taglist config
+"let generate_tags = 1
+"let Tlist_Use_Horiz_Window = 0
+"nnoremap TT :TlistToggle<CR>
+"map <F4> :TlistToggle<CR>
+"let Tlist_GainFocus_On_ToggleOpen = 1
+"let Tlist_Exit_OnlyWindow = 1
+"let Tlist_File_Fold_Auto_Close = 1
+"let Tlist_Compact_Format = 1
+"let Tlist_Use_Right_Window = 1
+"let Tlist_Inc_Winwidth = 0
+"let Tlist_Close_On_Select = 1
+"let Tlist_Process_File_Always = 1
+
+
+" keyword completion for perl
+"set iskeyword+=:
+" keyword completion for python (and ruby?)
+"set iskeyword+=.
+
+
+"let g:no_html_toolbar = 1
+"let g:html_tag_case = 'lower'
+"let g:html_template = '$HOME/.vim/html_template'
+"let g:html_authorname = 'Nathan Howell'
+"let g:html_authoremail = 'nath@nhowell.net'
+
+"runtime ftplugin/man.vim
 
 
 " Google code search in vim
 " via http://www.jukie.net/~bart/blog/codesearch-from-vim
 function! OnlineDoc()
-    let s:browser = "/home/nathan/ff3/firefox/firefox"
-    let s:wordUnderCursor = expand("<cword>")
+  let s:browser = "/home/nathan/ff3/firefox/firefox"
+  let s:wordUnderCursor = expand("<cword>")
 
-    if &ft == "cpp" || &ft == "c" || &ft == "ruby" || &ft == "php" || &ft == "python"
-        let s:url = "http://www.google.com/codesearch?q=".s:wordUnderCursor."+lang:".&ft
-    elseif &ft == "vim"
-        let s:url = "http://www.google.com/codesearch?q=".s:wordUnderCursor
-    else
-        return
-    endif
+  if &ft == "cpp" || &ft == "c" || &ft == "ruby" || &ft == "php" || &ft == "python"
+    let s:url = "http://www.google.com/codesearch?q=".s:wordUnderCursor."+lang:".&ft
+  elseif &ft == "vim"
+    let s:url = "http://www.google.com/codesearch?q=".s:wordUnderCursor
+  else
+    return
+  endif
 
-    let s:cmd = "silent !" . s:browser . " \"" . s:url . "\""
-    execute  s:cmd
-    redraw!
+  let s:cmd = "silent !" . s:browser . " \"" . s:url . "\""
+  execute  s:cmd
+  redraw!
 endfunction
-
-" online doc search
-map <Leader>k :call OnlineDoc()<CR>
+"map <Leader>k :call OnlineDoc()<CR>
 
 
 " search for a pattern in the current git branch
@@ -304,4 +374,4 @@ function! GitGrepWord()
   normal! "zyiw
   call GitGrep('-w -e ', getreg('z'))
 endf
-nmap <C-x>G :call GitGrepWord()<CR>
+"nmap <C-x>G :call GitGrepWord()<CR>

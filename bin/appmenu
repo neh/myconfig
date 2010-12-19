@@ -12,7 +12,7 @@ case ARGV[0]
 
 when 'update'
   # Update master app list
- 
+
   # Index system and user .desktop files
   desktop = %w[GNOME]
   dirs = []

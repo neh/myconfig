@@ -1,3 +1,4 @@
+keycode 37 = Meta_L
 keycode 135 = Super_L
 keycode 108 = Super_L
 add mod4 = Super_L
