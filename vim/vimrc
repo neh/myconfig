@@ -1,6 +1,7 @@
 set nocompatible
 set background=dark
 
+
 """ Terminal specific settings
 
 " Make vim update screen window title
@@ -40,6 +41,7 @@ if has("autocmd")
   autocmd BufEnter * let &titlestring = expand("%f")
 
   """ Filetype specific options
+
   " git commit diff viewing
   au BufRead,BufNewFile COMMIT_EDITMSG setf git
   autocmd BufNewFile,BufRead *.erb setf eruby
@@ -50,7 +52,9 @@ if has("autocmd")
   au BufRead,BufNewFile *.php set filetype=php.html
   au BufRead,BufNewFile *.snippet? set filetype=snippet
 
+
   """ Filetype specific commands
+
   " re-read vimrc after writing it
   autocmd BufWritePost \.vimrc :source $HOME/.vimrc
   autocmd BufWritePost vim/vimrc :source $HOME/.vimrc
@@ -68,7 +72,7 @@ if has("autocmd")
         \ endif
 
   " automatically give executable permissions if file begins with #! and contains
-  " '/bin/' in the path
+  " '/bin/' in the path (not sure I want this to be automatic
   "au bufwritepost * if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod a+x <afile> | endif | endif
 
   "augroup VCSCommand
@@ -80,6 +84,7 @@ endif " has("autocmd")
 
 
 """ General options
+
 set encoding=utf-8
 set fileencodings=utf-8
 let mapleader=","
@@ -96,8 +101,8 @@ set showcmd
 set startofline
 set hidden
 set backspace=indent,eol,start
+set timeoutlen=500
 "set spell
-
 
 set autoindent
 set smartindent
@@ -146,6 +151,7 @@ hi CursorColumn term=none cterm=none ctermbg=16 gui=none guibg=#B50DB9
 
 
 """ Key mappings
+
 " A few dvorak adjustments
 noremap s l
 noremap S L
@@ -162,16 +168,22 @@ nmap <C-t> <C-W>w
 "map <C-S-N> <C-W>k<C-W>_     " move up one window and maximize
 "map <C-H> <C-W>h           " move left one window
 "map <C-L> <C-W>l           " move right one window
-map <C--> <C-W>-
-map <C-=> <C-W>+
-map <M-,> <C-W><
-map <M-.> <C-W>>
+"map <C--> <C-W>-
+"map <C-=> <C-W>+
+"map <M-,> <C-W><
+"map <M-.> <C-W>>
 
 " toggle hlsearch
 "map <Leader>h :set hls!<bar>set hls?<CR>
 
 " Load vimrc in a split window and switch to it
 map <Leader>V :sp ~/.vimrc<cr><C-W>w
+
+" cd to the dir containing the current file
+map <Leader>cd :lcd %:h<cr>
+
+" Set up retabbing on a source file
+nmap <Leader>rr :1,$retab<cr>
 
 " In visual mode press * or # to search for the current selection
 vnoremap <silent> * :call VisualSearch('f')<CR>
@@ -184,7 +196,7 @@ vnoremap <silent> sf :call VisualSearch('sf')<CR>
 
 """ Plugin configs and keymaps
 
-""" NERDTree mappings and configuration
+" NERDTree mappings and configuration
 map <F10> :NERDTreeToggle<CR>
 map <F11> :NERDTreeMirror<CR>
 let g:NERDTreeMapOpenInTab="a"
@@ -197,30 +209,30 @@ let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeAutoCenter=1
 let g:NERDTreeAutoCenterThreshold=6
 
-""" SuperTab config
+" SuperTab config
 let g:SuperTabMappingForward = '<c-n>'
 let g:SuperTabMappingBackward = '<c-p>'
 let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabLongestHighlight = 1
 
-""" Lusty Juggler config
+" Lusty Juggler config
 let g:LustyJugglerShowKeys = ''
 let g:LustyJugglerAltTabMode = 1
 let g:LustyJugglerSuppressRubyWarning = 1
 nmap <Leader>b :LustyJuggler<cr>
 nmap <C-p> :LustyJugglePrevious<cr>
 
-""" Lusty Explorer config
+" Lusty Explorer config
 nmap <Leader>f :LustyFilesystemExplorer<cr>
 nmap <Leader>h :LustyFilesystemExplorerFromHere<cr>
 nmap <Leader>e :LustyBufferExplorer<cr>
 nmap <Leader>sb :LustyBufferGrep<cr>
 let g:LustyExplorerSuppressRubyWarning = 1
 
-""" Ack config
+" Ack config
 nmap <Leader>sf :Ack 
 
-""" fugitive (git) config
+" fugitive (git) config
 map <Leader>gs :Gstatus<cr>
 map <Leader>gd :Gdiff<cr>
 map <Leader>gg :Ggrep 
@@ -334,44 +346,3 @@ endfunction
 "let g:html_authoremail = 'nath@nhowell.net'
 
 "runtime ftplugin/man.vim
-
-
-" Google code search in vim
-" via http://www.jukie.net/~bart/blog/codesearch-from-vim
-function! OnlineDoc()
-  let s:browser = "/home/nathan/ff3/firefox/firefox"
-  let s:wordUnderCursor = expand("<cword>")
-
-  if &ft == "cpp" || &ft == "c" || &ft == "ruby" || &ft == "php" || &ft == "python"
-    let s:url = "http://www.google.com/codesearch?q=".s:wordUnderCursor."+lang:".&ft
-  elseif &ft == "vim"
-    let s:url = "http://www.google.com/codesearch?q=".s:wordUnderCursor
-  else
-    return
-  endif
-
-  let s:cmd = "silent !" . s:browser . " \"" . s:url . "\""
-  execute  s:cmd
-  redraw!
-endfunction
-"map <Leader>k :call OnlineDoc()<CR>
-
-
-" search for a pattern in the current git branch
-function! GitGrep(...)
-  let save = &grepprg
-  set grepprg=git\ grep\ -n\ $*
-  let s = 'grep'
-  for i in a:000
-    let s = s . ' ' . i
-  endfor
-  exe s
-  let &grepprg = save
-endfun
-command! -nargs=? G call GitGrep(<f-args>)
-" run GitGrep on the word under the cursor
-function! GitGrepWord()
-  normal! "zyiw
-  call GitGrep('-w -e ', getreg('z'))
-endf
-"nmap <C-x>G :call GitGrepWord()<CR>
