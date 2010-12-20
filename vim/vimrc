@@ -1,15 +1,15 @@
 set nocompatible
-set background=dark
 
 
 """ Terminal specific settings
 
 " Make vim update screen window title
-if &term =~ "screen"
+if &term =~ "^screen"
   set t_ts=k
   set t_fs=\
 endif
 
+set background=dark
 " Set up color settings and scheme based on terminal type
 if $TERM =~ '^screen-bce' || $TERM =~ '^rxvt-256' || $TERM =~ '^xterm-256'
   set t_Co=256
@@ -190,11 +190,16 @@ vnoremap <silent> * :call VisualSearch('f')<CR>
 vnoremap <silent> # :call VisualSearch('b')<CR>
 
 " Searches for the current selection using Ack
-vnoremap <silent> sf :call VisualSearch('sf')<CR>
+vnoremap <silent> gf :call VisualSearch('gf')<CR>
 
 
 
 """ Plugin configs and keymaps
+
+" Surround plugin
+" Change visual surround mappings so s works for movement again
+vmap <Leader>s <Plug>Vsurround
+vmap <Leader>S <Plug>Vsurround
 
 " NERDTree mappings and configuration
 map <F10> :NERDTreeToggle<CR>
@@ -226,11 +231,11 @@ nmap <C-p> :LustyJugglePrevious<cr>
 nmap <Leader>f :LustyFilesystemExplorer<cr>
 nmap <Leader>h :LustyFilesystemExplorerFromHere<cr>
 nmap <Leader>e :LustyBufferExplorer<cr>
-nmap <Leader>sb :LustyBufferGrep<cr>
+nmap <Leader>gb :LustyBufferGrep<cr>
 let g:LustyExplorerSuppressRubyWarning = 1
 
 " Ack config
-nmap <Leader>sf :Ack 
+nmap <Leader>gf :Ack 
 
 " fugitive (git) config
 map <Leader>gs :Gstatus<cr>
@@ -245,7 +250,8 @@ map <Leader>grm :Gremove
 
 """ Functions
 
-" A visual search mode function
+" A visual search mode function. Searches for the current selection
+" forwards, backwards, or with Ack.
 function! VisualSearch(direction) range
     let l:saved_reg = @"
     execute "normal! vgvy"
@@ -255,7 +261,7 @@ function! VisualSearch(direction) range
 
     if a:direction == 'b'
         execute "normal ?" . l:pattern . "^M"
-    elseif a:direction == 'sf'
+    elseif a:direction == 'gf'
         execute Ack(l:pattern)
     elseif a:direction == 'f'
         execute "normal /" . l:pattern . "^M"
@@ -270,6 +276,7 @@ endfunction
 " enable a shortcut for tidy using ~/.tidyrc config
 " map <Leader>T :!tidy -config ~/.tidyrc<cr><cr>
 
+
 " Scrolling commands (I had forgotten all about these, so I probably won't
 " miss them)
 "nmap <C-o> <PageUp>
@@ -280,8 +287,6 @@ endfunction
 "imap <C-e> <PageDown>
 " since I'm using c-o elsewhere
 "noremap <C-> :pop<cr>
-
-
 
 " Tab mappings (delete soon?)
 ":nmap <C-n> :tabprevious<cr>
@@ -299,11 +304,6 @@ endfunction
 "nmap <tab> :bn<cr>
 "nmap <s-tab> :bp<cr>
 
-
-
-" open taglist window
-"nnoremap <silent> <Leader>tl :Tlist<CR>
-
 "if has("gui_running")
   "colo vilight
   "set guioptions=aAim    " don't want a toolbar or menu
@@ -314,9 +314,8 @@ endfunction
 "let g:snips_author = 'Nathan Howell'
 "let VCSCommandEnableBufferSetup=1
 
-"let loaded_vimspell = 1
-
-
+" open taglist window
+"nnoremap <silent> <Leader>tl :Tlist<CR>
 
 """ Taglist config
 "let generate_tags = 1
@@ -332,12 +331,10 @@ endfunction
 "let Tlist_Close_On_Select = 1
 "let Tlist_Process_File_Always = 1
 
-
 " keyword completion for perl
 "set iskeyword+=:
 " keyword completion for python (and ruby?)
 "set iskeyword+=.
-
 
 "let g:no_html_toolbar = 1
 "let g:html_tag_case = 'lower'
