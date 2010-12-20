@@ -139,10 +139,15 @@ set directory=~/.vim/backup
 set list listchars=tab:\ \ ,trail:·
 
 " highlight the current line (all the way to the right edge) and column
-set cursorline
-set cursorcolumn
-hi CursorLine term=none cterm=none ctermbg=16 gui=none guibg=#B50DB9
-hi CursorColumn term=none cterm=none ctermbg=16 gui=none guibg=#B50DB9
+"autocmd WinEnter * setlocal cursorline
+"autocmd WinLeave * setlocal nocursorline
+"autocmd WinEnter * setlocal cursorcolumn
+"autocmd WinLeave * setlocal nocursorcolumn
+autocmd CursorMoved,CursorMovedI * call s:Cursor_Moved()
+let g:last_pos = 0
+" define highlighting colours for cursor line/column
+hi CursorLine term=none cterm=none ctermbg=0 gui=none guibg=#B50DB9
+hi CursorColumn term=none cterm=none ctermbg=0 gui=none guibg=#B50DB9
 
 
 
@@ -251,8 +256,29 @@ nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
 
 """ Functions
 
+" Check whether the cursor has moved to a new line and toggle
+" cursorline highlighting (on if on a new line, off if not).
+" TODO doesn't seem 100% reliable (eg. C-u, C-d don't toggle it)
+" from: http://vim.wikia.com/wiki/Highlight_cursor_line_after_cursor_jump
+function! s:Cursor_Moved()
+  let cur_pos = winline()
+  if g:last_pos == 0
+    setlocal cursorline
+    let g:last_pos = cur_pos
+    return
+  endif
+  let diff = g:last_pos - cur_pos
+  if diff >= 1 || diff <= -1
+    setlocal cursorline
+  else
+    setlocal nocursorline
+  endif
+  let g:last_pos = cur_pos
+endfunction
+
 " A visual search mode function. Searches for the current selection
 " forwards, backwards, or with Ack.
+" from: http://amix.dk/vim/vimrc.html
 function! VisualSearch(direction) range
     let l:saved_reg = @"
     execute "normal! vgvy"
@@ -274,9 +300,10 @@ endfunction
 
 
 
+""" Everything below this line is old/broken/unused or I just haven't looked it over yet
+
 " enable a shortcut for tidy using ~/.tidyrc config
 " map <Leader>T :!tidy -config ~/.tidyrc<cr><cr>
-
 
 " Scrolling commands (I had forgotten all about these, so I probably won't
 " miss them)
