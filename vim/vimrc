@@ -196,6 +196,12 @@ vnoremap <silent> # :call VisualSearch('b')<CR>
 " Searches for the current selection using Ack
 vnoremap <silent> gf :call VisualSearch('gf')<CR>
 
+" Quickfix window maps
+map <Leader>qq :copen<cr>
+map <Leader>qc :cclose<cr>
+map <C-x> :cn<cr>
+map <C-k> :cp<cr>
+
 
 
 """ Plugin configs and keymaps
@@ -257,8 +263,23 @@ let g:snips_author = 'Nathan Howell'
 nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
 
 " Yankring config
+let g:yankring_enabled = 0
 let g:yankring_replace_n_pkey = '<Leader>yp'
 let g:yankring_replace_n_nkey = '<Leader>yn'
+
+""" Taglist config
+map <Leader>,t :TlistToggle<CR>
+map <Leader>,a :TlistAddFiles
+map <Leader>,r :TlistAddFilesRecursive .
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_File_Fold_Auto_Close = 1
+let Tlist_Compact_Format = 1
+let Tlist_Use_Right_Window = 0
+let Tlist_Inc_Winwidth = 0
+let Tlist_Close_On_Select = 0
+let Tlist_Process_File_Always = 1
+
 
 
 """ Functions
@@ -345,25 +366,6 @@ endfunction
   "set guifont=Liberation\ Mono\ 11
   "set mousehide
 "endif
-
-"let VCSCommandEnableBufferSetup=1
-
-" open taglist window
-"nnoremap <silent> <Leader>tl :Tlist<CR>
-
-""" Taglist config
-"let generate_tags = 1
-"let Tlist_Use_Horiz_Window = 0
-"nnoremap TT :TlistToggle<CR>
-"map <F4> :TlistToggle<CR>
-"let Tlist_GainFocus_On_ToggleOpen = 1
-"let Tlist_Exit_OnlyWindow = 1
-"let Tlist_File_Fold_Auto_Close = 1
-"let Tlist_Compact_Format = 1
-"let Tlist_Use_Right_Window = 1
-"let Tlist_Inc_Winwidth = 0
-"let Tlist_Close_On_Select = 1
-"let Tlist_Process_File_Always = 1
 
 " keyword completion for perl
 "set iskeyword+=:
