@@ -24,62 +24,58 @@ else
 endif
 
 
+autocmd!
 
-if has("autocmd")
-
-  autocmd!
-
-  filetype on
-  filetype plugin on
-  filetype indent on
-  syntax on
-
-  " old titlestring
-  "set titlestring=%<%{hostname()}:%F\ %(%m\ %)[%l/%L\ %P]\ %y\ VIM
-  " new titlestring (short for screen window names)
-  "autocmd BufEnter * let &titlestring = hostname().expand(":%t")
-  autocmd BufEnter * let &titlestring = expand("%f")
-
-  """ Filetype specific options
-
-  " git commit diff viewing
-  au BufRead,BufNewFile COMMIT_EDITMSG setf git
-  autocmd BufNewFile,BufRead *.erb setf eruby
-  " python and makefiles need real tabs
-  autocmd FileType python noexpandtab
-  autocmd FileType make   noexpandtab
-  " add html ft to php files for snippet support
-  au BufRead,BufNewFile *.php set filetype=php.html
-  au BufRead,BufNewFile *.snippet? set filetype=snippet
+filetype on
+filetype plugin on
+filetype indent on
+syntax on
 
 
-  """ Filetype specific commands
+" old titlestring
+"set titlestring=%<%{hostname()}:%F\ %(%m\ %)[%l/%L\ %P]\ %y\ VIM
+" new titlestring (short for screen window names)
+"autocmd BufEnter * let &titlestring = hostname().expand(":%t")
+autocmd BufEnter * let &titlestring = expand("%f")
 
-  " re-read vimrc after writing it
-  autocmd BufWritePost \.vimrc :source $HOME/.vimrc
-  autocmd BufWritePost vim/vimrc :source $HOME/.vimrc
-  " Useful when customizing xterm
-  autocmd BufWritePost \.Xdefaults :!xrdb ~/.Xdefaults
-  " PHP syntax check (CTRL-L)
-  autocmd FileType php noremap <C-L> :!/usr/bin/php -l %<CR>
 
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \   exe "normal g`\"" |
-        \ endif
+""" Filetype specific options
 
-  " automatically give executable permissions if file begins with #! and contains
-  " '/bin/' in the path (not sure I want this to be automatic
-  "au bufwritepost * if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod a+x <afile> | endif | endif
+" git commit diff viewing
+autocmd BufRead,BufNewFile COMMIT_EDITMSG setf git
+autocmd BufNewFile,BufRead *.erb setf eruby
+" add html ft to php files for snippet support
+autocmd BufRead,BufNewFile *.php set filetype=php.html
+autocmd BufRead,BufNewFile *.snippet? set filetype=snippet
+" python and makefiles need real tabs
+autocmd FileType python noexpandtab
+autocmd FileType make   noexpandtab
+autocmd FileType snippet set softtabstop=8 noexpandtab
 
-  "augroup VCSCommand
-    "au User VCSBufferCreated silent! nmap <unique> <buffer> q: bwipeout<cr>
-  "augroup END
 
-endif " has("autocmd")
+""" Filetype specific commands
+
+" re-read vimrc after writing it
+autocmd BufWritePost \.vimrc :source $HOME/.vimrc
+autocmd BufWritePost vim/vimrc :source $HOME/.vimrc
+" Useful when customizing xterm
+autocmd BufWritePost \.Xdefaults :!xrdb ~/.Xdefaults
+" PHP syntax check (CTRL-L)
+autocmd FileType php noremap <C-L> :!/usr/bin/php -l %<CR>
+
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+autocmd BufReadPost *
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal g`\"" |
+      \ endif
+
+
+" automatically give executable permissions if file begins with #! and contains
+" '/bin/' in the path (not sure I want this to be automatic
+"autocmd bufwritepost * if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod a+x <afile> | endif | endif
 
 
 
@@ -108,8 +104,8 @@ set autoindent
 set smartindent
 
 set tabstop=8
-set softtabstop=2
-set shiftwidth=2
+set softtabstop=4
+set shiftwidth=4
 set shiftround
 set expandtab
 set smarttab
@@ -246,6 +242,9 @@ map <Leader>gci :Gcommit<cr>
 map <Leader>gmv :Gmove 
 map <Leader>grm :Gremove
 
+" Snipmate config
+let g:snips_author = 'Nathan Howell'
+
 
 
 """ Functions
@@ -311,7 +310,6 @@ endfunction
   "set mousehide
 "endif
 
-"let g:snips_author = 'Nathan Howell'
 "let VCSCommandEnableBufferSetup=1
 
 " open taglist window
