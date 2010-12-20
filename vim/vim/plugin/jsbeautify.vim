@@ -619,5 +619,3 @@ function! g:Jsbeautify()
 	let @0 = ret
 	:put!0
 endfunction
-
-nnoremap <silent> <leader>ff :call g:Jsbeautify()<cr>

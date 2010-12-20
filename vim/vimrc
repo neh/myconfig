@@ -245,6 +245,8 @@ map <Leader>grm :Gremove
 " Snipmate config
 let g:snips_author = 'Nathan Howell'
 
+" Jsbeautify config
+nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
 
 
 """ Functions
