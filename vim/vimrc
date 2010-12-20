@@ -256,6 +256,10 @@ let g:snips_author = 'Nathan Howell'
 " Jsbeautify config
 nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
 
+" Yankring config
+let g:yankring_replace_n_pkey = '<Leader>yp'
+let g:yankring_replace_n_nkey = '<Leader>yn'
+
 
 """ Functions
 
