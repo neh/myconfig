@@ -89,7 +89,7 @@ set pastetoggle=<F12>
 set title
 set laststatus=2
 set visualbell t_vb=
-set formatoptions+=tcroqnw
+set formatoptions+=tcaroqnw
 set ttyfast
 set history=50
 set nowrap
@@ -149,6 +149,9 @@ let g:last_pos = 0
 hi CursorLine term=none cterm=none ctermbg=0 gui=none guibg=#B50DB9
 hi CursorColumn term=none cterm=none ctermbg=0 gui=none guibg=#B50DB9
 
+
+""" Indent options
+let g:PHP_default_indenting = 1
 
 
 """ Key mappings
