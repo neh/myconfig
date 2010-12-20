@@ -5,22 +5,22 @@ set nocompatible
 
 " Make vim update screen window title
 if &term =~ "^screen"
-  set t_ts=k
-  set t_fs=\
+    set t_ts=k
+    set t_fs=\
 endif
 
 set background=dark
 " Set up color settings and scheme based on terminal type
 if $TERM =~ '^screen-bce' || $TERM =~ '^rxvt-256' || $TERM =~ '^xterm-256'
-  set t_Co=256
-  colo molokai
+    set t_Co=256
+    colo molokai
 elseif $TERM =~ '^rxvt'
-  set t_Co=88
-  colo inkpot
+    set t_Co=88
+    colo inkpot
 elseif $TERM =~ '^linux'
-  set t_Co=8
+    set t_Co=8
 else
-  set t_Co=16
+    set t_Co=16
 endif
 
 
@@ -261,19 +261,19 @@ nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
 " TODO doesn't seem 100% reliable (eg. C-u, C-d don't toggle it)
 " from: http://vim.wikia.com/wiki/Highlight_cursor_line_after_cursor_jump
 function! s:Cursor_Moved()
-  let cur_pos = winline()
-  if g:last_pos == 0
-    setlocal cursorline
+    let cur_pos = winline()
+    if g:last_pos == 0
+        setlocal cursorline
+        let g:last_pos = cur_pos
+        return
+    endif
+    let diff = g:last_pos - cur_pos
+    if diff >= 1 || diff <= -1
+        setlocal cursorline
+    else
+        setlocal nocursorline
+    endif
     let g:last_pos = cur_pos
-    return
-  endif
-  let diff = g:last_pos - cur_pos
-  if diff >= 1 || diff <= -1
-    setlocal cursorline
-  else
-    setlocal nocursorline
-  endif
-  let g:last_pos = cur_pos
 endfunction
 
 " A visual search mode function. Searches for the current selection
