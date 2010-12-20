@@ -217,7 +217,7 @@ let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabLongestHighlight = 1
 
 " Lusty Juggler config
-let g:LustyJugglerShowKeys = ''
+let g:LustyJugglerShowKeys = 'a'
 let g:LustyJugglerAltTabMode = 1
 let g:LustyJugglerSuppressRubyWarning = 1
 nmap <Leader>b :LustyJuggler<cr>

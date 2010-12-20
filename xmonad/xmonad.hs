@@ -20,7 +20,7 @@ import qualified XMonad.Actions.DynamicWorkspaceOrder as DO
 import XMonad.Actions.FloatKeys
 import XMonad.Actions.RotSlaves
 import XMonad.Actions.Submap
-import XMonad.Actions.UpdatePointer
+import XMonad.Actions.UpdateFocus
 import XMonad.Actions.WindowBringer
 import XMonad.Actions.WindowGo
 import XMonad.Hooks.DynamicLog
@@ -95,7 +95,9 @@ main = withConnection Session $ \ dbus -> do
     , workspaces         = ["im", "comm", "files", "web"]
     , keys               = myKeys
     , mouseBindings      = myMouse
+    , startupHook        = adjustEventInput
     , handleEventHook    = ewmhDesktopsEventHook
+                           <+> focusOnMouseMove
                            <+> fullscreenEventHook
     , manageHook         = myPreManageHook
                            <+> placeHook (withGaps (24,0,0,0)
@@ -106,7 +108,7 @@ main = withConnection Session $ \ dbus -> do
     , logHook            = myLog dbus
                            -- >> fadeInactiveLogHook 0x99999999
                            >> ewmhDesktopsLogHook
-                           >> updatePointer (Relative 0.01 0.5)
+                           -- >> updatePointer (Relative 0.01 0.5)
                            >> setWMName "LG3D"
     , layoutHook         = smartBorders
                            $ layoutHintsWithPlacement (0.5, 0.5)
@@ -252,6 +254,7 @@ myManageHook = composeAll
   , className ~? "(Gimp-2.6|Gimp)"         --> doNewWS "gimp"
   , title     ~? ".*VirtualBox.*"          --> doNewWS "vm"
   , className =? "Savebox"                 --> doOpenUnder
+  , role      =? "chat"                    --> doShift "im"
   ]
   where
     unFloat = ask >>= doF . W.sink
@@ -342,13 +345,14 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   --, ((mod1Mask,                xK_Tab   ), toggleWS )
   , ((modMask .|. shiftMask,    xK_Tab   ), toggleWS )
+  --, ((modMask,                  xK_Tab   ), toggleWS )
 
   , ((modMask,                 xK_F12   ), spawn "gnome-screensaver-command --lock")
 
   , ((modMask .|. controlMask, xK_period), rotSlavesUp)
   , ((modMask .|. controlMask, xK_comma ), rotSlavesDown)
 
-  , ((modMask,           xK_bracketright ), withFocused (\f -> sendMessage (MinimizeWin f)))
+  , ((modMask,           xK_bracketright ), withFocused minimizeWindow)
   , ((modMask,           xK_bracketleft), sendMessage RestoreNextMinimizedWin)
 
   , ((modMask,                 xK_t     ), B.focusDown)
@@ -438,12 +442,12 @@ button7     =  7 :: Button
 button8     =  8 :: Button
 myMouse (XConfig {XMonad.modMask = modMask}) = M.fromList $
   [ ((modMask, button1), (\w -> focus w >> mouseMoveWindow w))
-  , ((modMask, button2), (\w -> focus w >> windows W.swapMaster))
   , ((modMask, button3), (\w -> focus w >> mouseResizeWindow w))
   , ((modMask, button4), (\_ -> DO.moveTo Prev AnyWS))
   , ((modMask, button5), (\_ -> DO.moveTo Next AnyWS))
   --, ((0, button6), (\_ -> DO.moveTo Prev AnyWS))
   --, ((0, button7), (\_ -> DO.moveTo Next AnyWS))
+  , ((modMask .|. controlMask, button2), (\w -> focus w >> kill1))
   , ((modMask .|. controlMask, button4), (\_ -> B.focusUp))
   , ((modMask .|. controlMask, button5), (\_ -> B.focusDown))
   , ((0, button8), (\_ -> toggleWS))
