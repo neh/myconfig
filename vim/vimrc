@@ -132,7 +132,7 @@ set completeopt=longest,menuone
 set wildmenu
 set wildmode=longest,list
 
-set statusline=%F\ %1*%m%r%*%h%w\ %{fugitive#statusline()}%=[%{&ff}\ %{strlen(&fenc)?&fenc:'none'}\ %{&ft}]\ [%LL\ %P\ %l,%v]
+set statusline=%f\ %1*%m%r%*%h%w\ %{fugitive#statusline()}%=[%{&ff}\ %{strlen(&fenc)?&fenc:'none'}\ %{&ft}]\ [%LL\ %P\ %l,%v]
 hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
 
 " Put backup/swap files all in one place
