@@ -49,7 +49,7 @@ autocmd BufRead,BufNewFile *.php set filetype=php.html
 autocmd BufRead,BufNewFile *.snippet? set filetype=snippet
 " python and makefiles need real tabs
 autocmd FileType python noexpandtab
-autocmd FileType make   noexpandtab
+autocmd FileType make noexpandtab
 autocmd FileType snippet set softtabstop=8 noexpandtab
 
 
@@ -57,7 +57,7 @@ autocmd FileType snippet set softtabstop=8 noexpandtab
 
 " re-read vimrc after writing it
 autocmd BufWritePost \.vimrc :source $HOME/.vimrc
-autocmd BufWritePost vim/vimrc :source $HOME/.vimrc
+autocmd BufWritePost */vim/vimrc :source $HOME/.vimrc
 " Useful when customizing xterm
 autocmd BufWritePost \.Xdefaults :!xrdb ~/.Xdefaults
 " PHP syntax check (CTRL-L)
@@ -151,7 +151,7 @@ hi CursorColumn term=none cterm=none ctermbg=0 gui=none guibg=#B50DB9
 
 
 """ Indent options
-let g:PHP_default_indenting = 1
+let g:PHP_default_indenting = 0
 
 
 """ Key mappings
@@ -181,10 +181,10 @@ nmap <C-t> <C-W>w
 "map <Leader>h :set hls!<bar>set hls?<CR>
 
 " Load vimrc in a split window and switch to it
-map <Leader>V :sp ~/.vimrc<cr><C-W>w
+nmap <Leader>V :sp ~/.vimrc<cr><C-W>w
 
 " cd to the dir containing the current file
-map <Leader>cd :lcd %:h<cr>
+nmap <Leader>cd :lcd %:h<cr>
 
 " Set up retabbing on a source file
 nmap <Leader>rr :1,$retab<cr>
@@ -197,10 +197,10 @@ vnoremap <silent> # :call VisualSearch('b')<CR>
 vnoremap <silent> gf :call VisualSearch('gf')<CR>
 
 " Quickfix window maps
-map <Leader>qq :copen<cr>
-map <Leader>qc :cclose<cr>
-map <C-x> :cn<cr>
-map <C-k> :cp<cr>
+nmap <C-x> :copen<cr>
+nmap <C-q> :cclose<cr>
+nmap <C-j> :cn<cr>
+nmap <C-k> :cp<cr>
 
 
 
@@ -212,8 +212,8 @@ vmap <Leader>s <Plug>Vsurround
 vmap <Leader>S <Plug>Vsurround
 
 " NERDTree mappings and configuration
-map <F10> :NERDTreeToggle<CR>
-map <F11> :NERDTreeMirror<CR>
+nmap <Leader>nt :NERDTreeToggle<CR>
+nmap <Leader>nm :NERDTreeMirror<CR>
 let g:NERDTreeMapOpenInTab="a"
 let g:NERDTreeMapOpenInTabSilent="A"
 let g:NERDTreeMapJumpFirstChild="N"
@@ -248,13 +248,13 @@ let g:LustyExplorerSuppressRubyWarning = 1
 nmap <Leader>gf :Ack 
 
 " fugitive (git) config
-map <Leader>gs :Gstatus<cr>
-map <Leader>gd :Gdiff<cr>
-map <Leader>gg :Ggrep 
-map <Leader>glg :Glog<cr>
-map <Leader>gci :Gcommit<cr>
-map <Leader>gmv :Gmove 
-map <Leader>grm :Gremove
+nmap <Leader>gs :Gstatus<cr>
+nmap <Leader>gd :Gdiff<cr>
+nmap <Leader>gg :Ggrep 
+nmap <Leader>glg :Glog<cr>
+nmap <Leader>gci :Gcommit<cr>
+nmap <Leader>gmv :Gmove 
+nmap <Leader>grm :Gremove
 
 " Snipmate config
 let g:snips_author = 'Nathan Howell'
@@ -268,9 +268,9 @@ let g:yankring_replace_n_pkey = '<Leader>yp'
 let g:yankring_replace_n_nkey = '<Leader>yn'
 
 """ Taglist config
-map <Leader>,t :TlistToggle<CR>
-map <Leader>,a :TlistAddFiles
-map <Leader>,r :TlistAddFilesRecursive .
+nmap <Leader>,t :TlistToggle<CR>
+nmap <Leader>,a :TlistAddFiles
+nmap <Leader>,r :TlistAddFilesRecursive .
 let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_File_Fold_Auto_Close = 1
