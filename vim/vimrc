@@ -38,6 +38,8 @@ syntax on
 "autocmd BufEnter * let &titlestring = hostname().expand(":%t")
 autocmd BufEnter * let &titlestring = expand("%f")
 
+" No wrapping for the quickfix window
+autocmd BufReadPost quickfix setlocal nowrap
 
 """ Filetype specific options
 
