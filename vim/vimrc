@@ -165,6 +165,13 @@ noremap l n
 noremap L N
 noremap j J
 
+" Unmap my dvorak movement keys in select mode so snippets don't suck
+sunmap s
+sunmap S
+sunmap t
+sunmap n
+sunmap N
+
 " Window nav mappings
 nmap <C-n> <C-W>W
 nmap <C-t> <C-W>w
