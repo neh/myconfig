@@ -151,7 +151,7 @@ hi CursorColumn term=none cterm=none ctermbg=0 gui=none guibg=#B50DB9
 
 
 """ Indent options
-let g:PHP_default_indenting = 1
+let g:PHP_default_indenting = 0
 
 
 """ Key mappings
