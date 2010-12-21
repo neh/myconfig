@@ -255,6 +255,7 @@ nmap <Leader>glg :Glog<cr>
 nmap <Leader>gci :Gcommit<cr>
 nmap <Leader>gmv :Gmove 
 nmap <Leader>grm :Gremove
+nmap <Leader>gpu :Git push<cr>
 
 " Snipmate config
 let g:snips_author = 'Nathan Howell'
