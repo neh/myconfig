@@ -55,7 +55,7 @@ autocmd FileType snippet set noexpandtab
 autocmd FileType php set filetype=php.html.javascript
 autocmd FileType html set ts=2 sts=2 sw=2 filetype=html.javascript
 autocmd FileType javascript set ts=4 sts=4 sw=4
-autocmd FileType snippet set sts=8 sw=8
+autocmd FileType snippet set sts=8 sw=8 noet
 
 """ Filetype specific commands
 
@@ -143,10 +143,6 @@ set directory=~/.vim/backup
 set list listchars=tab:\ \ ,trail:·
 
 " highlight the current line (all the way to the right edge) and column
-"autocmd WinEnter * setlocal cursorline
-"autocmd WinLeave * setlocal nocursorline
-"autocmd WinEnter * setlocal cursorcolumn
-"autocmd WinLeave * setlocal nocursorcolumn
 autocmd CursorMoved,CursorMovedI * call s:Cursor_Moved()
 let g:last_pos = 0
 " define highlighting colours for cursor line/column
@@ -179,10 +175,6 @@ sunmap N
 " Window nav mappings
 nmap <C-n> :call SwitchWindowOrBuffer('b')<CR>
 nmap <C-t> :call SwitchWindowOrBuffer('f')<CR>
-"map <C-S-T> <C-W>j<C-W>_     " move down one window and maximize
-"map <C-S-N> <C-W>k<C-W>_     " move up one window and maximize
-"map <C-H> <C-W>h           " move left one window
-"map <C-L> <C-W>l           " move right one window
 nmap <F4> <C-W>o
 nmap <F5> <C-W>c
 nmap <F11> <C-W>_
@@ -302,14 +294,13 @@ let Tlist_Process_File_Always = 1
 
 """ Functions
 
-" Switch either windows or buffers, depending on whether more than one window 
-" is open.
+" Switch windows/buffers, depending on whether multiple windows exist.
 function! SwitchWindowOrBuffer(d)
     if winbufnr(2) == -1
         if a:d == 'f'
-            execute 'normal :bnext '
+            execute 'normal :bnext'
         elseif a:d == 'b'
-            execute 'normal :bprev '
+            execute 'normal :bprev'
         endif
     else
         if a:d == 'f'
@@ -342,7 +333,7 @@ endfunction
 
 " A visual search mode function. Searches for the current selection
 " forwards, backwards, or with Ack.
-" from: http://amix.dk/vim/vimrc.html
+" from: http://amix.dk/vim/vimrc.html (but slightly customized)
 function! VisualSearch(direction) range
     let l:saved_reg = @"
     execute "normal! vgvy"
@@ -368,17 +359,6 @@ endfunction
 
 " enable a shortcut for tidy using ~/.tidyrc config
 " map <Leader>T :!tidy -config ~/.tidyrc<cr><cr>
-
-" Scrolling commands (I had forgotten all about these, so I probably won't
-" miss them)
-"nmap <C-o> <PageUp>
-"nmap <C-e> <PageDown>
-"map <C-o> <PageUp>
-"map <C-e> <PageDown>
-"imap <C-o> <PageUp>
-"imap <C-e> <PageDown>
-" since I'm using c-o elsewhere
-"noremap <C-> :pop<cr>
 
 " Tab mappings (delete soon?)
 ":nmap <C-n> :tabprevious<cr>
@@ -413,5 +393,3 @@ endfunction
 "let g:html_template = '$HOME/.vim/html_template'
 "let g:html_authorname = 'Nathan Howell'
 "let g:html_authoremail = 'nath@nhowell.net'
-
-"runtime ftplugin/man.vim
