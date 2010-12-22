@@ -57,6 +57,10 @@ autocmd FileType html set ts=2 sts=2 sw=2 filetype=html.javascript
 autocmd FileType javascript set ts=4 sts=4 sw=4
 autocmd FileType snippet set sts=8 sw=8 noet
 
+" highlight error logging functions
+hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red
+match ErrorLogFunction "error_log\|console.log"
+
 """ Filetype specific commands
 
 " re-read vimrc after writing it
