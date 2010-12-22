@@ -177,15 +177,16 @@ sunmap n
 sunmap N
 
 " Window nav mappings
-nmap <C-n> <C-W>W
-nmap <C-t> <C-W>w
+nmap <C-n> :call SwitchWindowOrBuffer('b')<CR>
+nmap <C-t> :call SwitchWindowOrBuffer('f')<CR>
 "map <C-S-T> <C-W>j<C-W>_     " move down one window and maximize
 "map <C-S-N> <C-W>k<C-W>_     " move up one window and maximize
 "map <C-H> <C-W>h           " move left one window
 "map <C-L> <C-W>l           " move right one window
+nmap <F4> <C-W>o
 nmap <F5> <C-W>c
-nmap <F6> <C-W>o
 nmap <F11> <C-W>_
+nmap <F6> <C-W>=
 nmap <F8> <C-W>-
 nmap <F9> <C-W>+
 nmap <F7> <C-W><
@@ -270,6 +271,8 @@ nmap <Leader>gci :Gcommit<cr>
 nmap <Leader>gmv :Gmove 
 nmap <Leader>grm :Gremove
 nmap <Leader>gpu :Git push<cr>
+" clean up all those buffers fugitive leaves behind
+nmap <Leader>gbd :bdelete fugitive<C-A><cr>
 
 " Snipmate config
 let g:snips_author = 'Nathan Howell'
@@ -298,6 +301,24 @@ let Tlist_Process_File_Always = 1
 
 
 """ Functions
+
+" Switch either windows or buffers, depending on whether more than one window 
+" is open.
+function! SwitchWindowOrBuffer(d)
+    if winbufnr(2) == -1
+        if a:d == 'f'
+            execute 'normal :bnext '
+        elseif a:d == 'b'
+            execute 'normal :bprev '
+        endif
+    else
+        if a:d == 'f'
+            execute 'normal :wincmd w'
+        elseif a:d == 'b'
+            execute 'normal :wincmd W'
+        endif
+    endif
+endfunction
 
 " Check whether the cursor has moved to a new line and toggle
 " cursorline highlighting (on if on a new line, off if not).
