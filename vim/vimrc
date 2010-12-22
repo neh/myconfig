@@ -59,7 +59,6 @@ autocmd FileType snippet set sts=8 sw=8 noet
 
 " highlight error logging functions
 hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red
-match ErrorLogFunction "error_log\|console.log"
 
 """ Filetype specific commands
 
