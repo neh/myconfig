@@ -43,18 +43,18 @@ autocmd BufReadPost quickfix setlocal nowrap
 
 """ Filetype specific options
 
-" git commit diff viewing
+" add proper filetype to files that need it
 autocmd BufRead,BufNewFile COMMIT_EDITMSG setf git
 autocmd BufNewFile,BufRead *.erb setf eruby
-" add html ft to php files for snippet support
-autocmd BufRead,BufNewFile *.php set filetype=php.html
 autocmd BufRead,BufNewFile *.snippet? set filetype=snippet
 " some files need real tabs
 autocmd FileType python set noexpandtab
 autocmd FileType make set noexpandtab
 autocmd FileType snippet set noexpandtab
-" some files should have different tabsizes
-autocmd FileType html set sts=2 sw=2
+" some files should have different tabsizes and other options
+autocmd FileType php set filetype=php.html.javascript
+autocmd FileType html set ts=2 sts=2 sw=2 filetype=html.javascript
+autocmd FileType javascript set ts=4 sts=4 sw=4
 autocmd FileType snippet set sts=8 sw=8
 
 """ Filetype specific commands
@@ -93,7 +93,7 @@ set pastetoggle=<F12>
 set title
 set laststatus=2
 set visualbell t_vb=
-set formatoptions+=tcaroqnw
+set formatoptions+=tcroqnw
 set ttyfast
 set history=50
 set nowrap
