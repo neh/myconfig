@@ -49,11 +49,13 @@ autocmd BufNewFile,BufRead *.erb setf eruby
 " add html ft to php files for snippet support
 autocmd BufRead,BufNewFile *.php set filetype=php.html
 autocmd BufRead,BufNewFile *.snippet? set filetype=snippet
-" python and makefiles need real tabs
-autocmd FileType python noexpandtab
-autocmd FileType make noexpandtab
-autocmd FileType snippet set softtabstop=8 noexpandtab
-
+" some files need real tabs
+autocmd FileType python set noexpandtab
+autocmd FileType make set noexpandtab
+autocmd FileType snippet set noexpandtab
+" some files should have different tabsizes
+autocmd FileType html set sts=2 sw=2
+autocmd FileType snippet set sts=8 sw=8
 
 """ Filetype specific commands
 
@@ -181,10 +183,13 @@ nmap <C-t> <C-W>w
 "map <C-S-N> <C-W>k<C-W>_     " move up one window and maximize
 "map <C-H> <C-W>h           " move left one window
 "map <C-L> <C-W>l           " move right one window
-"map <C--> <C-W>-
-"map <C-=> <C-W>+
-"map <M-,> <C-W><
-"map <M-.> <C-W>>
+nmap <F5> <C-W>c
+nmap <F6> <C-W>o
+nmap <F11> <C-W>_
+nmap <F8> <C-W>-
+nmap <F9> <C-W>+
+nmap <F7> <C-W><
+nmap <F10> <C-W>>
 
 " toggle hlsearch
 "map <Leader>h :set hls!<bar>set hls?<CR>
