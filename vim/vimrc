@@ -212,6 +212,16 @@ nmap <C-q> :cclose<cr>
 nmap <C-j> :cn<cr>
 nmap <C-k> :cp<cr>
 
+" Align convenience maps
+nmap <Leader>ac :AlignCtrl 
+nmap <Leader>a vii:Align 
+nmap <Leader>a: vii:Align :<cr>
+nmap <Leader>a= vii:Align =<cr>
+nmap <Leader>a=> vii:Align =><cr>
+
+" Source .vimrc
+nmap <Leader>VS :so ~/.vimrc<cr>
+
 
 
 """ Plugin configs and keymaps
