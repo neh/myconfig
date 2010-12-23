@@ -1,7 +1,7 @@
 snippet db
 	debugger;
 snippet cl
-	console.log(${1});
+	console.log(${1});${2}
 # Prototype
 snippet proto
 	${1:class_name}.prototype.${2:method_name} =
@@ -15,7 +15,7 @@ snippet fun
 	}
 # Anonymous Function
 snippet f
-	function(${1}) {${2}};
+	function(${1}) {${2}};${3}
 # if
 snippet if
 	if (${1:true}) {
@@ -31,7 +31,7 @@ snippet ife
 	    ${2}
 	} else {
 	    ${3}
-	};
+	};${4}
 # if ... else 2
 snippet iife
 	if (${1:true})

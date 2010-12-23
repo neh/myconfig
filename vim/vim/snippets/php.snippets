@@ -1,9 +1,9 @@
 snippet err
-	error_log(${1});
+	error_log(${1});${2}
 snippet erre
 	error_log(${1});exit;
 snippet vd
-	var_dump(${1});
+	var_dump(${1});${2}
 snippet vde
 	var_dump(${1});exit;
 snippet php
@@ -162,7 +162,7 @@ snippet def?
 snippet wh
 	while (${1:/* condition */}) {
 	    ${2:// code...}
-	}
+	}${3}
 # do ... while
 snippet do
 	do {
@@ -171,7 +171,7 @@ snippet do
 snippet if
 	if (${1:/* condition */}) {
 	    ${2:// code...}
-	}
+	}${3}
 snippet iif
 	if (${1:/* condition */})
 	    ${2:// code...}
@@ -180,8 +180,7 @@ snippet ife
 	    ${2:// code...}
 	} else {
 	    ${3:// code...}
-	}
-	${4}
+	}${4}
 snippet iife
 	if (${1:/* condition */})
 	    ${2:// code...}
@@ -190,11 +189,11 @@ snippet iife
 snippet else
 	else {
 	    ${1:// code...}
-	}
+	}${2}
 snippet elseif
 	elseif (${1:/* condition */}) {
 	    ${2:// code...}
-	}
+	}${3}
 # Tertiary conditional
 snippet t
 	$${1:retVal} = (${2:condition}) ? ${3:a} : ${4:b};${5}
@@ -215,19 +214,19 @@ snippet case
 snippet for
 	for ($${2:i} = 0; $$2 < ${1:count}; $$2${3:++}) {
 	    ${4: // code...}
-	}
+	}${5}
 snippet foreach
 	foreach ($${1:variable} as $${2:key}) {
 	    ${3:// code...}
-	}
+	}${4}
 snippet foreachk
 	foreach ($${1:variable} as $${2:key} => ${3:val}) {
 	    ${4:// code...}
-	}
+	}${5}
 snippet fun
 	${1:public }function ${2:FunctionName}(${3}) {
 	    ${4:// code...}
-	}
+	}${5}
 # $... = array (...)
 snippet array
 	$${1:arrayName} = array('${2}' => ${3});${4}
