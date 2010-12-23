@@ -52,8 +52,8 @@ autocmd FileType python set noexpandtab
 autocmd FileType make set noexpandtab
 autocmd FileType snippet set noexpandtab
 " some files should have different tabsizes and other options
-autocmd FileType php set filetype=php.html.javascript
-autocmd FileType html set ts=2 sts=2 sw=2 filetype=html.javascript
+"autocmd FileType php set filetype=php.html.javascript
+"autocmd FileType html set ts=2 sts=2 sw=2 filetype=html.javascript
 autocmd FileType javascript set ts=4 sts=4 sw=4
 autocmd FileType snippet set sts=8 sw=8 noet
 
