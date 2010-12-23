@@ -275,6 +275,8 @@ nmap <Leader>gci :Gcommit<cr>
 nmap <Leader>gmv :Gmove 
 nmap <Leader>grm :Gremove
 nmap <Leader>gpu :Git push<cr>
+nmap <Leader>gt :w<cr>:bd<cr>
+nmap <Leader>gta :Gread<cr>:w<cr>:bd<cr>
 " clean up all those buffers fugitive leaves behind
 nmap <Leader>gbd :bdelete fugitive<C-A><cr>
 
