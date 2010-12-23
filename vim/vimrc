@@ -29,6 +29,7 @@ autocmd!
 filetype plugin indent on
 syntax on
 
+runtime! ftplugin/man.vim
 
 " old titlestring
 "set titlestring=%<%{hostname()}:%F\ %(%m\ %)[%l/%L\ %P]\ %y\ VIM
@@ -53,13 +54,15 @@ autocmd FileType snippet set noexpandtab
 autocmd FileType html set ts=2 sts=2 sw=2
 autocmd FileType javascript set ts=4 sts=4 sw=4
 autocmd FileType snippet set sts=8 sw=8 noet
+autocmd FileType haskell set ts=2 sts=2 sw=2
 
 " highlight error logging functions
 hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red
 
-" Change search term highlight colours
+" Change some highlight colours
 hi Search term=bold cterm=bold ctermfg=black ctermbg=green
 hi IncSearch term=bold cterm=bold ctermfg=yellow ctermbg=red
+hi Todo term=bold cterm=bold ctermfg=black ctermbg=blue
 
 
 """ Filetype specific commands
@@ -101,7 +104,8 @@ set visualbell t_vb=
 set formatoptions+=tcroqnw
 set ttyfast
 set history=50
-set nowrap
+set wrap
+set linebreak
 set showcmd
 set startofline
 set hidden
@@ -227,6 +231,10 @@ nmap <Leader>a=> vii:Align =><cr>
 " Source .vimrc
 nmap <Leader>VS :so ~/.vimrc<cr>
 
+" Session management maps
+nmap <Leader>SS :mksession! ~/.vim/sessions/
+nmap <Leader>SL :source ~/.vim/sessions/
+
 
 
 
@@ -314,6 +322,9 @@ let Tlist_Process_File_Always = 1
 
 
 """ Functions
+
+" I keep hitting :W when saving. It may as well work.
+command! W :w
 
 " Switch windows/buffers, depending on whether multiple windows exist.
 function! SwitchWindowOrBuffer(d)
