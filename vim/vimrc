@@ -26,9 +26,7 @@ endif
 
 autocmd!
 
-filetype on
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 syntax on
 
 
@@ -58,6 +56,11 @@ autocmd FileType snippet set sts=8 sw=8 noet
 
 " highlight error logging functions
 hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red
+
+" Change search term highlight colours
+hi Search term=bold cterm=bold ctermfg=black ctermbg=green
+hi IncSearch term=bold cterm=bold ctermfg=yellow ctermbg=red
+
 
 """ Filetype specific commands
 
@@ -186,6 +189,9 @@ nmap <F9> <C-W>+
 nmap <F7> <C-W><
 nmap <F10> <C-W>>
 
+" No more Ex mode mapping. Do something useful instead.
+map Q gq
+
 " toggle hlsearch
 "map <Leader>h :set hls!<bar>set hls?<CR>
 
@@ -220,6 +226,7 @@ nmap <Leader>a=> vii:Align =><cr>
 
 " Source .vimrc
 nmap <Leader>VS :so ~/.vimrc<cr>
+
 
 
 
@@ -275,8 +282,8 @@ nmap <Leader>gci :Gcommit<cr>
 nmap <Leader>gmv :Gmove 
 nmap <Leader>grm :Gremove
 nmap <Leader>gpu :Git push<cr>
-nmap <Leader>gt :w<cr>:bd<cr>
-nmap <Leader>gta :Gread<cr>:w<cr>:bd<cr>
+nmap <Leader>gt :w<cr>:bd<cr>:diffoff<cr>
+nmap <Leader>gta :Gread<cr>:w<cr>:bd<cr>:diffoff<cr>
 " clean up all those buffers fugitive leaves behind
 nmap <Leader>gbd :bdelete fugitive<C-A><cr>
 
