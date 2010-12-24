@@ -70,6 +70,10 @@ hi DiffChange term=none cterm=none ctermfg=black ctermbg=blue
 hi DiffDelete term=none cterm=none ctermfg=black ctermbg=red
 hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
 
+" custom popup menu colouring
+hi Pmenu term=none cterm=none ctermfg=gray ctermbg=black
+hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=green
+
 
 """ Filetype specific commands
 
@@ -241,13 +245,21 @@ nmap <Leader>VS :so ~/.vimrc<cr>
 nmap <Leader>SS :mksession! ~/.vim/sessions/
 nmap <Leader>SL :source ~/.vim/sessions/
 
-" Turn of diff options
+" Turn off diff options
 nmap <Leader>do :diffoff<cr>
 nmap <Leader>do! :diffoff!<cr>
+
+" Use C-l instead of C-y to insert the first option in the auto completion 
+" popup (useful with autocomplpop plugin)
+inoremap <C-l> <C-R>=pumvisible() ? "\<lt>C-y>" : "\<lt>C-l>"<cr>
 
 
 
 """ Plugin configs and keymaps
+
+" AutoComplPop
+let g:acp_mappingDriven = 1
+"let g:acp_behaviorSnipmateLength = 1
 
 " Surround plugin
 " Change visual surround mappings so s works for movement again
@@ -272,6 +284,7 @@ let g:SuperTabMappingForward = '<c-n>'
 let g:SuperTabMappingBackward = '<c-p>'
 let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabLongestHighlight = 1
+let g:SuperTabLongestEnhanced = 1
 
 " Lusty Juggler config
 let g:LustyJugglerShowKeys = 'a'
