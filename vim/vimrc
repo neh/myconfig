@@ -241,6 +241,9 @@ nmap <Leader>VS :so ~/.vimrc<cr>
 nmap <Leader>SS :mksession! ~/.vim/sessions/
 nmap <Leader>SL :source ~/.vim/sessions/
 
+" Turn of diff options
+nmap <Leader>do :diffoff<cr>
+nmap <Leader>do! :diffoff!<cr>
 
 
 
@@ -296,10 +299,10 @@ nmap <Leader>gci :Gcommit<cr>
 nmap <Leader>gmv :Gmove 
 nmap <Leader>grm :Gremove
 nmap <Leader>gpu :Git push<cr>
-nmap <Leader>gt :w<cr>:bd<cr>:diffoff<cr>
-nmap <Leader>gta :Gread<cr>:w<cr>:bd<cr>:diffoff<cr>
+nmap <Leader>gt :w<cr>:bd<cr>:diffoff!<cr>
+nmap <Leader>gta :Gread<cr>:w<cr>:bd<cr>:diffoff!<cr>
 " clean up all those buffers fugitive leaves behind
-nmap <Leader>gbd :bdelete fugitive<C-A><cr>
+nmap <Leader>gbd :bdelete fugitive://<C-A><cr>
 
 " Snipmate config
 let g:snips_author = 'Nathan Howell'
