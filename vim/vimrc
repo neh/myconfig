@@ -13,7 +13,7 @@ set background=dark
 " Set up color settings and scheme based on terminal type
 if $TERM =~ '^screen-bce' || $TERM =~ '^rxvt-256' || $TERM =~ '^xterm-256'
     set t_Co=256
-    colo molokai
+    colo jellybeans
 elseif $TERM =~ '^rxvt'
     set t_Co=88
     colo inkpot
@@ -63,6 +63,12 @@ hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red
 hi Search term=bold cterm=bold ctermfg=black ctermbg=green
 hi IncSearch term=bold cterm=bold ctermfg=yellow ctermbg=red
 hi Todo term=bold cterm=bold ctermfg=black ctermbg=blue
+
+" Use my own diff highlighting regardless of colour scheme
+hi DiffAdd term=none cterm=none ctermfg=black ctermbg=green
+hi DiffChange term=none cterm=none ctermfg=black ctermbg=blue
+hi DiffDelete term=none cterm=none ctermfg=black ctermbg=red
+hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
 
 
 """ Filetype specific commands
