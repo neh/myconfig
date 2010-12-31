@@ -62,7 +62,7 @@ hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red
 " Change some highlight colours
 hi Search term=bold cterm=bold ctermfg=black ctermbg=green
 hi IncSearch term=bold cterm=bold ctermfg=yellow ctermbg=red
-hi Todo term=bold cterm=bold ctermfg=black ctermbg=blue
+hi Todo term=bold cterm=bold ctermfg=red ctermbg=yellow
 
 " Use my own diff highlighting regardless of colour scheme
 hi DiffAdd term=none cterm=none ctermfg=black ctermbg=green
