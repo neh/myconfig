@@ -13,7 +13,7 @@ set background=dark
 " Set up color settings and scheme based on terminal type
 if $TERM =~ '^screen-bce' || $TERM =~ '^rxvt-256' || $TERM =~ '^xterm-256'
     set t_Co=256
-    colo jellybeans
+    colo molokai
 elseif $TERM =~ '^rxvt'
     set t_Co=88
     colo inkpot
@@ -370,7 +370,7 @@ endfunction
 " TODO doesn't seem 100% reliable (eg. C-u, C-d don't toggle it)
 " from: http://vim.wikia.com/wiki/Highlight_cursor_line_after_cursor_jump
 function! s:Cursor_Moved()
-    let cur_pos = winline()
+    let cur_pos = line('.')
     if g:last_pos == 0
         setlocal cursorline
         let g:last_pos = cur_pos

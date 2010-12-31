@@ -547,6 +547,12 @@ vimball-history	pi_vimball.txt	/*vimball-history*
 vimball-intro	pi_vimball.txt	/*vimball-intro*
 vimball-manual	pi_vimball.txt	/*vimball-manual*
 vs	surround.txt	/*vs*
+xml-plugin-callbacks	xml-plugin.txt	/*xml-plugin-callbacks*
+xml-plugin-html	xml-plugin.txt	/*xml-plugin-html*
+xml-plugin-mappings	xml-plugin.txt	/*xml-plugin-mappings*
+xml-plugin-settings	xml-plugin.txt	/*xml-plugin-settings*
+xml-plugin.txt	xml-plugin.txt	/*xml-plugin.txt*
+xmledit.vim	xml-plugin.txt	/*xmledit.vim*
 yS	surround.txt	/*yS*
 ySS	surround.txt	/*ySS*
 yankring	yankring.txt	/*yankring*
