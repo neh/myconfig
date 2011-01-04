@@ -159,7 +159,7 @@ set backupdir=~/.vim/backup
 set directory=~/.vim/backup
 
 " show trailing whitespace
-set list listchars=tab:\ \ ,trail:·
+set list listchars=tab:⇨\ ,trail:·
 
 " highlight the current line (all the way to the right edge) and column
 autocmd CursorMoved,CursorMovedI * call s:Cursor_Moved()
@@ -232,11 +232,15 @@ nmap <C-j> :cn<cr>
 nmap <C-k> :cp<cr>
 
 " Align convenience maps
-nmap <Leader>ac :AlignCtrl 
+map <Leader>ac :AlignCtrl 
 nmap <Leader>a vii:Align 
+vmap <Leader>a :Align 
 nmap <Leader>a: vii:Align :<cr>
+vmap <Leader>a: :Align :<cr>
 nmap <Leader>a= vii:Align =<cr>
+vmap <Leader>a= :Align =<cr>
 nmap <Leader>a=> vii:Align =><cr>
+vmap <Leader>a=> :Align =><cr>
 
 " Source .vimrc
 nmap <Leader>VS :so ~/.vimrc<cr>
