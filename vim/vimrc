@@ -178,8 +178,8 @@ let g:PHP_default_indenting = 0
 " A few dvorak adjustments
 noremap s l
 noremap S L
-noremap t j
-noremap n k
+noremap t gj
+noremap n gk
 noremap l n
 noremap L N
 noremap j J
