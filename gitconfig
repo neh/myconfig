@@ -6,3 +6,4 @@
 
 [alias]
     st = status
+    listem = diff --name-status
