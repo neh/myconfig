@@ -86,7 +86,7 @@ main = withConnection Session $ \ dbus -> do
   putStrLn "Got name, starting XMonad."
   --spawn "xcompmgr -nFf -I 0.056 -O 0.06"
   xmonad $ withUrgencyHook NoUrgencyHook
-         $ defaultConfig
+         $ ewmh defaultConfig
     { borderWidth        = 1
     , terminal           = "urxvtcd"
     , normalBorderColor  = "#222222"
@@ -96,8 +96,7 @@ main = withConnection Session $ \ dbus -> do
     , keys               = myKeys
     , mouseBindings      = myMouse
     , startupHook        = adjustEventInput
-    , handleEventHook    = ewmhDesktopsEventHook
-                           <+> focusOnMouseMove
+    , handleEventHook    = focusOnMouseMove
                            <+> fullscreenEventHook
     , manageHook         = myPreManageHook
                            <+> placeHook (withGaps (24,0,0,0)
@@ -107,8 +106,6 @@ main = withConnection Session $ \ dbus -> do
                            <+> myManageHook
     , logHook            = myLog dbus
                            -- >> fadeInactiveLogHook 0x99999999
-                           >> ewmhDesktopsLogHook
-                           -- >> updatePointer (Relative 0.01 0.5)
                            >> setWMName "LG3D"
     , layoutHook         = smartBorders
                            $ layoutHintsWithPlacement (0.5, 0.5)
@@ -118,7 +115,6 @@ main = withConnection Session $ \ dbus -> do
                            $ toggleLayouts Full
                            $ onWorkspace "vm" Full
                            $ avoidStruts
-                           -- $ onWorkspace "0" (tp ||| grid)
                            $ onWorkspace "comm" Full
                            $ onWorkspace "im" im
                            $ onWorkspace "files" file
@@ -304,7 +300,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((0, xK_l), spawn $ XMonad.terminal conf ++ " -e ncmpc")
     , ((0, xK_m), spawn "musicmenu mpc")
     , ((0, xK_t), spawn "musicmenu totem")
-    , ((0, xK_b), spawn "musicmenu banshee")
+    , ((0, xK_b), spawn "musicmenu banshee-1")
     , ((0, xK_r), spawn "musicmenu rhythmbox-client")
     , ((0, xK_p), spawn "musicmenu beep-media-player")
     , ((0, xK_v), spawn "pavucontrol")
