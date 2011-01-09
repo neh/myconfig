@@ -228,7 +228,9 @@ myPConfig = defaultXPConfig
 -- to avoid its effects for some apps
 myPreManageHook :: ManageHook
 myPreManageHook = composeAll
-  [ title     =? "handy"                 --> (doSetRole "handy" >> doCenterFloat) 
+  [ title     =? "handy"                   --> (doSetRole "handy" >> doCenterFloat)
+  , className =? "feh"                     --> doCenterFloat
+  , className =? "MPlayer"                 --> doCenterFloat
   ]
 
 -- And this manageHook goes after the placeHook
@@ -244,7 +246,6 @@ myManageHook = composeAll
   , title     =? "Firefox Preferences"     --> doFloat
   , title     =? "Thunderbird Preferences" --> doFloat
   , title     =? "Add-ons"                 --> doFloat
-  , className =? "feh"                     --> doFloat
   , className =? "Xmessage"                --> doFloat
   , title     ~? "mythfrontend"            --> doNewHWS "tv"
   , className ~? "(Gimp-2.6|Gimp)"         --> doNewWS "gimp"
