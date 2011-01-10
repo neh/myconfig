@@ -206,6 +206,13 @@ nmap <F10> <C-W>>
 " No more Ex mode mapping. Do something useful instead.
 map Q gq
 
+" Move a line of text using C-S+[tn]
+" TODO these don't actually work (the mappings, I mean).
+nmap <M-t> mz:m+<cr>`z
+nmap <M-n> mz:m-2<cr>`z
+vmap <M-t> :m'<-2<cr>`>my`<mzgv`yo`z
+vmap <M-n> :m'>+<cr>`<my`>mzgv`yo`z
+
 " toggle hlsearch
 "map <Leader>h :set hls!<bar>set hls?<CR>
 
@@ -226,10 +233,10 @@ vnoremap <silent> # :call VisualSearch('b')<CR>
 vnoremap <silent> gf :call VisualSearch('gf')<CR>
 
 " Quickfix window maps
-nmap <C-x> :copen<cr>
-nmap <C-q> :cclose<cr>
-nmap <C-j> :cn<cr>
-nmap <C-k> :cp<cr>
+nmap <Leader>co :copen<cr>
+nmap <Leader>cx :cclose<cr>
+nmap <Leader>t :cn<cr>
+nmap <Leader>n :cp<cr>
 
 " Align convenience maps
 map <Leader>ac :AlignCtrl 
