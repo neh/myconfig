@@ -92,7 +92,7 @@ main = withConnection Session $ \ dbus -> do
     , normalBorderColor  = "#222222"
     , focusedBorderColor = fg
     , modMask            = mod4Mask
-    , workspaces         = ["im", "comm", "files", "web"]
+    , workspaces         = ["mon", "comm", "files", "d", "web", "vm"]
     , keys               = myKeys
     , mouseBindings      = myMouse
     , startupHook        = adjustEventInput
@@ -112,22 +112,28 @@ main = withConnection Session $ \ dbus -> do
                            $ maximize
                            $ minimize
                            $ B.boringWindows
-                           $ toggleLayouts Full
-                           $ onWorkspace "vm" Full
+                           $ toggleLayouts (noBorders Full)
+                           $ onWorkspace "vm" (noBorders Full)
                            $ avoidStruts
-                           $ onWorkspace "comm" Full
+                           $ onWorkspace "comm" (noBorders Full)
                            $ onWorkspace "im" im
                            $ onWorkspace "files" file
                            $ onWorkspace "gimp" gimp
                            $ onWorkspace "read" read
+                           $ onWorkspace "d" (reflectHoriz tp)
+                           $ onWorkspace "mon" monlayout
                            $ tp
+                           ||| rtp
                            ||| rtiled
                            ||| file
+                           ||| grid
     }
     where
       tiled = HintedTile 1 (3%100) 0.648 TopLeft Tall
       rtiled = Mag.magnifier' (ResizableTall 1 (3%100) 0.648 [])
-      tp = TwoPane 0.03 0.5
+      tp = TwoPane 0.03 0.62
+      monlayout = withIM (0.39) (ClassName "Gnome-terminal") $ Full
+      rtp = Mirror $ TwoPane 0.03 0.6
       im = withIM (0.13) (Role "contact_list") $ ResizableTall 1 (1/100) (0.40) [1]
       rgrid = Grid True
       grid = Grid False
@@ -142,7 +148,7 @@ myLog dbus = withWindowSet $ \ws -> do
           { ppCurrent         = pangoStyle "#be462a" "#dfd8c3" "bold"
           , ppUrgent          = pangoUrgent "#d7c529"
           , ppHidden          = wrap " " " "
-          , ppVisible         = pangoStyle "#dfd8c3" "#333" "bold"
+          , ppVisible         = pangoStyle "#df684c" "#333" "bold"
           , ppHiddenNoWindows = pangoColor "#dfd8c3"
           , ppWsSep           = ""
           , ppSep             = " "
@@ -251,7 +257,7 @@ myManageHook = composeAll
   , className ~? "(Gimp-2.6|Gimp)"         --> doNewWS "gimp"
   , title     ~? ".*VirtualBox.*"          --> doNewWS "vm"
   , className =? "Savebox"                 --> doOpenUnder
-  , role      =? "chat"                    --> doShift "im"
+  , className =? "rdesktop"                --> doNewWS "rdp"
   ]
   where
     unFloat = ask >>= doF . W.sink
@@ -307,7 +313,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xK_v), spawn "pavucontrol")
     ])
 
-  , ((modMask, xK_w), submap . M.fromList $
+  , ((modMask, xK_apostrophe), submap . M.fromList $
     [ ((0, xK_i), B.markBoring)
     , ((0, xK_u), B.clearBoring)
     , ((0, xK_m), sendMessage Mag.Toggle)
@@ -321,7 +327,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask,                 xK_o     ), toggleWindow (role =? "handy")
       (spawn $ XMonad.terminal conf ++
-      " -title handy -geometry 100x52 -e screen -D -R handy"))
+      " -title handy -geometry 110x62 -e screen -D -R handy"))
 
   , ((modMask, xK_g), submap . M.fromList $
     [ ((0, xK_m), raiseNext (className =? "MPlayer"))
@@ -329,7 +335,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xK_t), raiseNext (title ~? "mythfrontend(.real)?"))
     ])
   , ((modMask,                 xK_b     ), raiseNext (className ~? "(Firefox|Namoroka|Google-chrome)") )
-  , ((modMask,                 xK_v     ), raiseNext (title ~? "VIM$") )
 
   , ((modMask,                 xK_space ), sendMessage NextLayout)
   , ((modMask .|. shiftMask,   xK_space ), setLayout $ XMonad.layoutHook conf)
@@ -381,8 +386,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask .|. shiftMask,   xK_h     ), DO.swapWith Prev AnyWS)
   , ((modMask .|. shiftMask,   xK_s     ), DO.swapWith Next AnyWS)
 
-  , ((modMask,                 xK_Left     ), nextScreen)
-  --, ((modMask,                 xK_Right    ), prevWS)
+  , ((modMask,                 xK_w     ), prevScreen)
+  , ((modMask .|. shiftMask,   xK_w     ), shiftNextScreen)
 
   , ((modMask,                 xK_f     ), sendMessage ToggleLayout )
 
@@ -436,18 +441,21 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 button6     =  6 :: Button
 button7     =  7 :: Button
-button8     =  8 :: Button
+--button8     =  8 :: Button
+button9     =  9 :: Button
 myMouse (XConfig {XMonad.modMask = modMask}) = M.fromList $
   [ ((modMask, button1), (\w -> focus w >> mouseMoveWindow w))
   , ((modMask, button3), (\w -> focus w >> mouseResizeWindow w))
   , ((modMask, button4), (\_ -> DO.moveTo Prev AnyWS))
   , ((modMask, button5), (\_ -> DO.moveTo Next AnyWS))
+  -- Need a decent side scroll mouse for these two
   --, ((0, button6), (\_ -> DO.moveTo Prev AnyWS))
   --, ((0, button7), (\_ -> DO.moveTo Next AnyWS))
   , ((modMask .|. controlMask, button2), (\w -> focus w >> kill1))
   , ((modMask .|. controlMask, button4), (\_ -> B.focusUp))
   , ((modMask .|. controlMask, button5), (\_ -> B.focusDown))
-  , ((0, button8), (\_ -> toggleWS))
+  --, ((0, button8), (\_ -> toggleWS))
+  , ((0, button9), (\_ -> toggleWS))
   , ((modMask .|. shiftMask, button4), (\_ -> windows W.swapUp))
   , ((modMask .|. shiftMask, button5), (\_ -> windows W.swapDown))
   ]
