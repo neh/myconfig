@@ -213,6 +213,23 @@ nmap <M-n> mz:m-2<cr>`z
 vmap <M-t> :m'<-2<cr>`>my`<mzgv`yo`z
 vmap <M-n> :m'>+<cr>`<my`>mzgv`yo`z
 
+" Auto-close various pair chars.
+inoremap        (  ()<Esc>:let leavechar=")"<CR>i
+inoremap        [  []<Esc>:let leavechar="]"<CR>i
+"inoremap        {  {}<Esc>:let leavechar="}"<CR>i
+inoremap        <  <><Esc>:let leavechar=">"<CR>i
+" Handle empty pairs (by not closing them, just move cursor right).
+inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
+inoremap <expr> }  strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
+inoremap <expr> >  strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
+" C-e to move the cursor after the current parens/brackets/braces etc.
+imap <C-e> <Esc>:exec "normal f" . leavechar<CR>a
+
+" Close braces and put cursor on a blank line between them
+inoremap { {<CR><BS>}<Esc>ko
+
+
 " toggle hlsearch
 "map <Leader>h :set hls!<bar>set hls?<CR>
 
