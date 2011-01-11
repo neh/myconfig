@@ -153,10 +153,9 @@ myLog dbus = withWindowSet $ \ws -> do
           , ppOutput   = \ str -> do
               let str'  = "<span font=\"Liberation Sans Mono\">" ++ str ++ 
                           "</span>"
-                  str'' = sanitize str'
               msg <- newSignal "/org/xmonad/Log" "org.xmonad.Log" 
                          "Update"
-              addArgs msg [String str'']
+              addArgs msg [String str']
               -- If the send fails, ignore it.
               send dbus msg 0 `catchDyn`
                 (\ (DBus.Error _name _msg) ->
@@ -197,12 +196,6 @@ myLog dbus = withWindowSet $ \ws -> do
        where
         left  = "<span underline=\"single\" foreground=\"" ++ fg ++ "\" font_weight=\"bold\"> "
         right = " </span>"
-
-      sanitize :: String -> String
-      sanitize [] = []
-      sanitize (x:rest) | fromEnum x > 127 = "&#" ++ show (fromEnum x) ++ "; " ++
-                                             sanitize rest
-                        | otherwise        = x : sanitize rest
 
 
 --data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
