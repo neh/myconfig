@@ -13,9 +13,9 @@
 *Rxvt*background: black
 
 !To set font manually: printf '\e]710;%s\007' "xft:Consolas:size=12"
-URxvt*font:	xft:Liberation Mono:pixelsize=16,\
-			xft:Arial Unicode MS:pixelsize=16,\
-			xft:Everson Mono Unicode:pixelsize=16
+URxvt*font:	xft:Liberation Mono:pixelsize=13,\
+			xft:Arial Unicode MS:pixelsize=13,\
+			xft:Everson Mono Unicode:pixelsize=13
 URxvt*searchable-scrollback: CS-s
 URxvt.cutchars: "()*,<>[]{}|'
 URxvt*secondaryScroll: true
@@ -45,11 +45,9 @@ URxvt.color15: #EEEEEC
 !URxvt*keysym.C-e: 0xff56
 
 !url yanking from urxvt
-URxvt.keysym.C-apostrophe: perl:mark-yank-urls:activate_mark_mode
-URxvt.underlineURLs: true
-URxvt.perl-lib: /home/nathan/.urxvt/
-URxvt.perl-ext: selection,mark-yank-urls
-URxvt.urlLauncher: firefox
+URxvt.perl-ext-common: default,matcher
+URxvt.urlLauncher: xdg-open
+URxvt.matcher.button: 1
 
 
 !!! Xterm settings

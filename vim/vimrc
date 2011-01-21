@@ -165,7 +165,8 @@ set list listchars=tab:⇨\ ,trail:·
 
 " highlight the current line (all the way to the right edge) and column
 autocmd CursorMoved,CursorMovedI * call s:Cursor_Moved()
-let g:last_pos = 0
+let g:last_screen_pos = 0
+let g:last_file_pos = 0
 " define highlighting colours for cursor line/column
 hi CursorLine term=none cterm=none ctermbg=0 gui=none guibg=#B50DB9
 hi CursorColumn term=none cterm=none ctermbg=0 gui=none guibg=#B50DB9
@@ -400,19 +401,23 @@ endfunction
 " TODO doesn't seem 100% reliable (eg. C-u, C-d don't toggle it)
 " from: http://vim.wikia.com/wiki/Highlight_cursor_line_after_cursor_jump
 function! s:Cursor_Moved()
-    let cur_pos = line('.')
-    if g:last_pos == 0
+    let cur_screen_pos = winline()
+    let cur_file_pos = line('.')
+    if g:last_file_pos == 0 || g:last_file_pos == 0
         setlocal cursorline
-        let g:last_pos = cur_pos
+        let g:last_screen_pos = cur_screen_pos
+        let g:last_file_pos = cur_file_pos
         return
     endif
-    let diff = g:last_pos - cur_pos
-    if diff >= 1 || diff <= -1
+    let sdiff = g:last_screen_pos - cur_screen_pos
+    let fdiff = g:last_file_pos - cur_file_pos
+    if sdiff >= 1 || sdiff <= -1 || fdiff >= 1 || fdiff <= -1
         setlocal cursorline
     else
         setlocal nocursorline
     endif
-    let g:last_pos = cur_pos
+    let g:last_screen_pos = cur_screen_pos
+    let g:last_file_pos = cur_file_pos
 endfunction
 
 " A visual search mode function. Searches for the current selection
