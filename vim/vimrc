@@ -59,7 +59,7 @@ autocmd FileType snippet set sts=8 sw=8 noet
 autocmd FileType haskell set ts=2 sts=2 sw=2
 
 " highlight error logging functions
-hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red
+hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red ctermbg=black
 
 " Change some highlight colours
 hi Search term=bold cterm=bold ctermfg=black ctermbg=green
@@ -229,7 +229,7 @@ inoremap <expr> >  strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">
 imap <C-e> <Esc>:exec "normal f" . leavechar<CR>a
 
 " Close braces and put cursor on a blank line between them
-inoremap { {<CR><BS>}<Esc>ko
+"inoremap { {<CR><BS>}<Esc>ko
 
 
 " toggle hlsearch
