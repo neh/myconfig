@@ -46,6 +46,8 @@ autocmd BufReadPost quickfix setlocal nowrap
 autocmd BufRead,BufNewFile COMMIT_EDITMSG setf git
 autocmd BufNewFile,BufRead *.erb setf eruby
 autocmd BufRead,BufNewFile *.snippet? set filetype=snippet
+autocmd BufRead,BufNewFile *.mustache set filetype=mustache
+autocmd BufRead,BufNewFile *.ms set filetype=mustache
 " some files need real tabs
 autocmd FileType python set noexpandtab
 autocmd FileType make set noexpandtab
