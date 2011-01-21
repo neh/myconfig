@@ -45,11 +45,9 @@ URxvt.color15: #EEEEEC
 !URxvt*keysym.C-e: 0xff56
 
 !url yanking from urxvt
-!URxvt.keysym.C-apostrophe: perl:mark-yank-urls:activate_mark_mode
-URxvt.underlineURLs: true
-URxvt.perl-lib: /home/nathan/.urxvt/
-URxvt.perl-ext: selection,mark-yank-urls
-URxvt.urlLauncher: firefox
+URxvt.perl-ext-common: default,matcher
+URxvt.urlLauncher: xdg-open
+URxvt.matcher.button: 1
 
 
 !!! Xterm settings
