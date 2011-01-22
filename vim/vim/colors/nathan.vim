@@ -18,13 +18,7 @@ if version > 580
         syntax reset
     endif
 endif
-let g:colors_name="molokai"
-
-if exists("g:molokai_original")
-    let s:molokai_original = g:molokai_original
-else
-    let s:molokai_original = 0
-endif
+let g:colors_name="nathan"
 
 
 hi Boolean         guifg=#AE81FF
@@ -183,7 +177,7 @@ if &t_Co > 255
 
    hi VertSplit       ctermfg=244 ctermbg=232   cterm=bold
    hi VisualNOS                   ctermbg=238
-   hi Visual                      ctermbg=235
+   hi Visual                      ctermbg=237
    hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
    hi WildMenu        ctermfg=81  ctermbg=16
 
