@@ -20,7 +20,7 @@ URxvt*searchable-scrollback: CS-s
 URxvt.cutchars: "()*,<>[]{}|'
 URxvt*secondaryScroll: true
 URxvt.urgentOnBell: true
-URxvt*termName: rxvt-256
+URxvt*termName: rxvt-256color
 
 !Tango style colors
 !URxvt.color0: #2E3436
