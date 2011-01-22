@@ -385,7 +385,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask,                 xK_f     ), sendMessage ToggleLayout )
 
-  , ((modMask .|. shiftMask,   xK_q     ), io (exitWith ExitSuccess))
+  , ((modMask .|. shiftMask,   xK_q     ), spawn "gnome-session-save --gui --logout-dialog")
   , ((modMask,                 xK_q     ), spawn "xmonad --recompile && xmonad --restart")
   ]
   ++
@@ -435,7 +435,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 button6     =  6 :: Button
 button7     =  7 :: Button
---button8     =  8 :: Button
+button8     =  8 :: Button
 button9     =  9 :: Button
 myMouse (XConfig {XMonad.modMask = modMask}) = M.fromList $
   [ ((modMask, button1), (\w -> focus w >> mouseMoveWindow w))
@@ -448,7 +448,6 @@ myMouse (XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask .|. controlMask, button2), (\w -> focus w >> kill1))
   , ((modMask .|. controlMask, button4), (\_ -> B.focusUp))
   , ((modMask .|. controlMask, button5), (\_ -> B.focusDown))
-  --, ((0, button8), (\_ -> toggleWS))
   , ((0, button9), (\_ -> toggleWS))
   , ((modMask .|. shiftMask, button4), (\_ -> windows W.swapUp))
   , ((modMask .|. shiftMask, button5), (\_ -> windows W.swapDown))
