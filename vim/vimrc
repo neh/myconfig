@@ -76,6 +76,9 @@ hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
 hi Pmenu term=none cterm=none ctermfg=gray ctermbg=black
 hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=green
 
+" make special chars (tabs, trailing spaces, etc) barely visible
+hi NonText cterm=none ctermfg=237
+hi SpecialKey cterm=none ctermfg=237
 
 """ Filetype specific commands
 
