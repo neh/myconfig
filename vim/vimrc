@@ -58,6 +58,8 @@ autocmd FileType javascript set ts=4 sts=4 sw=4
 autocmd FileType snippet set sts=8 sw=8 noet
 autocmd FileType haskell set ts=2 sts=2 sw=2
 
+autocmd FileType html,xml setlocal matchpairs+=<:>
+
 " highlight error logging functions
 hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red ctermbg=black
 
@@ -78,7 +80,7 @@ hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=green
 
 " make special chars (tabs, trailing spaces, etc) barely visible
 hi NonText cterm=none ctermfg=237
-hi SpecialKey cterm=none ctermfg=237
+hi SpecialKey cterm=bold ctermfg=235
 
 """ Filetype specific commands
 
@@ -141,7 +143,6 @@ set smarttab
 set incsearch
 set hlsearch
 
-set matchpairs+=<:>
 set showmatch
 set matchtime=2
 
@@ -164,7 +165,7 @@ set backupdir=~/.vim/backup
 set directory=~/.vim/backup
 
 " show trailing whitespace
-set list listchars=tab:⇨\ ,trail:·
+set list listchars=tab:⇥\ ,trail:·
 
 " highlight the current line (all the way to the right edge) and column
 autocmd CursorMoved,CursorMovedI * call s:Cursor_Moved()
@@ -222,7 +223,7 @@ vmap <M-n> :m'>+<cr>`<my`>mzgv`yo`z
 " Auto-close various pair chars.
 inoremap        (  ()<Esc>:let leavechar=")"<CR>i
 inoremap        [  []<Esc>:let leavechar="]"<CR>i
-"inoremap        {  {}<Esc>:let leavechar="}"<CR>i
+inoremap        {  {}<Esc>:let leavechar="}"<CR>i
 inoremap        <  <><Esc>:let leavechar=">"<CR>i
 " Handle empty pairs (by not closing them, just move cursor right).
 inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
@@ -331,7 +332,7 @@ nmap <C-p> :LustyJugglePrevious<cr>
 nmap <Leader>f :LustyFilesystemExplorer<cr>
 nmap <Leader>h :LustyFilesystemExplorerFromHere<cr>
 nmap <Leader>e :LustyBufferExplorer<cr>
-nmap <Leader>gb :LustyBufferGrep<cr>
+vmap <Leader>gb :LustyBufferGrep<cr>
 let g:LustyExplorerSuppressRubyWarning = 1
 
 " Ack config
