@@ -43,20 +43,21 @@ autocmd BufReadPost quickfix setlocal nowrap
 """ Filetype specific options
 
 " add proper filetype to files that need it
-autocmd BufRead,BufNewFile COMMIT_EDITMSG setf git
-autocmd BufNewFile,BufRead *.erb setf eruby
-autocmd BufRead,BufNewFile *.snippet? set filetype=snippet
-autocmd BufRead,BufNewFile *.mustache set filetype=mustache
-autocmd BufRead,BufNewFile *.ms set filetype=mustache
+autocmd BufRead,BufNewFile COMMIT_EDITMSG setlocal filetype git
+autocmd BufNewFile,BufRead *.erb setlocal filetype eruby
+autocmd BufRead,BufNewFile *.snippet? setlocal filetype=snippet
+autocmd BufRead,BufNewFile *.mustache setlocal filetype=mustache
+autocmd BufRead,BufNewFile *.ms setlocal filetype=mustache
 " some files need real tabs
-autocmd FileType python set noexpandtab
-autocmd FileType make set noexpandtab
-autocmd FileType snippet set noexpandtab
+autocmd FileType python setlocal noexpandtab
+autocmd FileType make setlocal noexpandtab
+autocmd FileType snippet setlocal noexpandtab
 " some files should have different tabsizes and other options
-autocmd FileType html set ts=2 sts=2 sw=2
-autocmd FileType javascript set ts=4 sts=4 sw=4
-autocmd FileType snippet set sts=8 sw=8 noet
-autocmd FileType haskell set ts=2 sts=2 sw=2
+autocmd FileType css setlocal ts=2 sts=2 sw=2 noet
+autocmd FileType html setlocal ts=2 sts=2 sw=2
+autocmd FileType javascript setlocal ts=4 sts=4 sw=4
+autocmd FileType snippet setlocal sts=8 sw=8 noet
+autocmd FileType haskell setlocal ts=2 sts=2 sw=2
 
 autocmd FileType html,xml setlocal matchpairs+=<:>
 
