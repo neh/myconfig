@@ -83,6 +83,10 @@ hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=green
 hi NonText cterm=none ctermfg=237
 hi SpecialKey cterm=bold ctermfg=235
 
+" highlight lines longer than 80 chars
+hi OverLength ctermbg=236
+match OverLength /\%80v.\+/
+
 """ Filetype specific commands
 
 " re-read vimrc after writing it
