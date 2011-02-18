@@ -53,9 +53,9 @@ autocmd FileType python setlocal noexpandtab
 autocmd FileType make setlocal noexpandtab
 autocmd FileType snippet setlocal noexpandtab
 " some files should have different tabsizes and other options
-autocmd FileType css setlocal ts=2 sts=2 sw=2 noet
-autocmd FileType html setlocal ts=2 sts=2 sw=2
-autocmd FileType javascript setlocal ts=4 sts=4 sw=4
+autocmd FileType css setlocal ts=4 sts=4 sw=4 noet
+autocmd FileType html setlocal ts=4 sts=4 sw=4 noet
+autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noet
 autocmd FileType snippet setlocal sts=8 sw=8 noet
 autocmd FileType haskell setlocal ts=2 sts=2 sw=2
 
