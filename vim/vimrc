@@ -84,7 +84,7 @@ hi NonText cterm=none ctermfg=237
 hi SpecialKey cterm=bold ctermfg=235
 
 " highlight lines longer than 80 chars
-hi OverLength ctermbg=236
+hi OverLength ctermbg=235
 match OverLength /\%80v.\+/
 
 """ Filetype specific commands
