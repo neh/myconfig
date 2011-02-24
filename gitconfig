@@ -8,3 +8,5 @@
     st = status
     listem = diff --name-status
     diffeol = diff --ignore-space-at-eol
+[core]
+	excludesfile = ~/.gitexcludes

@@ -6,6 +6,7 @@ die "Nothing to do.\n" unless @ARGV;
 
 my $config_dir = $Bin;
 my $files = {'cli' => {'gitconfig' => '.gitconfig',
+                       'gitexcludes' => '.gitexcludes',
                        'screenrc' => '.screenrc',
                        'zsh/zshrc' => '.zshrc',
                        'zsh/zshenv' => '.zshenv',
