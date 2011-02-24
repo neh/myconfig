@@ -38,7 +38,7 @@ runtime! ftplugin/man.vim
 "set titlestring=%<%{hostname()}:%F\ %(%m\ %)[%l/%L\ %P]\ %y\ VIM
 " new titlestring (short for screen window names)
 "autocmd BufEnter * let &titlestring = hostname().expand(":%t")
-autocmd BufEnter * let &titlestring = expand("%f")
+autocmd BufEnter * let &titlestring = expand("%:t")
 
 " No wrapping for the quickfix window
 autocmd BufReadPost quickfix setlocal nowrap
