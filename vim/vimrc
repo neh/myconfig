@@ -90,6 +90,11 @@ hi SpecialKey cterm=bold ctermfg=235
 hi OverLength ctermbg=235
 match OverLength /\%80v.\+/
 
+" customize indent level highlight colours
+let g:indent_guides_auto_colors = 0
+hi IndentGuidesEven ctermbg=234 ctermfg=235
+hi IndentGuidesOdd ctermbg=235 ctermfg=236
+
 """ Filetype specific commands
 
 " re-read vimrc after writing it

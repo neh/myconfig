@@ -1,3 +1,6 @@
 [submodule "vim/vim/bundle/vim-indent-guides"]
 	path = vim/vim/bundle/vim-indent-guides
 	url = git://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "vim/vim/bundle/fugitive"]
+	path = vim/vim/bundle/fugitive
+	url = git://github.com/tpope/vim-fugitive.git
