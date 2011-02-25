@@ -37,3 +37,6 @@
 [submodule "vim/vim/bundle/easytags"]
 	path = vim/vim/bundle/easytags
 	url = git://github.com/vim-scripts/easytags.vim.git
+[submodule "vim/vim/bundle/align"]
+	path = vim/vim/bundle/align
+	url = git://github.com/vim-scripts/Align.git

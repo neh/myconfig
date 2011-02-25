@@ -269,10 +269,10 @@ nmap <Leader>a vii:Align
 vmap <Leader>a :Align 
 nmap <Leader>a: vii:Align :<cr>
 vmap <Leader>a: :Align :<cr>
-nmap <Leader>a= vii:Align =<cr>
-vmap <Leader>a= :Align =<cr>
-nmap <Leader>a=> vii:Align =><cr>
-vmap <Leader>a=> :Align =><cr>
+"nmap <Leader>a= vii:Align =<cr>
+"vmap <Leader>a= :Align =<cr>
+"nmap <Leader>a=> vii:Align =><cr>
+"vmap <Leader>a=> :Align =><cr>
 
 " Source .vimrc
 nmap <Leader>VS :so ~/.vimrc<cr>
