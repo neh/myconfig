@@ -1,15 +1,9 @@
-'Tail_Height'	tail.txt	/*'Tail_Height'*
 :MkVimball	pi_vimball.txt	/*:MkVimball*
 :RmVimball	pi_vimball.txt	/*:RmVimball*
-:STail	tail.txt	/*:STail*
-:TabTail	tail.txt	/*:TabTail*
-:Tail	tail.txt	/*:Tail*
 :UseVimball	pi_vimball.txt	/*:UseVimball*
 :VimballList	pi_vimball.txt	/*:VimballList*
-:vim-tail.zsh	tail.txt	/*:vim-tail.zsh*
 GetLatestVimScripts	pi_getscript.txt	/*GetLatestVimScripts*
 GetLatestVimScripts-copyright	pi_getscript.txt	/*GetLatestVimScripts-copyright*
-Tail.txt	tail.txt	/*Tail.txt*
 Vimball-copyright	pi_vimball.txt	/*Vimball-copyright*
 YRClear	yankring.txt	/*YRClear*
 YRClear-example	yankring.txt	/*YRClear-example*
@@ -90,10 +84,6 @@ psc_statement_different_from_type	ps_color.txt	/*psc_statement_different_from_ty
 psc_style	ps_color.txt	/*psc_style*
 psc_use_default_for_cterm	ps_color.txt	/*psc_use_default_for_cterm*
 pscolor	ps_color.txt	/*pscolor*
-tail-about	tail.txt	/*tail-about*
-tail-commands	tail.txt	/*tail-commands*
-tail-configure	tail.txt	/*tail-configure*
-tail-mappings	tail.txt	/*tail-mappings*
 vba	pi_vimball.txt	/*vba*
 vimball	pi_vimball.txt	/*vimball*
 vimball-contents	pi_vimball.txt	/*vimball-contents*
