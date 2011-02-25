@@ -34,3 +34,6 @@
 [submodule "vim/vim/bundle/autocomplpop"]
 	path = vim/vim/bundle/autocomplpop
 	url = git://github.com/vim-scripts/AutoComplPop.git
+[submodule "vim/vim/bundle/easytags"]
+	path = vim/vim/bundle/easytags
+	url = git://github.com/vim-scripts/easytags.vim.git
