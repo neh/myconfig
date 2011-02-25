@@ -371,19 +371,6 @@ let g:yankring_enabled = 0
 let g:yankring_replace_n_pkey = '<Leader>yp'
 let g:yankring_replace_n_nkey = '<Leader>yn'
 
-""" Taglist config
-nmap <Leader>,t :TlistToggle<CR>
-nmap <Leader>,a :TlistAddFiles
-nmap <Leader>,r :TlistAddFilesRecursive .
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_File_Fold_Auto_Close = 1
-let Tlist_Compact_Format = 1
-let Tlist_Use_Right_Window = 0
-let Tlist_Inc_Winwidth = 0
-let Tlist_Close_On_Select = 0
-let Tlist_Process_File_Always = 1
-
 
 
 """ Functions
