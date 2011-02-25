@@ -11,16 +11,20 @@ endif
 
 set background=dark
 " Set up color settings and scheme based on terminal type
-if $TERM =~ '^screen-bce' || $TERM =~ '^rxvt-256' || $TERM =~ '^xterm-256'
-    set t_Co=256
+if has('gui_running')
     colo molokai
-elseif $TERM =~ '^rxvt'
-    set t_Co=88
-    colo inkpot
-elseif $TERM =~ '^linux'
-    set t_Co=8
 else
-    set t_Co=16
+    if $TERM =~ '^screen-bce' || $TERM =~ '^rxvt-256' || $TERM =~ '^xterm-256'
+        set t_Co=256
+        colo molokai
+    elseif $TERM =~ '^rxvt'
+        set t_Co=88
+        colo inkpot
+    elseif $TERM =~ '^linux'
+        set t_Co=8
+    else
+        set t_Co=16
+    endif
 endif
 
 
@@ -185,8 +189,8 @@ autocmd CursorMoved,CursorMovedI * call s:Cursor_Moved()
 let g:last_screen_pos = 0
 let g:last_file_pos = 0
 " define highlighting colours for cursor line/column
-hi CursorLine term=none cterm=none ctermbg=0 gui=none guibg=#B50DB9
-hi CursorColumn term=none cterm=none ctermbg=0 gui=none guibg=#B50DB9
+hi CursorLine term=none cterm=none ctermbg=0 gui=none guibg=#333333
+hi CursorColumn term=none cterm=none ctermbg=0 gui=none guibg=#333333
 
 
 """ Indent options
