@@ -180,8 +180,6 @@ alignmaps	Align.txt	/*alignmaps*
 alignusage	Align.txt	/*alignusage*
 any-item-example	yankring.txt	/*any-item-example*
 autocomplpop	acp.txt	/*autocomplpop*
-cs	surround.txt	/*cs*
-ds	surround.txt	/*ds*
 g:SuperTabCompletionContexts	supertab.txt	/*g:SuperTabCompletionContexts*
 g:SuperTabContextDefaultCompletionType	supertab.txt	/*g:SuperTabContextDefaultCompletionType*
 g:SuperTabCrMapping	supertab.txt	/*g:SuperTabCrMapping*
@@ -244,8 +242,6 @@ glvs-options	pi_getscript.txt	/*glvs-options*
 glvs-plugins	pi_getscript.txt	/*glvs-plugins*
 glvs-usage	pi_getscript.txt	/*glvs-usage*
 iI	indent-object.txt	/*iI*
-i_CTRL-G_S	surround.txt	/*i_CTRL-G_S*
-i_CTRL-G_s	surround.txt	/*i_CTRL-G_s*
 idntobj-about	indent-object.txt	/*idntobj-about*
 idntobj-blanklines	indent-object.txt	/*idntobj-blanklines*
 idntobj-introduction	indent-object.txt	/*idntobj-introduction*
@@ -301,14 +297,6 @@ supertab-midword	supertab.txt	/*supertab-midword*
 supertab-options	supertab.txt	/*supertab-options*
 supertab-usage	supertab.txt	/*supertab-usage*
 supertab.txt	supertab.txt	/*supertab.txt*
-surround	surround.txt	/*surround*
-surround-author	surround.txt	/*surround-author*
-surround-customizing	surround.txt	/*surround-customizing*
-surround-issues	surround.txt	/*surround-issues*
-surround-mappings	surround.txt	/*surround-mappings*
-surround-replacements	surround.txt	/*surround-replacements*
-surround-targets	surround.txt	/*surround-targets*
-surround.txt	surround.txt	/*surround.txt*
 taglist-commands	taglist.txt	/*taglist-commands*
 taglist-debug	taglist.txt	/*taglist-debug*
 taglist-extend	taglist.txt	/*taglist-extend*
@@ -337,9 +325,6 @@ vimball-extract	pi_vimball.txt	/*vimball-extract*
 vimball-history	pi_vimball.txt	/*vimball-history*
 vimball-intro	pi_vimball.txt	/*vimball-intro*
 vimball-manual	pi_vimball.txt	/*vimball-manual*
-vs	surround.txt	/*vs*
-yS	surround.txt	/*yS*
-ySS	surround.txt	/*ySS*
 yankring	yankring.txt	/*yankring*
 yankring-commands	yankring.txt	/*yankring-commands*
 yankring-configure	yankring.txt	/*yankring-configure*
@@ -355,5 +340,3 @@ yankring-visual-example	yankring.txt	/*yankring-visual-example*
 yankring-window	yankring.txt	/*yankring-window*
 yankring-window-example	yankring.txt	/*yankring-window-example*
 yankring.txt	yankring.txt	/*yankring.txt*
-ys	surround.txt	/*ys*
-yss	surround.txt	/*yss*
