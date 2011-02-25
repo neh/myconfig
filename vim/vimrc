@@ -287,7 +287,7 @@ nmap <Leader>do! :diffoff!<cr>
 
 " Use C-l instead of C-y to insert the first option in the auto completion 
 " popup (useful with autocomplpop plugin)
-inoremap <C-l> <C-R>=pumvisible() ? "\<lt>C-y>" : "\<lt>C-l>"<cr>
+inoremap <Nul> <C-R>=pumvisible() ? "\<lt>C-y>" : "\<lt>C-l>"<cr>
 
 
 
