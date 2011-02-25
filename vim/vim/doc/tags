@@ -28,14 +28,10 @@
 'snippets'	snipMate.txt	/*'snippets'*
 .snippet	snipMate.txt	/*.snippet*
 .snippets	snipMate.txt	/*.snippets*
-:Ack	ack.txt	/*:Ack*
-:AckAdd	ack.txt	/*:AckAdd*
 :AcpDisable	acp.txt	/*:AcpDisable*
 :AcpEnable	acp.txt	/*:AcpEnable*
 :AcpLock	acp.txt	/*:AcpLock*
 :AcpUnlock	acp.txt	/*:AcpUnlock*
-:LAck	ack.txt	/*:LAck*
-:LAckAdd	ack.txt	/*:LAckAdd*
 :MkVimball	pi_vimball.txt	/*:MkVimball*
 :RmVimball	pi_vimball.txt	/*:RmVimball*
 :STail	tail.txt	/*:STail*
@@ -97,9 +93,6 @@ YRYankCount	yankring.txt	/*YRYankCount*
 YRYankRange	yankring.txt	/*YRYankRange*
 YRYankRange-example	yankring.txt	/*YRYankRange-example*
 aI	indent-object.txt	/*aI*
-ack	ack.txt	/*ack*
-ack-author	ack.txt	/*ack-author*
-ack.txt	ack.txt	/*ack.txt*
 acp	acp.txt	/*acp*
 acp-about	acp.txt	/*acp-about*
 acp-author	acp.txt	/*acp-author*
