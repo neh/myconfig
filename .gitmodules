@@ -7,3 +7,6 @@
 [submodule "vim/vim/bundle/autoclose"]
 	path = vim/vim/bundle/autoclose
 	url = git://github.com/vim-scripts/AutoClose.git
+[submodule "vim/vim/bundle/nerdtree"]
+	path = vim/vim/bundle/nerdtree
+	url = git://github.com/scrooloose/nerdtree.git
