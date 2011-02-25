@@ -85,7 +85,6 @@ YRToggle	yankring.txt	/*YRToggle*
 YRYankCount	yankring.txt	/*YRYankCount*
 YRYankRange	yankring.txt	/*YRYankRange*
 YRYankRange-example	yankring.txt	/*YRYankRange-example*
-aI	indent-object.txt	/*aI*
 acp	acp.txt	/*acp*
 acp-about	acp.txt	/*acp-about*
 acp-author	acp.txt	/*acp-author*
@@ -100,7 +99,6 @@ acp-snipMate	acp.txt	/*acp-snipMate*
 acp-thanks	acp.txt	/*acp-thanks*
 acp-usage	acp.txt	/*acp-usage*
 acp.txt	acp.txt	/*acp.txt*
-ai	indent-object.txt	/*ai*
 align	Align.txt	/*align*
 align-align	Align.txt	/*align-align*
 align-codepoint	Align.txt	/*align-codepoint*
@@ -241,13 +239,6 @@ glvs-install	pi_getscript.txt	/*glvs-install*
 glvs-options	pi_getscript.txt	/*glvs-options*
 glvs-plugins	pi_getscript.txt	/*glvs-plugins*
 glvs-usage	pi_getscript.txt	/*glvs-usage*
-iI	indent-object.txt	/*iI*
-idntobj-about	indent-object.txt	/*idntobj-about*
-idntobj-blanklines	indent-object.txt	/*idntobj-blanklines*
-idntobj-introduction	indent-object.txt	/*idntobj-introduction*
-idntobj-objects	indent-object.txt	/*idntobj-objects*
-ii	indent-object.txt	/*ii*
-indent-object.txt	indent-object.txt	/*indent-object.txt*
 multiple-items-example	yankring.txt	/*multiple-items-example*
 pi_getscript.txt	pi_getscript.txt	/*pi_getscript.txt*
 pi_vimball.txt	pi_vimball.txt	/*pi_vimball.txt*

@@ -22,3 +22,6 @@
 [submodule "vim/vim/bundle/surround"]
 	path = vim/vim/bundle/surround
 	url = git://github.com/tpope/vim-surround.git
+[submodule "vim/vim/bundle/indent-object"]
+	path = vim/vim/bundle/indent-object
+	url = git://github.com/michaeljsmith/vim-indent-object.git
