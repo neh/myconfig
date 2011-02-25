@@ -430,11 +430,11 @@ function! VisualSearch(direction) range
     let l:pattern = substitute(l:pattern, "\n$", "", "")
 
     if a:direction == 'b'
-        execute "normal ?" . l:pattern . "^M"
+        execute "normal ?" . l:pattern . ""
     elseif a:direction == 'gf'
-        execute Ack(l:pattern)
+        execute "normal :Ack " . l:pattern . ""
     elseif a:direction == 'f'
-        execute "normal /" . l:pattern . "^M"
+        execute "normal /" . l:pattern . ""
     endif
 
     let @/ = l:pattern
