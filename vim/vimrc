@@ -12,11 +12,11 @@ endif
 set background=dark
 " Set up color settings and scheme based on terminal type
 if has('gui_running')
-    colo molokai
+    colo mustang
 else
     if $TERM =~ '^screen-bce' || $TERM =~ '^rxvt-256' || $TERM =~ '^xterm-256'
         set t_Co=256
-        colo molokai
+        colo mustang
     elseif $TERM =~ '^rxvt'
         set t_Co=88
         colo inkpot
