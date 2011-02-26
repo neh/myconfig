@@ -310,6 +310,8 @@ inoremap <Nul> <C-R>=pumvisible() ? "\<lt>C-y>" : "\<lt>C-l>"<cr>
 
 " Gundo
 nnoremap <F3> :GundoToggle<CR>
+let g:gundo_map_move_older="t"
+let g:gundo_map_move_newer="n"
 
 " Autoclose
 nmap <Leader>acm <Plug>ToggleAutoCloseMappings
