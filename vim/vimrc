@@ -297,6 +297,9 @@ inoremap <Nul> <C-R>=pumvisible() ? "\<lt>C-y>" : "\<lt>C-l>"<cr>
 
 """ Plugin configs and keymaps
 
+" Gundo
+nnoremap <F3> :GundoToggle<CR>
+
 " Autoclose
 nmap <Leader>acm <Plug>ToggleAutoCloseMappings
 
