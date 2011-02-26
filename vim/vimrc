@@ -308,6 +308,11 @@ inoremap <Nul> <C-R>=pumvisible() ? "\<lt>C-y>" : "\<lt>C-l>"<cr>
 
 """ Plugin configs and keymaps
 
+" Space
+let g:space_no_character_movements = 1
+let g:space_disable_select_mode = 1
+let g:space_no_search = 1
+
 " Gundo
 nnoremap <F3> :GundoToggle<CR>
 let g:gundo_map_move_older="t"

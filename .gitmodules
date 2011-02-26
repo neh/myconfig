@@ -46,3 +46,6 @@
 [submodule "vim/vim/bundle/gundo"]
 	path = vim/vim/bundle/gundo
 	url = git://github.com/neh/gundo.vim.git
+[submodule "vim/vim/bundle/space"]
+	path = vim/vim/bundle/space
+	url = git://github.com/spiiph/vim-space.git
