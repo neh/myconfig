@@ -91,8 +91,8 @@ hi NonText cterm=none ctermfg=237
 hi SpecialKey cterm=bold ctermfg=235
 
 " highlight lines longer than 80 chars
-hi OverLength ctermbg=235
-match OverLength /\%80v.\+/
+hi OverLength ctermbg=234
+match OverLength /\%81v.\+/
 
 " customize indent level highlight colours
 let g:indent_guides_auto_colors = 0
@@ -137,7 +137,7 @@ set laststatus=2
 set visualbell t_vb=
 set formatoptions+=tcroqnw
 set ttyfast
-set history=50
+set history=500
 set wrap
 set linebreak
 set showcmd
@@ -165,6 +165,7 @@ set matchtime=2
 
 set ignorecase
 set smartcase
+set gdefault
 
 set scrolloff=3
 set sidescroll=1
@@ -184,12 +185,20 @@ set directory=~/.vim/backup
 " show trailing whitespace
 set list listchars=tab:⇥\ ,trail:·
 
+if v:version >= '703'
+    set relativenumber
+    hi ColorColumn ctermbg=234 guibg=233
+    set cc=+3
+    set undodir=~/.vim/undo
+    set undofile
+endif
+
 " highlight the current line (all the way to the right edge) and column
 autocmd CursorMoved,CursorMovedI * call s:Cursor_Moved()
 let g:last_screen_pos = 0
 let g:last_file_pos = 0
 " define highlighting colours for cursor line/column
-hi CursorLine term=none cterm=none ctermbg=0 gui=none guibg=#333333
+hi CursorLine term=none cterm=none ctermbg=234 gui=none guibg=#333333
 hi CursorColumn term=none cterm=none ctermbg=0 gui=none guibg=#333333
 
 
@@ -243,7 +252,9 @@ vmap <M-n> :m'>+<cr>`<my`>mzgv`yo`z
 "inoremap <expr> >  strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 
 " toggle hlsearch
-"map <Leader>h :set hls!<bar>set hls?<CR>
+"map <Leader><space> :set hls!<bar>set hls?<CR>
+" quickly turn of search highlighting
+map <Leader><space> :noh<cr>
 
 " Load vimrc in a split window and switch to it
 nmap <Leader>V :sp ~/.vimrc<cr><C-W>w
