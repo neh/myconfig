@@ -43,6 +43,3 @@
 [submodule "vim/vim/bundle/tail"]
 	path = vim/vim/bundle/tail
 	url = git://github.com/vim-scripts/Tail-Bundle.git
-[submodule "vim/vim/bundle/gundo"]
-	path = vim/vim/bundle/gundo
-	url = git://github.com/sjl/gundo.vim.git
