@@ -41,7 +41,6 @@ if [ "$TERM" != "dumb" ]; then
     eval "`dircolors -b`"
     alias ls='ls --color=auto -h'
 fi
-alias vim='vim -p'
 alias m4a2ogg='for nam in *.m4a; do nice mplayer -vo null -vc null -ao pcm:fast "$nam" -ao pcm:file="$nam.wav" && nice oggenc -q5 "$nam.wav" -o "$(basename "$nam" .m4a).ogg"; rm "$nam.wav"; done'
 alias au='sudo aptitude update'
 alias afu='sudo aptitude full-upgrade'
