@@ -49,3 +49,6 @@
 [submodule "vim/vim/bundle/gundo"]
 	path = vim/vim/bundle/gundo
 	url = git@github.com:neh/gundo.vim.git
+[submodule "vim/vim/bundle/lusty"]
+	path = vim/vim/bundle/lusty
+	url = git://github.com/sjbach/lusty.git
