@@ -1,7 +1,9 @@
+"==============================================================================
+" Initial setup
+
 set nocompatible
-
-
-""" Terminal specific settings
+" Clear autocmds
+autocmd!
 
 " Make vim update screen window title
 if &term =~ "^screen"
@@ -27,86 +29,52 @@ else
     endif
 endif
 
-
-autocmd!
-
+" Set up pathogen for loading plugins
 filetype off
 let g:pathogen_disabled = ["gundo"]
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
+
+" Enable filetype detection and syntax highlighting
 filetype plugin indent on
 syntax on
 
+" Set titlestring when switching buffers (kept short for screen window names)
+autocmd BufEnter * let &titlestring = expand("%:t")
+
+" Set up man page viewing
+let $PAGER=''
 runtime! ftplugin/man.vim
 
-" New titlestring (kept short for screen window names)
-autocmd BufEnter * let &titlestring = expand("%:t")
+
+
+"==============================================================================
+" Filetype specific options
+
+" add filetype to files that need it
+"autocmd BufRead,BufNewFile COMMIT_EDITMSG setlocal filetype git
+autocmd BufRead,BufNewFile *.erb setlocal filetype eruby
+autocmd BufRead,BufNewFile *.snippet? setlocal filetype=snippet sts=8 sw=8 noet
+autocmd BufRead,BufNewFile *.mustache,*.ms setlocal filetype=mustache
+
+" some files need real tabs (I default to spaces for indentation)
+autocmd FileType make setlocal noexpandtab
+autocmd FileType snippet setlocal noexpandtab
+
+" some files should have different tabsizes and other options
+autocmd FileType css,html,javascript setlocal noet
+
+autocmd FileType html,xml setlocal matchpairs+=<:>
 
 " No wrapping for the quickfix window
 autocmd BufReadPost quickfix setlocal nowrap
 
-""" Filetype specific options
-
-" add proper filetype to files that need it
-autocmd BufRead,BufNewFile COMMIT_EDITMSG setlocal filetype git
-autocmd BufNewFile,BufRead *.erb setlocal filetype eruby
-autocmd BufRead,BufNewFile *.snippet? setlocal filetype=snippet
-autocmd BufRead,BufNewFile *.mustache setlocal filetype=mustache
-autocmd BufRead,BufNewFile *.ms setlocal filetype=mustache
-" some files need real tabs
-autocmd FileType python setlocal noexpandtab
-autocmd FileType make setlocal noexpandtab
-autocmd FileType snippet setlocal noexpandtab
-" some files should have different tabsizes and other options
-autocmd FileType css setlocal ts=4 sts=4 sw=4 noet
-autocmd FileType html setlocal ts=4 sts=4 sw=4 noet
-autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noet
-autocmd FileType snippet setlocal sts=8 sw=8 noet
-autocmd FileType haskell setlocal ts=2 sts=2 sw=2
-
-autocmd FileType html,xml setlocal matchpairs+=<:>
-
-" highlight error logging functions
-hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red ctermbg=black
-
-" Change some highlight colours
-hi Search term=bold cterm=bold ctermfg=black ctermbg=green
-hi IncSearch term=bold cterm=bold ctermfg=yellow ctermbg=red
-hi Todo term=bold cterm=bold ctermfg=red ctermbg=yellow
-
-" Use my own diff highlighting regardless of colour scheme
-hi DiffAdd term=none cterm=none ctermfg=black ctermbg=green
-hi DiffChange term=none cterm=none ctermfg=black ctermbg=blue
-hi DiffDelete term=none cterm=none ctermfg=black ctermbg=red
-hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
-
-" custom popup menu colouring
-hi Pmenu term=none cterm=none ctermfg=gray ctermbg=black
-hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=green
-
-" make special chars (tabs, trailing spaces, etc) barely visible
-hi NonText cterm=none ctermfg=237
-hi SpecialKey cterm=bold ctermfg=235
-
-" highlight lines longer than 80 chars
-hi OverLength ctermbg=234
-match OverLength /\%81v.\+/
-
-" customize indent level highlight colours
-let g:indent_guides_auto_colors = 0
-hi IndentGuidesEven ctermbg=234 ctermfg=235
-hi IndentGuidesOdd ctermbg=235 ctermfg=236
-
-""" Filetype specific commands
-
 " re-read vimrc after writing it
 autocmd BufWritePost \.vimrc :source $HOME/.vimrc
 autocmd BufWritePost */vim/vimrc :source $HOME/.vimrc
+
 " Useful when customizing xterm
 autocmd BufWritePost \.Xdefaults :!xrdb ~/.Xdefaults
-" PHP syntax check (CTRL-L)
-autocmd FileType php noremap <C-L> :!/usr/bin/php -l %<CR>
-
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
@@ -118,11 +86,44 @@ autocmd BufReadPost *
 
 
 
-""" General options
+"==============================================================================
+" Custom highlighting
 
+" Highlight error logging functions (php error_log, js console.log, etc)
+" Terms to be highlighted are defined in ~/.vim/after/syntax/*
+hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red ctermbg=black
+
+" Change some highlight group colours, overriding the colour scheme
+" search terms
+hi Search term=bold cterm=bold ctermfg=black ctermbg=green
+hi IncSearch term=bold cterm=bold ctermfg=yellow ctermbg=red
+" todo
+hi Todo term=bold cterm=bold ctermfg=red ctermbg=yellow
+" popup menu
+hi Pmenu term=none cterm=none ctermfg=gray ctermbg=black
+hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=green
+" diff viewer
+hi DiffAdd term=none cterm=none ctermfg=black ctermbg=green
+hi DiffChange term=none cterm=none ctermfg=black ctermbg=blue
+hi DiffDelete term=none cterm=none ctermfg=black ctermbg=red
+hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
+
+" make special chars (tabs, trailing spaces, etc) barely visible
+hi NonText cterm=none ctermfg=237
+hi SpecialKey cterm=bold ctermfg=235
+
+" highlight lines longer than 80 chars
+hi OverLength ctermbg=234
+match OverLength /\%81v.\+/
+
+
+
+"==============================================================================
+" General options
+
+let mapleader=","
 set encoding=utf-8
 set fileencodings=utf-8
-let mapleader=","
 set ruler
 set pastetoggle=<F12>
 set title
@@ -142,7 +143,7 @@ set timeoutlen=500
 set autoindent
 set smartindent
 
-set tabstop=8
+set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set shiftround
@@ -168,13 +169,14 @@ set wildmenu
 set wildmode=longest,list
 
 set statusline=%f\ %1*%m%r%*%h%w\ %{fugitive#statusline()}%=[%{&ff}\ %{strlen(&fenc)?&fenc:'none'}\ %{&ft}]\ [%LL\ %P\ %l,%v]
+" Highlights modified marker in statusline
 hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
 
 " Put backup/swap files all in one place
 set backupdir=~/.vim/backup
 set directory=~/.vim/backup
 
-" show trailing whitespace
+" Show trailing whitespace and tabs as visible chars
 set list listchars=tab:⇥\ ,trail:·
 
 if v:version >= '703'
@@ -189,18 +191,15 @@ endif
 autocmd CursorMoved,CursorMovedI * call s:Cursor_Moved()
 let g:last_screen_pos = 0
 let g:last_file_pos = 0
-" define highlighting colours for cursor line/column
+" define highlighting colours for cursor line
 hi CursorLine term=none cterm=none ctermbg=234 gui=none guibg=#333333
-hi CursorColumn term=none cterm=none ctermbg=0 gui=none guibg=#333333
 
 
-""" Indent options
-let g:PHP_default_indenting = 0
 
+"==============================================================================
+" Key mappings
 
-""" Key mappings
-
-" A few dvorak adjustments
+" A few dvorak movement adjustments
 noremap s l
 noremap S L
 noremap t gj
@@ -221,35 +220,30 @@ nmap <C-n> :call SwitchWindowOrBuffer('b')<CR>
 nmap <C-t> :call SwitchWindowOrBuffer('f')<CR>
 nmap <F4> <C-W>o
 nmap <F5> <C-W>c
-nmap <F11> <C-W>_
 nmap <F6> <C-W>=
+nmap <F7> <C-W><
 nmap <F8> <C-W>-
 nmap <F9> <C-W>+
-nmap <F7> <C-W><
 nmap <F10> <C-W>>
+nmap <F11> <C-W>_
 
 " No more Ex mode mapping. Do something useful instead.
 map Q gq
 
-" Move a line of text using C-S+[tn]
+" Move a line of text
 " TODO these don't actually work (the mappings, I mean).
 nmap <M-t> mz:m+<cr>`z
 nmap <M-n> mz:m-2<cr>`z
 vmap <M-t> :m'<-2<cr>`>my`<mzgv`yo`z
 vmap <M-n> :m'>+<cr>`<my`>mzgv`yo`z
 
-" Auto-close various pair chars.
-"inoremap        <  <><Esc>:let leavechar=">"<CR>i
-" Handle empty pairs (by not closing them, just move cursor right).
-"inoremap <expr> >  strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
-
-" toggle hlsearch
-"map <Leader><space> :set hls!<bar>set hls?<CR>
-" quickly turn of search highlighting
+" quickly turn off search highlighting
 map <Leader><space> :noh<cr>
 
 " Load vimrc in a split window and switch to it
 nmap <Leader>V :sp ~/.vimrc<cr><C-W>w
+" Source .vimrc
+nmap <Leader>VS :so ~/.vimrc<cr>
 
 " cd to the dir containing the current file
 nmap <Leader>cd :lcd %:h<cr>
@@ -272,20 +266,6 @@ nmap <Leader>cx :cclose<cr>
 nmap <Leader>lo :lopen<cr>
 nmap <Leader>lx :lclose<cr>
 
-" Align convenience maps
-map <Leader>ac :AlignCtrl 
-nmap <Leader>a vii:Align 
-vmap <Leader>a :Align 
-nmap <Leader>a: vii:Align :<cr>
-vmap <Leader>a: :Align :<cr>
-"nmap <Leader>a= vii:Align =<cr>
-"vmap <Leader>a= :Align =<cr>
-"nmap <Leader>a=> vii:Align =><cr>
-"vmap <Leader>a=> :Align =><cr>
-
-" Source .vimrc
-nmap <Leader>VS :so ~/.vimrc<cr>
-
 " Session management maps
 nmap <Leader>SS :mksession! ~/.vim/sessions/
 nmap <Leader>SL :source ~/.vim/sessions/
@@ -298,9 +278,18 @@ nmap <Leader>do! :diffoff!<cr>
 " popup (useful with autocomplpop plugin)
 inoremap <Nul> <C-R>=pumvisible() ? "\<lt>C-y>" : "\<lt>C-l>"<cr>
 
+" Quick PHP syntax check (CTRL-l)
+autocmd FileType php noremap <C-l> :!/usr/bin/php -l %<CR>
 
 
-""" Plugin configs and keymaps
+
+"==============================================================================
+" Plugin configs
+
+" Indent-object
+let g:indent_guides_auto_colors = 0
+hi IndentGuidesEven ctermbg=234 ctermfg=235
+hi IndentGuidesOdd ctermbg=235 ctermfg=236
 
 " Space
 let g:space_no_character_movements = 1
@@ -319,12 +308,12 @@ nmap <Leader>acm <Plug>ToggleAutoCloseMappings
 let g:acp_mappingDriven = 1
 "let g:acp_behaviorSnipmateLength = 1
 
-" Surround plugin
-" Change visual surround mappings so s works for movement again
+" Surround
+" Change visual mode surround mappings so s works for movement again
 vmap <Leader>s <Plug>Vsurround
 vmap <Leader>S <Plug>Vsurround
 
-" NERDTree mappings and configuration
+" NERDTree
 nmap <Leader>nt :NERDTreeToggle<CR>
 nmap <Leader>nm :NERDTreeMirror<CR>
 let g:NERDTreeMapOpenInTab="a"
@@ -337,31 +326,31 @@ let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeAutoCenter=1
 let g:NERDTreeAutoCenterThreshold=6
 
-" SuperTab config
+" SuperTab
 let g:SuperTabMappingForward = '<c-n>'
 let g:SuperTabMappingBackward = '<c-p>'
 let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabLongestEnhanced = 1
 
-" Lusty Juggler config
+" Lusty Juggler
 let g:LustyJugglerShowKeys = 'a'
 let g:LustyJugglerAltTabMode = 1
 let g:LustyJugglerSuppressRubyWarning = 1
 nmap <Leader>b :LustyJuggler<cr>
 nmap <C-p> :LustyJugglePrevious<cr>
 
-" Lusty Explorer config
+" Lusty Explorer
 nmap <Leader>f :LustyFilesystemExplorer<cr>
 nmap <Leader>h :LustyFilesystemExplorerFromHere<cr>
 nmap <Leader>e :LustyBufferExplorer<cr>
 vmap <Leader>gb :LustyBufferGrep<cr>
 let g:LustyExplorerSuppressRubyWarning = 1
 
-" Ack config
-nmap <Leader>gf :Ack 
+" Ack
+nmap <Leader>gf :LAck 
 
-" fugitive (git) config
+" fugitive (git)
 nmap <Leader>gs :Gstatus<cr>
 nmap <Leader>gd :Gdiff<cr>
 nmap <Leader>gg :Ggrep 
@@ -375,20 +364,26 @@ nmap <Leader>gta :Gread<cr>:w<cr>:bd<cr>:diffoff!<cr>
 " clean up all those buffers fugitive leaves behind
 nmap <Leader>gbd :bdelete fugitive://<C-A><cr>
 
-" Snipmate config
+" Snipmate
 let g:snips_author = 'Nathan Howell'
 
-" Jsbeautify config
+" Jsbeautify
 nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
 
-" Yankring config
+" Align
+map <Leader>ac :AlignCtrl 
+nmap <Leader>a vii:Align 
+vmap <Leader>a :Align 
+
+" Yankring
 let g:yankring_enabled = 0
 let g:yankring_replace_n_pkey = '<Leader>yp'
 let g:yankring_replace_n_nkey = '<Leader>yn'
 
 
 
-""" Functions
+"==============================================================================
+" Custom functions and commands
 
 " I keep hitting :W when saving. It may as well work.
 command! W :w
@@ -454,31 +449,3 @@ function! VisualSearch(direction) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
-
-
-
-""" Everything below this line is old/broken/unused or I just haven't looked it over yet
-
-" enable a shortcut for tidy using ~/.tidyrc config
-" map <Leader>T :!tidy -config ~/.tidyrc<cr><cr>
-
-" Tab mappings (delete soon?)
-":nmap <C-n> :tabprevious<cr>
-":nmap <C-t> :tabnext<cr>
-":map <C-n> :tabprevious<cr>
-":map <C-t> :tabnext<cr>
-":nmap <C-N> :tabmove tabpagenr() - 2<cr>
-":nmap <C-T> :tabmove tabpagenr() + 2<cr>
-":map <C-N> :tabmove tabpagenr() - 2<cr>
-":map <C-T> :tabmove tabpagenr() + 2<cr>
-":imap <C-n> <ESC>:tabprevious<cr>i
-":imap <C-t> <ESC>:tabnext<cr>i
-":nmap <C-t> :tabnew<cr>
-":imap <C-t> <ESC>:tabnew<cr> 
-"nmap <tab> :bn<cr>
-"nmap <s-tab> :bp<cr>
-
-" keyword completion for perl
-"set iskeyword+=:
-" keyword completion for python (and ruby?)
-"set iskeyword+=.
