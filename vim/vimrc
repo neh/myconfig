@@ -38,10 +38,7 @@ syntax on
 
 runtime! ftplugin/man.vim
 
-" old titlestring
-"set titlestring=%<%{hostname()}:%F\ %(%m\ %)[%l/%L\ %P]\ %y\ VIM
-" new titlestring (short for screen window names)
-"autocmd BufEnter * let &titlestring = hostname().expand(":%t")
+" New titlestring (kept short for screen window names)
 autocmd BufEnter * let &titlestring = expand("%:t")
 
 " No wrapping for the quickfix window
@@ -119,11 +116,6 @@ autocmd BufReadPost *
       \ endif
 
 
-" automatically give executable permissions if file begins with #! and contains
-" '/bin/' in the path (not sure I want this to be automatic
-"autocmd bufwritepost * if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod a+x <afile> | endif | endif
-
-
 
 """ General options
 
@@ -145,7 +137,6 @@ set startofline
 set hidden
 set backspace=indent,eol,start
 set timeoutlen=500
-"set spell
 
 set autoindent
 set smartindent
@@ -418,8 +409,7 @@ endfunction
 
 " Check whether the cursor has moved to a new line and toggle
 " cursorline highlighting (on if on a new line, off if not).
-" TODO doesn't seem 100% reliable (eg. C-u, C-d don't toggle it)
-" from: http://vim.wikia.com/wiki/Highlight_cursor_line_after_cursor_jump
+" orig from: http://vim.wikia.com/wiki/Highlight_cursor_line_after_cursor_jump
 function! s:Cursor_Moved()
     let cur_screen_pos = winline()
     let cur_file_pos = line('.')
@@ -485,20 +475,7 @@ endfunction
 "nmap <tab> :bn<cr>
 "nmap <s-tab> :bp<cr>
 
-"if has("gui_running")
-  "colo vilight
-  "set guioptions=aAim    " don't want a toolbar or menu
-  "set guifont=Liberation\ Mono\ 11
-  "set mousehide
-"endif
-
 " keyword completion for perl
 "set iskeyword+=:
 " keyword completion for python (and ruby?)
 "set iskeyword+=.
-
-"let g:no_html_toolbar = 1
-"let g:html_tag_case = 'lower'
-"let g:html_template = '$HOME/.vim/html_template'
-"let g:html_authorname = 'Nathan Howell'
-"let g:html_authoremail = 'nath@nhowell.net'
