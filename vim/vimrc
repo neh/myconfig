@@ -266,8 +266,10 @@ vnoremap <silent> gf :call VisualSearch('gf')<CR>
 " Quickfix window maps
 nmap <Leader>co :copen<cr>
 nmap <Leader>cx :cclose<cr>
-nmap <Leader>t :cn<cr>
-nmap <Leader>n :cp<cr>
+
+" Location window maps
+nmap <Leader>lo :lopen<cr>
+nmap <Leader>lx :lclose<cr>
 
 " Align convenience maps
 map <Leader>ac :AlignCtrl 
@@ -443,7 +445,7 @@ function! VisualSearch(direction) range
     if a:direction == 'b'
         execute "normal ?" . l:pattern . ""
     elseif a:direction == 'gf'
-        execute "normal :Ack " . l:pattern . ""
+        execute "normal :LAck " . l:pattern . ""
     elseif a:direction == 'f'
         execute "normal /" . l:pattern . ""
     endif
