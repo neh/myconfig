@@ -18,6 +18,7 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.DynamicWorkspaces
 import qualified XMonad.Actions.DynamicWorkspaceOrder as DO
 import XMonad.Actions.FloatKeys
+import XMonad.Actions.PerLayoutKeys
 import XMonad.Actions.RotSlaves
 import XMonad.Actions.Submap
 import XMonad.Actions.UpdateFocus
@@ -351,8 +352,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,           xK_bracketright ), withFocused minimizeWindow)
   , ((modMask,           xK_bracketleft), sendMessage RestoreNextMinimizedWin)
 
-  , ((modMask,                 xK_t     ), B.focusDown)
-  , ((modMask,                 xK_n     ), B.focusUp  )
+  , ((modMask,                 xK_t     ), bindOnLayout [("TwoPane", rotSlavesDown), ("", B.focusDown)])
+  , ((modMask,                 xK_n     ), bindOnLayout [("TwoPane", rotSlavesUp), ("", B.focusUp)])
 
   , ((modMask,                 xK_Return), windows W.swapMaster)
   , ((modMask .|. shiftMask,   xK_t     ), windows W.swapDown  )
@@ -360,8 +361,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask .|. controlMask, xK_h     ), withFocused (keysMoveWindow (-200,0)))
   , ((modMask .|. controlMask, xK_s     ), withFocused (keysMoveWindow (200,0)))
-  , ((modMask .|. controlMask, xK_t     ), withFocused (keysMoveWindow (0,200)))
-  , ((modMask .|. controlMask, xK_n     ), withFocused (keysMoveWindow (0,-200)))
+  , ((modMask .|. controlMask, xK_t     ), myFocusDown)
+  , ((modMask .|. controlMask, xK_n     ), myFocusUp)
 
   , ((modMask,                 xK_comma ), myShrink)
   , ((modMask,                 xK_period), myExpand)
@@ -405,6 +406,15 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                       then withFocused $ windows . W.sink
                       else withFocused (keysMoveWindowTo (960,600) (1%2,1%2))
 
+    myFocusDown = withWindowSet $ \ws ->
+                 if M.member (fromJust $ W.peek ws) (W.floating ws)
+                   then withFocused (keysMoveWindow (0,200))
+                   else B.focusDown
+    myFocusUp = withWindowSet $ \ws ->
+                 if M.member (fromJust $ W.peek ws) (W.floating ws)
+                   then withFocused (keysMoveWindow (0,-200))
+                   else B.focusUp
+
     myExpand = withWindowSet $ \ws ->
                  if M.member (fromJust $ W.peek ws) (W.floating ws)
                    then withFocused (keysResizeWindow (40,40) (1%2,1%2))
@@ -446,8 +456,8 @@ myMouse (XConfig {XMonad.modMask = modMask}) = M.fromList $
   --, ((0, button6), (\_ -> DO.moveTo Prev AnyWS))
   --, ((0, button7), (\_ -> DO.moveTo Next AnyWS))
   , ((modMask .|. controlMask, button2), (\w -> focus w >> kill1))
-  , ((modMask .|. controlMask, button4), (\_ -> B.focusUp))
-  , ((modMask .|. controlMask, button5), (\_ -> B.focusDown))
+  , ((modMask .|. controlMask, button4), (\_ -> bindOnLayout [("TwoPane", rotSlavesUp), ("", B.focusUp)]))
+  , ((modMask .|. controlMask, button5), (\_ -> bindOnLayout [("TwoPane", rotSlavesDown), ("", B.focusDown)]))
   , ((0, button9), (\_ -> toggleWS))
   , ((modMask .|. shiftMask, button4), (\_ -> windows W.swapUp))
   , ((modMask .|. shiftMask, button5), (\_ -> windows W.swapDown))
