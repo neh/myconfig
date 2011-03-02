@@ -52,3 +52,6 @@
 [submodule "vim/vim/bundle/lusty"]
 	path = vim/vim/bundle/lusty
 	url = git://github.com/sjbach/lusty.git
+[submodule "vim/vim/bundle/dbext"]
+	path = vim/vim/bundle/dbext
+	url = git@github.com:neh/dbext.vim.git

@@ -46,6 +46,11 @@ autocmd BufEnter * let &titlestring = expand("%:t")
 let $PAGER=''
 runtime! ftplugin/man.vim
 
+" Pull in dbext database profiles if they exist
+if filereadable($HOME.'/dbext_profiles')
+    source $HOME/dbext_profiles
+endif
+
 
 
 "==============================================================================
