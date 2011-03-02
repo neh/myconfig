@@ -293,6 +293,10 @@ autocmd FileType php noremap <C-l> :!/usr/bin/php -l %<CR>
 "==============================================================================
 " Plugin configs
 
+" dbext
+let g:dbext_default_use_sep_result_buffer = 1
+nmap <Leader>sdb :DBSetOption dbname=
+
 " Indent-object
 let g:indent_guides_auto_colors = 0
 hi IndentGuidesEven ctermbg=234 ctermfg=235
