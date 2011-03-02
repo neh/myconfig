@@ -107,6 +107,8 @@ hi DiffAdd term=none cterm=none ctermfg=black ctermbg=green
 hi DiffChange term=none cterm=none ctermfg=black ctermbg=blue
 hi DiffDelete term=none cterm=none ctermfg=black ctermbg=red
 hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
+" statusline
+hi StatusLine ctermfg=185 ctermbg=black
 
 " make special chars (tabs, trailing spaces, etc) barely visible
 hi NonText cterm=none ctermfg=237
@@ -135,7 +137,7 @@ set history=500
 set wrap
 set linebreak
 set showcmd
-set startofline
+set nostartofline
 set hidden
 set backspace=indent,eol,start
 set timeoutlen=500
