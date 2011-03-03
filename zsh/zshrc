@@ -7,15 +7,16 @@ fi
 export __CURRENT_GIT_BRANCH=
 export EDITOR="vim"
 
-# Set up the $DISPLAY var to allow vim (and others) to connect to remote X
-# If not running within screen, store the value of $DISPLAY for use within screen.
-# If running within screen, set $DISPLAY to the stored value.
-case $TERM in 
-    screen*)
-    export DISPLAY=$(cat $HOME/.displayvar);;
-    *)
-    echo $DISPLAY > $HOME/.displayvar;;
-esac
+# Set up the $DISPLAY var to allow vim (and others) to connect back 
+# to X from within remote screen sessions.
+if [[ "$SSH_CONNECTION" != '' ]]; then
+    case $TERM in
+        screen*)
+        export DISPLAY=$(cat $HOME/.displayvar);;
+        *)
+        echo $DISPLAY > $HOME/.displayvar;;
+    esac
+fi
 
 # Nice directory truncation with a proper ellipsis: %30<…<
 
