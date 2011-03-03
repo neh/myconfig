@@ -5,6 +5,11 @@ set nocompatible
 " Clear autocmds
 autocmd!
 
+" Enable mouse usage in terminals
+" (allows window resizing, mousewheel scrolling, proper text highlighting)
+set mouse=a
+set ttymouse=xterm2
+
 " Make vim update screen window title
 if &term =~ "^screen"
     set t_ts=k
