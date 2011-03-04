@@ -352,8 +352,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,           xK_bracketright ), withFocused minimizeWindow)
   , ((modMask,           xK_bracketleft), sendMessage RestoreNextMinimizedWin)
 
-  , ((modMask,                 xK_t     ), bindOnLayout [("TwoPane", rotSlavesDown), ("", B.focusDown)])
-  , ((modMask,                 xK_n     ), bindOnLayout [("TwoPane", rotSlavesUp), ("", B.focusUp)])
+  , ((modMask,                 xK_t     ), bindOnLayout [("TwoPane", rotSlavesUp), ("", B.focusDown)])
+  , ((modMask,                 xK_n     ), bindOnLayout [("TwoPane", rotSlavesDown), ("", B.focusUp)])
 
   , ((modMask,                 xK_Return), windows W.swapMaster)
   , ((modMask .|. shiftMask,   xK_t     ), windows W.swapDown  )
@@ -456,8 +456,8 @@ myMouse (XConfig {XMonad.modMask = modMask}) = M.fromList $
   --, ((0, button6), (\_ -> DO.moveTo Prev AnyWS))
   --, ((0, button7), (\_ -> DO.moveTo Next AnyWS))
   , ((modMask .|. controlMask, button2), (\w -> focus w >> kill1))
-  , ((modMask .|. controlMask, button4), (\_ -> bindOnLayout [("TwoPane", rotSlavesUp), ("", B.focusUp)]))
-  , ((modMask .|. controlMask, button5), (\_ -> bindOnLayout [("TwoPane", rotSlavesDown), ("", B.focusDown)]))
+  , ((modMask .|. controlMask, button4), (\_ -> bindOnLayout [("TwoPane", rotSlavesDown), ("", B.focusUp)]))
+  , ((modMask .|. controlMask, button5), (\_ -> bindOnLayout [("TwoPane", rotSlavesUp), ("", B.focusDown)]))
   , ((0, button9), (\_ -> toggleWS))
   , ((modMask .|. shiftMask, button4), (\_ -> windows W.swapUp))
   , ((modMask .|. shiftMask, button5), (\_ -> windows W.swapDown))
