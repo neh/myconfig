@@ -9,13 +9,11 @@ export EDITOR="vim"
 
 # Set up the $DISPLAY var to allow vim (and others) to connect back 
 # to X from within remote screen sessions.
-if [[ "$SSH_CONNECTION" != '' ]]; then
-    case $TERM in
-        screen*)
-        export DISPLAY=$(cat $HOME/.displayvar);;
-        *)
-        echo $DISPLAY > $HOME/.displayvar;;
-    esac
+# Only stores/sets $DISPLAY when running over ssh -X
+if [[ "$TERM" != 'screen-bce' ]] && [[ "$SSH_CONNECTION" != '' ]] && [[ "$DISPLAY" != '' ]]; then
+    echo $DISPLAY > $HOME/.displayvar;
+elif [[ "$TERM" == 'screen-bce' ]] && [[ "$SSH_CONNECTION" != '' ]]; then
+    [[ -f $HOME/.displayvar ]] && export DISPLAY=$(cat $HOME/.displayvar);
 fi
 
 # Nice directory truncation with a proper ellipsis: %30<…<
