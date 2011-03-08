@@ -23,7 +23,7 @@ if has('gui_running')
 else
     if $TERM =~ '^screen-bce' || $TERM =~ '^rxvt-256' || $TERM =~ '^xterm-256'
         set t_Co=256
-        colo mustang
+        colo twilight256
     elseif $TERM =~ '^rxvt'
         set t_Co=88
         colo inkpot
@@ -124,10 +124,6 @@ hi StatusLine ctermfg=185 ctermbg=black
 hi NonText cterm=none ctermfg=237
 hi SpecialKey cterm=bold ctermfg=235
 
-" highlight lines longer than 80 chars
-hi OverLength ctermbg=234
-match OverLength /\%81v.\+/
-
 
 
 "==============================================================================
@@ -191,10 +187,17 @@ set directory=~/.vim/backup
 " Show trailing whitespace and tabs as visible chars
 set list listchars=tab:⇥\ ,trail:·
 
+" Mark column 80, method depending on vim version
+if exists('+colorcolumn')
+    hi ColorColumn ctermbg=232 guibg=232
+    set cc=80
+else
+    hi OverLength ctermbg=234
+    match OverLength /\%81v.\+/
+endif
+
 if v:version >= '703'
     set relativenumber
-    hi ColorColumn ctermbg=234 guibg=233
-    set cc=+3
     set undodir=~/.vim/undo
     set undofile
 endif
