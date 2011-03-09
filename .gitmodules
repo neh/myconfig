@@ -4,9 +4,6 @@
 [submodule "vim/vim/bundle/fugitive"]
 	path = vim/vim/bundle/fugitive
 	url = git://github.com/tpope/vim-fugitive.git
-[submodule "vim/vim/bundle/autoclose"]
-	path = vim/vim/bundle/autoclose
-	url = git://github.com/vim-scripts/AutoClose.git
 [submodule "vim/vim/bundle/nerdtree"]
 	path = vim/vim/bundle/nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
@@ -55,3 +52,6 @@
 [submodule "vim/vim/bundle/dbext"]
 	path = vim/vim/bundle/dbext
 	url = git@github.com:neh/dbext.vim.git
+[submodule "vim/vim/bundle/delimitMate"]
+	path = vim/vim/bundle/delimitMate
+	url = git://github.com/Raimondi/delimitMate.git
