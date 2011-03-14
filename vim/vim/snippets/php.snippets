@@ -6,29 +6,3 @@ snippet vd
 	var_dump(${1});${2}
 snippet vde
 	var_dump(${1});exit;
-snippet iif
-	if (${1:/* condition */})
-	    ${2:// code...}
-snippet ife
-	if (${1:/* condition */}) {
-	    ${2:// code...}
-	} else {
-	    ${3:// code...}
-	}${4}
-snippet iife
-	if (${1:/* condition */})
-	    ${2:// code...}
-	else
-	    ${3:// code...}
-snippet else
-	else {
-	    ${1:// code...}
-	}${2}
-snippet elseif
-	elseif (${1:/* condition */}) {
-	    ${2:// code...}
-	}${3}
-snippet fun
-	${1:public }function ${2:FunctionName}(${3}) {
-	    ${4:// code...}
-	}${5}
