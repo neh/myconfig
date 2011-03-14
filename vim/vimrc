@@ -31,7 +31,7 @@ endif
 
 " Set up pathogen for loading plugins
 filetype off
-let g:pathogen_disabled = ["gundo"]
+let g:pathogen_disabled = ["supertab"]
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
