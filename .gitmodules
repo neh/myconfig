@@ -55,3 +55,6 @@
 [submodule "vim/vim/bundle/gundo"]
 	path = vim/vim/bundle/gundo
 	url = https://github.com/sjl/gundo.vim.git
+[submodule "vim/vim/bundle/unimpaired"]
+	path = vim/vim/bundle/unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git
