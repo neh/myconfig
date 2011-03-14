@@ -89,6 +89,8 @@ autocmd BufReadPost *
       \   exe "normal g`\"" |
       \ endif
 
+" Make yssp wrap a line in php tags
+autocmd FileType php let b:surround_112 = "<?php \r ?>"
 
 
 "==============================================================================
