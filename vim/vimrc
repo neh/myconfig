@@ -299,6 +299,14 @@ autocmd FileType php noremap <C-l> :!/usr/bin/php -l %<CR>
 "==============================================================================
 " Plugin configs
 
+" delimitMate
+let delimitMate_expand_cr = 1
+" some delimitMate functions don't work:
+"  expand_space
+"  smart backspace
+"  maybe more
+let delimitMate_expand_space = 1
+
 " dbext
 let g:dbext_default_use_sep_result_buffer = 1
 nmap <Leader>sdb :DBSetOption dbname=
