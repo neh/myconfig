@@ -5,11 +5,6 @@ set nocompatible
 " Clear autocmds
 autocmd!
 
-" Enable mouse usage in terminals
-" (allows window resizing, mousewheel scrolling, proper text highlighting)
-set mouse=a
-set ttymouse=xterm2
-
 " Make vim update screen window title
 if &term =~ "^screen"
     set t_ts=k
@@ -21,7 +16,7 @@ set background=dark
 if has('gui_running')
     colo mustang
 else
-    if $TERM =~ '^screen-bce' || $TERM =~ '^rxvt-256' || $TERM =~ '^xterm-256'
+    if $TERM =~ '^screen-bce' || $TERM =~ '256'
         set t_Co=256
         colo twilight256
     elseif $TERM =~ '^rxvt'
@@ -119,6 +114,8 @@ hi DiffDelete term=none cterm=none ctermfg=black ctermbg=red
 hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
 " statusline
 hi StatusLine ctermfg=185 ctermbg=black
+" cursor line
+hi CursorLine term=none cterm=none ctermbg=234 gui=none guibg=#333333
 
 " make special chars (tabs, trailing spaces, etc) barely visible
 hi NonText cterm=none ctermfg=237
@@ -184,6 +181,11 @@ hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
 set backupdir=~/.vim/backup
 set directory=~/.vim/backup
 
+" Enable mouse usage in terminals
+" (allows window resizing, mousewheel scrolling, proper text highlighting)
+set mouse=a
+set ttymouse=xterm2
+
 " Show trailing whitespace and tabs as visible chars
 set list listchars=tab:⇥\ ,trail:·
 
@@ -202,12 +204,6 @@ if v:version >= '703'
     set undofile
 endif
 
-" highlight the current line (all the way to the right edge) and column
-autocmd CursorMoved,CursorMovedI * call s:Cursor_Moved()
-let g:last_screen_pos = 0
-let g:last_file_pos = 0
-" define highlighting colours for cursor line
-hi CursorLine term=none cterm=none ctermbg=234 gui=none guibg=#333333
 
 
 
@@ -223,7 +219,7 @@ noremap l n
 noremap L N
 noremap j J
 
-" Unmap my dvorak movement keys in select mode so snippets don't suck
+" Unmap my dvorak movement keys in select mode so Snipmate snippets don't suck
 sunmap s
 sunmap S
 sunmap t
@@ -289,9 +285,9 @@ nmap <Leader>SL :source ~/.vim/sessions/
 nmap <Leader>do :diffoff<cr>
 nmap <Leader>do! :diffoff!<cr>
 
-" Use C-l instead of C-y to insert the first option in the auto completion 
+" Use C-space instead of C-y to insert the first option in the auto completion 
 " popup (useful with autocomplpop plugin)
-inoremap <Nul> <C-R>=pumvisible() ? "\<lt>C-y>" : "\<lt>C-l>"<cr>
+inoremap <Nul> <C-R>=pumvisible() ? "\<lt>C-y>" : " "<cr>
 
 " Quick PHP syntax check (CTRL-l)
 autocmd FileType php noremap <C-l> :!/usr/bin/php -l %<CR>
@@ -319,9 +315,6 @@ let g:space_no_search = 1
 nnoremap <F3> :GundoToggle<CR>
 let g:gundo_map_move_older="t"
 let g:gundo_map_move_newer="n"
-
-" Autoclose
-nmap <Leader>acm <Plug>ToggleAutoCloseMappings
 
 " AutoComplPop
 let g:acp_mappingDriven = 1
@@ -407,6 +400,7 @@ let g:yankring_replace_n_nkey = '<Leader>yn'
 " I keep hitting :W when saving. It may as well work.
 command! W :w
 
+
 " Switch windows/buffers, depending on whether multiple windows exist.
 function! SwitchWindowOrBuffer(d)
     if winbufnr(2) == -1
@@ -423,6 +417,7 @@ function! SwitchWindowOrBuffer(d)
         endif
     endif
 endfunction
+
 
 " Check whether the cursor has moved to a new line and toggle
 " cursorline highlighting (on if on a new line, off if not).
@@ -446,6 +441,12 @@ function! s:Cursor_Moved()
     let g:last_screen_pos = cur_screen_pos
     let g:last_file_pos = cur_file_pos
 endfunction
+" highlight the current line (all the way to the right edge), but only if the 
+" cursor has moved to a new line
+autocmd CursorMoved,CursorMovedI * call s:Cursor_Moved()
+let g:last_screen_pos = 0
+let g:last_file_pos = 0
+
 
 " A visual search mode function. Searches for the current selection
 " forwards, backwards, or with Ack.
@@ -468,6 +469,7 @@ function! VisualSearch(direction) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+
 
 " Show syntax highlighting groups for word under cursor
 nmap <Leader>syn :call <SID>SynStack()<CR>
