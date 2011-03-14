@@ -110,8 +110,8 @@ hi IncSearch term=bold cterm=bold ctermfg=yellow ctermbg=red
 " todo
 hi Todo term=bold cterm=bold ctermfg=red ctermbg=yellow
 " popup menu
-hi Pmenu term=none cterm=none ctermfg=gray ctermbg=black
-hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=green
+hi Pmenu term=none cterm=none ctermfg=250 ctermbg=238
+hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=250
 " diff viewer
 hi DiffAdd term=none cterm=none ctermfg=black ctermbg=green
 hi DiffChange term=none cterm=none ctermfg=black ctermbg=blue
