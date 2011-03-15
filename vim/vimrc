@@ -136,7 +136,7 @@ set pastetoggle=<F12>
 set title
 set laststatus=2
 set visualbell t_vb=
-set formatoptions+=tcroqnw
+set formatoptions+=tcroqnwl
 set ttyfast
 set history=500
 set wrap
@@ -150,6 +150,7 @@ set timeoutlen=500
 set autoindent
 set smartindent
 
+set textwidth=79
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -206,6 +207,13 @@ if v:version >= '703'
     set undofile
 endif
 
+let &showbreak = '… '
+
+" Remove parts of the gui, just in case I happen to run it
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+
 
 
 
@@ -243,6 +251,14 @@ nmap <F11> <C-W>_
 " No more Ex mode mapping. Do something useful instead.
 map Q gq
 
+" Change regex handling
+nnoremap / /\v
+vnoremap / /\v
+
+" Use tab to move to matchpairs
+nnoremap <tab> %
+vnoremap <tab> %
+
 " Move a line of text
 " TODO these don't actually work (the mappings, I mean).
 nmap <M-t> mz:m+<cr>`z
@@ -254,7 +270,7 @@ vmap <M-n> :m'>+<cr>`<my`>mzgv`yo`z
 map <Leader><space> :noh<cr>
 
 " Load vimrc in a split window and switch to it
-nmap <Leader>V :sp ~/.vimrc<cr><C-W>w
+nmap <Leader>V :vs ~/.vimrc<cr>
 " Source .vimrc
 nmap <Leader>VS :so ~/.vimrc<cr>
 
@@ -294,10 +310,16 @@ inoremap <Nul> <C-R>=pumvisible() ? "\<lt>C-y>" : " "<cr>
 " Quick PHP syntax check (CTRL-l)
 autocmd FileType php noremap <C-l> :!/usr/bin/php -l %<CR>
 
+" Fold an html tag
+nnoremap <Leader>ft Vatzf
+
 
 
 "==============================================================================
 " Plugin configs
+
+" Scratch
+nmap <Leader><tab> :Sscratch<cr>
 
 " delimitMate
 let delimitMate_expand_cr = 1
