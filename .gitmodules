@@ -58,3 +58,6 @@
 [submodule "vim/vim/bundle/unimpaired"]
 	path = vim/vim/bundle/unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
+[submodule "vim/vim/bundle/slime"]
+	path = vim/vim/bundle/slime
+	url = https://github.com/jpalardy/vim-slime.git
