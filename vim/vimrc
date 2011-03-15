@@ -120,8 +120,8 @@ hi StatusLine ctermfg=185 ctermbg=black
 hi CursorLine term=none cterm=none ctermbg=234 gui=none guibg=#333333
 
 " make special chars (tabs, trailing spaces, etc) barely visible
-hi NonText cterm=none ctermfg=237
-hi SpecialKey cterm=bold ctermfg=235
+hi NonText cterm=none ctermfg=green
+hi SpecialKey cterm=none ctermfg=235
 
 
 
@@ -194,11 +194,8 @@ set list listchars=tab:⇥\ ,trail:·
 
 " Mark column 80, method depending on vim version
 if exists('+colorcolumn')
-    hi ColorColumn ctermbg=232 guibg=232
+    hi ColorColumn ctermbg=232 guibg=#111111
     set cc=80
-else
-    hi OverLength ctermbg=234
-    match OverLength /\%81v.\+/
 endif
 
 if v:version >= '703'
@@ -207,13 +204,16 @@ if v:version >= '703'
     set undofile
 endif
 
-let &showbreak = '… '
+let &showbreak = ' ↪ '
 
 " Remove parts of the gui, just in case I happen to run it
 set guioptions-=m
 set guioptions-=T
 set guioptions-=r
-
+set guioptions-=R
+set guioptions-=l
+set guioptions-=L
+set guioptions-=b
 
 
 
