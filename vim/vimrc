@@ -190,7 +190,8 @@ set mouse=a
 set ttymouse=xterm2
 
 " Show trailing whitespace and tabs as visible chars
-set list listchars=tab:⇥\ ,trail:·
+set list
+set listchars=tab:⇥\ ,trail:·,extends:…,precedes:…
 
 " Mark column 80, method depending on vim version
 if exists('+colorcolumn')
@@ -249,7 +250,14 @@ nmap <F10> <C-W>>
 nmap <F11> <C-W>_
 
 " No more Ex mode mapping. Do something useful instead.
-map Q gq
+vmap Q gq
+nmap Q gqap
+
+" Fast save mapping
+nmap <Leader><return> :w<cr>
+
+" Save files that you need sudo for, but didn't open as root
+cmap W! silent w !sudo tee % >/dev/null
 
 " Change regex handling
 nnoremap / /\v
