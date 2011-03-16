@@ -139,7 +139,7 @@ set visualbell t_vb=
 set formatoptions+=tcroqnwl
 set ttyfast
 set history=500
-set wrap
+set nowrap
 set linebreak
 set showcmd
 set nostartofline
@@ -258,6 +258,9 @@ vnoremap / /\v
 " Use tab to move to matchpairs
 nnoremap <tab> %
 vnoremap <tab> %
+
+" Toggle wrapping
+nnoremap <Leader>p :set nowrap!<cr>
 
 " Move a line of text
 " TODO these don't actually work (the mappings, I mean).
