@@ -92,6 +92,12 @@ autocmd BufReadPost *
 " Make yssp wrap a line in php tags
 autocmd FileType php let b:surround_112 = "<?php \r ?>"
 
+" folding setup
+let php_folding = 1
+autocmd FileType javascript setlocal foldmethod=indent
+autocmd FileType css,php setlocal foldmethod=syntax
+
+
 
 "==============================================================================
 " Custom highlighting
@@ -118,6 +124,9 @@ hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
 hi StatusLine ctermfg=185 ctermbg=black
 " cursor line
 hi CursorLine term=none cterm=none ctermbg=234 gui=none guibg=#333333
+" folding
+hi Folded term=none cterm=bold ctermbg=4 ctermfg=15 gui=none guibg=#333333
+hi FoldColumn term=none cterm=none ctermbg=4 ctermfg=15 gui=none guibg=#333333
 
 " make special chars (tabs, trailing spaces, etc) barely visible
 hi NonText cterm=none ctermfg=green
@@ -321,8 +330,10 @@ inoremap <Nul> <C-R>=pumvisible() ? "\<lt>C-y>" : " "<cr>
 " Quick PHP syntax check (CTRL-l)
 autocmd FileType php noremap <C-l> :!/usr/bin/php -l %<CR>
 
-" Fold an html tag
+" Create folds for objects (tags, paras, blocks, etc.)
 nnoremap <Leader>ft Vatzf
+nnoremap <Leader>fp Vapzf
+nnoremap <Leader>fb VaBzf
 
 
 
