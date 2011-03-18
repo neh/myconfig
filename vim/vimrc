@@ -125,7 +125,7 @@ hi StatusLine ctermfg=185 ctermbg=black
 " cursor line
 hi CursorLine term=none cterm=none ctermbg=234 gui=none guibg=#333333
 " folding
-hi Folded term=none cterm=bold ctermbg=4 ctermfg=15 gui=none guibg=#333333
+hi Folded term=none cterm=bold ctermbg=4 ctermfg=0 gui=none guibg=#333333
 hi FoldColumn term=none cterm=none ctermbg=4 ctermfg=15 gui=none guibg=#333333
 
 " make special chars (tabs, trailing spaces, etc) barely visible
