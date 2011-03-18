@@ -69,6 +69,7 @@ alias xmi='pushd `pwd`; cd $HOME/xmonad/xmonad; rm -f $HOME/bin/xmonad; runhaske
 alias xmbi='xmb && xmi'
 alias hddtemps='for i in /dev/sd? ; do sudo smartctl -d ata -a $i | grep -i tempera ; done'
 alias scd='screen -X chdir `pwd`'
+alias gcd='cd $(git rev-parse --show-toplevel)'
 
 # this one doesn't work right in zsh... fix? (prob. turn into function. don't think zsh aliases take $N.
 #alias topthreads="find /proc/*/status -exec gawk '/^Pid:/ { p=\$2}; /^Name:/ { n=\$2}; /^Threads:/ { t=\$2}; END{ printf(\"%6d %-30s %5d\n\", p, n, t);}' {} \; | sort -k3 -g -r | head -10"
