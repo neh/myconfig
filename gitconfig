@@ -10,3 +10,7 @@
     diffeol = diff --ignore-space-at-eol
 [core]
 	excludesfile = ~/.gitexcludes
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = false
