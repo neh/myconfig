@@ -5,11 +5,24 @@ set nocompatible
 " Clear autocmds
 autocmd!
 
+" Set up pathogen for loading plugins
+filetype off
+let g:pathogen_disabled = ["supertab"]
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+" Enable filetype detection and syntax highlighting
+filetype plugin indent on
+syntax on
+
 " Make vim update screen window title
 if &term =~ "^screen"
     set t_ts=k
     set t_fs=\
 endif
+
+" Set titlestring when switching buffers (kept short for screen window names)
+autocmd BufEnter * let &titlestring = expand("%:t")
 
 set background=dark
 " Set up color settings and scheme based on terminal type
@@ -28,19 +41,6 @@ else
         set t_Co=16
     endif
 endif
-
-" Set up pathogen for loading plugins
-filetype off
-let g:pathogen_disabled = ["supertab"]
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
-
-" Enable filetype detection and syntax highlighting
-filetype plugin indent on
-syntax on
-
-" Set titlestring when switching buffers (kept short for screen window names)
-autocmd BufEnter * let &titlestring = expand("%:t")
 
 " Set up man page viewing
 let $PAGER=''
@@ -277,7 +277,7 @@ nnoremap <tab> %
 vnoremap <tab> %
 
 " Toggle wrapping
-nnoremap <Leader>p :set nowrap!<cr>
+nnoremap <Leader>p :setlocal nowrap! nolist!<cr>
 
 " Move a line of text
 " TODO these don't actually work (the mappings, I mean).
