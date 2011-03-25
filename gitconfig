@@ -12,5 +12,6 @@
 	excludesfile = ~/.gitexcludes
 [diff]
     tool = vimdiff
+    color = true
 [difftool]
     prompt = false
