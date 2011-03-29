@@ -46,9 +46,6 @@
 [submodule "vim/vim/bundle/lusty"]
 	path = vim/vim/bundle/lusty
 	url = git://github.com/sjbach/lusty.git
-[submodule "vim/vim/bundle/dbext"]
-	path = vim/vim/bundle/dbext
-	url = git@github.com:neh/dbext.vim.git
 [submodule "vim/vim/bundle/delimitMate"]
 	path = vim/vim/bundle/delimitMate
 	url = git://github.com/Raimondi/delimitMate.git
@@ -67,3 +64,6 @@
 [submodule "vim/vim/bundle/solarized"]
 	path = vim/vim/bundle/solarized
 	url = https://github.com/altercation/vim-colors-solarized
+[submodule "vim/vim/bundle/dbext"]
+	path = vim/vim/bundle/dbext
+	url = https://neh@github.com/neh/dbext.vim.git
