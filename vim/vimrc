@@ -66,9 +66,10 @@ autocmd BufRead,BufNewFile *.mustache,*.ms setlocal filetype=mustache
 autocmd FileType make setlocal noexpandtab
 autocmd FileType snippet setlocal noexpandtab
 
-" some files should have different tabsizes and other options
-autocmd FileType css,html,javascript setlocal noet
+"autocmd FileType text,mail setlocal formatprg=perl\ -MText::Autoformat\ -e\ 'autoformat{all=>1}'
+autocmd FileType text,mail setlocal formatprg=par\ -w80\ -q
 
+autocmd FileType css,html,javascript setlocal noet
 autocmd FileType html,xml setlocal matchpairs+=<:>
 
 " No wrapping for the quickfix window
