@@ -129,6 +129,8 @@ hi CursorLine term=none cterm=none ctermbg=234 gui=none guibg=#333333
 " folding
 hi Folded term=none cterm=bold ctermbg=4 ctermfg=0 gui=none guibg=#333333
 hi FoldColumn term=none cterm=none ctermbg=4 ctermfg=15 gui=none guibg=#333333
+" conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " make special chars (tabs, trailing spaces, etc) barely visible
 hi NonText cterm=none ctermfg=green
@@ -336,6 +338,9 @@ autocmd FileType php noremap <C-l> :!/usr/bin/php -l %<CR>
 nnoremap <Leader>ft Vatzf
 nnoremap <Leader>fp Vapzf
 nnoremap <Leader>fb VaBzf
+
+" jump to next conflict marker
+nmap <silent> <Leader>c /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
 
 
 " }}}
