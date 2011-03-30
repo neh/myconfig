@@ -1,5 +1,5 @@
 "==============================================================================
-" Initial setup
+" Initial setup {{{
 
 set nocompatible
 " Clear autocmds
@@ -52,9 +52,9 @@ if filereadable($HOME.'/dbext_profiles')
 endif
 
 
-
+" }}}
 "==============================================================================
-" Filetype specific options
+" Filetype specific options {{{
 
 " add filetype to files that need it
 "autocmd BufRead,BufNewFile COMMIT_EDITMSG setlocal filetype git
@@ -78,6 +78,7 @@ autocmd BufReadPost quickfix setlocal nowrap
 " re-read vimrc after writing it
 autocmd BufWritePost \.vimrc :source $HOME/.vimrc
 autocmd BufWritePost */vim/vimrc :source $HOME/.vimrc
+autocmd BufRead vimrc setlocal foldmethod=marker
 
 " Useful when customizing xterm
 autocmd BufWritePost \.Xdefaults :!xrdb ~/.Xdefaults
@@ -99,9 +100,9 @@ autocmd FileType javascript setlocal foldmethod=indent
 autocmd FileType css,php setlocal foldmethod=syntax
 
 
-
+" }}}
 "==============================================================================
-" Custom highlighting
+" Custom highlighting {{{
 
 " Highlight error logging functions (php error_log, js console.log, etc)
 " Terms to be highlighted are defined in ~/.vim/after/syntax/*
@@ -134,9 +135,9 @@ hi NonText cterm=none ctermfg=green
 hi SpecialKey cterm=none ctermfg=235
 
 
-
+" }}}
 "==============================================================================
-" General options
+" General options {{{
 
 let mapleader=","
 set encoding=utf-8
@@ -227,9 +228,9 @@ set guioptions-=L
 set guioptions-=b
 
 
-
+" }}}
 "==============================================================================
-" Key mappings
+" Key mappings {{{
 
 " A few dvorak movement adjustments
 noremap s l
@@ -337,9 +338,9 @@ nnoremap <Leader>fp Vapzf
 nnoremap <Leader>fb VaBzf
 
 
-
+" }}}
 "==============================================================================
-" Plugin configs
+" Plugin configs {{{
 
 " Scratch
 nmap <Leader><tab> :Sscratch<cr>
@@ -448,9 +449,9 @@ let g:yankring_replace_n_pkey = '<Leader>yp'
 let g:yankring_replace_n_nkey = '<Leader>yn'
 
 
-
+" }}}
 "==============================================================================
-" Custom functions and commands
+" Custom functions and commands {{{
 
 " I keep hitting :W when saving. It may as well work.
 command! W :w
@@ -534,3 +535,5 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+" }}}
