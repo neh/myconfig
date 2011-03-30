@@ -72,6 +72,8 @@ autocmd FileType text,mail setlocal formatprg=par\ -w80\ -q
 autocmd FileType css,html,javascript setlocal noet
 autocmd FileType html,xml setlocal matchpairs+=<:>
 
+autocmd FileType ruby setlocal sts=2 sw=2 ts=2
+
 " No wrapping for the quickfix window
 autocmd BufReadPost quickfix setlocal nowrap
 
@@ -96,7 +98,7 @@ autocmd FileType php let b:surround_112 = "<?php \r ?>"
 
 " folding setup
 let php_folding = 1
-autocmd FileType javascript setlocal foldmethod=indent
+autocmd FileType javascript setlocal foldmethod=marker foldmarker={,}
 autocmd FileType css,php setlocal foldmethod=syntax
 
 
@@ -341,6 +343,14 @@ nnoremap <Leader>fb VaBzf
 
 " jump to next conflict marker
 nmap <silent> <Leader>c /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
+
+" underline/overline mappings
+nnoremap <leader>1 yyPVr=jyypVr=
+nnoremap <leader>2 yyPVr*jyypVr*
+nnoremap <leader>3 yypVr=
+nnoremap <leader>4 yypVr-
+nnoremap <leader>5 yypVr^
+nnoremap <leader>6 yypVr"
 
 
 " }}}
