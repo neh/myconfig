@@ -354,8 +354,8 @@ nnoremap <leader>5 yypVr^
 nnoremap <leader>6 yypVr"
 
 " fast file format conversion
-nnoremap <Leader>ftd :setlocal ff=dos<CR>
-nnoremap <Leader>ftu :setlocal ff=unix<CR>
+nnoremap <Leader>ffd :setlocal ff=dos<CR>
+nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 
 " }}}
