@@ -101,13 +101,16 @@ zstyle ':completion:*:*:kill:*:processes' command 'ps -axco pid,user,command'
 
 ## Some functions used to put the current vcs branch name in my prompt 
 git_prompt_info() {
-    BRANCH=$(git branch --no-color 2> /dev/null \
-    | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')
+    BRANCH=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')
+    STASH=$(git stash list | wc -l)
+    if [[ $STASH -gt 0 ]]; then
+        STASHCOUNT=" $STASH"
+    fi
     case $(git status 2> /dev/null | tail -n1) in
         'nothing to commit'*)
-        echo "%{${fg[green]}%}$BRANCH%b";;
+        echo "%{${fg[green]}%}$BRANCH%{${fg[yellow]}%}$STASHCOUNT%b";;
         *)
-        echo "%{${fg_bold[red]}%}$BRANCH%b";;
+        echo "%{${fg_bold[red]}%}$BRANCH%{${fg[yellow]}%}$STASHCOUNT%b";;
     esac
 }
 vcs_prompt_update() {
