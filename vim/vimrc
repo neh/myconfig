@@ -345,7 +345,7 @@ nnoremap <Leader>fp Vapzf
 nnoremap <Leader>fb VaBzf
 
 " jump to next conflict marker
-nmap <silent> <Leader>c /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
+nmap <silent> <Leader>c /\M^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
 
 " underline/overline mappings
 nnoremap <leader>1 yyPVr=jyypVr=
