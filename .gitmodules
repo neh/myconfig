@@ -60,7 +60,7 @@
 	url = https://github.com/jpalardy/vim-slime.git
 [submodule "vim/vim/bundle/scratch"]
 	path = vim/vim/bundle/scratch
-	url = https://github.com/duff/vim-scratch.git
+	url = https://github.com/neh/vim-scratch.git
 [submodule "vim/vim/bundle/solarized"]
 	path = vim/vim/bundle/solarized
 	url = https://github.com/altercation/vim-colors-solarized

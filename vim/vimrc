@@ -365,7 +365,7 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " Plugin configs {{{
 
 " Scratch
-nmap <Leader><tab> :Sscratch<cr>
+nmap <Leader><tab> :SscratchToggle<cr>
 
 " delimitMate
 let delimitMate_expand_cr = 1
