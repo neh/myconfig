@@ -87,6 +87,8 @@ bindkey -v
 bindkey -M vicmd "s" vi-forward-char
 bindkey -M vicmd "t" down-line-or-history
 bindkey -M vicmd "n" up-line-or-history
+bindkey "^r" history-incremental-pattern-search-backward
+bindkey "^f" history-incremental-pattern-search-forward
 
 
 # TODO completions don't seem to work for the very first cmd in an new shell. things like C-r don't either.
