@@ -103,16 +103,16 @@ zstyle ':completion:*:*:kill:*:processes' command 'ps -axco pid,user,command'
 
 ## Some functions used to put the current vcs branch name in my prompt 
 git_prompt_info() {
-    BRANCH=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')
+    BRANCH=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
     STASH=$(git stash list 2> /dev/null | wc -l)
     if [[ $STASH -gt 0 ]]; then
-        STASHCOUNT=" $STASH"
+        STASHCOUNT="$STASH "
     fi
     case $(git status 2> /dev/null | tail -n1) in
         'nothing to commit'*)
-        echo "%{${fg[green]}%}$BRANCH%{${fg[yellow]}%}$STASHCOUNT%b";;
+        echo "%{${fg[green]}%}$BRANCH%{${fg[yellow]}%} $STASHCOUNT%b";;
         *)
-        echo "%{${fg_bold[red]}%}$BRANCH%{${fg[yellow]}%}$STASHCOUNT%b";;
+        echo "%{${fg_bold[red]}%}$BRANCH%{${fg[yellow]}%} $STASHCOUNT%b";;
     esac
 }
 vcs_prompt_update() {
@@ -241,9 +241,9 @@ precmd_functions+='pwd_colour'
 
 # change user@host color based on where I am
 case "$SSH_CONNECTION" in
-    '') COLOUR="%B%{${fg[green]}%}";;
-    *) COLOUR="%B%{${fg[yellow]}%}";;
+    '') COLOUR="%{${fg[green]}%}";;
+    *) COLOUR="%{${fg[yellow]}%}";;
 esac
 
-PS1='%{${fg_bold[red]}%}%(?..%?%b%{${fg_no_bold[white]}%}:% )$COLOUR%n@%m%{${fg[default]}%}$JOBS%b $VIMODE'
-RPS1='$(vcs_prompt) ${PWD_COLOUR}%~%{${fg[default]}%}'
+PS1='%{${fg_bold[red]}%}%(?..%?%b%{${fg_no_bold[white]}%}:% )$(vcs_prompt)%b%%$VIMODE'
+RPS1='$JOBS $COLOUR%n@%m%{${fg[default]}:%}${PWD_COLOUR}%~%{${fg[default]}%}'
