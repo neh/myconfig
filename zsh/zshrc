@@ -1,3 +1,9 @@
+#==============================================================================
+# Initial setup {{{
+
+typeset -ga preexec_functions
+typeset -ga precmd_functions
+typeset -ga chpwd_functions
 
 autoload colors zsh/terminfo
 if [[ "$terminfo[colors]" -ge 8 ]]; then
@@ -6,6 +12,14 @@ fi
 
 export __CURRENT_GIT_BRANCH=
 export EDITOR="vim"
+
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zshhistory
+
+# make sure ^S and ^Q are not mapped to stop/start so they're freed up for 
+# other things (like screen)
+stty stop "" start ""
 
 # Set up the $DISPLAY var to allow vim (and others) to connect back 
 # to X from within remote screen sessions.
@@ -16,14 +30,20 @@ elif [[ "$TERM" == 'screen-bce' ]] && [[ "$SSH_CONNECTION" != '' ]]; then
     [[ -f $HOME/.displayvar ]] && export DISPLAY=$(cat $HOME/.displayvar);
 fi
 
-# Nice directory truncation with a proper ellipsis: %30<…<
+# enable color support of ls and also add handy aliases
+if [ "$TERM" != "dumb" ]; then
+    eval "`dircolors -b`"
+    alias ls='ls --color=auto -h'
+fi
 
-typeset -ga preexec_functions
-typeset -ga precmd_functions
-typeset -ga chpwd_functions
+# }}}
+#==============================================================================
+# Options {{{
+
+setopt autocd
+setopt auto_pushd
 
 setopt nobeep
-setopt autocd
 #setopt extendedglob
 setopt correct
 setopt NO_CLOBBER
@@ -40,48 +60,39 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 setopt HIST_NO_STORE
 
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE=~/.zshhistory
+# }}}
+#==============================================================================
+# Aliases {{{
 
+alias au='sudo apt-get update'
+alias adu='sudo apt-get dist-upgrade'
+alias ai='sudo apt-get install'
+alias air='sudo aptitude -R install'
+alias acs='apt-cache search'
+alias acsn='apt-cache search --names-only'
 
-# enable color support of ls and also add handy aliases
-if [ "$TERM" != "dumb" ]; then
-    eval "`dircolors -b`"
-    alias ls='ls --color=auto -h'
-fi
-alias m4a2ogg='for nam in *.m4a; do nice mplayer -vo null -vc null -ao pcm:fast "$nam" -ao pcm:file="$nam.wav" && nice oggenc -q5 "$nam.wav" -o "$(basename "$nam" .m4a).ogg"; rm "$nam.wav"; done'
-alias au='sudo aptitude update'
-alias afu='sudo aptitude full-upgrade'
+alias scd='screen -X chdir `pwd`'
+alias gcd='cd $(git rev-parse --show-toplevel)'
+
 alias less='less -Mircaf'
 alias ltail='less +F'
 alias vless='vim -u /usr/share/vim/vim71/macros/less.vim'
 alias df='df -h'
-alias acs='apt-cache search'
-alias acsn='apt-cache search --names-only'
-alias ai='sudo aptitude install'
-alias air='sudo aptitude -R install'
 alias psg='ps ax|grep'
 alias asdf='setxkbmap dvorak'
 alias aoeu='setxkbmap us'
-alias xmb='pushd `pwd`; cd $HOME/xmonad/xmonad; runhaskell Setup.lhs build; popd'
-alias xmi='pushd `pwd`; cd $HOME/xmonad/xmonad; rm -f $HOME/bin/xmonad; runhaskell Setup.lhs install --user; popd'
-alias xmbi='xmb && xmi'
 alias hddtemps='for i in /dev/sd? ; do sudo smartctl -d ata -a $i | grep -i tempera ; done'
-alias scd='screen -X chdir `pwd`'
-alias gcd='cd $(git rev-parse --show-toplevel)'
 
 # this one doesn't work right in zsh... fix? (prob. turn into function. don't think zsh aliases take $N.
 #alias topthreads="find /proc/*/status -exec gawk '/^Pid:/ { p=\$2}; /^Name:/ { n=\$2}; /^Threads:/ { t=\$2}; END{ printf(\"%6d %-30s %5d\n\", p, n, t);}' {} \; | sort -k3 -g -r | head -10"
-
-# TODO can I make zsh understand .desktop files (for execution and completion of friendly names)
 
 # hash the cwd to a short ~name
 setopt CDABLEVARS
 hit() { hash -d $1=$PWD }
 
-# make sure ^S and ^Q are not mapped to stop/start so they're freed up for other things (like screen)
-stty stop "" start ""
+# }}}
+#==============================================================================
+# Key bindings {{{
 
 bindkey -v
 bindkey -M vicmd "s" vi-forward-char
@@ -90,16 +101,19 @@ bindkey -M vicmd "n" up-line-or-history
 bindkey "^r" history-incremental-pattern-search-backward
 bindkey "^f" history-incremental-pattern-search-forward
 
+# }}}
+#==============================================================================
+# Completions {{{
 
-# TODO completions don't seem to work for the very first cmd in an new shell. things like C-r don't either.
-
-## Completions
 autoload -U compinit
 compinit -C
 
 ## case-insensitive (all),partial-word and then substring completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*:*:kill:*:processes' command 'ps -axco pid,user,command'
+
+# }}}
+#==============================================================================
 
 ## Some functions used to put the current vcs branch name in my prompt 
 git_prompt_info() {
