@@ -364,6 +364,18 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 "==============================================================================
 " Plugin configs {{{
 
+" Easymotion
+let g:EasyMotion_mapping_f = ',f'
+let g:EasyMotion_mapping_F = ',F'
+let g:EasyMotion_mapping_t = ',t'
+let g:EasyMotion_mapping_T = ',T'
+let g:EasyMotion_mapping_w = ',w'
+let g:EasyMotion_mapping_b = ',b'
+let g:EasyMotion_mapping_e = ',e'
+let g:EasyMotion_mapping_ge = ',ge'
+let g:EasyMotion_mapping_j = ',j'
+let g:EasyMotion_mapping_k = ',k'
+
 " Scratch
 nmap <Leader><tab> :SscratchToggle<cr>
 

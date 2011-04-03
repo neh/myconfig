@@ -67,3 +67,6 @@
 [submodule "vim/vim/bundle/dbext"]
 	path = vim/vim/bundle/dbext
 	url = https://neh@github.com/neh/dbext.vim.git
+[submodule "vim/vim/bundle/easymotion"]
+	path = vim/vim/bundle/easymotion
+	url = https://github.com/Lokaltog/vim-easymotion.git
