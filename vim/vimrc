@@ -83,7 +83,7 @@ autocmd BufReadPost quickfix setlocal nowrap
 " re-read vimrc after writing it
 autocmd BufWritePost \.vimrc :source $HOME/.vimrc
 autocmd BufWritePost */vim/vimrc :source $HOME/.vimrc
-autocmd BufRead vimrc setlocal foldmethod=marker
+autocmd BufRead ?vimrc,?zshrc setlocal foldmethod=marker
 
 " Useful when customizing xterm
 autocmd BufWritePost \.Xdefaults :!xrdb ~/.Xdefaults
