@@ -377,7 +377,7 @@ let g:EasyMotion_mapping_j = '<Leader>,j'
 let g:EasyMotion_mapping_k = '<Leader>,k'
 
 " Scratch
-nmap <Leader><tab> :SscratchToggle<cr>
+nmap <Leader>' :SscratchToggle<cr>
 
 " delimitMate
 let delimitMate_expand_cr = 1
