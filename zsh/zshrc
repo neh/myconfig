@@ -50,7 +50,9 @@ setopt PUSHD_TO_HOME
 # Completion
 
 # Expansion and Globbing
+setopt NO_CASE_GLOB
 #setopt EXTENDEDGLOB
+setopt NUMERIC_GLOB_SORT
 
 ## History
 setopt APPEND_HISTORY
