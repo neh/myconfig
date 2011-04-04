@@ -5,7 +5,10 @@ typeset -ga preexec_functions
 typeset -ga precmd_functions
 typeset -ga chpwd_functions
 
-autoload colors zsh/terminfo
+autoload -U colors zsh/terminfo compinit promptinit
+promptinit
+compinit -C
+
 if [[ "$terminfo[colors]" -ge 8 ]]; then
     colors
 fi
@@ -40,25 +43,36 @@ fi
 #==============================================================================
 # Options {{{
 
+# Changing Directories
 setopt autocd
 setopt auto_pushd
+setopt cdablevars
 
-setopt nobeep
+# Completion
+
+# Expansion and Globbing
 #setopt extendedglob
-setopt correct
-setopt NO_CLOBBER
-setopt prompt_subst
 
 ## History
-setopt HIST_VERIFY
-setopt EXTENDED_HISTORY
-setopt APPEND_HISTORY
-setopt INC_APPEND_HISTORY
-setopt HIST_FIND_NO_DUPS
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_REDUCE_BLANKS
-setopt HIST_NO_STORE
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_find_no_dups
+setopt hist_ignore_all_dups
+setopt hist_no_store
+setopt hist_reduce_blanks
+setopt hist_verify
+setopt inc_append_history
+
+# Input/Output
+setopt correct
+setopt no_clobber
+
+# Prompting
+setopt prompt_subst
+
+# Zle
+setopt nobeep
 
 # }}}
 #==============================================================================
@@ -76,19 +90,15 @@ alias gcd='cd $(git rev-parse --show-toplevel)'
 
 alias less='less -Mircaf'
 alias ltail='less +F'
-alias vless='vim -u /usr/share/vim/vim71/macros/less.vim'
 alias df='df -h'
 alias psg='ps ax|grep'
 alias asdf='setxkbmap dvorak'
 alias aoeu='setxkbmap us'
 alias hddtemps='for i in /dev/sd? ; do sudo smartctl -d ata -a $i | grep -i tempera ; done'
 
-# this one doesn't work right in zsh... fix? (prob. turn into function. don't think zsh aliases take $N.
+# this one doesn't work right in zsh... fix? (prob. turn into function. don't 
+# think zsh aliases take $N.
 #alias topthreads="find /proc/*/status -exec gawk '/^Pid:/ { p=\$2}; /^Name:/ { n=\$2}; /^Threads:/ { t=\$2}; END{ printf(\"%6d %-30s %5d\n\", p, n, t);}' {} \; | sort -k3 -g -r | head -10"
-
-# hash the cwd to a short ~name
-setopt CDABLEVARS
-hit() { hash -d $1=$PWD }
 
 # }}}
 #==============================================================================
@@ -104,9 +114,6 @@ bindkey "^f" history-incremental-pattern-search-forward
 # }}}
 #==============================================================================
 # Completions {{{
-
-autoload -U compinit
-compinit -C
 
 ## case-insensitive (all),partial-word and then substring completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
