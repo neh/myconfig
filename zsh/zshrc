@@ -41,43 +41,43 @@ fi
 # Options {{{
 
 # Changing Directories
-setopt autocd
-setopt auto_pushd
-setopt cdablevars
-setopt pushd_ignore_dups
-setopt pushd_to_home
+setopt AUTOCD
+setopt AUTO_PUSHD
+setopt CDABLEVARS
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_TO_HOME
 
 # Completion
 
 # Expansion and Globbing
-#setopt extendedglob
+#setopt EXTENDEDGLOB
 
 ## History
-setopt append_history
-setopt extended_history
-setopt hist_expire_dups_first
-setopt hist_find_no_dups
-setopt hist_ignore_all_dups
-setopt hist_no_store
-setopt hist_reduce_blanks
-setopt hist_verify
-setopt inc_append_history
+setopt APPEND_HISTORY
+setopt EXTENDED_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_NO_STORE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY
+setopt INC_APPEND_HISTORY
 
 # Input/Output
-setopt no_clobber
-setopt correct
-setopt no_flow_control
+setopt NO_CLOBBER
+setopt CORRECT
+setopt NO_FLOW_CONTROL
 
 # Job Control
-setopt check_jobs
+setopt CHECK_JOBS
 
 # Prompting
-setopt prompt_subst
+setopt PROMPT_SUBST
 
 # Zle
-setopt nobeep
-setopt vi
-setopt zle
+setopt NOBEEP
+setopt VI
+setopt ZLE
 
 # }}}
 #==============================================================================
