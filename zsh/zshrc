@@ -5,19 +5,16 @@ typeset -ga preexec_functions
 typeset -ga precmd_functions
 typeset -ga chpwd_functions
 
-autoload -U colors zsh/terminfo compinit promptinit
-promptinit
+autoload -U colors compinit promptinit zsh/terminfo
+colors
 compinit -C
-
-if [[ "$terminfo[colors]" -ge 8 ]]; then
-    colors
-fi
+promptinit
 
 export __CURRENT_GIT_BRANCH=
 export EDITOR="vim"
 
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=8000
+SAVEHIST=5000
 HISTFILE=~/.zshhistory
 
 # make sure ^S and ^Q are not mapped to stop/start so they're freed up for 
