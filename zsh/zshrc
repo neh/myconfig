@@ -44,6 +44,8 @@ fi
 setopt autocd
 setopt auto_pushd
 setopt cdablevars
+setopt pushd_ignore_dups
+setopt pushd_to_home
 
 # Completion
 
@@ -62,14 +64,20 @@ setopt hist_verify
 setopt inc_append_history
 
 # Input/Output
-setopt correct
 setopt no_clobber
+setopt correct
+setopt no_flow_control
+
+# Job Control
+setopt check_jobs
 
 # Prompting
 setopt prompt_subst
 
 # Zle
 setopt nobeep
+setopt vi
+setopt zle
 
 # }}}
 #==============================================================================
