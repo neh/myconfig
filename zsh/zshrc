@@ -274,4 +274,4 @@ case "$SSH_CONNECTION" in
 esac
 
 PS1='%{${fg_bold[red]}%}%(?..%?%b%{${fg_no_bold[white]}%}:% )$(vcs_prompt)%b%%$VIMODE'
-RPS1='$JOBS $COLOUR%n@%m%{${fg[default]}:%}${PWD_COLOUR}%~%{${fg[default]}%}'
+RPS1='$JOBS $COLOUR%n@%m%{${fg[default]}:%}${PWD_COLOUR}%25<…<%~%{${fg[default]}%}'
