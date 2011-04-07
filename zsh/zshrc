@@ -134,13 +134,14 @@ git_prompt_info() {
     BRANCH=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
     STASH=$(git stash list 2> /dev/null | wc -l)
     if [[ $STASH -gt 0 ]]; then
-        STASHCOUNT="$STASH "
+        chars=(¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹)
+        STASHCOUNT="$STASH:"
     fi
     case $(git status 2> /dev/null | tail -n1) in
         'nothing to commit'*)
-        echo "%{${fg[green]}%}$BRANCH%{${fg[yellow]}%} $STASHCOUNT%b";;
+        echo "%{${fg_bold[yellow]}%}$STASHCOUNT%b%{${fg[green]}%}$BRANCH%b";;
         *)
-        echo "%{${fg_bold[red]}%}$BRANCH%{${fg[yellow]}%} $STASHCOUNT%b";;
+        echo "%{${fg_bold[yellow]}%}$STASHCOUNT%b%{${fg_bold[red]}%}$BRANCH%b";;
     esac
 }
 vcs_prompt_update() {
@@ -273,5 +274,5 @@ case "$SSH_CONNECTION" in
     *) COLOUR="%{${fg[yellow]}%}";;
 esac
 
-PS1='%{${fg_bold[red]}%}%(?..%?%b%{${fg_no_bold[white]}%}:% )$(vcs_prompt)%b%%$VIMODE'
+PS1='%{${fg_bold[red]}%}%(?..%?%b%{${fg_no_bold[white]}%}:% )$(vcs_prompt)%b#$VIMODE'
 RPS1='$JOBS $COLOUR%n@%m%{${fg[default]}:%}${PWD_COLOUR}%25<…<%~%{${fg[default]}%}'
