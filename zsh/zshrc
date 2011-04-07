@@ -252,7 +252,7 @@ zle -N zle-keymap-select
 # Indicate background jobs
 function jobs_indicator {
     if [[ $(jobs | wc -l) -gt 0 ]]; then
-        JOBS=" %{${fg_bold[yellow]}%}*%b"
+        JOBS=" %{${fg_bold[yellow]}%}⚑%b"
     else
         JOBS=""
     fi
