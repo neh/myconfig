@@ -8,6 +8,7 @@ my $config_dir = $Bin;
 my $files = {'cli' => {'gitconfig' => '.gitconfig',
                        'gitexcludes' => '.gitexcludes',
                        'screenrc' => '.screenrc',
+                       'tmux.conf' => '.tmux.conf',
                        'zsh/zshrc' => '.zshrc',
                        'zsh/zshenv' => '.zshenv',
                        'zsh/zsh' => '.zsh',
