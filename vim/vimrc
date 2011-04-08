@@ -29,7 +29,7 @@ set background=dark
 if has('gui_running')
     colo mustang
 else
-    if $TERM =~ '^screen-bce' || $TERM =~ '256'
+    if $TERM =~ '^screen-bce' || $TERM == 'screen-256color' || $TERM =~ '256'
         set t_Co=256
         colo twilight256
     elseif $TERM =~ '^rxvt'
