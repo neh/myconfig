@@ -172,7 +172,11 @@ chpwd_functions+='vcs_chpwd_check'
 #TAB_TITLE_PREFIX='"${USER}:"'
 # when at the shell prompt, show a truncated version of the current path (with
 # standard ~ replacement) as the rest of the title.
-TAB_TITLE_PROMPT='`print -Pn "%~" | sed "s:\([~/][^/]*\)/.*/:\1...:"`'
+case "$TMUX" in
+    '') ELLIPSIS="...";;
+    *) ELLIPSIS="…";;
+esac
+TAB_TITLE_PROMPT='`print -Pn "%~" | sed "s:\([~/][^/]*\)/.*/:\1$ELLIPSIS:"`'
 # when running a command, show the name of the command as the rest of the
 # title (truncate to drop the path to the command)
 # also strip out sudo (replace with *), VAR=val
