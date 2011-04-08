@@ -205,7 +205,7 @@ set directory=~/.vim/backup
 " Enable mouse usage in terminals
 " (allows window resizing, mousewheel scrolling, proper text highlighting)
 set mouse=a
-set ttymouse=xterm2
+set ttymouse=xterm
 
 " Show trailing whitespace and tabs as visible chars
 set list
