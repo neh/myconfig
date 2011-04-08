@@ -52,6 +52,7 @@ import XMonad.Prompt.AppendFile
 import XMonad.Prompt.Man
 import XMonad.Prompt.Shell
 import XMonad.Prompt.Window
+import XMonad.Util.Paste
 import XMonad.Util.Run
 import XMonad.Util.NamedWindows
 import XMonad.Util.WorkspaceCompare
@@ -438,7 +439,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         --(x:_) -> if fromJust (W.findTag x ws) == curr
                      --then killWindow x
                      --else bringWindow x
-        (x:_) -> killWindow x
+        (x:_) -> sendKeyWindow controlMask xK_underscore x
         []    -> action
 
 
