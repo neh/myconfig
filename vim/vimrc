@@ -25,13 +25,14 @@ endif
 autocmd BufEnter * let &titlestring = expand("%:t")
 
 set background=dark
+let g:solarized_underline=0
 " Set up color settings and scheme based on terminal type
 if has('gui_running')
     colo mustang
 else
     if $TERM =~ '^screen-bce' || $TERM == 'screen-256color' || $TERM =~ '256'
-        set t_Co=256
-        colo twilight256
+        set t_Co=16
+        colo solarized
     elseif $TERM =~ '^rxvt'
         set t_Co=88
         colo inkpot
@@ -39,6 +40,7 @@ else
         set t_Co=8
     else
         set t_Co=16
+        colo solarized
     endif
 endif
 
@@ -128,12 +130,12 @@ hi DiffChange term=none cterm=none ctermfg=black ctermbg=blue
 hi DiffDelete term=none cterm=none ctermfg=black ctermbg=red
 hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
 " statusline
-hi StatusLine ctermfg=185 ctermbg=black
+"hi StatusLine ctermfg=185 ctermbg=black
 " cursor line
-hi CursorLine term=none cterm=none ctermbg=234 gui=none guibg=#333333
+"hi CursorLine term=none cterm=none ctermbg=234 gui=none guibg=#333333
 " folding
-hi Folded term=none cterm=bold ctermbg=4 ctermfg=15 gui=none guibg=#333333
-hi FoldColumn term=none cterm=none ctermbg=4 ctermfg=15 gui=none guibg=#333333
+"hi Folded term=none cterm=bold ctermbg=4 ctermfg=15 gui=none guibg=#333333
+"hi FoldColumn term=none cterm=none ctermbg=4 ctermfg=15 gui=none guibg=#333333
 " conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
