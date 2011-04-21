@@ -242,12 +242,7 @@ precmd_functions+='title_precmd'
 
 function zle-keymap-select {
     # Notification if prompt is in vi command mode
-    #VIMODE="${${KEYMAP/vicmd/${fg_bold[red]}!%b}/(main|viins)/}"
-    if [[ $KEYMAP = vicmd ]]; then
-        local VIMODE="%{${fg_bold[red]}%}!%b"
-    else
-        local VIMODE=""
-    fi
+    local VIMODE="${${KEYMAP/vicmd/${fg_bold[red]}!%b}/(main|viins)/}"
 
     zle reset-prompt
 }
@@ -278,5 +273,5 @@ case "$SSH_CONNECTION" in
     *) COLOUR="%{${fg[yellow]}%}";;
 esac
 
-PS1='%{${fg_bold[red]}%}%(?..%?%b%{${fg_no_bold[white]}%}:% )$(vcs_prompt)%b#$VIMODE'
+PS1='%{${fg_bold[red]}%}%(?..%?%b%{${fg_no_bold[white]}%}:)$(vcs_prompt)%b%{${fg[green]}%}#%b$VIMODE'
 RPS1='$JOBS $COLOUR%n@%m%{${fg[default]}:%}${PWD_COLOUR}%3(c.…/.)%2c%{${fg[default]}%}'
