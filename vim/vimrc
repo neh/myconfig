@@ -32,6 +32,7 @@ if has('gui_running')
 else
     if $TERM =~ '^screen-bce' || $TERM == 'screen-256color' || $TERM =~ '256'
         set t_Co=16
+        let g:solarized_visibility = "low"
         colo solarized
     elseif $TERM =~ '^rxvt'
         set t_Co=88
@@ -117,18 +118,18 @@ hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red ctermbg=bla
 
 " Change some highlight group colours, overriding the colour scheme
 " search terms
-hi Search term=bold cterm=bold ctermfg=black ctermbg=green
-hi IncSearch term=bold cterm=bold ctermfg=yellow ctermbg=red
+"hi Search term=bold cterm=bold ctermfg=black ctermbg=green
+"hi IncSearch term=bold cterm=bold ctermfg=yellow ctermbg=red
 " todo
-hi Todo term=bold cterm=bold ctermfg=red ctermbg=yellow
+"hi Todo term=bold cterm=bold ctermfg=red ctermbg=yellow
 " popup menu
-hi Pmenu term=none cterm=none ctermfg=250 ctermbg=238
-hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=250
+"hi Pmenu term=none cterm=none ctermfg=250 ctermbg=238
+"hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=250
 " diff viewer
-hi DiffAdd term=none cterm=none ctermfg=black ctermbg=green
-hi DiffChange term=none cterm=none ctermfg=black ctermbg=blue
-hi DiffDelete term=none cterm=none ctermfg=black ctermbg=red
-hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
+"hi DiffAdd term=none cterm=none ctermfg=black ctermbg=green
+"hi DiffChange term=none cterm=none ctermfg=black ctermbg=blue
+"hi DiffDelete term=none cterm=none ctermfg=black ctermbg=red
+"hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
 " statusline
 "hi StatusLine ctermfg=185 ctermbg=black
 " cursor line
@@ -140,8 +141,8 @@ hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " make special chars (tabs, trailing spaces, etc) barely visible
-hi NonText cterm=none ctermfg=green
-hi SpecialKey cterm=none ctermfg=235
+"hi NonText cterm=none ctermfg=green
+"hi SpecialKey cterm=none ctermfg=235
 
 
 " }}}
