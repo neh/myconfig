@@ -367,6 +367,12 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 "==============================================================================
 " Plugin configs {{{
 
+" Tagbar
+nmap <Leader>. :TagbarToggle<CR>
+let g:tagbar_autoclose = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_usearrows = 1
+
 " Easymotion
 let g:EasyMotion_mapping_f = '<Leader>,f'
 let g:EasyMotion_mapping_F = '<Leader>,F'
@@ -574,3 +580,4 @@ function! <SID>SynStack()
 endfunc
 
 " }}}
+
