@@ -73,3 +73,9 @@
 [submodule "vim/vim/bundle/gist"]
 	path = vim/vim/bundle/gist
 	url = https://github.com/mattn/gist-vim.git
+[submodule "vim/vim/bundle/haskellConceal"]
+	path = vim/vim/bundle/haskellConceal
+	url = https://github.com/Twinside/vim-haskellConceal.git
+[submodule "vim/vim/bundle/cute-python"]
+	path = vim/vim/bundle/cute-python
+	url = https://github.com/ehamberg/vim-cute-python.git
