@@ -542,7 +542,7 @@ function! s:Cursor_Moved()
 endfunction
 " highlight the current line (all the way to the right edge), but only if the 
 " cursor has moved to a new line
-autocmd CursorMoved,CursorMovedI * call s:Cursor_Moved()
+"autocmd CursorMoved,CursorMovedI * call s:Cursor_Moved()
 let g:last_screen_pos = 0
 let g:last_file_pos = 0
 
