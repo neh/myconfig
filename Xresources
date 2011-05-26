@@ -64,9 +64,8 @@
 !!! Rxvt settings
 
 !To set font manually: printf '\e]710;%s\007' "xft:Consolas:size=12"
-URxvt*font:	xft:Liberation Mono:pixelsize=13,\
-			xft:Arial Unicode MS:pixelsize=13,\
-			xft:Everson Mono Unicode:pixelsize=13
+!!xft:Arial Unicode MS:pixelsize=13,\
+URxvt*font:	xft:Deja Vu Sans Mono:size=10
 URxvt*searchable-scrollback: CS-s
 URxvt.cutchars: "()*,<>[]{}|'
 URxvt*secondaryScroll: true
