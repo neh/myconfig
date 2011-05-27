@@ -421,6 +421,7 @@ let g:gundo_map_move_newer="n"
 
 " AutoComplPop
 let g:acp_mappingDriven = 1
+let g:acp_behaviorKeywordLength = 4
 "let g:acp_behaviorSnipmateLength = 1
 
 " Surround
