@@ -107,6 +107,11 @@ let php_folding = 1
 autocmd FileType javascript setlocal foldmethod=marker foldmarker={,}
 autocmd FileType css,php setlocal foldmethod=syntax
 
+let php_sql_query = 1
+let php_htmlInStrings = 1
+let php_parent_error_close = 1
+let php_parent_error_open = 1
+
 
 " }}}
 "==============================================================================
