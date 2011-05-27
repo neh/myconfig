@@ -144,6 +144,10 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 "hi NonText cterm=none ctermfg=green
 "hi SpecialKey cterm=none ctermfg=235
 
+" change the default EasyMotion shading to something more readable with Solarized
+hi link EasyMotionTarget ErrorMsg
+hi link EasyMotionShade  Comment
+
 
 " }}}
 "==============================================================================
@@ -580,4 +584,5 @@ function! <SID>SynStack()
 endfunc
 
 " }}}
+
 
