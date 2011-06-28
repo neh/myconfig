@@ -79,6 +79,3 @@
 [submodule "vim/vim/bundle/cute-python"]
 	path = vim/vim/bundle/cute-python
 	url = https://github.com/ehamberg/vim-cute-python.git
-[submodule "vim/vim/bundle/tagbar"]
-	path = vim/vim/bundle/tagbar
-	url = https://github.com/majutsushi/tagbar.git
