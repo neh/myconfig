@@ -25,15 +25,13 @@ endif
 autocmd BufEnter * let &titlestring = expand("%:t")
 
 set background=dark
-let g:solarized_underline=0
 " Set up color settings and scheme based on terminal type
 if has('gui_running')
     colo mustang
 else
     if $TERM =~ '^screen-bce' || $TERM == 'screen-256color' || $TERM =~ '256'
-        set t_Co=16
-        let g:solarized_visibility = "low"
-        colo solarized
+        set t_Co=256
+        colo twilight256
     elseif $TERM =~ '^rxvt'
         set t_Co=88
         colo inkpot
@@ -123,35 +121,35 @@ hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red ctermbg=bla
 
 " Change some highlight group colours, overriding the colour scheme
 " search terms
-"hi Search term=bold cterm=bold ctermfg=black ctermbg=green
-"hi IncSearch term=bold cterm=bold ctermfg=yellow ctermbg=red
+hi Search term=bold cterm=bold ctermfg=black ctermbg=green
+hi IncSearch term=bold cterm=bold ctermfg=yellow ctermbg=red
 " todo
-"hi Todo term=bold cterm=bold ctermfg=red ctermbg=yellow
+hi Todo term=bold cterm=bold ctermfg=red ctermbg=yellow
 " popup menu
-"hi Pmenu term=none cterm=none ctermfg=250 ctermbg=238
-"hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=250
+hi Pmenu term=none cterm=none ctermfg=250 ctermbg=238
+hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=250
 " diff viewer
-"hi DiffAdd term=none cterm=none ctermfg=black ctermbg=green
-"hi DiffChange term=none cterm=none ctermfg=black ctermbg=blue
-"hi DiffDelete term=none cterm=none ctermfg=black ctermbg=red
-"hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
+hi DiffAdd term=none cterm=none ctermfg=black ctermbg=green
+hi DiffChange term=none cterm=none ctermfg=black ctermbg=blue
+hi DiffDelete term=none cterm=none ctermfg=black ctermbg=red
+hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
 " statusline
-"hi StatusLine ctermfg=185 ctermbg=black
+hi StatusLine ctermfg=185 ctermbg=black
 " cursor line
-"hi CursorLine term=none cterm=none ctermbg=234 gui=none guibg=#333333
+hi CursorLine term=none cterm=none ctermbg=234 gui=none guibg=#333333
 " folding
-"hi Folded term=none cterm=bold ctermbg=4 ctermfg=15 gui=none guibg=#333333
-"hi FoldColumn term=none cterm=none ctermbg=4 ctermfg=15 gui=none guibg=#333333
+hi Folded term=none cterm=bold ctermbg=4 ctermfg=15 gui=none guibg=#333333
+hi FoldColumn term=none cterm=none ctermbg=4 ctermfg=15 gui=none guibg=#333333
 " conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " make special chars (tabs, trailing spaces, etc) barely visible
-"hi NonText cterm=none ctermfg=green
-"hi SpecialKey cterm=none ctermfg=235
+hi NonText cterm=none ctermfg=green
+hi SpecialKey cterm=none ctermfg=235
 
 " change the default EasyMotion shading to something more readable with Solarized
-hi link EasyMotionTarget ErrorMsg
-hi link EasyMotionShade  Comment
+"hi link EasyMotionTarget ErrorMsg
+"hi link EasyMotionShade  Comment
 
 
 " }}}
@@ -225,7 +223,7 @@ set listchars=tab:➜\ ,trail:·,extends:…,precedes:…
 
 " Mark column 80, method depending on vim version
 if exists('+colorcolumn')
-    "hi ColorColumn ctermbg=232 guibg=#111111
+    hi ColorColumn ctermbg=232 guibg=#111111
     set cc=80
 endif
 
