@@ -237,7 +237,7 @@ myPConfig = defaultXPConfig
 -- to avoid its effects for some apps
 myPreManageHook :: ManageHook
 myPreManageHook = composeAll
-  [ title     =? "handy"                   --> (doSetRole "handy" >> doCenterFloat)
+  [ title     =? "handy"                   --> doCenterFloat
   , className =? "feh"                     --> doCenterFloat
   , className =? "MPlayer"                 --> doCenterFloat
   ]
@@ -329,7 +329,7 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,                 xK_r     ), toggleFloat)
   , ((modMask,                 xK_z     ), withFocused (sendMessage . maximizeRestore))
 
-  , ((modMask,                 xK_o     ), toggleWindow (role =? "handy")
+  , ((modMask,                 xK_o     ), toggleWindow (name =? "handy")
       (spawn $ XMonad.terminal conf ++
       " -title handy -geometry "++ handySize ++" -e tmux attach-session -t handy"))
 
@@ -414,6 +414,7 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       _ -> "105x55"
 
     role = stringProperty "WM_WINDOW_ROLE"
+    name = stringProperty "WM_NAME"
 
     toggleFloat = withWindowSet $ \ws ->
                     if M.member (fromJust $ W.peek ws) (W.floating ws)
