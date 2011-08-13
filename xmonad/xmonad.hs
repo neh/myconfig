@@ -1,3 +1,5 @@
+import System.Posix.Unistd
+
 import XMonad hiding (Tall)
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
@@ -83,6 +85,7 @@ getWellKnownName dbus = tryGetName `catchDyn` (\ (DBus.Error _ _) ->
 
 main :: IO ()
 main = withConnection Session $ \ dbus -> do
+  hostname <- fmap nodeName getSystemID
   putStrLn "Getting well-known name."
   getWellKnownName dbus
   putStrLn "Got name, starting XMonad."
@@ -95,7 +98,7 @@ main = withConnection Session $ \ dbus -> do
     , focusedBorderColor = fg
     , modMask            = mod4Mask
     , workspaces         = ["im", "comm", "files", "web", "vm"]
-    , keys               = myKeys
+    , keys               = myKeys hostname
     , mouseBindings      = myMouse
     , startupHook        = adjustEventInput
     , handleEventHook    = focusOnMouseMove
@@ -106,7 +109,7 @@ main = withConnection Session $ \ dbus -> do
                                          (underMouse (0.5, 0.5))))
                            <+> manageDocks
                            <+> myManageHook
-    , logHook            = myLog dbus
+    , logHook            = myLog dbus hostname
                            -- >> fadeInactiveLogHook 0x99999999
                            >> setWMName "LG3D"
     , layoutHook         = smartBorders
@@ -145,7 +148,7 @@ main = withConnection Session $ \ dbus -> do
       read = withIM (0.12) (ClassName "Rox") $ Full
 
 
-myLog dbus = withWindowSet $ \ws -> do
+myLog dbus hostname = withWindowSet $ \ws -> do
         dynamicLogWithPP $ defaultPP
           { ppCurrent         = pangoStyle "#be462a" "#dfd8c3" "bold"
           , ppUrgent          = pangoUrgent "#d7c529"
@@ -155,7 +158,7 @@ myLog dbus = withWindowSet $ \ws -> do
           , ppWsSep           = ""
           , ppSep             = " "
           , ppSort            = DO.getSortByOrder
-          , ppTitle           = pangoBold "#efefef" . shorten 90
+          , ppTitle           = pangoBold "#efefef" . shorten titleLength
           , ppOrder           = \(workspaces:layout:title:xs) ->
                                  (myWCount ws:workspaces:title:xs)
           , ppOutput   = \ str -> do
@@ -171,6 +174,11 @@ myLog dbus = withWindowSet $ \ws -> do
               return ()
           }
   where
+      titleLength = case hostname of
+        "tak" -> 50
+        "appa" -> 80
+        _ -> 60
+
       -- myWCount provides a count of open windows, and
       -- indicates which has focus. e.g. 2/4 means that
       -- the second window of four is focused.
@@ -283,7 +291,7 @@ doSetRole rl = ask >>= \w ->
   ) >> idHook
 
 
-myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
+myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   [ ((modMask,                 xK_c     ), spawn $ XMonad.terminal conf)
   , ((modMask, xK_a), submap . M.fromList $
     [ ((0, xK_e), spawn "appmenu")
@@ -323,7 +331,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask,                 xK_o     ), toggleWindow (role =? "handy")
       (spawn $ XMonad.terminal conf ++
-      " -title handy -geometry 105x65 -e tmux attach-session -t handy"))
+      " -title handy -geometry "++ handySize ++" -e tmux attach-session -t handy"))
 
   , ((modMask, xK_g), submap . M.fromList $
     [ ((0, xK_m), raiseNext (className =? "MPlayer"))
@@ -400,6 +408,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- mod-control-[1..9]   %! Copy client to workspace N
   zip (zip (repeat (modMask .|. controlMask)) [xK_1..xK_9]) (map (withNthWorkspace copy) [0..])
   where
+    handySize = case hostname of
+      "tak" -> "105x44"
+      "appa" -> "105x65"
+      _ -> "105x55"
+
     role = stringProperty "WM_WINDOW_ROLE"
 
     toggleFloat = withWindowSet $ \ws ->
