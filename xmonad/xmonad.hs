@@ -70,7 +70,6 @@ q ~? x = fmap (=~ x) q
 bg = "#222222"
 fg = "#f3431b"
 fn = "-*-terminal-medium-r-*-*-17-*-*-*-*-*-iso8859-*"
---fn = "-*-andale mono-medium-r-*-*-17-*-*-*-*-*-*-*"
 
 
 getWellKnownName :: Connection -> IO ()
@@ -288,16 +287,6 @@ myManageHook = composeAll
         then addHiddenWorkspace tg
         else return()
 
--- Apparently this function is a bad idea, since it likely
--- violates the ICCCM. I only use it as a workaround for
--- apps that can't set their own role, like urxvt.
-doSetRole rl = ask >>= \w ->
-  (liftX $ withDisplay $ \dpy -> do
-    r <- getAtom "WM_WINDOW_ROLE"
-    t <- getAtom "STRING"
-    io $ changeProperty8 dpy w r t propModeReplace
-         (map (fromIntegral . ord) rl)
-  ) >> idHook
 
 
 myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -312,7 +301,6 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xK_t), appendFilePrompt myPConfig "/home/nathan/notes/s-o-c")
     ])
 
-  --, ((modMask,                 xK_apostrophe ), spawn "mpc --no-status toggle")
   , ((0            , 0x1008ff14), spawn "mpc --no-status toggle")
   , ((0            , 0x1008ff16), spawn "mpc --no-status prev")
   , ((0            , 0x1008ff17), spawn "mpc --no-status next")
@@ -347,7 +335,7 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xK_f), raiseNext (className =? "Rox"))
     , ((0, xK_t), raiseNext (title ~? "mythfrontend(.real)?"))
     ])
-  , ((modMask,                 xK_b     ), raiseNext (className ~? "(Firefox|Namoroka|Google-chrome)") )
+  , ((modMask,                 xK_b     ), raiseNext (className ~? "(Firefox|Google-chrome)") )
 
   , ((modMask,                 xK_space ), sendMessage NextLayout)
   , ((modMask .|. shiftMask,   xK_space ), setLayout $ XMonad.layoutHook conf)
