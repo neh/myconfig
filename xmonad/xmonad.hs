@@ -182,9 +182,9 @@ myLog dbus hostname = withWindowSet $ \ws -> do
           }
   where
       titleLength = case hostname of
-        "tak" -> 50
-        "appa" -> 80
-        _ -> 70
+        "tak" -> 70
+        "appa" -> 100
+        _ -> 90
 
       -- myWCount provides a count of open windows, and
       -- indicates which has focus. e.g. 2/4 means that
