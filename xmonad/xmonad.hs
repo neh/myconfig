@@ -184,7 +184,7 @@ myLog dbus hostname = withWindowSet $ \ws -> do
       titleLength = case hostname of
         "tak" -> 50
         "appa" -> 80
-        _ -> 60
+        _ -> 70
 
       -- myWCount provides a count of open windows, and
       -- indicates which has focus. e.g. 2/4 means that
@@ -417,8 +417,7 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   where
     handySize = case hostname of
       "tak" -> "105x44"
-      "appa" -> "105x65"
-      _ -> "105x55"
+      _ -> "105x65"
 
     role = stringProperty "WM_WINDOW_ROLE"
     name = stringProperty "WM_NAME"
