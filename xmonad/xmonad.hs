@@ -336,7 +336,7 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,                 xK_r     ), toggleFloat)
   , ((modMask,                 xK_z     ), withFocused (sendMessage . maximizeRestore))
 
-  , ((modMask,                 xK_o     ), toggleWindow (name =? "handy")
+  , ((modMask,                 xK_o     ), toggleWindow (title =? "handy")
       (spawn $ XMonad.terminal conf ++
       " -title handy -geometry "++ handySize ++" -e tmux attach-session -t handy"))
 
@@ -420,7 +420,6 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       _ -> "105x65"
 
     role = stringProperty "WM_WINDOW_ROLE"
-    name = stringProperty "WM_NAME"
 
     toggleFloat = withWindowSet $ \ws ->
                     if M.member (fromJust $ W.peek ws) (W.floating ws)
