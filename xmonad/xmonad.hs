@@ -98,7 +98,7 @@ main = withConnection Session $ \ dbus -> do
     , normalBorderColor  = "#222222"
     , focusedBorderColor = fg
     , modMask            = mod4Mask
-    , workspaces         = ["im", "comm", "files", "web", "vm"]
+    , workspaces         = myWorkSpaces hostname
     , keys               = myKeys hostname
     , mouseBindings      = myMouse
     , startupHook        = adjustEventInput
@@ -149,6 +149,10 @@ main = withConnection Session $ \ dbus -> do
              withIM (0.15) (Role "gimp-dock") Full
       read = withIM (0.12) (ClassName "Rox") $ Full
 
+
+myWorkSpaces hostname = case hostname of
+    "nathan-desktop" -> ["mon", "comm", "files", "d", "web", "lose", "vm"]
+    _ -> ["im", "comm", "files", "web", "vm"]
 
 myLog dbus hostname = withWindowSet $ \ws -> do
         dynamicLogWithPP $ defaultPP
