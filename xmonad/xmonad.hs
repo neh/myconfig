@@ -29,6 +29,7 @@ import XMonad.Actions.WindowGo
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.FadeInactive
+import XMonad.Hooks.ICCCMFocus
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.Place
@@ -111,6 +112,7 @@ main = withConnection Session $ \ dbus -> do
                            <+> myManageHook
     , logHook            = myLog dbus hostname
                            -- >> fadeInactiveLogHook 0x99999999
+                           >> takeTopFocus
                            >> setWMName "LG3D"
     , layoutHook         = smartBorders
                            $ layoutHintsWithPlacement (0.5, 0.5)
