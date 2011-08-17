@@ -169,7 +169,7 @@ myLog dbus hostname = withWindowSet $ \ws -> do
           , ppOrder           = \(workspaces:layout:title:xs) ->
                                  (myWCount ws:workspaces:title:xs)
           , ppOutput   = \ str -> do
-              let str'  = "<span font=\"Liberation Sans Mono\">" ++ str ++ 
+              let str'  = "<span font=\"Ubuntu\">" ++ str ++
                           "</span>"
               msg <- newSignal "/org/xmonad/Log" "org.xmonad.Log" 
                          "Update"
