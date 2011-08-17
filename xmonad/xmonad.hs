@@ -269,6 +269,8 @@ myManageHook = composeAll
   , title     ~? ".*VirtualBox.*"          --> doNewWS "vm"
   , className =? "Savebox"                 --> doOpenUnder
   , className =? "rdesktop"                --> doNewWS "rdp"
+  , role      =? "buddy_list"              --> doFloat
+  , role      =? "conversation"            --> doFloat
   ]
   where
     unFloat = ask >>= doF . W.sink
