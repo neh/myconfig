@@ -127,8 +127,8 @@ main = withConnection Session $ \ dbus -> do
                            $ onWorkspace "files" file
                            $ onWorkspace "gimp" gimp
                            $ onWorkspace "read" read
-                           $ onWorkspace "d" (reflectHoriz tp)
-                           $ onWorkspace "mon" monlayout
+                           $ onWorkspace "d" ((reflectHoriz tp) ||| Full)
+                           $ onWorkspace "mon" (monlayout ||| Full)
                            $ tp
                            ||| rtp
                            ||| rtiled
@@ -143,7 +143,7 @@ main = withConnection Session $ \ dbus -> do
       tiled = HintedTile 1 (3%100) 0.648 TopLeft Tall
       rtiled = Mag.magnifier' (ResizableTall 1 (3%100) 0.648 [])
       tp = TwoPane 0.03 0.62
-      monlayout = withIM (0.39) (ClassName "Gnome-terminal") $ Full
+      monlayout = withIM (0.34) (ClassName "Gnome-terminal") $ Full
       rtp = Mirror $ TwoPane 0.03 0.6
       im = withIM (0.13) (Role "contact_list") $ ResizableTall 1 (1/100) (0.40) [1]
       rgrid = Grid True
