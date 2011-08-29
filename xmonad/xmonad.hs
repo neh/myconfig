@@ -326,6 +326,8 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,                 xK_r     ), toggleFloat)
   , ((modMask,                 xK_z     ), withFocused (sendMessage . maximizeRestore))
 
+  , ((modMask,                 xK_i     ), windows $ W.greedyView "plan")
+
   , ((modMask,                 xK_o     ), toggleWindow (title =? "handy")
       (spawn $ XMonad.terminal conf ++
       " -title handy -geometry "++ handySize ++" -e tmux attach-session -t handy"))
