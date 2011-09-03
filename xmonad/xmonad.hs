@@ -350,7 +350,7 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   --, ((mod1Mask,                xK_Tab   ), toggleWS )
   , ((modMask .|. shiftMask,    xK_Tab   ), toggleWS )
-  --, ((modMask,                  xK_Tab   ), toggleWS )
+  , ((modMask,                  xK_Tab   ), toggleWS )
 
   , ((modMask,                 xK_F12   ), spawn "gnome-screensaver-command --lock")
 
