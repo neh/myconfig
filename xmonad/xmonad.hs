@@ -326,7 +326,7 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,                 xK_r     ), toggleFloat)
   , ((modMask,                 xK_z     ), withFocused (sendMessage . maximizeRestore))
 
-  , ((modMask,                 xK_i     ), windows $ W.greedyView "plan")
+  , ((modMask,                 xK_i     ), windows $ W.greedyView "me")
 
   , ((modMask,                 xK_o     ), toggleWindow (title =? "handy")
       (spawn $ XMonad.terminal conf ++
