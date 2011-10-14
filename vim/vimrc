@@ -376,6 +376,9 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 "==============================================================================
 " Plugin configs {{{
 
+" Statline
+let g:statline_fugitive = 1
+
 " Syntastic
 let g:syntastic_auto_loc_list=1
 

@@ -88,3 +88,6 @@
 [submodule "vim/vim/bundle/syntastic"]
 	path = vim/vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
+[submodule "vim/vim/bundle/statline"]
+	path = vim/vim/bundle/statline
+	url = https://github.com/millermedeiros/vim-statline.git
