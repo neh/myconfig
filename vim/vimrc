@@ -376,6 +376,9 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 "==============================================================================
 " Plugin configs {{{
 
+" Syntastic
+let g:syntastic_auto_loc_list=1
+
 " Tagbar
 nmap <Leader>. :TagbarToggle<CR>
 let g:tagbar_autoclose = 1
