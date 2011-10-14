@@ -206,7 +206,7 @@ set wildmode=longest,list
 
 set statusline=%f\ %1*%m%r%*%h%w\ %{fugitive#statusline()}%=[%{&ff}\ %{strlen(&fenc)?&fenc:'none'}\ %{&ft}]\ [%LL\ %P\ %l,%v]
 " Highlights modified marker in statusline
-hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
+"hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
 
 " Put backup/swap files all in one place
 set backupdir=~/.vim/backup
@@ -375,6 +375,10 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 "==============================================================================
 " Plugin configs {{{
+
+" Syntastic
+let g:syntastic_auto_loc_list=1
+let g:syntastic_enable_signs=1
 
 " Tagbar
 nmap <Leader>. :TagbarToggle<CR>
