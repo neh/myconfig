@@ -91,3 +91,6 @@
 [submodule "vim/vim/bundle/statline"]
 	path = vim/vim/bundle/statline
 	url = https://github.com/millermedeiros/vim-statline.git
+[submodule "vim/vim/bundle/markdown"]
+	path = vim/vim/bundle/markdown
+	url = https://github.com/tpope/vim-markdown.git
