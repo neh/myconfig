@@ -97,3 +97,6 @@
 [submodule "vim/vim/bundle/json"]
 	path = vim/vim/bundle/json
 	url = https://github.com/leshill/vim-json.git
+[submodule "vim/vim/bundle/CamelCaseMotion"]
+	path = vim/vim/bundle/CamelCaseMotion
+	url = https://github.com/bkad/CamelCaseMotion.git
