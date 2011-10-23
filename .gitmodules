@@ -103,3 +103,6 @@
 [submodule "vim/vim/bundle/javascript"]
 	path = vim/vim/bundle/javascript
 	url = https://github.com/pangloss/vim-javascript.git
+[submodule "vim/vim/bundle/PIV"]
+	path = vim/vim/bundle/PIV
+	url = https://github.com/spf13/PIV.git
