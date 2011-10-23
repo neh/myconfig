@@ -5,7 +5,8 @@ typeset -ga preexec_functions
 typeset -ga precmd_functions
 typeset -ga chpwd_functions
 
-autoload -U colors compinit promptinit zsh/terminfo
+autoload -U colors compinit promptinit zsh/terminfo edit-command-line
+zle -N edit-command-line
 colors
 compinit -C
 promptinit
@@ -117,6 +118,8 @@ bindkey -M vicmd "t" down-line-or-history
 bindkey -M vicmd "n" up-line-or-history
 bindkey "^r" history-incremental-pattern-search-backward
 bindkey "^f" history-incremental-pattern-search-forward
+
+bindkey -M vicmd "v" edit-command-line
 
 # }}}
 #==============================================================================
