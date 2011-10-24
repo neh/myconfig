@@ -88,9 +88,6 @@
 [submodule "vim/vim/bundle/syntastic"]
 	path = vim/vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule "vim/vim/bundle/statline"]
-	path = vim/vim/bundle/statline
-	url = https://github.com/millermedeiros/vim-statline.git
 [submodule "vim/vim/bundle/markdown"]
 	path = vim/vim/bundle/markdown
 	url = https://github.com/tpope/vim-markdown.git
@@ -106,3 +103,6 @@
 [submodule "vim/vim/bundle/PIV"]
 	path = vim/vim/bundle/PIV
 	url = https://github.com/spf13/PIV.git
+[submodule "vim/vim/bundle/statline"]
+	path = vim/vim/bundle/statline
+	url = git@github.com:neh/vim-statline.git
