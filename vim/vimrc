@@ -7,7 +7,8 @@ autocmd!
 
 " Set up pathogen for loading plugins
 filetype off
-let g:pathogen_disabled = ["supertab"]
+"let g:pathogen_disabled = ["supertab"]
+let g:pathogen_disabled = ["autocomplpop"]
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
@@ -466,9 +467,8 @@ let g:NERDTreeAutoCenter=1
 let g:NERDTreeAutoCenterThreshold=6
 
 " SuperTab
-let g:SuperTabMappingForward = '<c-n>'
-let g:SuperTabMappingBackward = '<c-p>'
 let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabContextDefaultCompletionType = '<c-p>'
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabLongestEnhanced = 1
 
