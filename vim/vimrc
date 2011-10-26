@@ -204,7 +204,7 @@ set completeopt=longest,menuone
 set wildmenu
 set wildmode=longest,list
 
-set statusline=%f\ %1*%m%r%*%h%w\ %{fugitive#statusline()}%=[%{&ff}\ %{strlen(&fenc)?&fenc:'none'}\ %{&ft}]\ [%LL\ %P\ %l,%v]
+"set statusline=%f\ %1*%m%r%*%h%w\ %{fugitive#statusline()}%=[%{&ff}\ %{strlen(&fenc)?&fenc:'none'}\ %{&ft}]\ [%LL\ %P\ %l,%v]
 " Highlights modified marker in statusline
 "hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
 
