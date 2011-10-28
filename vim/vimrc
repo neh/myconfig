@@ -48,6 +48,8 @@ endif
 let $PAGER=''
 runtime! ftplugin/man.vim
 
+runtime macros/matchit.vim
+
 " Pull in dbext database profiles if they exist
 if filereadable($HOME.'/dbext_profiles')
     source $HOME/dbext_profiles
