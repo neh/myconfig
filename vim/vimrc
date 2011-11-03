@@ -395,7 +395,7 @@ xmap <silent> iw <Plug>CamelCaseMotion_iw
 let g:statline_fugitive = 1
 
 " Syntastic
-let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_loc_list=2
 let g:syntastic_enable_signs=1
 
 " Tagbar
