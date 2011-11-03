@@ -443,7 +443,6 @@ let g:space_disable_select_mode = 1
 let g:space_no_search = 1
 
 " Gundo
-nnoremap <F3> :GundoToggle<CR>
 let g:gundo_map_move_older="t"
 let g:gundo_map_move_newer="n"
 
