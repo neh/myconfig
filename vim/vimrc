@@ -233,7 +233,6 @@ if exists('+colorcolumn')
 endif
 
 if v:version >= '703'
-    set relativenumber
     set undodir=~/.vim/undo
     set undofile
 endif
