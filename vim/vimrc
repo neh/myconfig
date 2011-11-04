@@ -32,7 +32,7 @@ if has('gui_running')
 else
     if $TERM =~ '^screen-bce' || $TERM == 'screen-256color' || $TERM =~ '256'
         set t_Co=256
-        colo molokai
+        colo mango
     elseif $TERM =~ '^rxvt'
         set t_Co=88
         colo inkpot
