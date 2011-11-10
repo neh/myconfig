@@ -23,6 +23,7 @@ hi White    ctermfg=255         ctermbg=NONE        cterm=NONE
 " }
 
 " SyntaxHighlighting: {
+hi Visual         ctermfg=255         ctermbg=240         cterm=NONE
 hi CursorLine     ctermfg=NONE        ctermbg=234         cterm=NONE
 hi Normal         ctermfg=255         ctermbg=NONE        cterm=NONE
 hi Comment        ctermfg=240         ctermbg=NONE        cterm=NONE
