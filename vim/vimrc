@@ -73,7 +73,6 @@ autocmd FileType snippet setlocal noexpandtab
 "autocmd FileType text,mail setlocal formatprg=perl\ -MText::Autoformat\ -e\ 'autoformat{all=>1}'
 autocmd FileType text,mail setlocal formatoptions+=t formatprg=par\ -w80\ -q
 
-autocmd FileType css,html,javascript setlocal noet
 autocmd FileType html,xml setlocal matchpairs+=<:>
 autocmd FileType html setlocal makeprg=tidy\ -q\ -e\ %
 autocmd FileType html setlocal errorformat=line\ %l\ column\ %v\ -\ %m
