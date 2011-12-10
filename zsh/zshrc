@@ -28,4 +28,52 @@ plugins=(git vi-mode extract)
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
+# make sure ^S and ^Q are not mapped to stop/start so they're freed up for 
+# other things (like screen)
+stty stop "" start ""
+
+# Set up the $DISPLAY var to allow vim (and others) to connect back 
+# to X from within remote screen sessions.
+# Only stores/sets $DISPLAY when running over ssh -X
+if [[ "$TERM" != 'screen-bce' ]] && [[ "$SSH_CONNECTION" != '' ]] && [[ "$DISPLAY" != '' ]]; then
+    echo $DISPLAY > $HOME/.displayvar;
+elif [[ "$TERM" == 'screen-bce' ]] && [[ "$SSH_CONNECTION" != '' ]]; then
+    [[ -f $HOME/.displayvar ]] && export DISPLAY=$(cat $HOME/.displayvar);
+fi
+
+HISTSIZE=8000
+SAVEHIST=5000
+HISTFILE=~/.zshhistory
+
+#==============================================================================
+# Key bindings {{{
+
+bindkey -M vicmd s vi-forward-char
+bindkey -M vicmd t down-line-or-history
+bindkey -M vicmd n up-line-or-history
+bindkey ^r history-incremental-pattern-search-backward
+bindkey ^f history-incremental-pattern-search-forward
+bindkey -M vicmd v edit-command-line
+
+# }}}
+#==============================================================================
+# Aliases {{{
+
+alias au='sudo apt-get update'
+alias adu='sudo apt-get dist-upgrade'
+alias ai='sudo apt-get install'
+alias air='sudo aptitude -R install'
+alias acs='apt-cache search'
+alias acsn='apt-cache search --names-only'
+
+alias scd='screen -X chdir `pwd`'
+alias gcd='cd $(git rev-parse --show-toplevel)'
+
+alias less='less -Mircaf'
+alias ltail='less +F'
+alias df='df -h'
+alias psg='ps ax|grep'
+alias asdf='setxkbmap dvorak'
+alias aoeu='setxkbmap us'
+
+# }}}
