@@ -118,3 +118,6 @@
 [submodule "vim/vim/bundle/neocomplcache"]
 	path = vim/vim/bundle/neocomplcache
 	url = https://github.com/Shougo/neocomplcache.git
+[submodule "vim/vim/bundle/ansiesc"]
+	path = vim/vim/bundle/ansiesc
+	url = https://github.com/vim-scripts/AnsiEsc.vim.git
