@@ -9,6 +9,8 @@ autocmd!
 filetype off
 let g:pathogen_disabled = ["supertab"]
 let g:pathogen_disabled += ["autocomplpop"]
+"let g:pathogen_disabled += ["space"]
+let g:pathogen_disabled += ["easytags"]
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
@@ -32,7 +34,7 @@ if has('gui_running')
 else
     if $TERM =~ '^screen-bce' || $TERM == 'screen-256color' || $TERM =~ '256'
         set t_Co=256
-        colo mango
+        colo desert-warm-256
     elseif $TERM =~ '^rxvt'
         set t_Co=88
         colo inkpot
