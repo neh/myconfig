@@ -7,8 +7,8 @@ autocmd!
 
 " Set up pathogen for loading plugins
 filetype off
-"let g:pathogen_disabled = ["supertab"]
-let g:pathogen_disabled = ["autocomplpop"]
+let g:pathogen_disabled = ["supertab"]
+let g:pathogen_disabled += ["autocomplpop"]
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
@@ -106,6 +106,15 @@ autocmd FileType php let b:surround_112 = "<?php \r ?>"
 let php_folding = 1
 autocmd FileType javascript setlocal foldmethod=marker foldmarker={,}
 autocmd FileType css,php setlocal foldmethod=syntax
+
+" completion setup
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 
 let php_sql_query = 1
 let php_htmlInStrings = 1
@@ -378,6 +387,14 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 "==============================================================================
 " Plugin configs {{{
+
+" Neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_max_list = 10
+let g:neocomplcache_auto_completion_start_length = 3
 
 " CamelCaseMotion
 map <silent> w <Plug>CamelCaseMotion_w

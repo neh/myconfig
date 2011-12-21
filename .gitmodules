@@ -115,3 +115,6 @@
 [submodule "vim/vim/bundle/desert-warm-256"]
 	path = vim/vim/bundle/desert-warm-256
 	url = https://github.com/rainux/vim-desert-warm-256.git
+[submodule "vim/vim/bundle/neocomplcache"]
+	path = vim/vim/bundle/neocomplcache
+	url = https://github.com/Shougo/neocomplcache.git
