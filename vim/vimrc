@@ -147,7 +147,8 @@ hi DiffChange term=none cterm=none ctermfg=black ctermbg=blue
 hi DiffDelete term=none cterm=none ctermfg=black ctermbg=red
 hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
 " statusline
-hi StatusLine ctermfg=185 ctermbg=black
+hi StatusLine ctermfg=black ctermbg=185
+hi StatusLineNC ctermfg=black ctermbg=gray
 " cursor line
 hi CursorLine term=none cterm=none ctermbg=234 gui=none guibg=#333333
 " folding
