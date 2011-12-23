@@ -313,7 +313,7 @@ nnoremap <tab> %
 vnoremap <tab> %
 
 " Toggle wrapping
-nnoremap <Leader>p :setlocal nowrap! nolist!<cr>
+nnoremap <Leader>w :setlocal nowrap! nolist!<cr>
 
 " Move a line of text
 " TODO these don't actually work (the mappings, I mean).
@@ -498,7 +498,7 @@ let g:LustyJugglerShowKeys = 'a'
 let g:LustyJugglerAltTabMode = 1
 let g:LustyJugglerSuppressRubyWarning = 1
 nmap <Leader>b :LustyJuggler<cr>
-nmap <C-p> :LustyJugglePrevious<cr>
+nmap <Leader>p :LustyJugglePrevious<cr>
 
 " Lusty Explorer
 nmap <Leader>f :LustyFilesystemExplorer<cr>
