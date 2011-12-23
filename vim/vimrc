@@ -536,9 +536,9 @@ nmap <Leader>a vii:Align
 vmap <Leader>a :Align 
 
 " Yankring
-let g:yankring_enabled = 0
-let g:yankring_replace_n_pkey = '<Leader>yp'
-let g:yankring_replace_n_nkey = '<Leader>yn'
+"let g:yankring_enabled = 1
+map <Leader>y :YRShow<cr>
+let g:yankring_min_element_length = 2
 
 
 " }}}
