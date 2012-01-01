@@ -76,4 +76,6 @@ alias psg='ps ax|grep'
 alias asdf='setxkbmap dvorak'
 alias aoeu='setxkbmap us'
 
+alias myip='curl http://whatthefuckismyip.com'
+
 # }}}
