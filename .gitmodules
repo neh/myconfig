@@ -103,9 +103,6 @@
 [submodule "vim/vim/bundle/PIV"]
 	path = vim/vim/bundle/PIV
 	url = https://github.com/spf13/PIV.git
-[submodule "vim/vim/bundle/statline"]
-	path = vim/vim/bundle/statline
-	url = git@github.com:neh/vim-statline.git
 [submodule "vim/vim/bundle/tabular"]
 	path = vim/vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
