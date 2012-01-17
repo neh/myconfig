@@ -121,3 +121,6 @@
 [submodule "vim/vim/bundle/sudo"]
 	path = vim/vim/bundle/sudo
 	url = https://github.com/vim-scripts/sudo.vim.git
+[submodule "vim/vim/bundle/powerline"]
+	path = vim/vim/bundle/powerline
+	url = https://github.com/Lokaltog/vim-powerline.git
