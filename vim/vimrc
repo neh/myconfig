@@ -393,6 +393,7 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " Plugin configs {{{
 
 " ctrlp
+let g:ctrlp_dotfiles = 0
 let g:ctrlp_map = '<leader>f'
 nmap <Leader>e :CtrlPBuffer<cr>
 nmap <Leader>h :CtrlPCurFile<cr>
