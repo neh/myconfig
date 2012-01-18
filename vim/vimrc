@@ -8,7 +8,6 @@ autocmd!
 " Set up pathogen for loading plugins
 filetype off
 let g:pathogen_disabled = ["supertab"]
-let g:pathogen_disabled += ["autocomplpop"]
 "let g:pathogen_disabled += ["space"]
 let g:pathogen_disabled += ["easytags"]
 call pathogen#runtime_append_all_bundles()
@@ -469,11 +468,6 @@ let g:space_no_search = 1
 " Gundo
 let g:gundo_map_move_older="t"
 let g:gundo_map_move_newer="n"
-
-" AutoComplPop
-let g:acp_mappingDriven = 1
-let g:acp_behaviorKeywordLength = 4
-"let g:acp_behaviorSnipmateLength = 1
 
 " Surround
 " Change visual mode surround mappings so s works for movement again
