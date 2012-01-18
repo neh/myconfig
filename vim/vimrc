@@ -395,6 +395,11 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 "==============================================================================
 " Plugin configs {{{
 
+" ctrlp
+let g:ctrlp_map = '<leader>f'
+nmap <Leader>e :CtrlPBuffer<cr>
+nmap <Leader>h :CtrlPCurFile<cr>
+
 " Neocomplcache
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_camel_case_completion = 1
