@@ -85,8 +85,10 @@ autocmd FileType ruby setlocal sts=2 sw=2 ts=2
 autocmd BufReadPost quickfix setlocal nowrap
 
 " re-read vimrc after writing it
-autocmd BufWritePost \.vimrc :source $HOME/.vimrc
-autocmd BufWritePost */vim/vimrc :source $HOME/.vimrc
+autocmd BufWritePost \.vimrc source $HOME/.vimrc
+autocmd BufWritePost \.vimrc call Pl#Load()
+autocmd BufWritePost vimrc source $HOME/.vimrc
+autocmd BufWritePost vimrc call Pl#Load()
 autocmd BufRead *vimrc,*zshrc setlocal foldmethod=marker
 
 " Useful when customizing xterm
@@ -145,9 +147,6 @@ hi DiffAdd term=none cterm=none ctermfg=black ctermbg=green
 hi DiffChange term=none cterm=none ctermfg=black ctermbg=blue
 hi DiffDelete term=none cterm=none ctermfg=black ctermbg=red
 hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
-" statusline
-hi StatusLine ctermfg=black ctermbg=185
-hi StatusLineNC ctermfg=black ctermbg=gray
 " cursor line
 hi CursorLine term=none cterm=none ctermbg=234 gui=none guibg=#333333
 " folding
@@ -218,10 +217,6 @@ set sidescrolloff=2
 set completeopt=longest,menuone
 set wildmenu
 set wildmode=longest,list
-
-"set statusline=%f\ %1*%m%r%*%h%w\ %{fugitive#statusline()}%=[%{&ff}\ %{strlen(&fenc)?&fenc:'none'}\ %{&ft}]\ [%LL\ %P\ %l,%v]
-" Highlights modified marker in statusline
-"hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
 
 " Put backup/swap files all in one place
 set backupdir=~/.vim/backup
