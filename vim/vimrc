@@ -418,9 +418,6 @@ sunmap e
 omap <silent> iw <Plug>CamelCaseMotion_iw
 xmap <silent> iw <Plug>CamelCaseMotion_iw
 
-" Statline
-let g:statline_fugitive = 1
-
 " Syntastic
 let g:syntastic_auto_loc_list=2
 let g:syntastic_enable_signs=1
