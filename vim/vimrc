@@ -338,8 +338,8 @@ nmap <Leader>cd :lcd %:h<cr>
 nmap <Leader>rr :1,$retab<cr>
 
 " In visual mode press * or # to search for the current selection
-vnoremap <silent> * :call VisualSearch('f')<CR>
-vnoremap <silent> # :call VisualSearch('b')<CR>
+vnoremap <silent> * :call VisualSearch('f')<CR>zzzv
+vnoremap <silent> # :call VisualSearch('b')<CR>zzzv
 
 " Searches for the current selection using Ack
 vnoremap <silent> gf :call VisualSearch('gf')<CR>
