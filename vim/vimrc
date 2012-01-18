@@ -273,6 +273,10 @@ noremap l n
 noremap L N
 noremap j J
 
+" Keep line containing search term centered and unfold as needed
+nnoremap l nzzzv
+nnoremap L Nzzzv
+
 " Unmap my dvorak movement keys in select mode so Snipmate snippets don't suck
 sunmap s
 sunmap S
