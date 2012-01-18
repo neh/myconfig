@@ -502,20 +502,6 @@ let g:SuperTabContextDefaultCompletionType = '<c-p>'
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabLongestEnhanced = 1
 
-" Lusty Juggler
-let g:LustyJugglerShowKeys = 'a'
-let g:LustyJugglerAltTabMode = 1
-let g:LustyJugglerSuppressRubyWarning = 1
-nmap <Leader>b :LustyJuggler<cr>
-nmap <Leader>p :LustyJugglePrevious<cr>
-
-" Lusty Explorer
-nmap <Leader>f :LustyFilesystemExplorer<cr>
-nmap <Leader>h :LustyFilesystemExplorerFromHere<cr>
-nmap <Leader>e :LustyBufferExplorer<cr>
-vmap <Leader>gb :LustyBufferGrep<cr>
-let g:LustyExplorerSuppressRubyWarning = 1
-
 " Ack
 nmap <Leader>gf :LAck 
 
