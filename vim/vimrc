@@ -148,7 +148,7 @@ hi DiffChange term=none cterm=none ctermfg=black ctermbg=blue
 hi DiffDelete term=none cterm=none ctermfg=black ctermbg=red
 hi DiffText term=bold cterm=bold ctermfg=black ctermbg=yellow
 " cursor line
-hi CursorLine term=none cterm=none ctermbg=234 gui=none guibg=#333333
+hi CursorLine term=none cterm=none ctermfg=7 ctermbg=22 gui=none guibg=#333333
 " folding
 hi Folded term=none cterm=bold ctermbg=24 ctermfg=15 gui=none guibg=#333333
 hi FoldColumn term=none cterm=none ctermbg=4 ctermfg=15 gui=none guibg=#333333
