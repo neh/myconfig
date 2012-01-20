@@ -394,6 +394,7 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " ctrlp
 let g:ctrlp_dotfiles = 0
+let g:ctrlp_open_multi = 'vr'
 let g:ctrlp_map = '<leader>f'
 nmap <Leader>e :CtrlPBuffer<cr>
 nmap <Leader>h :CtrlPCurFile<cr>
