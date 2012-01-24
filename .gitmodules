@@ -100,9 +100,6 @@
 [submodule "vim/vim/bundle/tabular"]
 	path = vim/vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
-[submodule "zsh/oh-my-zsh"]
-	path = zsh/oh-my-zsh
-	url = git://github.com/robbyrussell/oh-my-zsh.git
 [submodule "vim/vim/bundle/desert-warm-256"]
 	path = vim/vim/bundle/desert-warm-256
 	url = https://github.com/rainux/vim-desert-warm-256.git
