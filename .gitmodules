@@ -124,3 +124,6 @@
 [submodule "vim/vim/bundle/abolish"]
 	path = vim/vim/bundle/abolish
 	url = https://github.com/tpope/vim-abolish.git
+[submodule "vim/vim/bundle/splitjoin"]
+	path = vim/vim/bundle/splitjoin
+	url = https://github.com/AndrewRadev/splitjoin.vim.git
