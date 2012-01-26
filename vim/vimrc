@@ -233,7 +233,7 @@ set listchars=tab:➜\ ,trail:·,extends:…,precedes:…
 
 " Mark column 80, method depending on vim version
 if exists('+colorcolumn')
-    hi ColorColumn ctermbg=232 guibg=#111111
+    hi ColorColumn ctermbg=236 guibg=#111111
     set cc=80
 endif
 
