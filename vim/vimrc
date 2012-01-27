@@ -253,6 +253,9 @@ endif
 
 let &showbreak = ' ↪ '
 
+" make concealed chars stay concealed when I'm just moving around
+set concealcursor=nc
+
 " Remove parts of the gui, just in case I happen to run it
 set guioptions-=m
 set guioptions-=T
