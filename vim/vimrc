@@ -22,6 +22,11 @@ if &term =~ "^screen"
     set t_ts=k
     set t_fs=\
 endif
+" Workaround to make italics work in tmux sessions
+if $TMUX != '' && &term =~ "screen-256color"
+    set t_so=[7m
+    set t_ZH=[3m
+endif
 
 " Set titlestring when switching buffers (kept short for screen window names)
 autocmd BufEnter * let &titlestring = expand("%:t")
@@ -154,6 +159,10 @@ hi Folded term=none cterm=bold ctermbg=24 ctermfg=15 gui=none guibg=#333333
 hi FoldColumn term=none cterm=none ctermbg=4 ctermfg=15 gui=none guibg=#333333
 " conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+if $TMUX != ''
+    hi Comment cterm=italic
+endif
 
 " make special chars (tabs, trailing spaces, etc) barely visible
 hi NonText cterm=none ctermfg=green
