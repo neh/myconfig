@@ -140,7 +140,7 @@ hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red ctermbg=bla
 
 " Change some highlight group colours, overriding the colour scheme
 " search terms
-hi Search term=bold cterm=bold ctermfg=black ctermbg=green
+hi Search term=bold cterm=bold ctermfg=black ctermbg=83
 hi IncSearch term=bold cterm=bold ctermfg=yellow ctermbg=red
 " todo
 hi Todo term=bold cterm=bold ctermfg=red ctermbg=yellow
