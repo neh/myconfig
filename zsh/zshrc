@@ -79,3 +79,13 @@ alias aoeu='setxkbmap us'
 alias myip='curl http://whatthefuckismyip.com'
 
 # }}}
+#==============================================================================
+# Settings {{{
+
+# custom window title truncation for tmux
+if [ $TMUX ]
+then
+    ZSH_THEME_TERM_TAB_TITLE_IDLE="%2(c.…/.)%1c"
+fi
+
+# }}}
