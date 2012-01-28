@@ -152,16 +152,13 @@ hi DiffText term=bold cterm=bold ctermfg=234 ctermbg=226
 " cursor line
 hi CursorLine term=none cterm=none ctermfg=7 ctermbg=22 gui=none guibg=#333333
 " folding
-if $TMUX != '' || $TERM == 'rxvt-256color'
-    hi Folded term=none cterm=italic ctermbg=236 ctermfg=244 gui=none guibg=#333333
-else
-    hi Folded term=none cterm=bold ctermbg=236 ctermfg=244 gui=none guibg=#333333
-endif
+hi Folded term=none cterm=bold ctermbg=236 ctermfg=244 gui=none guibg=#333333
 hi FoldColumn term=none cterm=none ctermbg=236 ctermfg=244 gui=none guibg=#333333
 " conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 if $TMUX != '' || $TERM == 'rxvt-256color'
+    hi Folded cterm=italic
     hi Comment cterm=italic
 endif
 
