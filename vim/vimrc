@@ -160,7 +160,7 @@ hi FoldColumn term=none cterm=none ctermbg=4 ctermfg=15 gui=none guibg=#333333
 " conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-if $TMUX != ''
+if $TMUX != '' || $TERM == 'rxvt-256color'
     hi Comment cterm=italic
 endif
 
