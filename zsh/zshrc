@@ -1,3 +1,4 @@
+# oh-my-zsh setup {{{ ---------------------------------------------------------
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -28,9 +29,22 @@ plugins=(git vi-mode extract)
 
 source $ZSH/oh-my-zsh.sh
 
+# }}}
+# Settings {{{ ----------------------------------------------------------------
+
+HISTSIZE=8000
+SAVEHIST=5000
+HISTFILE=~/.zshhistory
+
 # make sure ^S and ^Q are not mapped to stop/start so they're freed up for 
 # other things (like screen)
 stty stop "" start ""
+
+# custom window title truncation for tmux
+if [ $TMUX ]
+then
+    ZSH_THEME_TERM_TAB_TITLE_IDLE="%2(c.…/.)%1c"
+fi
 
 # Set up the $DISPLAY var to allow vim (and others) to connect back 
 # to X from within remote screen sessions.
@@ -41,12 +55,8 @@ elif [[ "$TERM" == 'screen-bce' ]] && [[ "$SSH_CONNECTION" != '' ]]; then
     [[ -f $HOME/.displayvar ]] && export DISPLAY=$(cat $HOME/.displayvar);
 fi
 
-HISTSIZE=8000
-SAVEHIST=5000
-HISTFILE=~/.zshhistory
-
-#==============================================================================
-# Key bindings {{{
+# }}}
+# Key bindings {{{ ------------------------------------------------------------
 
 bindkey -M vicmd s vi-forward-char
 bindkey -M vicmd t down-line-or-history
@@ -56,8 +66,7 @@ bindkey ^f history-incremental-pattern-search-forward
 bindkey -M vicmd v edit-command-line
 
 # }}}
-#==============================================================================
-# Aliases {{{
+# Aliases {{{ -----------------------------------------------------------------
 
 alias au='sudo apt-get update'
 alias adu='sudo apt-get dist-upgrade'
@@ -79,13 +88,8 @@ alias aoeu='setxkbmap us'
 alias myip='curl http://whatthefuckismyip.com'
 
 # }}}
-#==============================================================================
-# Settings {{{
+# Completions {{{ -------------------------------------------------------------
 
-# custom window title truncation for tmux
-if [ $TMUX ]
-then
-    ZSH_THEME_TERM_TAB_TITLE_IDLE="%2(c.…/.)%1c"
-fi
+
 
 # }}}
