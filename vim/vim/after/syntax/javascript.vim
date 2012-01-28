@@ -11,7 +11,7 @@ if has('conceal')
     syntax match jsNiceOperator "===" conceal cchar=≅ containedin=javaScriptParen
     syntax match jsNiceOperator "!==" conceal cchar=≠ containedin=ALL
     syntax match jsNiceOperator "!=" conceal cchar=≠ containedin=ALL
-    syntax match jsNiceOperator "<=" conceal cchar=≲ containedin=ALL
+    syntax match jsNiceOperator "<=" conceal cchar=≤ containedin=ALL
     syntax match jsNiceOperator ">=" conceal cchar=≳ containedin=ALL
     syntax match jsNiceOperator ">>" conceal cchar=» containedin=ALL
     syntax match jsNiceOperator "<<" conceal cchar=« containedin=ALL
