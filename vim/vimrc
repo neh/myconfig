@@ -499,7 +499,9 @@ let g:NERDTreeAutoCenter=1
 let g:NERDTreeAutoCenterThreshold=6
 
 " SuperTab
-let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabMappingForward = '<c-n>'
+let g:SuperTabMappingBackward = '<c-p>'
+let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
 let g:SuperTabContextDefaultCompletionType = '<c-p>'
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabLongestEnhanced = 1
