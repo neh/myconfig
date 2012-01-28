@@ -166,8 +166,9 @@ if $TMUX != '' || $TERM == 'rxvt-256color'
 endif
 
 " make special chars (tabs, trailing spaces, etc) barely visible
-hi NonText cterm=none ctermfg=green
 hi SpecialKey cterm=none ctermfg=238
+" other special chars (line wrap chars etc.)
+hi NonText cterm=none ctermfg=green ctermbg=235
 
 " change the default EasyMotion shading to something more readable with Solarized
 "hi link EasyMotionTarget ErrorMsg
