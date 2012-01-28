@@ -239,7 +239,7 @@ set ttymouse=xterm2
 
 " Show trailing whitespace and tabs as visible chars
 set list
-set listchars=tab:➜\ ,trail:·,extends:…,precedes:…
+set listchars=tab:➜\ ,trail:·,extends:❱,precedes:❰
 
 " Mark column 80, method depending on vim version
 if exists('+colorcolumn')
