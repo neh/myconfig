@@ -1,5 +1,4 @@
-"==============================================================================
-" Initial setup {{{
+" Initial Setup {{{ -----------------------------------------------------------
 
 set nocompatible
 " Clear autocmds
@@ -63,8 +62,7 @@ endif
 
 
 " }}}
-"==============================================================================
-" Filetype specific options {{{
+" Filetype specific options {{{ -----------------------------------------------
 
 " add filetype to files that need it
 "autocmd BufRead,BufNewFile COMMIT_EDITMSG setlocal filetype git
@@ -131,8 +129,7 @@ let php_parent_error_open = 1
 
 
 " }}}
-"==============================================================================
-" Custom highlighting {{{
+" Custom highlighting {{{ -----------------------------------------------------
 
 " Highlight error logging functions (php error_log, js console.log, etc)
 " Terms to be highlighted are defined in ~/.vim/after/syntax/*
@@ -174,8 +171,7 @@ hi SpecialKey cterm=none ctermfg=238
 
 
 " }}}
-"==============================================================================
-" General options {{{
+" General options {{{ ---------------------------------------------------------
 
 let mapleader=","
 set encoding=utf-8
@@ -267,8 +263,7 @@ set guioptions-=b
 
 
 " }}}
-"==============================================================================
-" Key mappings {{{
+" Key mappings {{{ ------------------------------------------------------------
 
 " Switch to previous buffer
 nnoremap <leader>p :b#<cr>
@@ -401,8 +396,7 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 
 " }}}
-"==============================================================================
-" Plugin configs {{{
+" Plugin configs {{{ ----------------------------------------------------------
 
 " ctrlp
 let g:ctrlp_dotfiles = 0
@@ -541,8 +535,7 @@ let g:yankring_replace_n_nkey = ''
 
 
 " }}}
-"==============================================================================
-" Custom functions and commands {{{
+" Custom functions and commands {{{ -------------------------------------------
 
 " I keep hitting :W when saving. It may as well work.
 command! W :w
@@ -628,5 +621,3 @@ function! <SID>SynStack()
 endfunc
 
 " }}}
-
-
