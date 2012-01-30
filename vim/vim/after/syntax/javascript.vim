@@ -12,7 +12,7 @@ if has('conceal')
     syntax match jsNiceOperator "!==" conceal cchar=≠ containedin=ALL
     syntax match jsNiceOperator "!=" conceal cchar=≠ containedin=ALL
     syntax match jsNiceOperator "<=" conceal cchar=≤ containedin=ALL
-    syntax match jsNiceOperator ">=" conceal cchar=≳ containedin=ALL
+    syntax match jsNiceOperator ">=" conceal cchar=≥ containedin=ALL
     syntax match jsNiceOperator ">>" conceal cchar=» containedin=ALL
     syntax match jsNiceOperator "<<" conceal cchar=« containedin=ALL
     syntax match jsNiceOperator "\:\:" conceal cchar=∷ containedin=ALL

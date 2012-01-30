@@ -11,7 +11,7 @@ if !exists('g:no_php_conceal') && has('conceal') && &enc == 'utf-8'
     syntax match phpNiceOperator "!==" conceal cchar=≠ containedin=phpRegion,@phpClConst contained
     syntax match phpNiceOperator ">>" conceal cchar=» containedin=phpRegion,@phpClConst contained
     syntax match phpNiceOperator "<=" conceal cchar=≤ containedin=phpRegion,@phpClConst contained
-    syntax match phpNiceOperator ">=" conceal cchar=≳ containedin=phpRegion,@phpClConst contained
+    syntax match phpNiceOperator ">=" conceal cchar=≥ containedin=phpRegion,@phpClConst contained
     syntax match phpNiceOperator "=>" conceal cchar=⇒ containedin=phpRegion,@phpClConst contained
     syntax match phpNiceOperator "\:\:" conceal cchar=∷ containedin=phpRegion,@phpClConst contained
     syntax match phpNiceOperator "\.\." conceal cchar=‥ containedin=phpRegion,@phpClConst contained
