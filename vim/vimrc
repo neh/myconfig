@@ -92,7 +92,7 @@ autocmd BufWritePost \.vimrc source $HOME/.vimrc
 autocmd BufWritePost \.vimrc call Pl#Load()
 autocmd BufWritePost vimrc source $HOME/.vimrc
 autocmd BufWritePost vimrc call Pl#Load()
-autocmd BufRead *vimrc,*zshrc setlocal foldmethod=marker
+autocmd BufRead *vimrc,*zshrc,*tmux.conf setlocal foldmethod=marker
 
 autocmd BufRead,BufNewFile *tmux.conf setlocal filetype=tmux
 
