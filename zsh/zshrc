@@ -76,6 +76,7 @@ alias acs='apt-cache search'
 alias acsn='apt-cache search --names-only'
 
 alias scd='screen -X chdir `pwd`'
+alias tcd='tmux set-option default-path `pwd`'
 alias gcd='cd $(git rev-parse --show-toplevel)'
 
 alias less='less -Mircaf'
