@@ -126,7 +126,7 @@ main = withConnection Session $ \ dbus -> do
                            $ onWorkspace "files" file
                            $ onWorkspace "gimp" gimp
                            $ onWorkspace "read" read
-                           $ onWorkspace "d" ((reflectHoriz tp) ||| Full)
+                           $ onWorkspace "d" ((reflectHoriz tp) ||| (noBorders Full))
                            $ onWorkspace "mon" (monlayout ||| Full)
                            $ tp
                            ||| rtp
