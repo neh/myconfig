@@ -10,7 +10,7 @@ filetype off
 let g:pathogen_disabled = ["supertab"]
 "let g:pathogen_disabled += ["space"]
 let g:pathogen_disabled += ["easytags"]
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 call pathogen#helptags()
 
 " Enable filetype detection and syntax highlighting
