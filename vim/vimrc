@@ -5,6 +5,7 @@ set nocompatible
 autocmd!
 
 " Set up pathogen for loading plugins
+runtime bundle/pathogen/autoload/pathogen.vim
 filetype off
 let g:pathogen_disabled = ["supertab"]
 "let g:pathogen_disabled += ["space"]
