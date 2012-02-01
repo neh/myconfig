@@ -89,10 +89,7 @@ autocmd FileType ruby setlocal sts=2 sw=2 ts=2
 autocmd BufReadPost quickfix setlocal nowrap
 
 " re-read vimrc after writing it
-autocmd BufWritePost \.vimrc source $HOME/.vimrc
-autocmd BufWritePost \.vimrc call Pl#Load()
-autocmd BufWritePost vimrc source $HOME/.vimrc
-autocmd BufWritePost vimrc call Pl#Load()
+autocmd BufWritePost *vimrc source $HOME/.vimrc | call Pl#Load()
 autocmd BufRead *vimrc,*zshrc,*tmux.conf setlocal foldmethod=marker
 
 autocmd BufRead,BufNewFile *tmux.conf setlocal filetype=tmux
