@@ -95,7 +95,7 @@ autocmd BufRead *vimrc,*zshrc,*tmux.conf setlocal foldmethod=marker
 autocmd BufRead,BufNewFile *tmux.conf setlocal filetype=tmux
 
 " Useful when customizing xterm
-autocmd BufWritePost \.Xdefaults :!xrdb ~/.Xdefaults
+autocmd BufWritePost *Xdefaults,*Xresources :!xrdb ~/.Xresources
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
