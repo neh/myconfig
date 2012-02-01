@@ -511,7 +511,7 @@ nmap <Leader>gs :Gstatus<cr>
 nmap <Leader>gd :Gdiff<cr>
 nmap <Leader>gg :Ggrep 
 nmap <Leader>glg :Glog<cr>
-nmap <Leader>gci :Gcommit<cr>
+nmap <Leader>gc :Gcommit<cr>
 nmap <Leader>gmv :Gmove 
 nmap <Leader>grm :Gremove
 nmap <Leader>gpu :Git push<cr>
