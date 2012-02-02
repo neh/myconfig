@@ -125,8 +125,8 @@ main = withConnection Session $ \ dbus -> do
                            $ onWorkspace "im" im
                            $ onWorkspace "files" file
                            $ onWorkspace "gimp" gimp
-                           $ onWorkspace "read" read
                            $ onWorkspace "d" ((reflectHoriz tp) ||| (noBorders Full))
+                           $ onWorkspace "db" (noBorders Full)
                            $ onWorkspace "mon" (monlayout ||| Full)
                            $ tp
                            ||| rtp
@@ -136,7 +136,7 @@ main = withConnection Session $ \ dbus -> do
     }
     where
       myWorkSpaces hostname = case hostname of
-          "nathan-desktop" -> ["mon", "comm", "files", "d", "web", "lose", "vm"]
+          "nathan-desktop" -> ["mon", "comm", "files", "d", "web", "db", "lose", "vm"]
           _ -> ["im", "comm", "files", "web", "vm"]
 
       tiled = HintedTile 1 (3%100) 0.648 TopLeft Tall
