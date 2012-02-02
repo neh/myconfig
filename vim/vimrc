@@ -9,7 +9,6 @@ runtime bundle/pathogen/autoload/pathogen.vim
 filetype off
 let g:pathogen_disabled = ["supertab"]
 "let g:pathogen_disabled += ["space"]
-let g:pathogen_disabled += ["easytags"]
 call pathogen#infect()
 call pathogen#helptags()
 
@@ -89,16 +88,13 @@ autocmd FileType ruby setlocal sts=2 sw=2 ts=2
 autocmd BufReadPost quickfix setlocal nowrap
 
 " re-read vimrc after writing it
-autocmd BufWritePost \.vimrc source $HOME/.vimrc
-autocmd BufWritePost \.vimrc call Pl#Load()
-autocmd BufWritePost vimrc source $HOME/.vimrc
-autocmd BufWritePost vimrc call Pl#Load()
+autocmd BufWritePost *vimrc source $HOME/.vimrc | call Pl#Load()
 autocmd BufRead *vimrc,*zshrc,*tmux.conf setlocal foldmethod=marker
 
 autocmd BufRead,BufNewFile *tmux.conf setlocal filetype=tmux
 
 " Useful when customizing xterm
-autocmd BufWritePost \.Xdefaults :!xrdb ~/.Xdefaults
+autocmd BufWritePost *Xdefaults,*Xresources :!xrdb ~/.Xresources
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
@@ -477,6 +473,7 @@ let g:space_disable_select_mode = 1
 let g:space_no_search = 1
 
 " Gundo
+nmap <Leader>un :GundoToggle<CR>
 let g:gundo_map_move_older="t"
 let g:gundo_map_move_newer="n"
 
@@ -514,7 +511,7 @@ nmap <Leader>gs :Gstatus<cr>
 nmap <Leader>gd :Gdiff<cr>
 nmap <Leader>gg :Ggrep 
 nmap <Leader>glg :Glog<cr>
-nmap <Leader>gci :Gcommit<cr>
+nmap <Leader>gc :Gcommit<cr>
 nmap <Leader>gmv :Gmove 
 nmap <Leader>grm :Gremove
 nmap <Leader>gpu :Git push<cr>
