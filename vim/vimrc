@@ -9,7 +9,6 @@ runtime bundle/pathogen/autoload/pathogen.vim
 filetype off
 let g:pathogen_disabled = ["supertab"]
 "let g:pathogen_disabled += ["space"]
-let g:pathogen_disabled += ["easytags"]
 call pathogen#infect()
 call pathogen#helptags()
 
