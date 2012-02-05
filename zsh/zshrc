@@ -92,6 +92,9 @@ alias vpup='cd ~/myconfig/vim/vim/bundle;for p in `ls`; do cd $p;git checkout ma
 
 alias t='tmux'
 
+# toggle the fullscreen status of the current focused window
+alias tfs="wmctrl -i -r $(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}') -b toggle,fullscreen"
+
 # }}}
 # Completions {{{ -------------------------------------------------------------
 
