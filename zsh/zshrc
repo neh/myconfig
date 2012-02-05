@@ -29,6 +29,8 @@ plugins=(git vi-mode extract)
 
 source $ZSH/oh-my-zsh.sh
 
+zstyle :omz:plugins:ssh-agent agent-forwarding on
+
 # }}}
 # Settings {{{ ----------------------------------------------------------------
 
