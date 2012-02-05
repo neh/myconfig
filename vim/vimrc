@@ -91,6 +91,7 @@ autocmd BufReadPost quickfix setlocal nowrap
 autocmd BufWritePost *vimrc source $HOME/.vimrc | call Pl#Load()
 autocmd BufRead *vimrc,*zshrc,*tmux.conf setlocal foldmethod=marker
 
+autocmd BufRead,BufNewFile *.zsh-theme setlocal filetype=zsh
 autocmd BufRead,BufNewFile *tmux.conf setlocal filetype=tmux
 
 " Useful when customizing xterm
