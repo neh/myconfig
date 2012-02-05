@@ -224,6 +224,8 @@ set completeopt=longest,menuone
 set wildmenu
 set wildmode=longest,list
 
+set clipboard=unnamed
+
 " Put backup/swap files all in one place
 set backupdir=~/.vim/backup
 set directory=~/.vim/backup
