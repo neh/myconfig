@@ -96,6 +96,7 @@ alias myip='curl http://whatthefuckismyip.com'
 
 alias vpup='cd ~/myconfig/vim/vim/bundle;for p in `ls`; do cd $p;git checkout master && git pull;cd ..; done'
 
+alias v='vim'
 alias t='tmux'
 
 # }}}
