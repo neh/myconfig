@@ -10,7 +10,7 @@ filetype off
 let g:pathogen_disabled = ["supertab"]
 "let g:pathogen_disabled += ["space"]
 call pathogen#infect()
-call pathogen#helptags()
+"call pathogen#helptags()
 
 " Enable filetype detection and syntax highlighting
 filetype plugin indent on
