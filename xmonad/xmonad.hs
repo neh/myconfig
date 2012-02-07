@@ -270,6 +270,8 @@ myManageHook = composeAll
   , className =? "rdesktop"                --> doNewWS "rdp"
   , role      =? "buddy_list"              --> doFloat
   , role      =? "conversation"            --> doFloat
+  , className =? "Unity-2d-panel"          --> doIgnore
+  , className =? "Unity-2d-launcher"       --> doIgnore
   ]
   where
     unFloat = ask >>= doF . W.sink
