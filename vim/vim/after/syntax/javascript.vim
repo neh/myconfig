@@ -17,9 +17,6 @@ if has('conceal')
     syntax match jsNiceOperator "<<" conceal cchar=« containedin=ALL
     syntax match jsNiceOperator "\:\:" conceal cchar=∷ containedin=ALL
 
-    syntax match jsNiceRepeat "\<in\>" conceal cchar=∈ display containedin=ALL
-    "syntax keyword jsNiceRepeat in
-
     hi link javaScriptFunctionNoParams javaScriptFunction
     hi link jsNiceOperator Operator
     hi link jsNiceRepeat Error
