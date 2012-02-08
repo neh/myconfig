@@ -145,7 +145,7 @@ hi Todo term=bold cterm=bold ctermfg=red ctermbg=yellow
 hi Pmenu term=none cterm=none ctermfg=250 ctermbg=238
 hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=250
 " diff viewer
-hi DiffAdd term=none cterm=none ctermfg=black ctermbg=76
+hi DiffAdd term=none cterm=none ctermfg=black ctermbg=120
 hi DiffDelete term=none cterm=none ctermfg=235 ctermbg=black
 hi DiffChange term=none cterm=none ctermfg=black ctermbg=62
 hi DiffText term=bold cterm=bold ctermfg=234 ctermbg=226
