@@ -38,14 +38,8 @@ else
     if $TERM =~ '^screen-bce' || $TERM == 'screen-256color' || $TERM =~ '256'
         set t_Co=256
         colo desert-warm-256
-    elseif $TERM =~ '^rxvt'
-        set t_Co=88
-        colo inkpot
-    elseif $TERM =~ '^linux'
-        set t_Co=8
     else
         set t_Co=16
-        colo solarized
     endif
 endif
 
@@ -77,7 +71,6 @@ autocmd FileType snippet setlocal noexpandtab
 "autocmd FileType text,mail setlocal formatprg=perl\ -MText::Autoformat\ -e\ 'autoformat{all=>1}'
 autocmd FileType text,mail setlocal formatoptions+=t formatprg=par\ -w80\ -q
 
-autocmd FileType html,xml setlocal matchpairs+=<:>
 autocmd FileType html setlocal makeprg=tidy\ -q\ -e\ %
 autocmd FileType html setlocal errorformat=line\ %l\ column\ %v\ -\ %m
 autocmd FileType html setlocal equalprg=tidy\ -q\ -w\ -i
@@ -135,8 +128,7 @@ let php_parent_error_open = 1
 " Terms to be highlighted are defined in ~/.vim/after/syntax/*
 hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red ctermbg=black
 
-" Change some highlight group colours, overriding the colour scheme
-" search terms
+" Change some highlight group colours, overriding the colour scheme search terms
 hi Search term=none cterm=none ctermfg=232 ctermbg=220
 hi IncSearch term=none cterm=none ctermfg=232 ctermbg=41
 " todo
@@ -166,10 +158,6 @@ endif
 hi SpecialKey cterm=none ctermfg=238
 " other special chars (line wrap chars etc.)
 hi NonText cterm=none ctermfg=green ctermbg=235
-
-" change the default EasyMotion shading to something more readable with Solarized
-"hi link EasyMotionTarget ErrorMsg
-"hi link EasyMotionShade  Comment
 
 
 " }}}
@@ -320,10 +308,6 @@ cmap W! silent w !sudo tee % >/dev/null
 nnoremap / /\v
 vnoremap / /\v
 
-" Use tab to move to matchpairs
-nnoremap <tab> %
-vnoremap <tab> %
-
 " Toggle wrapping
 nnoremap <Leader>w :setlocal nowrap! nolist!<cr>
 
@@ -346,7 +330,7 @@ nmap <Leader>VS :so ~/.vimrc<cr>
 nmap <Leader>cd :lcd %:h<cr>
 
 " Set up retabbing on a source file
-nmap <Leader>rr :1,$retab<cr>
+nmap <Leader>rt :1,$retab<cr>
 
 " In visual mode press * or # to search for the current selection
 vnoremap <silent> * :call VisualSearch('f')<CR>zzzv
@@ -363,36 +347,17 @@ nmap <Leader>cx :cclose<cr>
 nmap <Leader>lo :lopen<cr>
 nmap <Leader>lx :lclose<cr>
 
-" Session management maps
-nmap <Leader>SS :mksession! ~/.vim/sessions/
-nmap <Leader>SL :source ~/.vim/sessions/
-
 " Turn off diff options
 nmap <Leader>do :diffoff<cr>
 nmap <Leader>do! :diffoff!<cr>
 
-" Use C-space instead of C-y to insert the first option in the auto completion 
-" popup (useful with autocomplpop plugin)
-inoremap <Nul> <C-R>=pumvisible() ? "\<lt>C-y>" : " "<cr>
-
 " Quick PHP syntax check (CTRL-l)
-autocmd FileType php noremap <C-l> :!/usr/bin/php -l %<CR>
+autocmd FileType php noremap <Leader>phpl :!/usr/bin/php -l %<CR>
 
 " Create folds for objects (tags, paras, blocks, etc.)
 nnoremap <Leader>ft Vatzf
 nnoremap <Leader>fp Vapzf
 nnoremap <Leader>fb VaBzf
-
-" jump to next conflict marker
-nmap <silent> <Leader>c /\M^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
-
-" underline/overline mappings
-nnoremap <leader>1 yyPVr=jyypVr=
-nnoremap <leader>2 yyPVr*jyypVr*
-nnoremap <leader>3 yypVr=
-nnoremap <leader>4 yypVr-
-nnoremap <leader>5 yypVr^
-nnoremap <leader>6 yypVr"
 
 " fast file format conversion
 nnoremap <Leader>ffd :setlocal ff=dos<CR>
