@@ -146,9 +146,9 @@ hi Pmenu term=none cterm=none ctermfg=250 ctermbg=238
 hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=250
 " diff viewer
 hi DiffAdd term=none cterm=none ctermfg=black ctermbg=120
-hi DiffDelete term=none cterm=none ctermfg=235 ctermbg=black
-hi DiffChange term=none cterm=none ctermfg=black ctermbg=62
-hi DiffText term=bold cterm=bold ctermfg=234 ctermbg=226
+hi DiffDelete term=none cterm=none ctermfg=233 ctermbg=233
+hi DiffChange term=none cterm=none ctermfg=248 ctermbg=237
+hi DiffText term=none cterm=none ctermfg=234 ctermbg=120
 " cursor line
 hi CursorLine term=none cterm=none ctermfg=7 ctermbg=22 gui=none guibg=#333333
 " folding
