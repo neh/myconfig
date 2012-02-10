@@ -97,7 +97,19 @@ alias myip='curl http://whatthefuckismyip.com'
 alias vpup='cd ~/myconfig/vim/vim/bundle;for p in `ls`; do cd $p;git checkout master && git pull;cd ..; done'
 
 alias v='vim'
+alias vd='vimdiff'
 alias t='tmux'
+
+alias glr='git pull --rebase'
+compdef _git glr=git-pull
+alias gll='git log'
+compdef _git gll=git-log
+alias glns='git log --name-status'
+compdef _git glns=git-log
+alias gdns='git diff --name-status'
+compdef _git gdns=git-diff
+alias gdd='git diff'
+compdef _git gdns=git-diff
 
 # }}}
 # Functions {{{ ---------------------------------------------------------------
