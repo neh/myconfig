@@ -181,7 +181,7 @@ myLog dbus hostname = withWindowSet $ \ws -> do
           }
   where
       titleLength = case hostname of
-        "tak" -> 70
+        "tak" -> 90
         "appa" -> 100
         _ -> 90
 
