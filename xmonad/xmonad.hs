@@ -412,7 +412,7 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   zip (zip (repeat (modMask .|. controlMask)) [xK_1..xK_9]) (map (withNthWorkspace copy) [0..])
   where
     handySize = case hostname of
-      "tak" -> "105x42"
+      "tak" -> "105x46"
       _ -> "105x65"
 
     role = stringProperty "WM_WINDOW_ROLE"
