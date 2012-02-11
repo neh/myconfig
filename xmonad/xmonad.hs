@@ -86,9 +86,7 @@ getWellKnownName dbus = tryGetName `catchDyn` (\ (DBus.Error _ _) ->
 main :: IO ()
 main = withConnection Session $ \ dbus -> do
   hostname <- fmap nodeName getSystemID
-  putStrLn "Getting well-known name."
   getWellKnownName dbus
-  putStrLn "Got name, starting XMonad."
   --spawn "xcompmgr -nFf -I 0.056 -O 0.06"
   xmonad $ withUrgencyHook NoUrgencyHook
          $ ewmh defaultConfig
