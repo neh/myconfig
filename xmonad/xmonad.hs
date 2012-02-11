@@ -252,6 +252,7 @@ myPreManageHook = composeAll
 myManageHook :: ManageHook
 myManageHook = composeAll
   [ className ~? "(Do|Do.exe)"             --> doIgnore
+  , className =? "Synapse"                 --> doIgnore
   , resource  =? "Dialog"                  --> doFloat
   , title     ~? "Page.s. Unresponsive"    --> doFloat
   , title     =? "Options"                 --> doFloat
