@@ -130,3 +130,6 @@
 [submodule "vim/vim/bundle/pathogen"]
 	path = vim/vim/bundle/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
+[submodule "vim/vim/bundle/badwolf"]
+	path = vim/vim/bundle/badwolf
+	url = https://github.com/sjl/badwolf.git
