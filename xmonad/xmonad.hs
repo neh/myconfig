@@ -123,7 +123,7 @@ main = withConnection Session $ \ dbus -> do
                            $ onWorkspace "im" im
                            $ onWorkspace "files" file
                            $ onWorkspace "gimp" gimp
-                           $ onWorkspace "d" ((reflectHoriz tp) ||| (noBorders Full))
+                           $ onWorkspace "d" (noBorders Full)
                            $ onWorkspace "db" (noBorders Full)
                            $ onWorkspace "mon" (monlayout ||| Full)
                            $ tp
