@@ -258,7 +258,7 @@ set guioptions-=b
 " Key mappings {{{ ------------------------------------------------------------
 
 " Switch to previous buffer
-nnoremap <leader>p :b#<cr>
+nnoremap <c-u> :b#<cr>
 
 " A few dvorak movement adjustments
 noremap s l
