@@ -70,6 +70,9 @@ bindkey -M vicmd v edit-command-line
 # }}}
 # Aliases {{{ -----------------------------------------------------------------
 
+alias lrt='ls -lrth'
+alias lart='ls -larth'
+
 alias au='sudo apt-get update'
 alias adu='sudo apt-get dist-upgrade'
 alias ai='sudo apt-get install'
