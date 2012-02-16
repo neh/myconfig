@@ -111,14 +111,20 @@ alias t='tmux'
 
 alias glr='git pull --rebase'
 compdef _git glr=git-pull
+
 alias gll='git log'
 compdef _git gll=git-log
 alias glns='git log --name-status'
 compdef _git glns=git-log
+
 alias gdns='git diff --name-status'
 compdef _git gdns=git-diff
 alias gdd='git diff'
-compdef _git gdns=git-diff
+compdef _git gdd=git-diff
+alias gddc='git diff --cached'
+
+alias gslr='git stash && git pull --rebase'
+alias gsp='git stash pop'
 
 # }}}
 # Functions {{{ ---------------------------------------------------------------
