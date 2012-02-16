@@ -57,6 +57,12 @@ elif [[ "$TERM" == 'screen-bce' ]] && [[ "$SSH_CONNECTION" != '' ]]; then
     [[ -f $HOME/.displayvar ]] && export DISPLAY=$(cat $HOME/.displayvar);
 fi
 
+# load any local settings if they exist
+if [[ -f $HOME/.local_zshrc ]]
+then
+    source $HOME/.local_zshrc
+fi
+
 # }}}
 # Key bindings {{{ ------------------------------------------------------------
 
