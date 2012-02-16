@@ -366,7 +366,7 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " Plugin configs {{{ ----------------------------------------------------------
 
 " bufmru
-let g:bufmru_switchkey = "<c-u>"
+let g:bufmru_switchkey = "<c-e>"
 
 " ctrlp
 let g:ctrlp_dotfiles = 0
