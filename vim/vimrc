@@ -257,8 +257,6 @@ set guioptions-=b
 " }}}
 " Key mappings {{{ ------------------------------------------------------------
 
-" Switch to previous buffer
-nnoremap <c-u> :b#<cr>
 
 " A few dvorak movement adjustments
 noremap s l
@@ -366,6 +364,9 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" bufmru
+let g:bufmru_switchkey = "<c-u>"
 
 " ctrlp
 let g:ctrlp_dotfiles = 0

@@ -133,3 +133,6 @@
 [submodule "vim/vim/bundle/badwolf"]
 	path = vim/vim/bundle/badwolf
 	url = https://github.com/sjl/badwolf.git
+[submodule "vim/vim/bundle/bufmru"]
+	path = vim/vim/bundle/bufmru
+	url = https://github.com/vim-scripts/bufmru.vim.git
