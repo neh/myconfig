@@ -431,11 +431,6 @@ let delimitMate_expand_space = 1
 let g:dbext_default_use_sep_result_buffer = 1
 nmap <Leader>sdb :DBSetOption dbname=
 
-" Indent-object
-let g:indent_guides_auto_colors = 0
-hi IndentGuidesEven ctermbg=234 ctermfg=235
-hi IndentGuidesOdd ctermbg=235 ctermfg=236
-
 " Space
 let g:space_no_character_movements = 1
 let g:space_disable_select_mode = 1

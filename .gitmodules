@@ -1,6 +1,3 @@
-[submodule "vim/vim/bundle/vim-indent-guides"]
-	path = vim/vim/bundle/vim-indent-guides
-	url = git://github.com/nathanaelkane/vim-indent-guides.git
 [submodule "vim/vim/bundle/fugitive"]
 	path = vim/vim/bundle/fugitive
 	url = git://github.com/tpope/vim-fugitive.git
@@ -34,9 +31,6 @@
 [submodule "vim/vim/bundle/align"]
 	path = vim/vim/bundle/align
 	url = git://github.com/vim-scripts/Align.git
-[submodule "vim/vim/bundle/tail"]
-	path = vim/vim/bundle/tail
-	url = git://github.com/vim-scripts/Tail-Bundle.git
 [submodule "vim/vim/bundle/space"]
 	path = vim/vim/bundle/space
 	url = git://github.com/spiiph/vim-space.git
@@ -49,15 +43,9 @@
 [submodule "vim/vim/bundle/unimpaired"]
 	path = vim/vim/bundle/unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
-[submodule "vim/vim/bundle/slime"]
-	path = vim/vim/bundle/slime
-	url = https://github.com/jpalardy/vim-slime.git
 [submodule "vim/vim/bundle/scratch"]
 	path = vim/vim/bundle/scratch
 	url = https://github.com/neh/vim-scratch.git
-[submodule "vim/vim/bundle/solarized"]
-	path = vim/vim/bundle/solarized
-	url = https://github.com/altercation/vim-colors-solarized
 [submodule "vim/vim/bundle/dbext"]
 	path = vim/vim/bundle/dbext
 	url = https://github.com/neh/dbext.vim.git
