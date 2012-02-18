@@ -331,7 +331,7 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   , ((modMask,                 xK_o     ), toggleWindow (title =? "handy")
       (spawn $ XMonad.terminal conf ++
-      " -title handy -geometry "++ handySize ++" -e tmux attach -t handy || tmux new-session -s handy"))
+      " -title handy -geometry "++ handySize ++" -e sh -c \"tmux attach -t handy || tmux new-session -s handy\""))
 
   , ((modMask, xK_g), submap . M.fromList $
     [ ((0, xK_m), raiseNext (className =? "MPlayer"))
