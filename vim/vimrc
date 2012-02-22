@@ -210,8 +210,13 @@ set sidescroll=1
 set sidescrolloff=2
 
 set completeopt=longest,menuone
-set wildmenu
-set wildmode=longest,list
+
+if has("wildmenu")
+    set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.jpeg,*.png
+    set wildignore+=*~,*.swp,*.tmp,.DS_Store
+    set wildmenu
+    set wildmode=longest,list
+endif
 
 set clipboard=unnamed
 
