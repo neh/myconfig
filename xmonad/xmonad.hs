@@ -162,7 +162,7 @@ myLog dbus hostname = withWindowSet $ \ws -> do
           , ppWsSep           = ""
           , ppSep             = " "
           , ppSort            = DO.getSortByOrder
-          , ppTitle           = pangoBold "#efefef" . shorten titleLength
+          , ppTitle           = pangoBold "#efefef" . shorten 255
           , ppOrder           = \(workspaces:layout:title:xs) ->
                                  (myWCount ws:workspaces:title:xs)
           , ppOutput   = \ str -> do
@@ -178,11 +178,6 @@ myLog dbus hostname = withWindowSet $ \ws -> do
               return ()
           }
   where
-      titleLength = case hostname of
-        "tak" -> 90
-        "appa" -> 100
-        _ -> 90
-
       -- myWCount provides a count of open windows, and
       -- indicates which has focus. e.g. 2/4 means that
       -- the second window of four is focused.
