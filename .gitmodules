@@ -34,9 +34,6 @@
 [submodule "vim/vim/bundle/space"]
 	path = vim/vim/bundle/space
 	url = git://github.com/spiiph/vim-space.git
-[submodule "vim/vim/bundle/delimitMate"]
-	path = vim/vim/bundle/delimitMate
-	url = git://github.com/Raimondi/delimitMate.git
 [submodule "vim/vim/bundle/gundo"]
 	path = vim/vim/bundle/gundo
 	url = https://github.com/sjl/gundo.vim.git
