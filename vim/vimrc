@@ -244,7 +244,7 @@ if v:version >= '703'
     set undofile
 endif
 
-let &showbreak = ' ↪ '
+let &showbreak = '↪ '
 
 " make concealed chars stay concealed when I'm just moving around
 set concealcursor=nc
