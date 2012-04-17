@@ -375,6 +375,7 @@ let g:Powerline_symbols = 'unicode'
 let g:Powerline_symbols_override = {
     \ 'BRANCH': [0x2325],
     \ 'LINE': '',
+    \ 'RO': [0x2205],
     \ }
 let g:Powerline_dividers_override = ['', '|', '', '|']
 
