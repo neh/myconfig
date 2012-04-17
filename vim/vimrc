@@ -370,6 +370,14 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" Powerline
+let g:Powerline_symbols = 'unicode'
+let g:Powerline_symbols_override = {
+    \ 'BRANCH': [0x2325],
+    \ 'LINE': '',
+    \ }
+let g:Powerline_dividers_override = ['', '|', '', '|']
+
 " bufmru
 let g:bufmru_switchkey = "<c-e>"
 
