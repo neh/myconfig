@@ -515,6 +515,31 @@ let g:yankring_replace_n_nkey = ''
 command! W :w
 
 
+" Number text object. From http://vimbits.com/bits/334
+onoremap n :<c-u>call <SID>NumberTextObject(0)<cr>
+xnoremap n :<c-u>call <SID>NumberTextObject(0)<cr>
+onoremap an :<c-u>call <SID>NumberTextObject(1)<cr>
+xnoremap an :<c-u>call <SID>NumberTextObject(1)<cr>
+onoremap in :<c-u>call <SID>NumberTextObject(1)<cr>
+xnoremap in :<c-u>call <SID>NumberTextObject(1)<cr>
+
+function! s:NumberTextObject(whole)
+    normal! v
+
+    while getline('.')[col('.')] =~# '\v[0-9]'
+        normal! l
+    endwhile
+
+    if a:whole
+        normal! o
+
+        while col('.') > 1 && getline('.')[col('.') - 2] =~# '\v[0-9]'
+            normal! h
+        endwhile
+    endif
+endfunction
+
+
 " Switch windows/buffers, depending on whether multiple windows exist.
 function! SwitchWindowOrBuffer(d)
     if winbufnr(2) == -1
