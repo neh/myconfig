@@ -262,6 +262,8 @@ set guioptions-=b
 " }}}
 " Key mappings {{{ ------------------------------------------------------------
 
+" make Y behave like other capitals
+map Y y$
 
 " A few dvorak movement adjustments
 noremap s l
