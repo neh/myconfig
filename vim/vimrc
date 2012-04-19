@@ -375,6 +375,18 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" Mark
+function! s:SetMarkColours()
+    highlight MarkWord1 ctermbg=208 ctermfg=Black guibg=#F2891F guifg=Black
+    highlight MarkWord2 ctermbg=148 ctermfg=Black guibg=#BCFA37 guifg=Black
+    highlight MarkWord3 ctermbg=075 ctermfg=Black guibg=#4DD0F7 guifg=Black
+    highlight MarkWord4 ctermbg=185 ctermfg=Black guibg=#EFF589 guifg=Black
+    highlight MarkWord5 ctermbg=197 ctermfg=Black guibg=#F52A63 guifg=Black
+    highlight MarkWord6 ctermbg=249 ctermfg=Black guibg=#E3E3E3 guifg=Black
+endfunction
+autocmd ColorScheme * call s:SetMarkColours()
+call s:SetMarkColours()
+
 " Powerline
 let g:Powerline_symbols = 'unicode'
 let g:Powerline_symbols_override = {
