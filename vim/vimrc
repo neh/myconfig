@@ -9,8 +9,8 @@ runtime bundle/pathogen/autoload/pathogen.vim
 filetype off
 let g:pathogen_disabled = ["supertab"]
 "let g:pathogen_disabled += ["space"]
-if filereadable(".local.pathogen.vim")
-    source .local.pathogen.vim
+if filereadable($HOME . "/.local.pathogen.vim")
+    source $HOME/.local.pathogen.vim
 endif
 call pathogen#infect()
 "call pathogen#helptags()
@@ -627,8 +627,8 @@ endfunc
 " }}}
 " Local config settings {{{ ---------------------------------------------------
 
-if filereadable(".local.vim")
-    source .local.vim
+if filereadable($HOME . "/.local.vim")
+    source $HOME/.local.vim
 endif
 
 " }}}
