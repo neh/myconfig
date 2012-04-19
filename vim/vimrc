@@ -9,6 +9,9 @@ runtime bundle/pathogen/autoload/pathogen.vim
 filetype off
 let g:pathogen_disabled = ["supertab"]
 "let g:pathogen_disabled += ["space"]
+if filereadable(".local.pathogen.vim")
+    source .local.pathogen.vim
+endif
 call pathogen#infect()
 "call pathogen#helptags()
 
@@ -620,5 +623,12 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+" }}}
+" Local config settings {{{ ---------------------------------------------------
+
+if filereadable(".local.vim")
+    source .local.vim
+endif
 
 " }}}
