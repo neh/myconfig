@@ -403,6 +403,7 @@ let g:Powerline_symbols_override = {
     \ 'RO': [0x2205],
     \ }
 let g:Powerline_dividers_override = ['', '|', '', '|']
+call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
 " bufmru
 let g:bufmru_switchkey = "<c-e>"
