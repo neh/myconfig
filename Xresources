@@ -4,8 +4,37 @@
 *scrollBar: False
 *saveLines: 9999
 
-*background:            #222222
-*foreground:            #eeeeee
+
+!! Colour settings
+
+*background: #222222
+*foreground: #ffffff
+
+! Black + DarkGrey
+*color0:  #000000
+*color8:  #555753
+! DarkRed + Red
+*color1:  #f70c34
+*color9:  #ed022a
+! DarkGreen + Green
+*color2:  #93d44f
+*color10: #c8ffa8
+! DarkYellow + Yellow
+*color3:  #eab93d
+*color11: #ffc123
+! DarkBlue + Blue
+*color4:  #426ca9
+*color12: #78a9e8
+! DarkMagenta + Magenta
+*color5:  #d119ac
+*color13: #eb1cc1
+! DarkCyan + Cyan
+*color6:  #29c1d1
+*color14: #3cf3ff
+! LightGrey + White
+*color7:  #cccccc
+*color15: #ffffff
+
 
 !!! Rxvt settings
 
