@@ -7,6 +7,10 @@
 
 !! Colour settings
 
+!*cursorColor: #0a9dff
+!*cursorColor: #fa7f28
+*cursorColor: #ebf218
+
 *background: #222222
 *foreground: #ffffff
 
