@@ -541,12 +541,12 @@ command! W :w
 
 
 " Number text object. From http://vimbits.com/bits/334
-onoremap n :<c-u>call <SID>NumberTextObject(0)<cr>
-xnoremap n :<c-u>call <SID>NumberTextObject(0)<cr>
-onoremap an :<c-u>call <SID>NumberTextObject(1)<cr>
-xnoremap an :<c-u>call <SID>NumberTextObject(1)<cr>
-onoremap in :<c-u>call <SID>NumberTextObject(1)<cr>
-xnoremap in :<c-u>call <SID>NumberTextObject(1)<cr>
+onoremap N :<c-u>call <SID>NumberTextObject(0)<cr>
+xnoremap N :<c-u>call <SID>NumberTextObject(0)<cr>
+onoremap aN :<c-u>call <SID>NumberTextObject(1)<cr>
+xnoremap aN :<c-u>call <SID>NumberTextObject(1)<cr>
+onoremap iN :<c-u>call <SID>NumberTextObject(1)<cr>
+xnoremap iN :<c-u>call <SID>NumberTextObject(1)<cr>
 
 function! s:NumberTextObject(whole)
     normal! v
