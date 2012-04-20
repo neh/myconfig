@@ -1,2 +1,2 @@
+KERNEL=="event3", SUBSYSTEM=="input", RUN+="keymap $name neh-thinkpad"
 ATTRS{idVendor}=="1e54", ATTRS{idProduct}=="2030", RUN+="keymap $name neh-typematrix"
-ENV{DMI_VENDOR}=="LENOVO*", ATTR{[dmi/id]product_version}=="ThinkPad X220*", RUN+="keymap $name neh-thinkpad"
