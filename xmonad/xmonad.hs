@@ -134,7 +134,7 @@ main = withConnection Session $ \ dbus -> do
     }
     where
       myWorkSpaces hostname = case hostname of
-          "nathan-desktop" -> ["mon", "comm", "files", "d", "web", "db", "lose", "vm"]
+          "nathan" -> ["mon", "comm", "files", "d", "web", "db", "lose", "vm"]
           _ -> ["im", "comm", "files", "web", "vm"]
 
       tiled = HintedTile 1 (3%100) 0.648 TopLeft Tall
