@@ -12,7 +12,7 @@ import Data.Ratio
 import System.IO
 import System.Exit
 import DBus
-import DBus.Connection
+import qualified DBus.Connection as DBC
 import DBus.Message
 
 import XMonad.Actions.CopyWindow
@@ -72,19 +72,19 @@ fg = "#f3431b"
 fn = "-*-terminal-medium-r-*-*-17-*-*-*-*-*-iso8859-*"
 
 
-getWellKnownName :: Connection -> IO ()
+getWellKnownName :: DBC.Connection -> IO ()
 getWellKnownName dbus = tryGetName `catchDyn` (\ (DBus.Error _ _) ->
                                                 getWellKnownName dbus)
  where
   tryGetName = do
     namereq <- newMethodCall serviceDBus pathDBus interfaceDBus "RequestName"
     addArgs namereq [String "org.xmonad.Log", Word32 5]
-    sendWithReplyAndBlock dbus namereq 0
+    DBC.sendWithReplyAndBlock dbus namereq 0
     return ()
 
 
 main :: IO ()
-main = withConnection Session $ \ dbus -> do
+main = DBC.withConnection DBC.Session $ \ dbus -> do
   hostname <- fmap nodeName getSystemID
   getWellKnownName dbus
   --spawn "xcompmgr -nFf -I 0.056 -O 0.06"
@@ -172,7 +172,7 @@ myLog dbus hostname = withWindowSet $ \ws -> do
                          "Update"
               addArgs msg [String str']
               -- If the send fails, ignore it.
-              send dbus msg 0 `catchDyn`
+              DBC.send dbus msg 0 `catchDyn`
                 (\ (DBus.Error _name _msg) ->
                   return 0)
               return ()
