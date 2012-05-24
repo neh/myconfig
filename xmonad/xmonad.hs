@@ -266,6 +266,7 @@ myManageHook = composeAll
   , role      =? "conversation"            --> doFloat
   , className =? "Unity-2d-panel"          --> doIgnore
   , className =? "Unity-2d-launcher"       --> doIgnore
+  , title     =? "Sublime Color Picker"    --> doFloat
   ]
   where
     unFloat = ask >>= doF . W.sink
