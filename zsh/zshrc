@@ -126,6 +126,8 @@ alias gddc='git diff --cached'
 alias gslr='git stash && git pull --rebase'
 alias gsp='git stash pop'
 
+alias gn='git annex'
+
 # }}}
 # Functions {{{ ---------------------------------------------------------------
 
