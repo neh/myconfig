@@ -9,7 +9,8 @@
 
 !*cursorColor: #0a9dff
 !*cursorColor: #fa7f28
-*cursorColor: #ebf218
+!*cursorColor: #ebf218
+*cursorColor: #33b1ff
 
 *background: #222222
 *foreground: #ffffff

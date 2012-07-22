@@ -73,6 +73,33 @@ bindkey ^r history-incremental-pattern-search-backward
 bindkey ^f history-incremental-pattern-search-forward
 bindkey -M vicmd v edit-command-line
 
+# set cursor colour as indicator of vi mode
+zle-keymap-select () {
+    if [ $KEYMAP = vicmd ]; then
+        if [[ $TMUX = '' ]]; then
+            echo -ne "\033]12;#fffb17\007"
+        else
+            printf '\033Ptmux;\033\033]12;#fffb17\007\033\\'
+        fi
+    else
+        if [[ $TMUX = '' ]]; then
+            echo -ne "\033]12;#33b1ff\007"
+        else
+            printf '\033Ptmux;\033\033]12;#33b1ff\007\033\\'
+        fi
+    fi
+}
+zle-line-init () {
+    zle -K viins
+    if [[ $TMUX = '' ]]; then
+        echo -ne "\033]12;#33b1ff\007"
+    else
+        printf '\033Ptmux;\033\033]12;#33b1ff\007\033\\'
+    fi
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
+
 # }}}
 # Aliases {{{ -----------------------------------------------------------------
 

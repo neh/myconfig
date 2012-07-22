@@ -383,6 +383,10 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" URitality
+let g:uritality_color_insert = "#33b1ff"
+let g:uritality_color_normal = "#fffb17"
+
 " Mark
 function! s:SetMarkColours()
     highlight MarkWord1 ctermbg=208 ctermfg=Black guibg=#F2891F guifg=Black
