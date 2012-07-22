@@ -127,3 +127,6 @@
 [submodule "vim/vim/bundle/mark"]
 	path = vim/vim/bundle/mark
 	url = https://github.com/dimasg/vim-mark.git
+[submodule "vim/vim/bundle/uritality"]
+	path = vim/vim/bundle/uritality
+	url = https://github.com/dmedvinsky/uritality.vim.git
