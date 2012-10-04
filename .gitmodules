@@ -130,3 +130,6 @@
 [submodule "vim/vim/bundle/uritality"]
 	path = vim/vim/bundle/uritality
 	url = https://github.com/dmedvinsky/uritality.vim.git
+[submodule "xcape"]
+	path = xcape
+	url = https://github.com/alols/xcape.git
