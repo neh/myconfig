@@ -156,7 +156,7 @@ if $TMUX != '' || $TERM == 'rxvt-256color'
 endif
 
 " make special chars (tabs, trailing spaces, etc) barely visible
-hi SpecialKey cterm=none ctermfg=238
+hi SpecialKey cterm=none ctermfg=241
 " other special chars (line wrap chars etc.)
 hi NonText cterm=none ctermfg=green ctermbg=235
 
