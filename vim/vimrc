@@ -149,8 +149,6 @@ hi CursorLine term=none cterm=none ctermfg=7 ctermbg=22 gui=none guibg=#333333
 " folding
 hi Folded term=none cterm=bold ctermbg=236 ctermfg=244 gui=none guibg=#333333
 hi FoldColumn term=none cterm=none ctermbg=236 ctermfg=244 gui=none guibg=#333333
-" conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 if $TMUX != '' || $TERM == 'rxvt-256color'
     hi Folded cterm=italic
