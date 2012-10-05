@@ -273,6 +273,9 @@ set guioptions-=b
 " }}}
 " Key mappings {{{ ------------------------------------------------------------
 
+" delete trailing whitespace
+map <leader>dtr :%s/\s\+$//e<cr>
+
 " make Y behave like other capitals
 map Y y$
 
