@@ -160,6 +160,8 @@ hi SpecialKey cterm=none ctermfg=241
 " other special chars (line wrap chars etc.)
 hi NonText cterm=none ctermfg=green ctermbg=235
 
+hi ExtraWhitespace ctermbg=124 ctermfg=white guibg=red guifg=white
+autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
 
 " }}}
 " General options {{{ ---------------------------------------------------------
@@ -240,7 +242,7 @@ endif
 
 " Show trailing whitespace and tabs as visible chars
 set list
-set listchars=tab:➜\ ,trail:·,extends:❱,precedes:❰
+set listchars=tab:➜\ ,extends:❱,precedes:❰
 
 " Mark column 80, method depending on vim version
 if exists('+colorcolumn')
