@@ -40,7 +40,7 @@ if has('gui_running')
 else
     if $TERM =~ '^screen-bce' || $TERM == 'screen-256color' || $TERM =~ '256'
         set t_Co=256
-        colo desert-warm-256
+        colo Tomorrow-Night
     else
         set t_Co=16
     endif
