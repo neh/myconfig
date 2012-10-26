@@ -133,3 +133,6 @@
 [submodule "xcape"]
 	path = xcape
 	url = https://github.com/alols/xcape.git
+[submodule "vim/vim/bundle/clam"]
+	path = vim/vim/bundle/clam
+	url = https://github.com/sjl/clam.vim.git
