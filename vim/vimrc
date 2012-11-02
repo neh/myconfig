@@ -409,7 +409,7 @@ let g:Powerline_symbols_override = {
     \ 'LINE': '',
     \ 'RO': [0x2205],
     \ }
-let g:Powerline_dividers_override = ['', '|', '', '|']
+let g:Powerline_dividers_override = ['', [0x2502], '', [0x2502]]
 call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
 " bufmru
