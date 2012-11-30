@@ -42,6 +42,9 @@ HISTFILE=~/.zshhistory
 # other things (like screen)
 stty stop "" start ""
 
+# shortest possible delay when pressing esc
+KEYTIMEOUT=1
+
 # custom window title truncation for tmux
 if [ $TMUX ]
 then
