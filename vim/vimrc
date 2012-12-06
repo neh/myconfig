@@ -91,7 +91,9 @@ autocmd BufRead,BufNewFile *.zsh-theme setlocal filetype=zsh
 autocmd BufRead,BufNewFile *tmux.conf setlocal filetype=tmux
 
 " Useful when customizing xterm
-autocmd BufWritePost *Xdefaults,*Xresources :!xrdb ~/.Xresources
+autocmd BufWritePost *Xdefaults*,*Xresources* :!xrdb ~/.Xresources
+" give machine-specific X setting files the proper filetype
+autocmd BufRead,BufNewFile *Xdefaults-* setlocal filetype=xdefaults
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
