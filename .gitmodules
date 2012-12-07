@@ -139,3 +139,6 @@
 [submodule "vim/vim/bundle/lushtags"]
 	path = vim/vim/bundle/lushtags
 	url = https://github.com/bitc/lushtags.git
+[submodule "vim/vim/bundle/tagbar-phpctags"]
+	path = vim/vim/bundle/tagbar-phpctags
+	url = https://github.com/techlivezheng/tagbar-phpctags.git

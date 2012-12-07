@@ -388,6 +388,11 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" PHPCtags
+if executable($HOME . "/src/phpctags/phpctags")
+    let g:tagbar_phpctags_bin=$HOME.'/src/phpctags/phpctags'
+endif
+
 " URitality
 let g:uritality_color_insert = "#33b1ff"
 let g:uritality_color_normal = "#fffb17"
