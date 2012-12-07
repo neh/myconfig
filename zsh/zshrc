@@ -41,6 +41,8 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 # }}}
 # Settings {{{ ----------------------------------------------------------------
 
+path+=($HOME/.cabal/bin(N-/))
+
 HISTSIZE=8000
 SAVEHIST=5000
 HISTFILE=~/.zshhistory
