@@ -136,3 +136,6 @@
 [submodule "vim/vim/bundle/clam"]
 	path = vim/vim/bundle/clam
 	url = https://github.com/sjl/clam.vim.git
+[submodule "vim/vim/bundle/lushtags"]
+	path = vim/vim/bundle/lushtags
+	url = https://github.com/bitc/lushtags.git
