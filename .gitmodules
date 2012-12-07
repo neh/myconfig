@@ -142,3 +142,6 @@
 [submodule "vim/vim/bundle/tagbar-phpctags"]
 	path = vim/vim/bundle/tagbar-phpctags
 	url = https://github.com/techlivezheng/tagbar-phpctags.git
+[submodule "phpctags"]
+	path = phpctags
+	url = https://github.com/techlivezheng/phpctags.git

@@ -389,8 +389,8 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " Plugin configs {{{ ----------------------------------------------------------
 
 " PHPCtags
-if executable($HOME . "/src/phpctags/phpctags")
-    let g:tagbar_phpctags_bin=$HOME.'/src/phpctags/phpctags'
+if executable($HOME . "/myconfig/phpctags/phpctags")
+    let g:tagbar_phpctags_bin=$HOME.'/myconfig/phpctags/phpctags'
 endif
 
 " URitality
