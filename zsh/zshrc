@@ -41,6 +41,7 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 # }}}
 # Settings {{{ ----------------------------------------------------------------
 
+path+=($HOME/bin(N-/))
 path+=($HOME/.cabal/bin(N-/))
 
 HISTSIZE=8000
