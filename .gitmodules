@@ -145,3 +145,6 @@
 [submodule "vim/vim/bundle/sudoedit"]
 	path = vim/vim/bundle/sudoedit
 	url = https://github.com/chrisbra/SudoEdit.vim.git
+[submodule "vim/vim/bundle/git-inline-diff"]
+	path = vim/vim/bundle/git-inline-diff
+	url = git@github.com:neh/vim-git-inline-diff.git
