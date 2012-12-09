@@ -145,3 +145,6 @@
 [submodule "vim/vim/bundle/tcomment"]
 	path = vim/vim/bundle/tcomment
 	url = https://github.com/tomtom/tcomment_vim.git
+[submodule "vim/vim/bundle/sudoedit"]
+	path = vim/vim/bundle/sudoedit
+	url = https://github.com/chrisbra/SudoEdit.vim.git
