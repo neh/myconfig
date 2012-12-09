@@ -9,6 +9,7 @@ runtime bundle/pathogen/autoload/pathogen.vim
 filetype off
 let g:pathogen_disabled = ["supertab"]
 let g:pathogen_disabled += ["easytags"]
+let g:pathogen_disabled += ["uritality"]
 if filereadable($HOME . "/.local.pathogen.vim")
     source $HOME/.local.pathogen.vim
 endif
