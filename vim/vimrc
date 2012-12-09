@@ -389,6 +389,10 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" SudoEdit
+nmap <Leader>W :SudoWrite<cr>
+vmap <Leader>W :SudoWrite<cr>
+
 " tcomment
 let g:tcommentMapLeader2="<Leader>c"
 nmap <Leader>cc :TComment<cr>
