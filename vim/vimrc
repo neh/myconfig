@@ -389,6 +389,12 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" tcomment
+let g:tcommentMapLeader2="<Leader>c"
+nmap <Leader>cc :TComment<cr>
+vmap <Leader>cc :TComment<cr>
+vmap <Leader>ci :TCommentInline<cr>
+
 " PHPCtags
 if executable($HOME . "/myconfig/phpctags/phpctags")
     let g:tagbar_phpctags_bin=$HOME.'/myconfig/phpctags/phpctags'
