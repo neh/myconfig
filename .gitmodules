@@ -142,3 +142,6 @@
 [submodule "phpctags"]
 	path = phpctags
 	url = https://github.com/techlivezheng/phpctags.git
+[submodule "vim/vim/bundle/tcomment"]
+	path = vim/vim/bundle/tcomment
+	url = https://github.com/tomtom/tcomment_vim.git
