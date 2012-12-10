@@ -41,6 +41,8 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 # }}}
 # Settings {{{ ----------------------------------------------------------------
 
+typeset -U path cdpath
+
 path+=($HOME/bin(N-/))
 path+=($HOME/.cabal/bin(N-/))
 
