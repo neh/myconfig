@@ -109,7 +109,7 @@ autocmd FileType php let b:surround_112 = "<?php \r ?>"
 
 " folding setup
 let php_folding = 1
-autocmd FileType javascript setlocal foldmethod=marker foldmarker={,}
+autocmd FileType javascript setlocal foldmethod=syntax
 autocmd FileType css,php setlocal foldmethod=syntax
 
 " completion setup
