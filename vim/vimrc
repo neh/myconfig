@@ -276,6 +276,16 @@ set guioptions-=b
 " }}}
 " Key mappings {{{ ------------------------------------------------------------
 
+" toggle folds
+nnoremap <space> za
+vnoremap <space> za
+
+" recursively open folds
+nnoremap z<space> zCzO
+
+" refocus folds
+nnoremap zf zMzvzz
+
 " delete trailing whitespace
 map <leader>dtr :%s/\s\+$//e<cr>
 
