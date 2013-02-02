@@ -161,7 +161,7 @@ endif
 " make special chars (tabs, trailing spaces, etc) barely visible
 hi SpecialKey cterm=none ctermfg=241
 " other special chars (line wrap chars etc.)
-hi NonText cterm=none ctermfg=green ctermbg=235
+hi NonText cterm=none ctermfg=240 ctermbg=235
 
 hi ExtraWhitespace ctermbg=124 ctermfg=white guibg=red guifg=white
 autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
