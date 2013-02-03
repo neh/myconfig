@@ -1,15 +1,15 @@
 [user]
-	name = Nathan Howell
-	email = nath@nhowell.net
+    name = Nathan Howell
+    email = nath@nhowell.net
 [github]
-	user = neh
+    user = neh
 
 [alias]
     st = status
     listem = diff --name-status
     diffeol = diff --ignore-space-at-eol
 [core]
-	excludesfile = ~/.gitexcludes
+    excludesfile = ~/.gitexcludes
 [diff]
     tool = vimdiff
     color = true
