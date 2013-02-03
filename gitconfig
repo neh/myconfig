@@ -15,3 +15,6 @@
     color = true
 [difftool]
     prompt = false
+
+[color]
+    ui = true
