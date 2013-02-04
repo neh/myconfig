@@ -405,8 +405,8 @@ vmap <Leader>W :SudoWrite<cr>
 
 " tcomment
 let g:tcommentMapLeader2="<Leader>c"
-nmap <Leader>cc :TComment<cr>
-vmap <Leader>cc :TComment<cr>
+nmap <Leader>/ :TComment<cr>
+vmap <Leader>/ :TComment<cr>
 vmap <Leader>ci :TCommentInline<cr>
 
 " PHPCtags
