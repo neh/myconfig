@@ -537,11 +537,6 @@ nmap <Leader>' :SscratchToggle<cr>
 let g:dbext_default_use_sep_result_buffer = 1
 nmap <Leader>sdb :DBSetOption dbname=
 
-" Space
-let g:space_no_character_movements = 1
-let g:space_disable_select_mode = 1
-let g:space_no_search = 1
-
 " Gundo
 nmap <Leader>un :GundoToggle<CR>
 let g:gundo_map_move_older="t"
