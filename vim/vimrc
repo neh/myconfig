@@ -490,9 +490,10 @@ call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 let g:bufmru_switchkey = "<c-e>"
 
 " ctrlp
-let g:ctrlp_dotfiles = 0
-let g:ctrlp_open_multi = 'vr'
+let g:ctrlp_show_hidden = 0
+let g:ctrlp_open_multiple_files = 'i'
 let g:ctrlp_map = '<leader>f'
+let g:ctrlp_switch_buffer = 'Et'
 nmap <Leader>e :CtrlPBuffer<cr>
 nmap <Leader>h :CtrlPCurFile<cr>
 
