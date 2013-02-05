@@ -53,7 +53,7 @@ Bundle 'vim-scripts/Align'
 Bundle 'vim-scripts/AnsiEsc.vim'
 Bundle 'vim-scripts/bufmru.vim'
 " Bundle 'vim-scripts/easytags.vim'
-Bundle 'Yggdroot/indentLine'
+" Bundle 'Yggdroot/indentLine'
 
 " Enable filetype detection and syntax highlighting
 filetype plugin indent on
