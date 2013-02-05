@@ -4,16 +4,55 @@ set nocompatible
 " Clear autocmds
 autocmd!
 
-" Set up pathogen for loading plugins
-runtime bundle/pathogen/autoload/pathogen.vim
 filetype off
-let g:pathogen_disabled = ["easytags"]
-let g:pathogen_disabled += ["uritality"]
-if filereadable($HOME . "/.local.pathogen.vim")
-    source $HOME/.local.pathogen.vim
-endif
-call pathogen#infect()
-"call pathogen#helptags()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+Bundle 'AndrewRadev/splitjoin.vim'
+Bundle 'bitc/lushtags'
+Bundle 'bkad/CamelCaseMotion'
+Bundle 'chrisbra/SudoEdit.vim'
+Bundle 'dimasg/vim-mark'
+" Bundle 'dmedvinsky/uritality.vim'
+Bundle 'ehamberg/vim-cute-python'
+Bundle 'godlygeek/tabular'
+Bundle 'kana/vim-smartinput'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'kien/ctrlp.vim'
+Bundle 'leshill/vim-json'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'majutsushi/tagbar'
+Bundle 'mattn/gist-vim'
+Bundle 'michaeljsmith/vim-indent-object'
+Bundle 'mileszs/ack.vim'
+Bundle 'msanders/snipmate.vim'
+Bundle 'neh/dbext.vim'
+Bundle 'neh/vim-git-inline-diff'
+Bundle 'neh/vim-scratch'
+Bundle 'pangloss/vim-javascript'
+Bundle 'rainux/vim-desert-warm-256'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'Shougo/neocomplcache'
+Bundle 'sjl/clam.vim'
+Bundle 'sjl/gundo.vim'
+Bundle 'spf13/PIV'
+Bundle 'techlivezheng/tagbar-phpctags'
+Bundle 'tomtom/tcomment_vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-abolish'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-markdown'
+Bundle 'Twinside/vim-haskellConceal'
+Bundle 'vim-scripts/Align'
+Bundle 'vim-scripts/AnsiEsc.vim'
+Bundle 'vim-scripts/bufmru.vim'
+" Bundle 'vim-scripts/easytags.vim'
 
 " Enable filetype detection and syntax highlighting
 filetype plugin indent on
