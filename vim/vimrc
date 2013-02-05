@@ -7,8 +7,7 @@ autocmd!
 " Set up pathogen for loading plugins
 runtime bundle/pathogen/autoload/pathogen.vim
 filetype off
-let g:pathogen_disabled = ["supertab"]
-let g:pathogen_disabled += ["easytags"]
+let g:pathogen_disabled = ["easytags"]
 let g:pathogen_disabled += ["uritality"]
 if filereadable($HOME . "/.local.pathogen.vim")
     source $HOME/.local.pathogen.vim
@@ -526,14 +525,6 @@ let g:NERDTreeMapJumpPrevSibling="<C-S-N>"
 let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeAutoCenter=1
 let g:NERDTreeAutoCenterThreshold=6
-
-" SuperTab
-let g:SuperTabMappingForward = '<c-n>'
-let g:SuperTabMappingBackward = '<c-p>'
-let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-let g:SuperTabContextDefaultCompletionType = '<c-p>'
-let g:SuperTabLongestHighlight = 1
-let g:SuperTabLongestEnhanced = 1
 
 " Ack
 nmap <Leader>gf :LAck 

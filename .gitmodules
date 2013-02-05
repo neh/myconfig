@@ -19,9 +19,6 @@
 [submodule "vim/vim/bundle/repeat"]
 	path = vim/vim/bundle/repeat
 	url = git://github.com/tpope/vim-repeat.git
-[submodule "vim/vim/bundle/supertab"]
-	path = vim/vim/bundle/supertab
-	url = git://github.com/ervandew/supertab.git
 [submodule "vim/vim/bundle/easytags"]
 	path = vim/vim/bundle/easytags
 	url = git://github.com/vim-scripts/easytags.vim.git
