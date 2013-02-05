@@ -419,6 +419,7 @@ let g:uritality_color_insert = "#33b1ff"
 let g:uritality_color_normal = "#fffb17"
 
 " Mark
+nmap <Leader><Leader><Leader>/ <Plug>MarkSearchAnyNext
 function! s:SetMarkColours()
     highlight MarkWord1 ctermbg=208 ctermfg=Black guibg=#F2891F guifg=Black
     highlight MarkWord2 ctermbg=148 ctermfg=Black guibg=#BCFA37 guifg=Black
