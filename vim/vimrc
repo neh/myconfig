@@ -39,7 +39,6 @@ Bundle 'sjl/clam.vim'
 Bundle 'sjl/gundo.vim'
 Bundle 'spf13/PIV'
 Bundle 'techlivezheng/tagbar-phpctags'
-Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-abolish'
@@ -438,12 +437,6 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " SudoEdit
 nmap <Leader>W :SudoWrite<cr>
 vmap <Leader>W :SudoWrite<cr>
-
-" tcomment
-let g:tcommentMapLeader2="<Leader>c"
-nmap <Leader>/ :TComment<cr>
-vmap <Leader>/ :TComment<cr>
-vmap <Leader>ci :TCommentInline<cr>
 
 " PHPCtags
 if executable($HOME . "/myconfig/phpctags/phpctags")
