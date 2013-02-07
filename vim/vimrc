@@ -15,7 +15,6 @@ Bundle 'bitc/lushtags'
 Bundle 'bkad/CamelCaseMotion'
 Bundle 'chrisbra/SudoEdit.vim'
 Bundle 'dimasg/vim-mark'
-" Bundle 'dmedvinsky/uritality.vim'
 Bundle 'ehamberg/vim-cute-python'
 Bundle 'godlygeek/tabular'
 Bundle 'kana/vim-smartinput'
@@ -449,10 +448,6 @@ vmap <Leader>ci :TCommentInline<cr>
 if executable($HOME . "/myconfig/phpctags/phpctags")
     let g:tagbar_phpctags_bin=$HOME.'/myconfig/phpctags/phpctags'
 endif
-
-" URitality
-let g:uritality_color_insert = "#33b1ff"
-let g:uritality_color_normal = "#fffb17"
 
 " Mark
 nmap <Leader><Leader><Leader>/ <Plug>MarkSearchAnyNext
