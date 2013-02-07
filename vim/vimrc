@@ -27,14 +27,12 @@ Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'neh/dbext.vim'
-Bundle 'neh/vim-git-inline-diff'
 Bundle 'neh/vim-scratch'
 Bundle 'pangloss/vim-javascript'
 Bundle 'rainux/vim-desert-warm-256'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
-Bundle 'Shougo/neocomplcache'
 Bundle 'sjl/clam.vim'
 Bundle 'sjl/gundo.vim'
 Bundle 'spf13/PIV'
@@ -50,6 +48,16 @@ Bundle 'vim-scripts/AnsiEsc.vim'
 Bundle 'vim-scripts/bufmru.vim'
 Bundle 'vim-scripts/simple-pairs'
 " Bundle 'vim-scripts/easytags.vim'
+
+if v:version > 703 || (v:version == 703 && has("patch547"))
+    Bundle 'neh/vim-git-inline-diff'
+endif
+
+if v:version > 703 || (v:version == 703 && has("patch584"))
+    Bundle 'Valloric/YouCompleteMe'
+else
+    Bundle 'Shougo/neocomplcache'
+endif
 
 " Enable filetype detection and syntax highlighting
 filetype plugin indent on
