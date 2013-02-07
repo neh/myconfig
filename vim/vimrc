@@ -48,7 +48,6 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-markdown'
 Bundle 'Twinside/vim-haskellConceal'
-Bundle 'vim-scripts/Align'
 Bundle 'vim-scripts/AnsiEsc.vim'
 Bundle 'vim-scripts/bufmru.vim'
 " Bundle 'vim-scripts/easytags.vim'
@@ -581,11 +580,6 @@ let g:snips_author = 'Nathan Howell'
 
 " Jsbeautify
 nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
-
-" Align
-map <Leader>ac :AlignCtrl 
-nmap <Leader>a vii:Align 
-vmap <Leader>a :Align 
 
 " Yankring
 "let g:yankring_enabled = 1
