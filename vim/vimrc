@@ -51,7 +51,6 @@ Bundle 'Twinside/vim-haskellConceal'
 Bundle 'vim-scripts/AnsiEsc.vim'
 Bundle 'vim-scripts/bufmru.vim'
 " Bundle 'vim-scripts/easytags.vim'
-" Bundle 'Yggdroot/indentLine'
 
 " Enable filetype detection and syntax highlighting
 filetype plugin indent on
@@ -435,12 +434,6 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
-
-" indent lines
-let g:indentLine_enabled = 0
-let g:indentLine_char = '│'
-let g:indentLine_color_term = 236
-nmap <leader>ig :IndentLinesToggle<cr>
 
 " SudoEdit
 nmap <Leader>W :SudoWrite<cr>
