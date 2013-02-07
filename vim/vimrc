@@ -490,20 +490,6 @@ let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_max_list = 40
 let g:neocomplcache_auto_completion_start_length = 3
 
-" CamelCaseMotion
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-sunmap w
-sunmap b
-sunmap e
-omap <silent> iw <Plug>CamelCaseMotion_iw
-xmap <silent> iw <Plug>CamelCaseMotion_iw
-omap <silent> ib <Plug>CamelCaseMotion_ib
-xmap <silent> ib <Plug>CamelCaseMotion_ib
-omap <silent> ie <Plug>CamelCaseMotion_ie
-xmap <silent> ie <Plug>CamelCaseMotion_ie
-
 " Syntastic
 let g:syntastic_auto_loc_list=2
 let g:syntastic_enable_signs=1
