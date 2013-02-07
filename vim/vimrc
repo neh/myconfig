@@ -205,6 +205,7 @@ autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
 " General options {{{ ---------------------------------------------------------
 
 let mapleader=","
+set relativenumber
 set encoding=utf-8
 set fileencodings=utf-8
 set ruler
