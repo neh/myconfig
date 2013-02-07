@@ -48,6 +48,7 @@ Bundle 'tpope/vim-markdown'
 Bundle 'Twinside/vim-haskellConceal'
 Bundle 'vim-scripts/AnsiEsc.vim'
 Bundle 'vim-scripts/bufmru.vim'
+Bundle 'vim-scripts/simple-pairs'
 " Bundle 'vim-scripts/easytags.vim'
 
 " Enable filetype detection and syntax highlighting
