@@ -325,6 +325,11 @@ set guioptions-=b
 " }}}
 " Key mappings {{{ ------------------------------------------------------------
 
+" quick vundle maps
+nmap <leader>bi :BundleInstall<cr>
+nmap <leader>bu :BundleInstall!<cr>
+nmap <leader>bc :BundleClean!<cr>
+
 " toggle folds
 nnoremap <space> za
 vnoremap <space> za
