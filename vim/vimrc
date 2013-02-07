@@ -32,6 +32,7 @@ Bundle 'neh/vim-git-inline-diff'
 Bundle 'neh/vim-scratch'
 Bundle 'pangloss/vim-javascript'
 Bundle 'rainux/vim-desert-warm-256'
+Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'Shougo/neocomplcache'
@@ -433,6 +434,10 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" NERDCommenter
+nmap <Leader>/ <Plug>NERDCommenterToggle
+vmap <Leader>/ <Plug>NERDCommenterToggle
 
 " SudoEdit
 nmap <Leader>W :SudoWrite<cr>
