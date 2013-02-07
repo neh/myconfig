@@ -29,6 +29,7 @@ Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'neh/dbext.vim'
+Bundle 'neh/vim-git-inline-diff'
 Bundle 'neh/vim-scratch'
 Bundle 'pangloss/vim-javascript'
 Bundle 'rainux/vim-desert-warm-256'
@@ -434,6 +435,12 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" indent lines
+let g:indentLine_enabled = 0
+let g:indentLine_char = '│'
+let g:indentLine_color_term = 236
+nmap <leader>ig :IndentLinesToggle<cr>
 
 " SudoEdit
 nmap <Leader>W :SudoWrite<cr>
