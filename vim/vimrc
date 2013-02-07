@@ -578,6 +578,25 @@ let g:yankring_replace_n_nkey = ''
 " }}}
 " Custom functions and commands {{{ -------------------------------------------
 
+function! SmartAlign(mode)
+    let cur_line = getline('.')
+
+    if a:mode =~ "[vV]"
+        let range = "'<,'>"
+    else
+        let range = ''
+    endif
+
+    if cur_line =~ ":"
+        execute "normal! :" . range . "Tabularize first_colon"
+    elseif cur_line =~ "="
+        execute "normal! :" . range . "Tabularize assignment"
+    endif
+endfunction
+nmap <leader>a :call SmartAlign('')<cr>
+vmap <leader>a :call SmartAlign(visualmode())<cr>
+
+
 " I keep hitting :W when saving. It may as well work.
 command! W :w
 
