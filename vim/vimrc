@@ -22,7 +22,6 @@ Bundle 'kana/vim-smartinput'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
 Bundle 'leshill/vim-json'
-Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'majutsushi/tagbar'
 Bundle 'mattn/gist-vim'
@@ -529,18 +528,6 @@ let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
 let g:tagbar_usearrows = 1
 let g:tagbar_singleclick = 1
-
-" Easymotion
-let g:EasyMotion_mapping_f = '<Leader>,f'
-let g:EasyMotion_mapping_F = '<Leader>,F'
-let g:EasyMotion_mapping_t = '<Leader>,t'
-let g:EasyMotion_mapping_T = '<Leader>,T'
-let g:EasyMotion_mapping_w = '<Leader>,w'
-let g:EasyMotion_mapping_b = '<Leader>,b'
-let g:EasyMotion_mapping_e = '<Leader>,e'
-let g:EasyMotion_mapping_ge = '<Leader>,ge'
-let g:EasyMotion_mapping_j = '<Leader>,j'
-let g:EasyMotion_mapping_k = '<Leader>,k'
 
 " Scratch
 nmap <Leader>' :SscratchToggle<cr>
