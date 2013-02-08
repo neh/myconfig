@@ -52,6 +52,9 @@ URxvt*secondaryScroll: true
 URxvt.urgentOnBell: true
 URxvt*termName: rxvt-256color
 
+! disable so I can use c-s elsewhere
+URxvt*iso14755: false
+URxvt*iso14755_52: false
 
 ! TODO I want to make these keys send pgup/dn to all apps
 !URxvt*keysym.C-o: 0xff55
