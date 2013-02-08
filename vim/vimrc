@@ -377,8 +377,10 @@ nmap <F8> <C-W>-
 nmap <F9> <C-W>+
 nmap <F10> <C-W>>
 nmap <F11> <C-W>_
-nmap <F12> :bd<CR>
-nmap <Leader><F12> :bd!<CR>
+
+" Buffer delete maps
+nmap <Leader>bd :bd<CR>
+nmap <Leader>BD :bd!<CR>
 
 " No more Ex mode mapping. Do something useful instead.
 vmap Q gq
