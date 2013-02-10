@@ -24,6 +24,7 @@ Bundle 'tpope/vim-repeat'
 Bundle 'chrisbra/SudoEdit.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'godlygeek/tabular'
+Bundle 'coderifous/textobj-word-column.vim'
 
 " Language/filetype-specific
 Bundle 'kchmck/vim-coffee-script'
