@@ -38,6 +38,7 @@ Bundle 'spf13/PIV'
 Bundle 'ehamberg/vim-cute-python'
 
 " The Rest
+Bundle 'Raimondi/delimitMate'
 Bundle 'AndrewRadev/splitjoin.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'mattn/gist-vim'
