@@ -53,7 +53,6 @@ Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'vim-scripts/AnsiEsc.vim'
-Bundle 'vim-scripts/simple-pairs'
 " Bundle 'vim-scripts/easytags.vim'
 
 if v:version > 703 || (v:version == 703 && has("patch547"))
