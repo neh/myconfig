@@ -90,7 +90,7 @@ if has('gui_running')
 else
     if $TERM =~ '^screen-bce' || $TERM == 'screen-256color' || $TERM =~ '256'
         set t_Co=256
-        colo Tomorrow-Night
+        colo sorcerer
     else
         set t_Co=16
     endif
@@ -206,6 +206,10 @@ if $TMUX != '' || $TERM == 'rxvt-256color'
     hi Folded cterm=italic
     hi Comment cterm=italic
 endif
+
+" The bg color for the sign/num columns sucks in the sorcerer theme
+hi SignColumn cterm=none ctermbg=235
+hi LineNr cterm=italic ctermbg=235
 
 " make special chars (tabs, trailing spaces, etc) barely visible
 hi SpecialKey cterm=none ctermfg=241
