@@ -242,6 +242,7 @@ set nostartofline
 set hidden
 set backspace=indent,eol,start
 set timeoutlen=500
+set lazyredraw
 
 set shortmess=atI
 
