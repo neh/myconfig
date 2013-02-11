@@ -42,6 +42,7 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'AndrewRadev/splitjoin.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'mattn/gist-vim'
+Bundle 'gregsexton/gitv'
 Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'vim-scripts/Sorcerer'
@@ -461,6 +462,11 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" gitv
+nmap <leader>gv :Gitv --all<cr>
+nmap <leader>gV :Gitv! --all<cr>
+vmap <leader>gV :Gitv! --all<cr>
 
 " CamelCaseMotion (need this in after/plugin as well)
 map <silent> w <Plug>CamelCaseMotion_w
