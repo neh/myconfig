@@ -38,6 +38,7 @@ Bundle 'spf13/PIV'
 Bundle 'ehamberg/vim-cute-python'
 
 " The Rest
+Bundle 'luxflux/vim-git-inline-diff'
 Bundle 'Raimondi/delimitMate'
 Bundle 'AndrewRadev/splitjoin.vim'
 Bundle 'majutsushi/tagbar'
@@ -56,10 +57,6 @@ Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'vim-scripts/AnsiEsc.vim'
 " Bundle 'vim-scripts/easytags.vim'
-
-if v:version > 703 || (v:version == 703 && has("patch547"))
-    Bundle 'neh/vim-git-inline-diff'
-endif
 
 if v:version > 703 || (v:version == 703 && has("patch584"))
     Bundle 'Valloric/YouCompleteMe'
@@ -220,6 +217,10 @@ hi NonText cterm=none ctermfg=240 ctermbg=235
 
 hi ExtraWhitespace ctermbg=124 ctermfg=white guibg=red guifg=white
 autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
+
+hi scmLineAdded ctermfg=green
+hi scmLineChanged ctermfg=yellow
+hi scmLineRemoved ctermfg=red
 
 " }}}
 " General options {{{ ---------------------------------------------------------
@@ -462,6 +463,11 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" git-inline-diff
+let g:git_diff_added_symbol = '▶'
+let g:git_diff_removed_symbol = '◀'
+let g:git_diff_changed_symbol = '◆'
 
 " gitv
 nmap <leader>gv :Gitv --all<cr>
