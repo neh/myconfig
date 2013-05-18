@@ -58,7 +58,7 @@ import XMonad.Util.Paste
 import XMonad.Util.Run
 import XMonad.Util.NamedWindows
 import XMonad.Util.WorkspaceCompare
- 
+
 -- Makes ~? usable in manageHook and other places to match
 -- window properties against regexes.
 -- From: http://thread.gmane.org/gmane.comp.lang.haskell.xmonad/7058/focus=7062
@@ -369,7 +369,7 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask .|. shiftMask,   xK_period), sendMessage (IncMasterN (-1)))
 
   , ((modMask,                 xK_minus ), sendMessage ToggleStruts)
-  
+
   , ((modMask,                 xK_h     ), DO.moveTo Prev AnyWS)
   , ((modMask,                 xK_s     ), DO.moveTo Next AnyWS)
 
