@@ -132,6 +132,7 @@ main = do
                            ||| rtiled
                            ||| file
                            ||| grid
+                           ||| (noBorders Full)
     }
     where
       myWorkSpaces hostname = case hostname of
