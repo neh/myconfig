@@ -4,16 +4,15 @@ import XMonad hiding (Tall)
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import Control.Monad (filterM)
-import Control.OldException
 import Data.Char (ord)
 import Data.List
 import Data.Maybe
 import Data.Ratio
 import System.IO
 import System.Exit
-import DBus
-import qualified DBus.Connection as DBC
-import DBus.Message
+import qualified DBus as D
+import qualified DBus.Client as D
+import qualified Codec.Binary.UTF8.String as UTF8
 
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.CycleWS
@@ -71,22 +70,24 @@ bg = "#222222"
 fg = "#f3431b"
 fn = "-*-terminal-medium-r-*-*-17-*-*-*-*-*-iso8859-*"
 
-
-getWellKnownName :: DBC.Connection -> IO ()
-getWellKnownName dbus = tryGetName `catchDyn` (\ (DBus.Error _ _) ->
-                                                getWellKnownName dbus)
- where
-  tryGetName = do
-    namereq <- newMethodCall serviceDBus pathDBus interfaceDBus "RequestName"
-    addArgs namereq [String "org.xmonad.Log", Word32 5]
-    DBC.sendWithReplyAndBlock dbus namereq 0
+getWellKnownName :: D.Client -> IO ()
+getWellKnownName dbus = do
+    D.requestName dbus (D.busName_ "org.xmonad.Log")
+                  [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
     return ()
 
+dbusOutput :: D.Client -> String -> IO ()
+dbusOutput dbus str = do
+    let signal = (D.signal (D.objectPath_ "/org/xmonad/Log") (D.interfaceName_ "org.xmonad.Log") (D.memberName_ "Update")) {
+            D.signalBody = [D.toVariant ("<b>" ++ (UTF8.decodeString str) ++ "</b>")]
+        }
+    D.emit dbus signal
 
 main :: IO ()
-main = DBC.withConnection DBC.Session $ \ dbus -> do
-  hostname <- fmap nodeName getSystemID
+main = do
+  dbus <- D.connectSession
   getWellKnownName dbus
+  hostname <- fmap nodeName getSystemID
   --spawn "xcompmgr -nFf -I 0.056 -O 0.06"
   xmonad $ withUrgencyHook NoUrgencyHook
          $ ewmh defaultConfig
@@ -165,17 +166,7 @@ myLog dbus hostname = withWindowSet $ \ws -> do
           , ppTitle           = pangoBold "#efefef" . shorten 255
           , ppOrder           = \(workspaces:layout:title:xs) ->
                                  (myWCount ws:workspaces:title:xs)
-          , ppOutput   = \ str -> do
-              let str'  = "<span font=\"Ubuntu\">" ++ str ++
-                          "</span>"
-              msg <- newSignal "/org/xmonad/Log" "org.xmonad.Log" 
-                         "Update"
-              addArgs msg [String str']
-              -- If the send fails, ignore it.
-              DBC.send dbus msg 0 `catchDyn`
-                (\ (DBus.Error _name _msg) ->
-                  return 0)
-              return ()
+          , ppOutput          = dbusOutput dbus
           }
   where
       -- myWCount provides a count of open windows, and
