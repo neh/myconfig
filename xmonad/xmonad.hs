@@ -42,6 +42,7 @@ import XMonad.Layout.LayoutHints
 import qualified XMonad.Layout.Magnifier as Mag
 import XMonad.Layout.Maximize
 import XMonad.Layout.Minimize
+import XMonad.Layout.MultiColumns
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Reflect
@@ -144,7 +145,9 @@ main = do
       tp = TwoPane 0.03 0.62
       monlayout = withIM (0.34) (ClassName "Gnome-terminal") $ Full
       rtp = Mirror $ TwoPane 0.03 0.6
-      im = withIM (0.13) (Role "contact_list") $ ResizableTall 1 (1/100) (0.40) [1]
+      im = withIM (0.15) (Role "contact_list") $ reflectHoriz $
+           withIM (0.15) (Title "Hangouts") $ reflectHoriz $
+           multiCol [1] 1 0.01 (-0.5)
       rgrid = Grid True
       grid = Grid False
       file = ThreeCol 1 (3/100) (0.33)
@@ -259,6 +262,7 @@ myManageHook = composeAll
   , className =? "Unity-2d-panel"          --> doIgnore
   , className =? "Unity-2d-launcher"       --> doIgnore
   , title     =? "Sublime Color Picker"    --> doFloat
+  , resource  ~? "crx_.*"                  --> doShift "im"
   ]
   where
     unFloat = ask >>= doF . W.sink
