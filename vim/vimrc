@@ -56,6 +56,7 @@ Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'vim-scripts/AnsiEsc.vim'
+Bundle 'JazzCore/ctrlp-cmatcher'
 " Bundle 'vim-scripts/easytags.vim'
 
 if v:version > 703 || (v:version == 703 && has("patch584"))
@@ -528,6 +529,7 @@ call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 let g:bufmru_switchkey = "<c-e>"
 
 " ctrlp
+let g:ctrlp_match_func = {'match' : 'matcher#cmatch'}
 let g:ctrlp_show_hidden = 0
 let g:ctrlp_open_multiple_files = 'i'
 let g:ctrlp_map = '<leader>f'
