@@ -1,6 +1,5 @@
 " Initial Setup {{{ -----------------------------------------------------------
 
-set nocompatible
 " Clear autocmds
 autocmd!
 
