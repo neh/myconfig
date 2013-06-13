@@ -54,6 +54,7 @@ endif
 " add filetype to files that need it
 "autocmd BufRead,BufNewFile COMMIT_EDITMSG setlocal filetype git
 autocmd BufRead,BufNewFile *.erb setlocal filetype=eruby
+autocmd BufRead,BufNewFile Berksfile setlocal filetype=ruby
 autocmd BufRead,BufNewFile *.snippet? setlocal filetype=snippet sts=8 sw=8 noet
 autocmd BufRead,BufNewFile *.mustache,*.ms setlocal filetype=mustache
 
