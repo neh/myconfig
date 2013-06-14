@@ -41,6 +41,8 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 # }}}
 # Settings {{{ ----------------------------------------------------------------
 
+export EDITOR=vim
+
 typeset -U path cdpath
 
 path+=($HOME/bin(N-/))
