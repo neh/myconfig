@@ -406,6 +406,32 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" unite
+let g:unite_source_history_yank_enable = 1
+let g:unite_enable_start_insert = 1
+let g:unite_enable_short_source_names = 1
+let g:unite_prompt = '» '
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <leader>f :<C-u>Unite -quick-match -auto-preview -buffer-name=files buffer file_rec/async:!<cr>
+nnoremap <leader>h :<C-u>UniteWithBufferDir -buffer-name=files buffer file_rec/async:!<cr>
+"nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
+"nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
+nnoremap <leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
+"nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
+if executable('ack-grep')
+    let g:unite_source_grep_command = 'ack-grep'
+    let g:unite_source_grep_default_opts = '--no-heading --no-color -a -H'
+    let g:unite_source_grep_recursive_opt = ''
+    nnoremap <leader>F :<C-u>Unite grep<cr>
+endif
+
+autocmd FileType unite call s:unite_settings()
+autocmd! BufEnter *files,*yank hi ExtraWhitespace none
+function! s:unite_settings()
+    imap <buffer> <C-n> <Plug>(unite_select_next_line)
+    imap <buffer> <C-p> <Plug>(unite_select_previous_line)
+endfunction
+
 " git-inline-diff
 let g:git_diff_added_symbol = '▶'
 let g:git_diff_removed_symbol = '◀'

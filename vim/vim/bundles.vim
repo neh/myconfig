@@ -51,6 +51,8 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'vim-scripts/AnsiEsc.vim'
 Bundle 'tpope/vim-sleuth'
 " Bundle 'vim-scripts/easytags.vim'
+Bundle 'Shougo/vimproc.vim'
+Bundle 'Shougo/unite.vim'
 
 if v:version > 703 || (v:version == 703 && has("patch584"))
     Bundle 'Valloric/YouCompleteMe'
