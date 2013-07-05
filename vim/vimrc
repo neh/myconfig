@@ -550,12 +550,6 @@ let g:snips_author = 'Nathan Howell'
 " Jsbeautify
 nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
 
-" Yankring
-"let g:yankring_enabled = 1
-map <Leader>y :YRShow<cr>
-let g:yankring_min_element_length = 2
-let g:yankring_replace_n_nkey = ''
-
 
 " }}}
 " Custom functions and commands {{{ -------------------------------------------
