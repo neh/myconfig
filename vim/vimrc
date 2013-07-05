@@ -527,9 +527,6 @@ let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeAutoCenter=1
 let g:NERDTreeAutoCenterThreshold=6
 
-" Ack
-nmap <Leader>gf :LAck 
-
 " fugitive (git)
 nmap <Leader>gs :Gstatus<cr>
 nmap <Leader>gd :Gdiff<cr>
