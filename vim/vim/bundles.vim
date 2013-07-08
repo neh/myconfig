@@ -54,6 +54,7 @@ Bundle 'Shougo/unite.vim'
 " Colors
 Bundle 'rainux/vim-desert-warm-256'
 Bundle 'vim-scripts/Sorcerer'
+Bundle 'w0ng/vim-hybrid'
 
 if v:version > 703 || (v:version == 703 && has("patch584"))
     Bundle 'Valloric/YouCompleteMe'
