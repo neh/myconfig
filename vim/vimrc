@@ -75,7 +75,7 @@ autocmd FileType ruby setlocal sts=2 sw=2 ts=2
 autocmd BufReadPost quickfix setlocal nowrap
 
 " re-read vimrc after writing it
-autocmd BufWritePost *vimrc source $HOME/.vimrc | call Pl#Load()
+autocmd BufWritePost *vimrc source $HOME/.vimrc
 autocmd BufRead *vimrc,*zshrc,*tmux.conf setlocal foldmethod=marker
 
 autocmd BufRead,BufNewFile *.zsh-theme setlocal filetype=zsh
@@ -481,16 +481,6 @@ function! s:SetMarkColours()
 endfunction
 autocmd ColorScheme * call s:SetMarkColours()
 call s:SetMarkColours()
-
-" Powerline
-let g:Powerline_symbols = 'unicode'
-let g:Powerline_symbols_override = {
-    \ 'BRANCH': [0x2325],
-    \ 'LINE': '',
-    \ 'RO': [0x2205],
-    \ }
-let g:Powerline_dividers_override = ['', [0x2502], '', [0x2502]]
-call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
 " bufmru
 let g:bufmru_switchkey = "<c-e>"
