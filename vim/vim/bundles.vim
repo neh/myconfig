@@ -56,6 +56,7 @@ Bundle 'rainux/vim-desert-warm-256'
 Bundle 'vim-scripts/Sorcerer'
 Bundle 'w0ng/vim-hybrid'
 Bundle 'chriskempson/vim-tomorrow-theme'
+Bundle 'nanotech/jellybeans.vim'
 
 if v:version > 703 || (v:version == 703 && has("patch584"))
     Bundle 'Valloric/YouCompleteMe'
