@@ -50,6 +50,7 @@ Bundle 'tpope/vim-sleuth'
 " Bundle 'vim-scripts/easytags.vim'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'Shougo/unite.vim'
+Bundle 'mmalecki/vim-node.js'
 
 " Colors
 Bundle 'rainux/vim-desert-warm-256'
