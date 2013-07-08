@@ -51,6 +51,8 @@ Bundle 'tpope/vim-sleuth'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'Shougo/unite.vim'
 Bundle 'mmalecki/vim-node.js'
+Bundle 'kana/vim-textobj-user'
+Bundle 'kana/vim-textobj-lastpat'
 
 " Colors
 Bundle 'rainux/vim-desert-warm-256'
