@@ -406,6 +406,11 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" vim-airline
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme='simple'
+
 " unite
 let g:unite_source_history_yank_enable = 1
 let g:unite_enable_start_insert = 1
