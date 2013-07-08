@@ -38,10 +38,8 @@ Bundle 'majutsushi/tagbar'
 Bundle 'mattn/gist-vim'
 Bundle 'gregsexton/gitv'
 Bundle 'msanders/snipmate.vim'
-Bundle 'vim-scripts/Sorcerer'
 Bundle 'neh/dbext.vim'
 Bundle 'neh/vim-scratch'
-Bundle 'rainux/vim-desert-warm-256'
 Bundle 'scrooloose/syntastic'
 Bundle 'sjl/clam.vim'
 Bundle 'sjl/gundo.vim'
@@ -52,6 +50,10 @@ Bundle 'tpope/vim-sleuth'
 " Bundle 'vim-scripts/easytags.vim'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'Shougo/unite.vim'
+
+" Colors
+Bundle 'rainux/vim-desert-warm-256'
+Bundle 'vim-scripts/Sorcerer'
 
 if v:version > 703 || (v:version == 703 && has("patch584"))
     Bundle 'Valloric/YouCompleteMe'
