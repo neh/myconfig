@@ -185,7 +185,14 @@ set showcmd
 set nostartofline
 set hidden
 set backspace=indent,eol,start
-set timeoutlen=500
+if ! has('gui_running')
+    set ttimeoutlen=10
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=500
+    augroup END
+endif
 set noshowmode
 set lazyredraw
 
