@@ -446,7 +446,7 @@ if executable('ack-grep')
 endif
 
 autocmd FileType unite call s:unite_settings()
-autocmd! BufEnter *files,*yank hi ExtraWhitespace none
+autocmd! BufEnter *files,*yank,*buffer hi ExtraWhitespace none
 function! s:unite_settings()
     imap <buffer> <C-n> <Plug>(unite_select_next_line)
     imap <buffer> <C-p> <Plug>(unite_select_previous_line)
