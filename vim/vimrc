@@ -168,6 +168,7 @@ hi scmLineRemoved ctermfg=red
 " General options {{{ ---------------------------------------------------------
 
 let mapleader=","
+set number
 set relativenumber
 set encoding=utf-8
 set fileencodings=utf-8
