@@ -75,7 +75,7 @@ autocmd FileType ruby setlocal sts=2 sw=2 ts=2
 autocmd BufReadPost quickfix setlocal nowrap
 
 " re-read vimrc after writing it
-autocmd BufWritePost *vimrc source $HOME/.vimrc
+autocmd BufWritePost *vimrc source $HOME/.vimrc | call ReloadAirline()
 autocmd BufRead *vimrc,*zshrc,*tmux.conf setlocal foldmethod=marker
 
 autocmd BufRead,BufNewFile *.zsh-theme setlocal filetype=zsh
@@ -577,6 +577,10 @@ nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
 
 " }}}
 " Custom functions and commands {{{ -------------------------------------------
+
+function! ReloadAirline()
+    execute ":AirlineTheme " . g:airline_theme
+endfunction
 
 function! SmartAlign(mode)
     let cur_line = getline('.')
