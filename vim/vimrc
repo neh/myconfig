@@ -415,6 +415,8 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" yankring
+let yankring_enabled = 0
 
 " vim-airline
 let g:airline_left_sep=''
