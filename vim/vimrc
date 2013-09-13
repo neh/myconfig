@@ -422,9 +422,11 @@ let yankring_enabled = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_theme='powerlineish'
-let g:airline_fugitive_prefix='⌥ '
+let g:airline_branch_prefix='⌥ '
 let g:airline_readonly_symbol='✖'
 let g:airline_section_z='%p%% %l:%c'
+let g:airline#extensions#whitespace#trailing_format = '%s·'
+let g:airline#extensions#whitespace#mixed_indent_format = '%s➜'
 
 " unite
 let g:unite_source_history_yank_enable = 1
