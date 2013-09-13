@@ -153,7 +153,7 @@ hi SignColumn cterm=none ctermbg=235
 hi LineNr cterm=italic ctermbg=235
 
 " make special chars (tabs, trailing spaces, etc) barely visible
-hi SpecialKey cterm=none ctermfg=241
+hi SpecialKey cterm=none ctermfg=red
 " other special chars (line wrap chars etc.)
 hi NonText cterm=none ctermfg=240 ctermbg=235
 
