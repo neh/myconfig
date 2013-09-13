@@ -415,8 +415,6 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
-" YouCompleteMe
-let g:ycm_filetype_blacklist={'unite':1}
 
 " vim-airline
 let g:airline_left_sep=''
