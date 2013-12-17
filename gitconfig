@@ -20,4 +20,4 @@
     ui = true
 
 [url "git@github.com:neh"]
-    insteadOf = "git://github.com/neh"
+    pushInsteadOf = "git://github.com/neh"
