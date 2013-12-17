@@ -29,6 +29,7 @@ Bundle 'tpope/vim-markdown'
 Bundle 'techlivezheng/tagbar-phpctags'
 Bundle 'spf13/PIV'
 Bundle 'ehamberg/vim-cute-python'
+Bundle 'jnwhiteh/vim-golang'
 
 " The Rest
 Bundle 'luxflux/vim-git-inline-diff'
