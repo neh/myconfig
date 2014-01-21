@@ -415,6 +415,12 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" gitgutter
+let g:gitgutter_sign_added = '▶'
+let g:gitgutter_sign_modified = '◆'
+let g:gitgutter_sign_removed = '◀'
+let g:gitgutter_sign_modified_removed = '◆'
+
 " yankring
 let yankring_enabled = 0
 
@@ -455,11 +461,6 @@ function! s:unite_settings()
     imap <buffer> <C-n> <Plug>(unite_select_next_line)
     imap <buffer> <C-p> <Plug>(unite_select_previous_line)
 endfunction
-
-" git-inline-diff
-let g:git_diff_added_symbol = '▶'
-let g:git_diff_removed_symbol = '◀'
-let g:git_diff_changed_symbol = '◆'
 
 " gitv
 nmap <leader>gv :Gitv --all<cr>

@@ -32,7 +32,7 @@ Bundle 'ehamberg/vim-cute-python'
 Bundle 'jnwhiteh/vim-golang'
 
 " The Rest
-Bundle 'luxflux/vim-git-inline-diff'
+Bundle 'airblade/vim-gitgutter'
 Bundle 'Raimondi/delimitMate'
 Bundle 'AndrewRadev/splitjoin.vim'
 Bundle 'majutsushi/tagbar'
