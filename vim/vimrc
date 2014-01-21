@@ -168,6 +168,7 @@ hi scmLineRemoved ctermfg=red
 " General options {{{ ---------------------------------------------------------
 
 let mapleader=","
+set updatetime=750
 set number
 set relativenumber
 set encoding=utf-8
