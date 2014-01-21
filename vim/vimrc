@@ -422,6 +422,16 @@ let g:gitgutter_sign_modified = '◆'
 let g:gitgutter_sign_removed = '◀'
 let g:gitgutter_sign_modified_removed = '◆'
 
+" signify
+let g:signify_vcs_list = ['git', 'hg']
+let g:signify_sign_add = '▶'
+let g:signify_sign_change = '◆'
+let g:signify_sign_delete = '◀'
+let g:signify_sign_delete_first_line = '◀'
+hi SignifySignAdd ctermfg=green
+hi SignifySignChange ctermfg=yellow
+hi SignifySignDelete ctermfg=red
+
 " yankring
 let yankring_enabled = 0
 
