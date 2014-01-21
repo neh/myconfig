@@ -453,21 +453,21 @@ let g:unite_prompt = '» '
 let g:unite_winheight = 10
 let g:unite_split_rule = 'botright'
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>f :<C-u>Unite -buffer-name=files buffer file_rec/async:!<cr>
-nnoremap <leader>h :<C-u>UniteWithBufferDir -buffer-name=files buffer file_rec/async:!<cr>
+nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files buffer file_rec/async:!<cr>
+nnoremap <leader>h :<C-u>UniteWithBufferDir -no-split -buffer-name=files buffer file_rec/async:!<cr>
 "nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
 "nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
-nnoremap <leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
+nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank history/yank<cr>
 nnoremap <leader>e :<C-u>Unite -buffer-name=buffer buffer<cr>
 if executable('ack-grep')
     let g:unite_source_grep_command = 'ack-grep'
     let g:unite_source_grep_default_opts = '--no-heading --no-color -a -H'
     let g:unite_source_grep_recursive_opt = ''
-    nnoremap <leader>F :<C-u>Unite -buffer-name=files grep<cr>
+    nnoremap <leader>F :<C-u>Unite -no-split -buffer-name=files grep<cr>
 endif
 
 autocmd FileType unite call s:unite_settings()
-autocmd! BufEnter *files,*yank,*buffer hi ExtraWhitespace none
+autocmd! BufEnter Unite,*files,*yank,*buffer hi ExtraWhitespace none
 function! s:unite_settings()
     imap <buffer> <C-n> <Plug>(unite_select_next_line)
     imap <buffer> <C-p> <Plug>(unite_select_previous_line)
