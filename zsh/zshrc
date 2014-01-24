@@ -74,6 +74,14 @@ elif [[ "$TERM" == 'screen-bce' ]] && [[ "$SSH_CONNECTION" != '' ]]; then
     [[ -f $HOME/.displayvar ]] && export DISPLAY=$(cat $HOME/.displayvar);
 fi
 
+SOCK="/tmp/ssh-agent-$USER-tmux"
+if test $SSH_AUTH_SOCK && [ $SSH_AUTH_SOCK != $SOCK ]
+then
+    rm -f /tmp/ssh-agent-$USER-tmux
+    ln -sf $SSH_AUTH_SOCK $SOCK
+    export SSH_AUTH_SOCK=$SOCK
+fi
+
 # load any local settings if they exist
 if [[ -f $HOME/.local_zshrc ]]
 then
