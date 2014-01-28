@@ -118,7 +118,7 @@ let php_parent_error_open = 1
 
 " golang
 let g:gofmt_command = "goimports"
-autocmd BufRead,BufNewFile *.go setlocal ts=4 sts=4 sw=4 noet nosmarttab
+autocmd BufRead,BufNewFile *.go setlocal ts=4 sts=4 sw=4 noet nosmarttab foldmethod=syntax
 
 
 " }}}
