@@ -30,6 +30,7 @@ Bundle 'techlivezheng/tagbar-phpctags'
 Bundle 'spf13/PIV'
 Bundle 'ehamberg/vim-cute-python'
 Bundle 'Blackrush/vim-gocode'
+Bundle 'dgryski/vim-godef'
 
 " The Rest
 Bundle 'airblade/vim-gitgutter'
