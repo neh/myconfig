@@ -29,7 +29,7 @@ Bundle 'tpope/vim-markdown'
 Bundle 'techlivezheng/tagbar-phpctags'
 Bundle 'spf13/PIV'
 Bundle 'ehamberg/vim-cute-python'
-Bundle 'jnwhiteh/vim-golang'
+Bundle 'Blackrush/vim-gocode'
 
 " The Rest
 Bundle 'airblade/vim-gitgutter'
