@@ -237,7 +237,11 @@ if has("wildmenu")
     set wildmode=longest,list
 endif
 
-set clipboard=unnamed
+if has('unnamedplus')
+  set clipboard=unnamedplus
+else
+  set clipboard=unnamed
+endif
 
 " Put backup/swap files all in one place
 set backupdir=~/.vim/backup
