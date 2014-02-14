@@ -577,6 +577,7 @@ vmap <Leader>S <Plug>Vsurround
 " NERDTree
 nmap <Leader>nt :NERDTreeToggle<CR>
 nmap <Leader>nm :NERDTreeMirror<CR>
+nmap <Leader>nh :NERDTreeFind<CR>
 let g:NERDTreeMapOpenInTab="a"
 let g:NERDTreeMapOpenInTabSilent="A"
 let g:NERDTreeMapJumpFirstChild="N"
