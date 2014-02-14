@@ -18,6 +18,8 @@ Bundle 'chrisbra/SudoEdit.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'godlygeek/tabular'
 Bundle 'coderifous/textobj-word-column.vim'
+Bundle 'kien/ctrlp.vim'
+Bundle 'JazzCore/ctrlp-cmatcher'
 
 " Language/filetype-specific
 Bundle 'kchmck/vim-coffee-script'

@@ -423,6 +423,15 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" ctrlp
+let g:ctrlp_match_func = {'match' : 'matcher#cmatch'}
+let g:ctrlp_show_hidden = 0
+let g:ctrlp_open_multiple_files = 'i'
+let g:ctrlp_map = '<leader>f'
+let g:ctrlp_switch_buffer = 'Et'
+nmap <Leader>e :CtrlPBuffer<cr>
+nmap <Leader>h :CtrlPCurFile<cr>
+
 " gitgutter
 let g:gitgutter_sign_added = '▶'
 let g:gitgutter_sign_modified = '◆'
