@@ -31,6 +31,18 @@ plugins+=extract
 plugins+=command-not-found
 plugins+=history
 plugins+=rsync
+plugins+=tmux
+plugins+=vagrant
+plugins+=cabal
+plugins+=docker
+plugins+=golang
+plugins+=mosh
+plugins+=npm
+plugins+=nvm
+plugins+=pip
+plugins+=redis-cli
+plugins+=sbt
+plugins+=scala
 # zsh-syntax-highlighting plugin must be last
 plugins+=zsh-syntax-highlighting
 
