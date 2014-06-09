@@ -49,6 +49,7 @@ import XMonad.Layout.Reflect
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.ToggleLayouts
+import XMonad.Layout.TrackFloating
 import XMonad.Layout.TwoPane
 import XMonad.Prompt
 import XMonad.Prompt.AppendFile
@@ -128,7 +129,7 @@ main = do
                            $ onWorkspace "d" (noBorders Full)
                            $ onWorkspace "db" (noBorders Full)
                            $ onWorkspace "mon" (monlayout ||| Full)
-                           $ tp
+                           $ trackFloating (useTransientFor tp)
                            ||| rtp
                            ||| rtiled
                            ||| file
