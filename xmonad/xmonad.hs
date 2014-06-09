@@ -263,6 +263,7 @@ myManageHook = composeAll
   , className =? "Unity-2d-launcher"       --> doIgnore
   , title     =? "Sublime Color Picker"    --> doFloat
   , resource  ~? "crx_.*"                  --> doShift "im"
+  , role      =? "gimp-screenshot"         --> doFloat
   ]
   where
     unFloat = ask >>= doF . W.sink
