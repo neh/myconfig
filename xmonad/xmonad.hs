@@ -390,6 +390,8 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,                 xK_f     ), sendMessage ToggleLayout )
   , ((modMask .|. shiftMask,   xK_f     ), spawn "wmctrl -i -r $(xprop -root | awk '/_NET_ACTIVE_WINDOW\\(WINDOW\\)/{print $NF}') -b toggle,fullscreen")
 
+  , ((modMask,                 xK_0     ), spawn "/home/nathan/bin/toggle_layout.sh")
+
   , ((modMask .|. shiftMask,   xK_q     ), spawn "gnome-session-save --gui --logout-dialog")
   , ((modMask,                 xK_q     ), spawn "xmonad --recompile && xmonad --restart")
   ]
