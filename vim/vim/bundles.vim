@@ -34,6 +34,7 @@ Bundle 'ehamberg/vim-cute-python'
 Bundle 'Blackrush/vim-gocode'
 Bundle 'dgryski/vim-godef'
 Bundle 'marijnh/tern_for_vim'
+Bundle 'derekwyatt/vim-scala'
 
 " The Rest
 Bundle 'airblade/vim-gitgutter'
