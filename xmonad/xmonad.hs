@@ -138,7 +138,7 @@ main = do
     where
       myWorkSpaces hostname = case hostname of
           "nathan" -> ["mon", "comm", "files", "d", "web", "db", "lose", "vm"]
-          _ -> ["im", "comm", "files", "web", "vm"]
+          _ -> ["org", "comm", "files", "web", "misc", "vm"]
 
       tiled = HintedTile 1 (3%100) 0.648 TopLeft Tall
       rtiled = Mag.magnifier' (ResizableTall 1 (3%100) 0.648 [])
