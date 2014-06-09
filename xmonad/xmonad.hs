@@ -300,6 +300,7 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((0            , 0x1008ff17), spawn "mpc --no-status next")
   , ((modMask,                 xK_m     ), submap . M.fromList $
     [ ((0, xK_l), spawn $ XMonad.terminal conf ++ " -e ncmpc")
+    , ((0, xK_g), raiseNext (title ~? ".* Google Play Music$"))
     , ((0, xK_m), spawn "musicmenu mpc")
     , ((0, xK_t), spawn "musicmenu totem")
     , ((0, xK_b), spawn "musicmenu banshee-1")
@@ -466,6 +467,7 @@ myMouse (XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask .|. controlMask, button4), (\_ -> bindOnLayout [("TwoPane", rotSlavesDown), ("", B.focusUp)]))
   , ((modMask .|. controlMask, button5), (\_ -> bindOnLayout [("TwoPane", rotSlavesUp), ("", B.focusDown)]))
   , ((0, button9), (\_ -> toggleWS))
+  , ((modMask, button9), (\_ -> raiseNext (title ~? ".* Google Play Music$")))
   , ((modMask .|. shiftMask, button4), (\_ -> windows W.swapUp))
   , ((modMask .|. shiftMask, button5), (\_ -> windows W.swapDown))
   ]
