@@ -122,7 +122,7 @@ main = do
                            $ toggleLayouts (noBorders Full)
                            $ onWorkspace "vm" (noBorders Full)
                            $ avoidStruts
-                           $ onWorkspace "comm" (noBorders Full)
+                           $ onWorkspace "comm" ((noBorders Full) ||| tp ||| grid)
                            $ onWorkspace "im" im
                            $ onWorkspace "files" file
                            $ onWorkspace "gimp" gimp
