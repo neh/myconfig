@@ -6,4 +6,4 @@
 	url = https://github.com/alols/xcape.git
 [submodule "phpctags"]
 	path = phpctags
-	url = https://github.com/techlivezheng/phpctags.git
+	url = https://github.com/vim-php/phpctags.git
