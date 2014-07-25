@@ -590,7 +590,7 @@ let g:NERDTreeAutoCenterThreshold=6
 
 " fugitive (git)
 nmap <Leader>gs :Gstatus<cr>
-nmap <Leader>gd :Gdiff<cr>
+nmap <Leader>gd :Gvdiff<cr>
 nmap <Leader>gg :Ggrep 
 nmap <Leader>glg :Glog<cr>
 nmap <Leader>gc :Gcommit<cr>
