@@ -31,10 +31,9 @@ Bundle 'tpope/vim-markdown'
 Bundle 'techlivezheng/tagbar-phpctags'
 Bundle 'spf13/PIV'
 Bundle 'ehamberg/vim-cute-python'
-Bundle 'Blackrush/vim-gocode'
-Bundle 'dgryski/vim-godef'
 Bundle 'marijnh/tern_for_vim'
 Bundle 'derekwyatt/vim-scala'
+Bundle 'fatih/vim-go'
 
 " The Rest
 Bundle 'airblade/vim-gitgutter'

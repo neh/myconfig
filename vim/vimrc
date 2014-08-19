@@ -423,6 +423,9 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" vim-go
+let g:go_bin_path = expand("~/bin")
+
 " ctrlp
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch'}
 let g:ctrlp_show_hidden = 0
