@@ -44,6 +44,10 @@ plugins+=redis-cli
 plugins+=sbt
 plugins+=scala
 plugins+=colored-man
+if [ -f "$(which aws_zsh_completer.sh)" ]
+then
+    plugins+=aws
+fi
 # zsh-syntax-highlighting plugin must be last
 plugins+=zsh-syntax-highlighting
 
