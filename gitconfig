@@ -21,3 +21,6 @@
 
 [url "git@github.com:neh"]
     pushInsteadOf = "git://github.com/neh"
+
+[url "git@github.com:predicativedotcom"]
+    insteadOf = "https://github.com/predicativedotcom"
