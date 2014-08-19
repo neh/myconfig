@@ -6,3 +6,10 @@ haddock
 /bin/xcape
 /vim/vim/bundle/
 /bin/vim
+/bin/errcheck
+/bin/gocode
+/bin/godef
+/bin/goimports
+/bin/golint
+/bin/gotags
+/bin/oracle
