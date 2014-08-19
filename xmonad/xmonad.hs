@@ -113,7 +113,6 @@ main = do
     , logHook            = myLog dbus hostname
                            -- >> fadeInactiveLogHook 0x99999999
                            >> takeTopFocus
-                           >> setWMName "LG3D"
     , layoutHook         = smartBorders
                            $ layoutHintsWithPlacement (0.5, 0.5)
                            $ maximize
