@@ -35,7 +35,7 @@ import XMonad.Hooks.Place
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
 import qualified XMonad.Layout.BoringWindows as B
-import XMonad.Layout.HintedGrid
+import XMonad.Layout.GridVariants
 import XMonad.Layout.HintedTile
 import XMonad.Layout.IM
 import XMonad.Layout.LayoutHints
@@ -146,9 +146,9 @@ main = do
       rtp = Mirror $ TwoPane 0.03 0.6
       im = withIM (0.15) (Role "contact_list") $ reflectHoriz $
            withIM (0.15) (Title "Hangouts") $ reflectHoriz $
-           multiCol [1] 1 0.01 (-0.5)
-      rgrid = Grid True
-      grid = Grid False
+           Grid (1)
+      rgrid = Grid (16/9)
+      grid = Grid (16/9)
       file = ThreeCol 1 (3/100) (0.33)
       gimp = withIM (0.11) (Role "gimp-toolbox") $ reflectHoriz $
              withIM (0.15) (Role "gimp-dock") Full
