@@ -43,6 +43,7 @@ plugins+=pip
 plugins+=redis-cli
 plugins+=sbt
 plugins+=scala
+plugins+=colored-man
 # zsh-syntax-highlighting plugin must be last
 plugins+=zsh-syntax-highlighting
 
