@@ -127,7 +127,6 @@ main = do
                            $ onWorkspace "files" file
                            $ onWorkspace "gimp" gimp
                            $ onWorkspace "d" (noBorders Full)
-                           $ onWorkspace "db" (noBorders Full)
                            $ onWorkspace "mon" (monlayout ||| Full)
                            $ trackFloating (useTransientFor tp)
                            ||| rtp
