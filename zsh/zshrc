@@ -66,6 +66,10 @@ typeset -U path cdpath
 
 path+=($HOME/bin(N-/))
 path+=($HOME/.cabal/bin(N-/))
+if [ -d /usr/local/go/bin ]
+then
+    path+=(/usr/local/go/bin)
+fi
 
 HISTSIZE=8000
 SAVEHIST=5000
