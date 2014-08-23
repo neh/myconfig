@@ -295,9 +295,6 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xK_t), appendFilePrompt myPConfig "/home/nathan/notes/s-o-c")
     ])
 
-  , ((0            , 0x1008ff14), spawn "mpc --no-status toggle")
-  , ((0            , 0x1008ff16), spawn "mpc --no-status prev")
-  , ((0            , 0x1008ff17), spawn "mpc --no-status next")
   , ((modMask,                 xK_m     ), submap . M.fromList $
     [ ((0, xK_l), spawn $ XMonad.terminal conf ++ " -e ncmpc")
     , ((0, xK_g), raiseNext (title ~? ".* Google Play Music$"))
