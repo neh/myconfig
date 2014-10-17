@@ -119,6 +119,9 @@ let php_parent_error_open = 1
 let g:gofmt_command = "goimports"
 autocmd BufRead,BufNewFile *.go setlocal ts=4 sts=4 sw=4 noet nosmarttab foldmethod=syntax
 
+autocmd BufRead,BufNewFile */host_vars/* setlocal filetype=yaml
+autocmd BufRead,BufNewFile */group_vars/* setlocal filetype=yaml
+
 
 " }}}
 " Custom highlighting {{{ -----------------------------------------------------
