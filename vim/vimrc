@@ -185,7 +185,9 @@ set title
 set laststatus=2
 set visualbell t_vb=
 set formatoptions+=croqnwl
-set ttyfast
+if has ('ttyfast')
+    set ttyfast
+endif
 set history=500
 set nowrap
 set linebreak
