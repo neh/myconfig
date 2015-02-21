@@ -492,10 +492,6 @@ xmap <silent> ib <Plug>CamelCaseMotion_ib
 omap <silent> ie <Plug>CamelCaseMotion_ie
 xmap <silent> ie <Plug>CamelCaseMotion_ie
 
-" NERDCommenter
-nmap <Leader>/ <Plug>NERDCommenterToggle
-vmap <Leader>/ <Plug>NERDCommenterToggle
-
 " SudoEdit
 nmap <Leader>W :SudoWrite<cr>
 vmap <Leader>W :SudoWrite<cr>
