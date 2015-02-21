@@ -631,8 +631,6 @@ function! SmartAlign(mode)
         execute "normal! :" . range . "Tabularize assignment"
     endif
 endfunction
-nmap <leader>a :call SmartAlign('')<cr>
-vmap <leader>a :call SmartAlign(visualmode())<cr>
 
 
 " I keep hitting :W when saving. It may as well work.
