@@ -605,9 +605,6 @@ nmap <Leader>gta :Gread<cr>:w<cr>:bd<cr>:diffoff!<cr>
 " clean up all those buffers fugitive leaves behind
 nmap <Leader>gbd :bdelete fugitive://<C-A><cr>
 
-" Snipmate
-let g:snips_author = 'Nathan Howell'
-
 " Jsbeautify
 nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
 
