@@ -59,6 +59,7 @@ Bundle 'mmalecki/vim-node.js'
 Bundle 'kana/vim-textobj-user'
 Bundle 'kana/vim-textobj-lastpat'
 Bundle 'tpope/vim-commentary'
+Bundle 'jamessan/vim-gnupg'
 
 " Colors
 Bundle 'rainux/vim-desert-warm-256'
