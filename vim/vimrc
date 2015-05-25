@@ -426,6 +426,15 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" ctrlsf
+let g:ctrlsf_position = 'right'
+let g:ctrlsf_winsize = '80%'
+let g:ctrlsf_leading_space = '8'
+nmap <Leader>a <Plug>CtrlSFPrompt
+nmap <Leader>A <Plug>CtrlSFOpen
+vmap a <Plug>CtrlSFVwordExec
+vmap A <Plug>CtrlSFVwordPath
+
 " vim-go
 let g:go_bin_path = expand("~/bin")
 
