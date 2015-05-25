@@ -251,14 +251,16 @@ set directory=~/.vim/backup
 " Enable mouse usage in terminals
 " (allows window resizing, mousewheel scrolling, proper text highlighting)
 set mouse=a
-set ttymouse=xterm2
-" Workaround for bug in vim that breaks mouse support when in tmux.
-" bug: http://groups.google.com/group/vim_dev/browse_thread/thread/0416d81258cbb5a0?pli=1
-" workaround: https://wincent.com/blog/tweaking-command-t-and-vim-for-use-in-the-terminal-and-tmux
-if $TMUX != '' || $TERM == 'rxvt-256color'
-    autocmd VimEnter * set ttymouse=xterm2
-    autocmd FocusGained * set ttymouse=xterm2
-    autocmd BufEnter * set ttymouse=xterm2
+if has('ttymouse')
+  set ttymouse=xterm2
+  " Workaround for bug in vim that breaks mouse support when in tmux.
+  " bug: http://groups.google.com/group/vim_dev/browse_thread/thread/0416d81258cbb5a0?pli=1
+  " workaround: https://wincent.com/blog/tweaking-command-t-and-vim-for-use-in-the-terminal-and-tmux
+  if $TMUX != '' || $TERM == 'rxvt-256color'
+      autocmd VimEnter * set ttymouse=xterm2
+      autocmd FocusGained * set ttymouse=xterm2
+      autocmd BufEnter * set ttymouse=xterm2
+  endif
 endif
 
 " Show trailing whitespace and tabs as visible chars
