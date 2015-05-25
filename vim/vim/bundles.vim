@@ -60,6 +60,7 @@ Bundle 'kana/vim-textobj-user'
 Bundle 'kana/vim-textobj-lastpat'
 Bundle 'tpope/vim-commentary'
 Bundle 'jamessan/vim-gnupg'
+Bundle 'dyng/ctrlsf.vim'
 
 " Colors
 Bundle 'rainux/vim-desert-warm-256'

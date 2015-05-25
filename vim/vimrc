@@ -127,7 +127,7 @@ autocmd BufRead,BufNewFile */group_vars/* setlocal filetype=yaml
 hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red ctermbg=black
 
 " Change some highlight group colours, overriding the colour scheme search terms
-hi Search term=none cterm=none ctermfg=232 ctermbg=220
+hi Search term=none cterm=bold ctermfg=252 ctermbg=22
 hi IncSearch term=none cterm=none ctermfg=232 ctermbg=41
 " todo
 hi Todo term=bold cterm=bold ctermfg=red ctermbg=yellow
@@ -161,6 +161,8 @@ hi NonText cterm=none ctermfg=240 ctermbg=235
 
 autocmd BufEnter !CTRLSF hi ExtraWhitespace ctermbg=124 ctermfg=white guibg=red guifg=white
 autocmd Syntax !CTRLSF syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
+
+hi Title cterm=bold ctermfg=118
 
 hi scmLineAdded ctermfg=green
 hi scmLineChanged ctermfg=yellow
