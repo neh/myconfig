@@ -159,8 +159,8 @@ hi SpecialKey cterm=none ctermfg=red
 " other special chars (line wrap chars etc.)
 hi NonText cterm=none ctermfg=240 ctermbg=235
 
-autocmd BufEnter * hi ExtraWhitespace ctermbg=124 ctermfg=white guibg=red guifg=white
-autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
+autocmd BufEnter !CTRLSF hi ExtraWhitespace ctermbg=124 ctermfg=white guibg=red guifg=white
+autocmd Syntax !CTRLSF syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
 
 hi scmLineAdded ctermfg=green
 hi scmLineChanged ctermfg=yellow
