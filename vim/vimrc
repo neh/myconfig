@@ -573,6 +573,13 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
+let g:tagbar_type_yaml = {
+    \ 'ctagstype' : 'ansible',
+    \ 'kinds'     : [
+        \ 'k:tasks'
+    \ ]
+\ }
+
 " Scratch
 nmap <Leader>' :SscratchToggle<cr>
 
