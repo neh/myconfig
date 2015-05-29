@@ -1,0 +1,4 @@
+--langdef=ansible
+--langmap=ansible:.yml
+--langmap=ansible:+.yaml
+--regex-ansible=/^[ \t]*-[ \t]*name:[ \t]*(.+)/\1/k,tasks/
