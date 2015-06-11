@@ -25,6 +25,7 @@ import XMonad.Actions.Submap
 import XMonad.Actions.UpdateFocus
 import XMonad.Actions.WindowBringer
 import XMonad.Actions.WindowGo
+import XMonad.Config.Gnome
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.FadeInactive
@@ -101,7 +102,7 @@ main = do
     , workspaces         = myWorkSpaces hostname
     , keys               = myKeys hostname
     , mouseBindings      = myMouse
-    , startupHook        = adjustEventInput
+    , startupHook        = gnomeRegister <+> adjustEventInput
     , handleEventHook    = focusOnMouseMove
                            <+> fullscreenEventHook
     , manageHook         = myPreManageHook
