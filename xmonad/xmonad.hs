@@ -94,7 +94,7 @@ main = do
   --spawn "xcompmgr -nFf -I 0.056 -O 0.06"
   xmonad $ withUrgencyHook NoUrgencyHook
          $ ewmh defaultConfig
-    { borderWidth        = 1
+    { borderWidth        = 2
     , terminal           = "urxvtcd"
     , normalBorderColor  = "#222222"
     , focusedBorderColor = fg
