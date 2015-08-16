@@ -174,13 +174,13 @@ bindsym Mod4+minus bar mode toggle cantina
 force_display_urgency_hint 1500 ms
 hide_edge_borders both
 
-exec gnome-settings-daemon
-exec compton
-exec hsetroot #222222
+exec --no-startup-id unity-settings-daemon
+exec --no-startup-id compton
+exec --no-startup-id hsetroot #222222
 exec nm-applet
 exec synapse
-exec dunst
-exec xcape
+exec --no-startup-id dunst
+exec --no-startup-id xcape
 
 client.focused #be462a #be462a #dfd8c3 #fffad5
 client.focused_inactive #dfd8c3 #dfd8c3 #222222 #fffad5
