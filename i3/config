@@ -191,7 +191,7 @@ exec --no-startup-id hsetroot #222222
 exec nm-applet
 exec synapse
 exec --no-startup-id dunst
-exec --no-startup-id xcape
+exec --no-startup-id sleep 0.5 && xcape
 
 client.focused #be462a #be462a #dfd8c3 #fffad5
 client.focused_inactive #dfd8c3 #dfd8c3 #222222 #fffad5
