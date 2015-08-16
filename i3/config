@@ -136,7 +136,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle && killa
 exec --no-startup-id xautolock -time 10 -bell 0 -locker "i3lock -d -c 000000 -e"
 mode "system" {
         bindsym l exec --no-startup-id xautolock -locknow, mode "default"
-        bindsym s exec --no-startup-id xautolock -locknow, mode "default"
+        bindsym s exec --no-startup-id xautolock -locknow && sudo pm-suspend, mode "default"
 }
 bindsym Mod4+w mode "system"
 
