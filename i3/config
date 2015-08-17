@@ -169,6 +169,7 @@ bar {
         position top
         tray_output primary
         binding_mode_indicator yes
+        modifier Mod1
         status_command i3status
 
         separator_symbol " | "
