@@ -162,8 +162,10 @@ mode "resize" {
 
 bindsym Mod4+l mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+### Status bar configs
+
+bindsym Mod4+minus bar mode toggle
+
 bar {
         id cantina
         position top
@@ -171,6 +173,11 @@ bar {
         binding_mode_indicator yes
         modifier Mod1
         status_command i3status
+
+        output eDP1
+        output LVDS
+        output DP1
+        output DP2-1
 
         separator_symbol " | "
 
@@ -183,7 +190,27 @@ bar {
                 urgent_workspace #d7c529 #d7c529 #222222
         }
 }
-bindsym Mod4+minus bar mode toggle cantina
+
+bar {
+        id secondary
+        position top
+        tray_output primary
+        binding_mode_indicator yes
+        modifier Mod1
+
+        output DP2-2
+
+        separator_symbol " | "
+
+        colors {
+                background #222222
+                statusline #dddddd
+                focused_workspace #be462a #be462a #dfd8c3
+                active_workspace #dfd8c3 #dfd8c3 #222222
+                inactive_workspace #222222 #222222 #666666
+                urgent_workspace #d7c529 #d7c529 #222222
+        }
+}
 
 force_display_urgency_hint 1500 ms
 hide_edge_borders both
