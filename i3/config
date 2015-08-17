@@ -41,7 +41,7 @@ bindsym Mod4+c exec urxvtcd
 bindsym Mod4+k kill
 
 # start dmenu (a program launcher)
-bindsym Mod4+d exec dmenu_run
+bindsym Mod4+d exec dmenu_run -fn '-*-bitstream charter-medium-r-normal-*-*-*-*-*-*-*-*-*'
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
