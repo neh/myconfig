@@ -126,8 +126,8 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 -- +10
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -- -10% && pactl set-sink-mute 0 0 && killall -SIGUSR1 i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle && killall -SIGUSR1 i3status
 
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 -steps 1 -time 0
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10 -steps 1 -time 0
 
 exec --no-startup-id xautolock -time 10 -bell 0 -locker "i3lock -d -c 000000 -e"
 mode "system" {
