@@ -14,6 +14,9 @@ import qualified DBus as D
 import qualified DBus.Client as D
 import qualified Codec.Binary.UTF8.String as UTF8
 
+import Graphics.X11.Xlib
+import Graphics.X11.Xinerama
+
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.CycleWS
 import XMonad.Actions.DynamicWorkspaces
@@ -88,6 +91,7 @@ dbusOutput dbus str = do
 
 main :: IO ()
 main = do
+  screens <- openDisplay "" >>= getScreenInfo
   dbus <- D.connectSession
   getWellKnownName dbus
   hostname <- fmap nodeName getSystemID
@@ -129,11 +133,9 @@ main = do
                            $ onWorkspace "d" (noBorders Full)
                            $ onWorkspace "mon" (monlayout ||| Full)
                            $ trackFloating (useTransientFor tp)
-                           ||| rtp
-                           ||| rtiled
-                           ||| file
                            ||| grid
                            ||| (noBorders Full)
+                           ||| rtp
     }
     where
       myWorkSpaces hostname = case hostname of
@@ -322,8 +324,8 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,                 xK_i     ), windows $ W.greedyView "me")
 
   , ((modMask,                 xK_o     ), toggleWindow (title =? "handy")
-      (spawn $ XMonad.terminal conf ++
-      " -title handy -geometry "++ handySize ++" -e sh -c \"tmux attach -t handy || tmux new-session -s handy\""))
+      (spawn $ XMonad.terminal conf ++ " -title handy -geometry "++ handySize ++" -e sh -c \"tmux attach -t handy || tmux new-session -s handy\""))
+      -- " -title handy -geometry "++ handySize screens ++" -e sh -c \"tmux attach -t handy || tmux new-session -s handy\""))
 
   , ((modMask, xK_g), submap . M.fromList $
     [ ((0, xK_m), raiseNext (className =? "MPlayer"))
@@ -403,6 +405,9 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- mod-control-[1..9]   %! Copy client to workspace N
   zip (zip (repeat (modMask .|. controlMask)) [xK_1..xK_9]) (map (withNthWorkspace copy) [0..])
   where
+    --screens = openDisplay "" >>= getScreenInfo
+    --handySize = \ss ->
+      --return "105x46"
     handySize = case hostname of
       "tak" -> "105x46"
       _ -> "105x65"
@@ -413,6 +418,15 @@ myKeys hostname conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                     if M.member (fromJust $ W.peek ws) (W.floating ws)
                       then withFocused $ windows . W.sink
                       else withFocused (keysMoveWindowTo (960,600) (1%2,1%2))
+
+    {-swapOrMoveDown = withWindowSet $ \ws ->-}
+                 {-if M.member (fromJust $ W.peek ws) (W.floating ws)-}
+                   {-then withFocused (keysMoveWindow (0,200))-}
+                   {-else W.swapDown ws-}
+    {-swapOrMoveUp = withWindowSet $ \ws ->-}
+                 {-if M.member (fromJust $ W.peek ws) (W.floating ws)-}
+                   {-then withFocused (keysMoveWindow (0,-200))-}
+                   {-else W.swapUp ws-}
 
     myFocusDown = withWindowSet $ \ws ->
                  if M.member (fromJust $ W.peek ws) (W.floating ws)
