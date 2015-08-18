@@ -149,6 +149,9 @@ mode "system" {
         # Suspend
         bindsym s exec --no-startup-id xautolock -locknow && sudo pm-suspend, mode "default"
 
+        # Detach external displays
+        bindsym g exec --no-startup-id autorandr --load mobile, mode "default"
+
         bindsym Escape mode "default"
 }
 bindsym Mod4+w mode "system"
