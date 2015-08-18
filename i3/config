@@ -129,7 +129,13 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle && killa
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 -steps 1 -time 0
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5 -steps 1 -time 0
 
+bindsym XF86Display exec --no-startup-id autorandr --change
+bindsym XF86Battery exec gnome-power-statistics
+
 exec --no-startup-id xautolock -time 10 -bell 0 -locker "i3lock -d -c 000000 -e"
+bindsym XF86Lock exec --no-startup-id xautolock -locknow
+bindsym XF86ScreenSaver exec --no-startup-id xautolock -locknow
+bindsym XF86Sleep exec --no-startup-id xautolock -locknow && sudo pm-suspend
 mode "system" {
         # reload the configuration file
         bindsym r reload, mode "default"
