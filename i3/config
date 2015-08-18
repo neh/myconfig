@@ -148,6 +148,8 @@ mode "system" {
         bindsym l exec --no-startup-id xautolock -locknow, mode "default"
         # Suspend
         bindsym s exec --no-startup-id xautolock -locknow && sudo pm-suspend, mode "default"
+
+        bindsym Escape mode "default"
 }
 bindsym Mod4+w mode "system"
 
