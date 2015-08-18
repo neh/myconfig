@@ -173,6 +173,14 @@ mode "resize" {
 
 bindsym Mod4+l mode "resize"
 
+mode "apps" {
+        bindsym s [title="ScudCloud"] focus, mode "default"
+        bindsym m [class="Thunderbird"] focus, mode "default"
+
+        bindsym Escape mode "default"
+}
+bindsym Mod4+g mode "apps"
+
 ### Status bar configs
 
 bindsym Mod4+minus bar mode toggle
