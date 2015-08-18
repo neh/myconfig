@@ -8,7 +8,7 @@
     idle_threshold = 0
     geometry = "300x5-20+20"
     alignment = left
-    transparency = 20
+    transparency = 15
     show_age_threshold = 60
     sticky_history = yes
     follow = keyboard
@@ -18,13 +18,15 @@
     horizontal_padding = 10
     separator_color = frame
     startup_notification = false
-    dmenu = "/usr/bin/dmenu -p dunst: -nb #FFFFFF -nf #000000 -sb #94DBFF -sf #000000"
+    # TODO font names with spaces don't work here
+    #dmenu = "/usr/bin/dmenu -fn '-*-bitstream charter-medium-r-normal-*-*-*-*-*-*-*-*-*' -nb #333333 -nf #dddddd -sb #be462a -sf #dfd8c3"
+    dmenu = "/usr/bin/dmenu -nb #333333 -nf #dddddd -sb #be462a -sf #dfd8c3"
     browser = x-www-browser
 
 
 [frame]
     width = 1
-    color = "#333333"
+    color = "#444444"
 
 [shortcuts]
     close = ctrl+space
@@ -33,13 +35,13 @@
     context = ctrl+shift+minus
 
 [urgency_low]
-    background = "#222222"
-    foreground = "#dddddd"
+    background = "#dfd8c3"
+    foreground = "#222222"
     timeout = 20
 
 [urgency_normal]
-    background = "#222222"
-    foreground = "#dddddd"
+    background = "#dfd8c3"
+    foreground = "#222222"
     timeout = 30
 
 [urgency_critical]
