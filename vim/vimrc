@@ -3,8 +3,6 @@
 " Clear autocmds
 autocmd!
 
-source $HOME/.vim/bundles.vim
-
 " Enable filetype detection and syntax highlighting
 filetype plugin indent on
 syntax on
@@ -47,6 +45,86 @@ if filereadable($HOME.'/dbext_profiles')
     source $HOME/dbext_profiles
 endif
 
+
+" }}}
+" Plugins {{{ -----------------------------------------------------------------
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'gmarik/vundle'
+
+" Essential
+Plug 'vim-scripts/bufmru.vim'
+Plug 'bkad/CamelCaseMotion'
+Plug 'tpope/vim-fugitive'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'dimasg/vim-mark'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-repeat'
+Plug 'chrisbra/SudoEdit.vim'
+Plug 'tpope/vim-surround'
+Plug 'godlygeek/tabular'
+Plug 'coderifous/textobj-word-column.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'JazzCore/ctrlp-cmatcher', { 'do': './install.sh' }
+
+" Language/filetype-specific
+Plug 'kchmck/vim-coffee-script'
+Plug 'Twinside/vim-haskellConceal'
+Plug 'bitc/lushtags'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'leshill/vim-json'
+Plug 'tpope/vim-markdown'
+Plug 'techlivezheng/tagbar-phpctags'
+Plug 'spf13/PIV'
+Plug 'ehamberg/vim-cute-python'
+Plug 'marijnh/tern_for_vim'
+Plug 'derekwyatt/vim-scala'
+Plug 'fatih/vim-go'
+
+" The Rest
+Plug 'airblade/vim-gitgutter'
+Plug 'Raimondi/delimitMate'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'majutsushi/tagbar'
+Plug 'mattn/gist-vim'
+Plug 'gregsexton/gitv'
+Plug 'msanders/snipmate.vim'
+Plug 'vim-scripts/dbext.vim'
+Plug 'neh/vim-scratch'
+Plug 'scrooloose/syntastic'
+Plug 'sjl/clam.vim'
+Plug 'sjl/gundo.vim'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-scripts/AnsiEsc.vim'
+Plug 'tpope/vim-sleuth'
+" Plug 'vim-scripts/easytags.vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+"Plug 'Shougo/unite.vim'
+Plug 'bling/vim-airline'
+Plug 'mmalecki/vim-node.js'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-lastpat'
+Plug 'tpope/vim-commentary'
+Plug 'jamessan/vim-gnupg'
+Plug 'dyng/ctrlsf.vim'
+
+Plug 'blindFS/vim-taskwarrior'
+
+" Colors
+Plug 'rainux/vim-desert-warm-256'
+Plug 'vim-scripts/Sorcerer'
+Plug 'w0ng/vim-hybrid'
+Plug 'chriskempson/vim-tomorrow-theme'
+
+if v:version > 703 || (v:version == 703 && has("patch584"))
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+else
+    Plug 'Shougo/neocomplcache'
+endif
+
+call plug#end()
 
 " }}}
 " Filetype specific options {{{ -----------------------------------------------
@@ -299,9 +377,9 @@ set guioptions-=b
 " Key mappings {{{ ------------------------------------------------------------
 
 " quick vundle maps
-nmap <leader>bi :BundleInstall<cr>
-nmap <leader>bu :BundleInstall!<cr>
-nmap <leader>bc :BundleClean!<cr>
+nmap <leader>pi :PlugInstall<cr>
+nmap <leader>pu :PlugUpdate<cr>
+nmap <leader>pc :PlugClean<cr>
 
 " toggle folds
 nnoremap <space> za
