@@ -111,6 +111,10 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'blindFS/vim-taskwarrior'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
+Plug 'fmoralesc/vim-pad'
+Plug 'justinmk/vim-sneak'
+Plug 'diepm/vim-rest-console'
+Plug 'NLKNguyen/papercolor-theme'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
@@ -511,6 +515,22 @@ nmap <Leader>f :execute 'Files' fnameescape(getcwd())<cr>
 nmap <Leader>h :execute 'Files' expand('%:p:h')<cr>
 nmap <Leader>e :Buffers<cr>
 
+
+" vim-sneak
+nmap f <Plug>Sneak_s
+nmap F <Plug>Sneak_S
+xmap f <Plug>Sneak_s
+xmap F <Plug>Sneak_S
+omap f <Plug>Sneak_s
+omap F <Plug>Sneak_S
+
+nmap ? <Plug>SneakPrevious
+
+hi link SneakPluginTarget Search
+
+" vim-pad
+let g:pad#set_mappings = 0
+
 " ctrlsf
 let g:ctrlsf_position = 'right'
 let g:ctrlsf_winsize = '80%'
@@ -557,6 +577,9 @@ let g:airline#extensions#whitespace#mixed_indent_format = '%s➜'
 let g:airline#extensions#branch#empty_message = 'No SCM'
 
 " gitv
+let g:Gitv_CommitStep = '500'
+let g:Gitv_OpenHorizontal = 1
+let g:Gitv_WrapLines = 0
 nmap <leader>gv :Gitv --all<cr>
 nmap <leader>gV :Gitv! --all<cr>
 vmap <leader>gV :Gitv! --all<cr>
@@ -659,7 +682,16 @@ nmap <Leader>' :SscratchToggle<cr>
 
 " dbext
 let g:dbext_default_use_sep_result_buffer = 1
-nmap <Leader>sdb :DBSetOption dbname=
+let g:dbext_default_DBI_list_proc_SQLAnywhere =
+          \ 'SELECT p.proc_name, u.user_name '.
+          \ '  FROM SYS.SYSPROCEDURE as p, '.
+          \ '       SYS.SYSUSERPERM as u '.
+          \ ' WHERE p.creator = u.user_id '.
+          \ '   AND p.proc_name like ''dbext_replace_name%''   '.
+          \ '   AND u.user_name not like ''dbext_replace_owner%''  '.
+          \ ' ORDER BY proc_name'
+let g:dbext_default_DBI_desc_proc_PGSQL = 'select p.* from pg_proc p, pg_language l where p.prolang = l.oid and p.proname = ''proc_percentiles'' order by p.pronargs'
+"let g:dbext_default_DBI_desc_proc_PGSQL = "select p.* from pg_proc p, pg_language l where p.prolang = l.oid and p.proname = ''dbext_replace_name'' order by p.pronargs"
 
 " Gundo
 nmap <Leader>un :GundoToggle<CR>
