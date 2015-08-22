@@ -506,6 +506,11 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" fzf
+nmap <Leader>f :execute 'Files' fnameescape(getcwd())<cr>
+nmap <Leader>h :execute 'Files' expand('%:p:h')<cr>
+nmap <Leader>e :Buffers<cr>
+
 " ctrlsf
 let g:ctrlsf_position = 'right'
 let g:ctrlsf_winsize = '80%'
