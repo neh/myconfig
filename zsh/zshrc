@@ -231,3 +231,5 @@ ssh-reagent () {
 
 
 # }}}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -111,6 +111,7 @@ Plug 'jamessan/vim-gnupg'
 Plug 'dyng/ctrlsf.vim'
 
 Plug 'blindFS/vim-taskwarrior'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
