@@ -65,8 +65,6 @@ Plug 'chrisbra/SudoEdit.vim'
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
 Plug 'coderifous/textobj-word-column.vim'
-Plug 'kien/ctrlp.vim'
-Plug 'JazzCore/ctrlp-cmatcher', { 'do': './install.sh' }
 
 " Language/filetype-specific
 Plug 'kchmck/vim-coffee-script'
@@ -518,15 +516,6 @@ vmap A <Plug>CtrlSFVwordPath
 
 " vim-go
 let g:go_bin_path = expand("~/bin")
-
-" ctrlp
-let g:ctrlp_match_func = {'match' : 'matcher#cmatch'}
-let g:ctrlp_show_hidden = 0
-let g:ctrlp_open_multiple_files = 'i'
-let g:ctrlp_map = '<leader>f'
-let g:ctrlp_switch_buffer = 'Et'
-nmap <Leader>e :CtrlPBuffer<cr>
-nmap <Leader>h :CtrlPCurFile<cr>
 
 " gitgutter
 let g:gitgutter_sign_added = '▶'
