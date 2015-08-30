@@ -183,7 +183,8 @@ alias vpup='cd ~/myconfig/vim/vim/bundle;for p in `ls`; do cd $p;git checkout ma
 
 alias v='vim'
 alias vd='vimdiff'
-alias t='tmux'
+alias t='tmux -2'
+alias tmux='tmux -2'
 
 alias glr='git pull --rebase'
 compdef _git glr=git-pull
