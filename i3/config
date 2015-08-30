@@ -17,6 +17,9 @@
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans 10
 
+set $terminal gnome-terminal
+set $handy_cmd gnome-terminal --role=handy -x sh -c "tmux attach -t handy || tmux new-session -s handy"
+
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -35,7 +38,7 @@ set $right s
 floating_modifier Mod4
 
 # start a terminal
-bindsym Mod4+c exec urxvtcd
+bindsym Mod4+c exec $terminal
 
 # kill focused window
 bindsym Mod4+k kill
@@ -87,8 +90,9 @@ bindsym Mod4+a focus parent
 # move the currently focused window to the scratchpad
 bindsym Mod4+Shift+o move scratchpad
 
-bindsym Mod4+Control+o exec urxvtcd -title handy -e sh -c "tmux attach -t handy || tmux new-session -s handy"
+bindsym Mod4+Control+o exec $handy_cmd
 for_window [title="handy"] border 1pixel, move scratchpad, scratchpad show
+for_window [window_role="handy"] border 1pixel, move scratchpad, scratchpad show
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
