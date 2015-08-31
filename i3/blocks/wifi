@@ -1,0 +1,32 @@
+#!/bin/bash
+
+INTERFACE=wlan0
+STATE=$(cat /sys/class/net/$INTERFACE/operstate)
+
+if [[ "$STATE" = "down" ]]; then
+  echo "<span foreground=\"#FF0000\"></span>"
+  echo "<span foreground=\"#FF0000\"></span>"
+else
+  INFO=$(/usr/bin/wicd-cli --wireless -d)
+
+  while read line
+  do
+    case $line in
+    IP*)
+      set $line
+      IP="$2"
+      ;;
+    Essid*)
+      set $line
+      ESSID="$2"
+      ;;
+    Quality*)
+      set $line
+      QUALITY="$2"
+      ;;
+    esac
+  done <<< "$INFO"
+
+  echo "  $ESSID  $IP"
+  echo "  $ESSID"
+fi
