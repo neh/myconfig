@@ -1,0 +1,26 @@
+#!/bin/bash
+
+/usr/bin/acpi_listen |
+{
+while read event
+do
+    case $event in
+    ac_adapter*)
+        sleep 5
+        pkill -RTMIN+10 i3blocks
+        ;;
+    *"HEADPHONE plug")
+        echo "plugged"
+        pactl set-sink-volume @DEFAULT_SINK@ 40%
+        pkill -RTMIN+11 i3blocks
+        ;;
+    *"HEADPHONE unplug")
+        echo "unplugged"
+        pkill -RTMIN+11 i3blocks
+        ;;
+    *)
+        echo $event
+        ;;
+    esac
+done
+}
