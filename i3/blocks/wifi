@@ -1,12 +1,19 @@
 #!/bin/bash
 
-INTERFACE=wlan0
+if [[ -n $BLOCK_INSTANCE ]]; then
+  INTERFACE=$BLOCK_INSTANCE
+else
+  INTERFACE=$(ip route | awk '/^default/ { print $5 ; exit }')
+fi
 STATE=$(cat /sys/class/net/$INTERFACE/operstate)
 
-if [[ "$STATE" = "down" ]]; then
-  echo "<span foreground=\"#FF0000\"></span>"
-  echo "<span foreground=\"#FF0000\"></span>"
-else
+if [[ "$STATE" = "down" || "$INTERFACE" = "" ]]; then
+
+  echo "<span foreground=\"#FF0000\">  </span>"
+  echo "<span foreground=\"#FF0000\">  </span>"
+
+elif [[ -e /sys/class/net/$INTERFACE/wireless ]]; then
+
   INFO=$(/usr/bin/wicd-cli --wireless -d)
 
   while read line
@@ -27,6 +34,17 @@ else
     esac
   done <<< "$INFO"
 
-  echo "  $ESSID  $IP"
-  echo "  $ESSID"
+  if [[ $QUALITY -le 50 ]]; then
+    SYMBOL="<span foreground=\"#FFDE00\"> </span>"
+  else
+    SYMBOL=" "
+  fi
+
+  echo "$SYMBOL $ESSID  $IP"
+  echo "$SYMBOL $ESSID"
+
+else
+
+  echo "  ethernet"
+
 fi
