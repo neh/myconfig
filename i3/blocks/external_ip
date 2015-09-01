@@ -1,0 +1,16 @@
+#!/bin/bash
+
+IP=$(/usr/bin/curl -s https://wtfismyip.com/text)
+
+if [[ $? -gt 0 ]]; then
+    SYMBOL="<span foreground=\"#FF0000\"></span>"
+    echo $SYMBOL
+    exit
+else
+    SYMBOL=""
+fi
+
+case $BLOCK_BUTTON in
+    3) echo "$IP" | xclip ;;
+    *) echo "$SYMBOL  $IP" ;;
+esac
