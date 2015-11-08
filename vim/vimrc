@@ -51,8 +51,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'gmarik/vundle'
-
 " Essential
 Plug 'vim-scripts/bufmru.vim'
 Plug 'bkad/CamelCaseMotion'
@@ -67,14 +65,9 @@ Plug 'godlygeek/tabular'
 Plug 'coderifous/textobj-word-column.vim'
 
 " Language/filetype-specific
-Plug 'kchmck/vim-coffee-script'
-Plug 'Twinside/vim-haskellConceal'
-Plug 'bitc/lushtags'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'leshill/vim-json'
 Plug 'tpope/vim-markdown'
-Plug 'techlivezheng/tagbar-phpctags'
-Plug 'spf13/PIV'
 Plug 'ehamberg/vim-cute-python'
 Plug 'marijnh/tern_for_vim'
 Plug 'derekwyatt/vim-scala'
@@ -109,24 +102,21 @@ Plug 'jamessan/vim-gnupg'
 Plug 'dyng/ctrlsf.vim'
 
 Plug 'blindFS/vim-taskwarrior'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'fmoralesc/vim-pad'
 Plug 'justinmk/vim-sneak'
 Plug 'diepm/vim-rest-console'
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'ktonga/vim-follow-my-lead'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
 Plug 'vim-scripts/Sorcerer'
 Plug 'w0ng/vim-hybrid'
 Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'NLKNguyen/papercolor-theme'
 
-if v:version > 703 || (v:version == 703 && has("patch584"))
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
-else
-    Plug 'Shougo/neocomplcache'
-endif
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 
 call plug#end()
 
@@ -602,11 +592,6 @@ xmap <silent> ie <Plug>CamelCaseMotion_ie
 nmap <Leader>W :SudoWrite<cr>
 vmap <Leader>W :SudoWrite<cr>
 
-" PHPCtags
-if executable($HOME . "/myconfig/phpctags/phpctags")
-    let g:tagbar_phpctags_bin=$HOME.'/myconfig/phpctags/phpctags'
-endif
-
 " Mark
 nmap <Leader><Leader><Leader>/ <Plug>MarkSearchAnyNext
 function! s:SetMarkColours()
@@ -622,14 +607,6 @@ call s:SetMarkColours()
 
 " bufmru
 let g:bufmru_switchkey = "<c-e>"
-
-" Neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_max_list = 40
-let g:neocomplcache_auto_completion_start_length = 3
 
 " Syntastic
 let g:syntastic_auto_loc_list=2
