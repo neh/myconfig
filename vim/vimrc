@@ -148,7 +148,7 @@ autocmd BufReadPost quickfix setlocal nowrap
 
 " re-read vimrc after writing it
 autocmd BufWritePost *vimrc source $HOME/.vimrc | call ReloadAirline()
-autocmd BufRead *vimrc,*zshrc,*tmux.conf setlocal foldmethod=marker
+autocmd BufRead *vimrc,init.vim,*zshrc,*tmux.conf setlocal foldmethod=marker
 
 autocmd BufRead,BufNewFile *.zsh-theme setlocal filetype=zsh
 autocmd BufRead,BufNewFile *tmux.conf setlocal filetype=tmux
