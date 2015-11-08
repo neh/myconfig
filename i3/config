@@ -44,7 +44,7 @@ bindsym Mod4+c exec $terminal
 bindsym Mod4+k kill
 
 # start dmenu (a program launcher)
-bindsym Mod4+d exec dmenu_run -fn '-*-bitstream charter-medium-r-normal-*-*-*-*-*-*-*-*-*' -nb '#333333' -nf '#dddddd' -sb '#be462a' -sf '#dfd8c3'
+bindsym Mod4+d exec dmenu_run -fn '-*-bitstream charter-medium-r-normal-*-*-*-*-*-*-*-*-*' -nb '#333333' -nf '#dddddd' -sb '#dd4814' -sf '#dfd8c3'
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -225,7 +225,7 @@ bar {
         colors {
                 background #222222
                 statusline #dddddd
-                focused_workspace #be462a #be462a #dfd8c3
+                focused_workspace #dd4814 #dd4814 #dfd8c3
                 active_workspace #dfd8c3 #dfd8c3 #222222
                 inactive_workspace #222222 #222222 #666666
                 urgent_workspace #d7c529 #d7c529 #222222
@@ -246,7 +246,7 @@ bar {
         colors {
                 background #222222
                 statusline #dddddd
-                focused_workspace #be462a #be462a #dfd8c3
+                focused_workspace #dd4814 #dd4814 #eeeeee
                 active_workspace #dfd8c3 #dfd8c3 #222222
                 inactive_workspace #222222 #222222 #666666
                 urgent_workspace #d7c529 #d7c529 #222222
@@ -266,7 +266,7 @@ exec --no-startup-id sleep 0.5 && xcape
 # Set up xkbmap to allow alt+shift to toggle keyboard layout
 exec --no-startup-id setxkbmap -option grp:switch,grp:alt_shift_toggle,grp_led:scroll us,dvorak
 
-client.focused #be462a #be462a #dfd8c3 #fffad5
+client.focused #dd4814 #dd4814 #eeeeee #fffad5
 client.focused_inactive #dfd8c3 #dfd8c3 #222222 #fffad5
 client.unfocused #333333 #333333 #999999 #fffad5
 client.urgent #d7c529 #d7c529 #222222 #fffad5
