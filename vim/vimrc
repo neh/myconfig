@@ -592,6 +592,11 @@ xmap <silent> ie <Plug>CamelCaseMotion_ie
 nmap <Leader>W :SudoWrite<cr>
 vmap <Leader>W :SudoWrite<cr>
 
+" PHPCtags
+if executable($HOME . "/myconfig/phpctags/phpctags")
+    let g:tagbar_phpctags_bin=$HOME.'/myconfig/phpctags/phpctags'
+endif
+
 " Mark
 nmap <Leader><Leader><Leader>/ <Plug>MarkSearchAnyNext
 function! s:SetMarkColours()
@@ -607,6 +612,14 @@ call s:SetMarkColours()
 
 " bufmru
 let g:bufmru_switchkey = "<c-e>"
+
+" Neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_max_list = 40
+let g:neocomplcache_auto_completion_start_length = 3
 
 " Syntastic
 let g:syntastic_auto_loc_list=2
