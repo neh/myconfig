@@ -247,7 +247,9 @@ let mapleader=","
 set updatetime=750
 set number
 set relativenumber
-set encoding=utf-8
+if !has('nvim')
+    set encoding=utf-8
+endif
 set fileencodings=utf-8
 set ruler
 set pastetoggle=<F12>
