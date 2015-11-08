@@ -45,6 +45,7 @@ elif [[ -e /sys/class/net/$INTERFACE/wireless ]]; then
 
 else
 
-  echo "  ethernet"
+  IP=$(/sbin/ifconfig $INTERFACE | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}')
+  echo "  $IP"
 
 fi
