@@ -183,7 +183,7 @@ mode "resize" {
 bindsym Mod4+l mode "resize"
 
 mode "apps" {
-        bindsym s [title="ScudCloud"] focus, mode "default"
+        bindsym s [class="Slack"] focus, mode "default"
         bindsym m [class="Thunderbird"] focus, mode "default"
 
         bindsym Escape mode "default"
