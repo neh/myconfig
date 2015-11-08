@@ -5,6 +5,7 @@ haddock
 .netrwhist
 /bin/xcape
 /vim/vim/plugged/
+/vim/vim/shada/
 /bin/vim
 /bin/errcheck
 /bin/gocode
