@@ -4,6 +4,3 @@
 [submodule "xcape"]
 	path = xcape
 	url = https://github.com/alols/xcape.git
-[submodule "phpctags"]
-	path = phpctags
-	url = https://github.com/vim-php/phpctags.git
