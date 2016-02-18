@@ -190,7 +190,9 @@ bindsym Mod4+l mode "resize"
 
 mode "apps" {
         bindsym s [class="Slack"] focus, mode "default"
-        bindsym m [class="Thunderbird"] focus, mode "default"
+        bindsym e [class="Thunderbird"] focus, mode "default"
+        bindsym m [title="^.*Google Play Music$"] focus, mode "default"
+        bindsym t [title="^Signal$"] focus, mode "default"
 
         bindsym Escape mode "default"
 }
