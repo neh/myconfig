@@ -13,26 +13,13 @@ if &term =~ "^screen"
     set t_fs=\
 endif
 " Workaround to make italics work in tmux sessions
-if $TMUX != '' && &term =~ "screen-256color"
+if $TMUX != '' && &term =~ "xterm-256color"
     set t_so=[7m
     set t_ZH=[3m
 endif
 
 " Set titlestring when switching buffers (kept short for screen window names)
 autocmd BufEnter * let &titlestring = expand("%:t")
-
-set background=dark
-" Set up color settings and scheme based on terminal type
-if has('gui_running')
-    colo mustang
-else
-    if $TERM =~ '^screen-bce' || $TERM == 'screen-256color' || $TERM =~ '256'
-        set t_Co=256
-        colo Tomorrow-Night
-    else
-        set t_Co=16
-    endif
-endif
 
 " Set up man page viewing
 let $PAGER=''
@@ -93,7 +80,8 @@ Plug 'tpope/vim-sleuth'
 " Plug 'vim-scripts/easytags.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 "Plug 'Shougo/unite.vim'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'mmalecki/vim-node.js'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-lastpat'
@@ -115,10 +103,28 @@ Plug 'vim-scripts/Sorcerer'
 Plug 'w0ng/vim-hybrid'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'morhetz/gruvbox'
 
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 
 call plug#end()
+
+" }}}
+" Color settings {{{ -----------------------------------------------------------------
+
+set background=dark
+if has('nvim')
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    colo gruvbox
+else
+    " Set up color settings and scheme based on terminal type
+    if $TERM == 'xterm' || $TERM == 'xterm-256color' || $TERM =~ '256'
+        set t_Co=256
+        colo Tomorrow-Night
+    else
+        set t_Co=16
+    endif
+endif
 
 " }}}
 " Filetype specific options {{{ -----------------------------------------------
@@ -218,18 +224,18 @@ hi Folded term=none cterm=bold ctermbg=236 ctermfg=244 gui=none guibg=#333333
 hi FoldColumn term=none cterm=none ctermbg=236 ctermfg=244 gui=none guibg=#333333
 
 if $TMUX != '' || $TERM == 'rxvt-256color'
-    hi Folded cterm=italic
-    hi Comment cterm=italic
+    hi Folded cterm=italic gui=italic
+    hi Comment cterm=italic gui=italic
 endif
 
 " The bg color for the sign/num columns sucks in the sorcerer theme
-hi SignColumn cterm=none ctermbg=235
-hi LineNr cterm=italic ctermbg=235
+" hi SignColumn cterm=none ctermbg=235
+" hi LineNr cterm=italic ctermbg=235
 
 " make special chars (tabs, trailing spaces, etc) barely visible
 hi SpecialKey cterm=none ctermfg=red
 " other special chars (line wrap chars etc.)
-hi NonText cterm=none ctermfg=240 ctermbg=235
+" hi NonText cterm=none ctermfg=240 ctermbg=235
 
 autocmd BufEnter !CTRLSF hi ExtraWhitespace ctermbg=124 ctermfg=white guibg=red guifg=white
 autocmd Syntax !CTRLSF syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
@@ -239,6 +245,8 @@ hi Title cterm=bold ctermfg=118
 hi scmLineAdded ctermfg=green
 hi scmLineChanged ctermfg=yellow
 hi scmLineRemoved ctermfg=red
+
+hi EndOfBuffer ctermbg=black guibg=#161616
 
 " }}}
 " General options {{{ ---------------------------------------------------------
@@ -345,8 +353,9 @@ set listchars=tab:➜\ ,trail:·,extends:❱,precedes:❰
 
 " Mark column 80, method depending on vim version
 if exists('+colorcolumn')
-    hi ColorColumn ctermbg=236 guibg=#111111
-    set cc=80
+    hi ColorColumn ctermbg=233 guibg=#161616
+    " set cc=80
+    " let &colorcolumn=join(range(81,300), ",")
 endif
 
 if v:version >= '703'
@@ -502,6 +511,12 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" gruvbox colorscheme
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_light = 'hard'
+let g:gruvbox_invert_selection = 0
+" let g:gruvbox_sign_column = ''
+
 " fzf
 nmap <Leader>f :execute 'Files' fnameescape(getcwd())<cr>
 nmap <Leader>h :execute 'Files' expand('%:p:h')<cr>
@@ -557,12 +572,12 @@ let yankring_enabled = 0
 " vim-airline
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-let g:airline_theme='powerlineish'
+let g:airline_theme='tomorrow'
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-let g:airline_symbols.branch='⌥ '
-let g:airline_symbols.readonly='✖'
+let g:airline_symbols.branch=''
+let g:airline_symbols.readonly=' '
 let g:airline_section_z='%p%% %l:%c'
 let g:airline#extensions#whitespace#trailing_format = '%s·'
 let g:airline#extensions#whitespace#mixed_indent_format = '%s➜'
@@ -729,6 +744,42 @@ nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
 
 " }}}
 " Custom functions and commands {{{ -------------------------------------------
+
+" Dim inactive windows using 'colorcolumn' setting
+" This tends to slow down redrawing, but is very useful.
+" Based on https://groups.google.com/d/msg/vim_use/IJU-Vk-QLJE/xz4hjPjCRBUJ
+" XXX: this will only work with lines containing text (i.e. not '~')
+" from 
+if exists('+colorcolumn')
+    function! s:DimInactiveWindows(which)
+        for i in range(1, tabpagewinnr(tabpagenr(), '$'))
+            let l:range = ""
+            if i != winnr() || a:which == 'all'
+                if &wrap
+                    " HACK: when wrapping lines is enabled, we use the maximum number
+                    " of columns getting highlighted. This might get calculated by
+                    " looking for the longest visible line and using a multiple of
+                    " winwidth().
+                    let l:width=256 " max
+                else
+                    let l:width=winwidth(i)
+                endif
+                let l:range = join(range(1, l:width), ',')
+                hi ColorColumn guibg=#161616
+            else
+                " let l:range = join(range(81, 300), ',')
+                " hi ColorColumn guibg=#161616
+            endif
+            call setwinvar(i, '&colorcolumn', l:range)
+        endfor
+    endfunction
+    augroup DimInactiveWindows
+        au!
+        au WinEnter,FocusGained * call s:DimInactiveWindows('most')
+        au FocusLost * call s:DimInactiveWindows('all')
+    augroup END
+endif
+
 
 function! ReloadAirline()
     execute ":AirlineTheme " . g:airline_theme
