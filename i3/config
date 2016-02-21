@@ -224,6 +224,7 @@ bar {
         output LVDS1
         output DP1
         output DP2-1
+        output VGA-0
 
         separator_symbol " | "
 
