@@ -271,6 +271,7 @@ exec --no-startup-id dunst
 exec --no-startup-id sleep 0.5 && xcape
 # Set up xkbmap to allow alt+shift to toggle keyboard layout
 exec --no-startup-id setxkbmap -option grp:switch,grp:alt_shift_toggle,grp_led:scroll us,dvorak
+exec --no-startup-id setxkbmap -option ctrl:nocaps
 
 client.focused #dd4814 #dd4814 #eeeeee #fffad5
 client.focused_inactive #dfd8c3 #dfd8c3 #222222 #fffad5
