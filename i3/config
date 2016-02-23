@@ -15,7 +15,7 @@
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans 10
+font pango:DejaVu Sans 10.5
 
 set $terminal gnome-terminal
 set $handy_cmd gnome-terminal --role=handy -x sh -c "tmux attach -t handy || tmux new-session -s handy"
