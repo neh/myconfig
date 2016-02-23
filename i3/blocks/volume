@@ -49,7 +49,7 @@ volume() {
 # use  when headphones plugged in
 format() {
   perl_filter='if (/.*\[(\d+%)\] (\[(-?\d+.\d+dB)\] )?\[(on|off)\]/)'
-  perl_filter+='{CORE::say $4 eq "off" ? "<span foreground=\"#ffde00\"></span>" : "  '
+  perl_filter+='{CORE::say $4 eq "off" ? "<span foreground=\"#ffde00\"></span>" : "<span foreground=\"#00aa00\"></span>  '
   # If dB was selected, print that instead
   perl_filter+=$([[ $STEP = *dB ]] && echo '$3' || echo '$1')
   perl_filter+='"; exit}'

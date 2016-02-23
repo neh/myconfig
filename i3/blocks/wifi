@@ -34,7 +34,7 @@ elif [[ -e /sys/class/net/$INTERFACE/wireless ]]; then
   if [[ $QUALITY -le 50 ]]; then
     SYMBOL="<span foreground=\"#FFDE00\"> </span>"
   else
-    SYMBOL=" "
+    SYMBOL="<span foreground=\"#00aa00\"> </span>"
   fi
 
   echo "$SYMBOL $ESSID  $IP"
@@ -43,6 +43,6 @@ elif [[ -e /sys/class/net/$INTERFACE/wireless ]]; then
 else
 
   IP=$(/sbin/ifconfig $INTERFACE | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}')
-  echo "  $IP"
+  echo "<span foreground=\"#00aa00\"></span>  $IP"
 
 fi

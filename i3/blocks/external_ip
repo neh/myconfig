@@ -7,7 +7,7 @@ if [[ $? -gt 0 ]]; then
     echo $SYMBOL
     exit
 else
-    SYMBOL=""
+    SYMBOL="<span foreground=\"#00aa00\"></span>"
 fi
 
 case $BLOCK_BUTTON in
