@@ -14,7 +14,6 @@ if [[ "$STATE" = "down" || "$INTERFACE" = "" ]]; then
 
 elif [[ -e /sys/class/net/$INTERFACE/wireless ]]; then
 
-  # INFO=$(/usr/bin/wicd-cli --wireless -d)
   INFO=$(/usr/bin/nmcli -t -f general,wifi-properties,ip4 device show $INTERFACE)
 
   while read line
