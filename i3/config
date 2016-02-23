@@ -91,8 +91,8 @@ bindsym Mod4+a focus parent
 bindsym Mod4+Shift+o move scratchpad
 
 bindsym Mod4+Control+o exec $handy_cmd
-for_window [title="handy"] border 1pixel, move scratchpad, scratchpad show
-for_window [window_role="handy"] border 1pixel, move scratchpad, scratchpad show
+for_window [title="handy"] border 2pixel, move scratchpad, scratchpad show
+for_window [window_role="handy"] border 2pixel, move scratchpad, scratchpad show
 
 for_window [window_role="bubble"] floating enable
 for_window [title="Wicd Network Manager"] floating enable
@@ -262,7 +262,6 @@ bar {
 }
 
 force_display_urgency_hint 1500 ms
-hide_edge_borders both
 
 exec --no-startup-id unity-settings-daemon
 exec --no-startup-id compton
@@ -276,6 +275,8 @@ exec --no-startup-id setxkbmap -option grp:switch,grp:alt_shift_toggle,grp_led:s
 exec --no-startup-id setxkbmap -option ctrl:nocaps
 exec gnome-terminal
 
+new_window pixel 2
+new_float pixel 2
 client.focused #dd4814 #dd4814 #eeeeee #fffad5
 client.focused_inactive #dfd8c3 #dfd8c3 #222222 #fffad5
 client.unfocused #333333 #333333 #999999 #fffad5
