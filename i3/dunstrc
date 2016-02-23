@@ -1,22 +1,22 @@
 [global]
-    font = "Ubuntu 11"
+    font = "DejaVu Sans 11.5"
     allow_markup = yes
-    format = "<b>%s %p</b>\n%b"
+    format = "<b><i>%s %p</i></b>\n%b"
     sort = yes
     indicate_hidden = true
     # geometry = "x5"
     idle_threshold = 0
-    geometry = "300x5-20+20"
+    geometry = "350x5-20+20"
     alignment = left
     transparency = 10
     show_age_threshold = 60
     sticky_history = yes
     follow = keyboard
     word_wrap = yes
-    separator_height = 2
-    padding = 10
-    horizontal_padding = 10
-    separator_color = frame
+    separator_height = 6
+    padding = 20
+    horizontal_padding = 20
+    separator_color = auto
     startup_notification = false
     # TODO font names with spaces don't work here
     #dmenu = "/usr/bin/dmenu -fn '-*-bitstream charter-medium-r-normal-*-*-*-*-*-*-*-*-*' -nb #333333 -nf #dddddd -sb #be462a -sf #dfd8c3"
@@ -26,7 +26,7 @@
 
 [frame]
     width = 1
-    color = "#444444"
+    color = "#222222"
 
 [shortcuts]
     close = ctrl+space
@@ -35,18 +35,18 @@
     context = ctrl+shift+minus
 
 [urgency_low]
-    background = "#efe9d4"
-    foreground = "#222222"
+    background = "#101010"
+    foreground = "#cccccc"
     timeout = 20
 
 [urgency_normal]
-    background = "#efe9d4"
-    foreground = "#222222"
+    background = "#101010"
+    foreground = "#ffffff"
     timeout = 30
 
 [urgency_critical]
-    background = "#d12f19"
-    foreground = "#ffffff"
+    background = "#101010"
+    foreground = "#ff2222"
     timeout = 0
 
 
