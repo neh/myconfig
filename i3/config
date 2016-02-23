@@ -265,7 +265,7 @@ hide_edge_borders both
 exec --no-startup-id unity-settings-daemon
 exec --no-startup-id compton
 exec --no-startup-id hsetroot #222222
-exec wicd-client -t
+exec nm-applet
 exec synapse
 exec --no-startup-id dunst
 exec --no-startup-id sleep 0.5 && xcape

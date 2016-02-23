@@ -14,25 +14,22 @@ if [[ "$STATE" = "down" || "$INTERFACE" = "" ]]; then
 
 elif [[ -e /sys/class/net/$INTERFACE/wireless ]]; then
 
-  INFO=$(/usr/bin/wicd-cli --wireless -d)
+  # INFO=$(/usr/bin/wicd-cli --wireless -d)
+  INFO=$(/usr/bin/nmcli -t -f general,wifi-properties,ip4 device show $INTERFACE)
 
   while read line
   do
     case $line in
-    IP*)
-      set $line
-      IP="$2"
+    IP4.ADDRESS*)
+      IP="$(echo $line | cut -d':' -f 2 | cut -d'/' -f 1)"
       ;;
-    Essid*)
-      set $line
-      ESSID="$2"
-      ;;
-    Quality*)
-      set $line
-      QUALITY="$2"
+    GENERAL.CONNECTION*)
+      ESSID="$(echo $line | cut -d':' -f 2)"
       ;;
     esac
   done <<< "$INFO"
+
+  QUALITY="$(nmcli -t -f ssid,signal device wifi list | grep "^$ESSID:" | cut -d':' -f 2)"
 
   if [[ $QUALITY -le 50 ]]; then
     SYMBOL="<span foreground=\"#FFDE00\"> </span>"
