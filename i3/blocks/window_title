@@ -1,50 +1,51 @@
 #!/bin/bash
 
+LASTTITLE=''
 while true; do
-  TITLE=$(xdotool getactivewindow getwindowname 2>/dev/null || echo 'None')
+  TITLE="$(xdotool getactivewindow getwindowname 2>/dev/null || echo 'None')"
 
-  case $TITLE in
-    *Thunderbird|'Write: '*)
-      SYMBOL='' ;;
-    *Signal)
-      SYMBOL='' ;;
-    *Slack)
-      SYMBOL='' ;;
-    nathan@*)
-      SYMBOL='' ;;
-    */*': '*)
-      SYMBOL='' ;;
-    *' - YouTube - '*)
-      SYMBOL='' ;;
-    *'Plex'*)
-      SYMBOL='' ;;
-    *'Play Music')
-      SYMBOL='' ;;
-    *' - Gmail - '*|*' - FreshGrade Mail - '*|*' - Google Search - '*)
-      SYMBOL='' ;;
-    'daily - '*|'oskim - '*)
-      SYMBOL='' ;;
-    *'Twitter - '*)
-      SYMBOL='' ;;
-    *' - Kibana - '*)
-      SYMBOL='' ;;
-    *'Transmission Web Interface'*)
-      SYMBOL='' ;;
-    # *Chromium)
-    #   echo ""
-    #   ;;
-    *)
-      SYMBOL='' ;;
-  esac
+  if [ "$TITLE" != "$LASTTITLE" ]; then
+    case $TITLE in
+      *Thunderbird|'Write: '*)
+        SYMBOL='' ;;
+      *Signal)
+        SYMBOL='' ;;
+      *Slack)
+        SYMBOL='' ;;
+      nathan@*)
+        SYMBOL='' ;;
+      */*': '*)
+        SYMBOL='' ;;
+      *' - YouTube - '*)
+        SYMBOL='' ;;
+      *'Plex'*)
+        SYMBOL='' ;;
+      *'Play Music')
+        SYMBOL='' ;;
+      *' - Gmail - '*|*' - FreshGrade Mail - '*|*' - Google Search - '*)
+        SYMBOL='' ;;
+      'daily - '*|'oskim - '*)
+        SYMBOL='' ;;
+      *'Twitter - '*)
+        SYMBOL='' ;;
+      *' - Kibana - '*)
+        SYMBOL='' ;;
+      *'Transmission Web Interface'*)
+        SYMBOL='' ;;
+      *)
+        SYMBOL='' ;;
+    esac
 
-  # Cut window title down if it's too long
-  if ((${#TITLE}>80))
-    then TITLE="$(printf '%s …' "${TITLE:0:80}")"
+    declare "LASTTITLE=$TITLE"
+    # Cut window title down if it's too long
+    if ((${#TITLE}>80))
+      then TITLE="$(printf '%s …' "${TITLE:0:80}")"
+    fi
+
+    MYTITLE='<span foreground="#00aa00"> '$SYMBOL'<i> </i> <span foreground="#ffffff">'$(echo $TITLE | sed -e "s/&/&amp;/g")' </span></span>'
+
+    echo $MYTITLE
   fi
-
-  MYTITLE='<span foreground="#00aa00"> '$SYMBOL'<i> </i> <span foreground="#ffffff">'$(echo $TITLE | sed -e "s/&/&amp;/g")' </span></span>'
-
-  echo $MYTITLE
   sleep 0.5
 done
 
