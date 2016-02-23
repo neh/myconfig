@@ -194,6 +194,8 @@ mode "apps" {
         bindsym m [title="^.*Google Play Music$"] focus, mode "default"
         bindsym t [title="^Signal"] focus, mode "default"
 
+        bindsym u [urgent=latest] focus, mode "default"
+
         bindsym Escape mode "default"
 }
 bindsym Mod4+g mode "apps"
