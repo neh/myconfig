@@ -22,9 +22,9 @@ while true; do
         SYMBOL='' ;;
       *'Play Music')
         SYMBOL='' ;;
-      *' - Gmail - '*|*' - FreshGrade Mail - '*|*' - Google Search - '*)
+      *' - Gmail - '*|*' - FreshGrade Mail'|*' - Google Search - '*)
         SYMBOL='' ;;
-      'daily - '*|'oskim - '*)
+      'daily - '*|'oskim - '*|daily|oskim)
         SYMBOL='' ;;
       *'Twitter - '*)
         SYMBOL='' ;;
@@ -32,6 +32,8 @@ while true; do
         SYMBOL='' ;;
       *'Transmission Web Interface'*)
         SYMBOL='' ;;
+      *JIRA*)
+        SYMBOL='' ;;
       *)
         SYMBOL='' ;;
     esac
@@ -50,7 +52,7 @@ while true; do
 done
 
 # …
-# 
+#           
 #   
 # generic     
 # email     
