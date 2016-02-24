@@ -94,7 +94,6 @@ bindsym Mod4+Control+o exec $handy_cmd
 for_window [title="handy"] border 2pixel, move scratchpad, scratchpad show
 for_window [window_role="handy"] border 2pixel, move scratchpad, scratchpad show
 
-for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [title="Wicd Network Manager"] floating enable
