@@ -281,8 +281,9 @@ exec --no-startup-id setxkbmap -option grp:switch,grp:alt_shift_toggle,grp_led:s
 exec --no-startup-id setxkbmap -option ctrl:nocaps
 exec gnome-terminal
 
-new_window pixel 2
-new_float pixel 2
+new_window none
+new_float none
+
 client.focused #dd4814 #dd4814 #eeeeee #fffad5
 client.focused_inactive #dfd8c3 #dfd8c3 #222222 #fffad5
 client.unfocused #333333 #333333 #999999 #fffad5
