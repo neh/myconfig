@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+# coding=utf-8
+
+import time
+import gobject
+gobject.threads_init()
+
+from dbus import glib
+glib.init_threads()
+import dbus
+bus = dbus.SystemBus()
+
+status = {
+    'batteries': {}
+}
+
+def plug_changed(*args, **kwargs):
+    status['plugged_in'] = bool(args[1]['Online'])
+    get_battery_info(upower)
+    format_output()
+
+def get_battery_info(upower):
+    for dev in upower.EnumerateDevices():
+        obj = bus.get_object('org.freedesktop.UPower', dev)
+        props = dbus.Interface(obj, dbus.PROPERTIES_IFACE)
+        dev_props = props.GetAll('org.freedesktop.UPower.Device')
+        if dev_props['Type'] == 2 and dev_props['PowerSupply']:
+            status['batteries'][dev_props['Serial']] = dev_props
+
+def format_output():
+    out = ''
+    if status['plugged_in']:
+        out = " "
+
+    for serial, battery in status['batteries'].iteritems():
+        out = "%s %s" % (out, battery['State'])
+        if battery['State'] == 1:
+            time = battery['TimeToFull']
+        elif battery['State'] == 2:
+            time = battery['TimeToEmpty']
+
+        if battery['State'] in [1,2]:
+            h, m = divmod(time/60, 60)
+            out = "%s %s %s%% %d:%02d" % (out, '', str(int(battery['Percentage'])), h, m)
+        elif battery['State'] == 3:
+            out = "%s %s" % (out, '')
+    print(out)
+
+bus.add_signal_receiver(
+    plug_changed,
+    signal_name='PropertiesChanged',
+    dbus_interface='org.freedesktop.DBus.Properties',
+    path='/org/freedesktop/UPower/devices/line_power_AC'
+)
+
+upower_obj = bus.get_object('org.freedesktop.UPower', '/org/freedesktop/UPower')
+upower = dbus.Interface(upower_obj, 'org.freedesktop.UPower')
+upower_props = dbus.Interface(upower_obj, dbus.PROPERTIES_IFACE)
+status['plugged_in'] = not bool(upower_props.Get('org.freedesktop.UPower', 'OnBattery'))
+get_battery_info(upower)
+format_output()
+
+loop = gobject.MainLoop()
+# loop.run()
+
+while True:
+    get_battery_info(upower)
+    format_output()
+    time.sleep(2)
