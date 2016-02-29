@@ -132,8 +132,8 @@ bindsym Mod4+Shift+0 move container to workspace 10
 
 bindsym Mod4+b border toggle
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && pactl set-sink-mute @DEFAULT_SINK@ 0 && pkill -RTMIN+11 i3blocks
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && pactl set-sink-mute @DEFAULT_SINK@ 0 && pkill -RTMIN+11 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && pactl set-sink-mute @DEFAULT_SINK@ 0 && pkill -RTMIN+11 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl set-sink-mute @DEFAULT_SINK@ 0 && pkill -RTMIN+11 i3blocks
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+11 i3blocks
 
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 -steps 1 -time 0
