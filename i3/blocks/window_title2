@@ -1,0 +1,90 @@
+#!/usr/bin/env python
+# coding=utf-8
+
+import wnck
+import gtk
+
+window = wnck.Window()
+window_watcher = 0
+
+# */*': '*)
+#   SYMBOL='' ;;
+
+def print_title(window):
+    title = window.get_name()
+    application = window.get_application().get_name()
+
+    if application == 'Thunderbird':
+        if title.endswith(' - Mozilla Thunderbird'):
+            title = title[0:-22]
+            icon = ''
+        elif title.startswith('Write: '):
+            icon = ''
+    elif title.endswith(' - Gmail') or title.endswith(' - FreshGrade Mail'):
+        icon = ''
+    elif application == 'Signal':
+        icon = ''
+    elif title.startswith('Slack'):
+        icon = ''
+    elif application == 'Terminal':
+        icon = ''
+
+    elif title.endswith(' - Chromium'):
+        title = title[0:-11]
+        if 'YouTube - ' in title:
+            icon = ''
+        elif ' - Kibana - ' in title:
+            icon = ''
+        elif 'Twitter - ' in title:
+            icon = ''
+        elif title.endswith(' - Google Search'):
+            icon = ''
+        elif title.endswith(' - Stack Overflow'):
+            title = title [0:-17]
+            icon = ''
+        else:
+            icon = ''
+            # icon = ''
+
+    # elif title.endswith(' - Mozilla Firefox'):
+    #     title = title[0:-18]
+    #     icon = ''
+
+    elif 'JIRA' in title:
+        icon = ''
+    elif title == 'oskim' or title == 'daily':
+        icon = ''
+    elif title.endswith(' - Google Play Music'):
+        title = title[0:-20]
+        icon = ''
+        # icon = ''
+    elif 'Transmission Web Interface' in title:
+        icon = ''
+    elif 'Plex' in title or 'Trakt' in title:
+        icon = ''
+    else:
+        icon = ''
+
+    if len(title) > 78:
+        title = title[0:78]+' …'
+    print '<span foreground="#00aa00"> '+icon+'</span><i> </i> '+title+' '
+
+def get_title(screen, win):
+    try:
+        global window, window_watcher
+        if window_watcher > 0 and 'disconnect' in dir(window):
+            window.disconnect(window_watcher)
+        window = screen.get_active_window()
+        if 'connect' in dir(window):
+            window_watcher = window.connect('name-changed', print_title)
+            print_title(window)
+        else:
+            raise('No window')
+    except Exception as e:
+        print e
+        print 'Nope'
+
+if __name__ == '__main__':
+    screen = wnck.screen_get_default()
+    screen.connect('active-window-changed', get_title)
+    gtk.main()
