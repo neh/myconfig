@@ -2,8 +2,9 @@
 # coding=utf-8
 
 import time
-import gobject
-gobject.threads_init()
+import gi
+from gi.repository import GObject
+GObject.threads_init()
 
 from dbus import glib
 glib.init_threads()
@@ -32,7 +33,7 @@ def format_output():
     if status['plugged_in']:
         out = " "
 
-    for serial, battery in status['batteries'].iteritems():
+    for serial, battery in status['batteries'].items():
         out = "%s %s" % (out, battery['State'])
         if battery['State'] == 1:
             time = battery['TimeToFull']
@@ -60,10 +61,10 @@ status['plugged_in'] = not bool(upower_props.Get('org.freedesktop.UPower', 'OnBa
 get_battery_info(upower)
 format_output()
 
-loop = gobject.MainLoop()
-# loop.run()
+loop = GObject.MainLoop()
+loop.run()
 
-while True:
-    get_battery_info(upower)
-    format_output()
-    time.sleep(2)
+# while True:
+#     get_battery_info(upower)
+#     format_output()
+#     time.sleep(2)

@@ -2,8 +2,9 @@
 # coding=utf-8
 
 import time
-import gobject
-gobject.threads_init()
+import gi
+from gi.repository import GObject
+GObject.threads_init()
 
 from dbus import glib
 glib.init_threads()
@@ -37,7 +38,7 @@ for connection in connections:
 # print nm_props.Get('org.freedesktop.NetworkManager', 'Devices')
 
 
-loop = gobject.MainLoop()
+loop = GObject.MainLoop()
 # loop.run()
 
 # while True:
