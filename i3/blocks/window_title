@@ -10,7 +10,7 @@ while true; do
         SYMBOL='' ;;
       *Signal)
         SYMBOL='' ;;
-      *Slack)
+      Slack*)
         SYMBOL='' ;;
       nathan@*)
         SYMBOL='' ;;
