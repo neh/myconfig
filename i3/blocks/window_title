@@ -19,7 +19,7 @@ while true; do
       *' - YouTube - '*)
         SYMBOL='' ;;
       *'Plex'*)
-        SYMBOL='' ;;
+        SYMBOL='' ;;
       *'Play Music')
         SYMBOL='' ;;
       *' - Gmail - '*|*' - FreshGrade Mail'|*' - Google Search - '*)
