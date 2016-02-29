@@ -44,7 +44,7 @@ while true; do
       then TITLE="$(printf '%s …' "${TITLE:0:80}")"
     fi
 
-    MYTITLE='<span foreground="#00aa00"> '$SYMBOL'<i> </i> <span foreground="#ffffff">'$(echo $TITLE | sed -e "s/&/&amp;/g")' </span></span>'
+    MYTITLE='<span foreground="#00aa00"> '$SYMBOL'</span><i> </i> '$(echo $TITLE | sed -e "s/&/&amp;/g")' '
 
     echo $MYTITLE
   fi
