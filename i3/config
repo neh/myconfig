@@ -207,6 +207,11 @@ mode "media" {
         bindsym --release n exec --no-startup-id xdotool key "XF86AudioNext", mode "default"
         bindsym --release r exec --no-startup-id xdotool key "XF86AudioPrev", mode "default"
 
+        bindsym --release e exec --no-startup-id xdotool key "XF86AudioPlay", mode "default"
+        bindsym --release s exec --no-startup-id xdotool key "XF86AudioStop", mode "default"
+        bindsym --release u exec --no-startup-id xdotool key "XF86AudioNext", mode "default"
+        bindsym --release a exec --no-startup-id xdotool key "XF86AudioPrev", mode "default"
+
         bindsym Escape mode "default"
 }
 bindsym Mod4+m mode "media"
