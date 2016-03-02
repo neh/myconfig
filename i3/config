@@ -194,6 +194,7 @@ mode "apps" {
         bindsym e [class="Thunderbird"] focus, mode "default"
         bindsym m [title="^.*Google Play Music$"] focus, mode "default"
         bindsym t [title="^Signal"] focus, mode "default"
+        bindsym j [title=" - JIRA$"] focus, mode "default"
 
         bindsym u [urgent=latest] focus, mode "default"
 
