@@ -20,22 +20,24 @@ def print_title(window):
             icon = ''
         elif title.startswith('Write: '):
             icon = ''
-    elif title.endswith(' - Gmail') or title.endswith(' - FreshGrade Mail'):
+    elif any(title.endswith(x) for x in [' - Gmail', ' - FreshGrade Mail']):
         icon = ''
     elif application == 'Signal':
         icon = ''
     elif title.startswith('Slack'):
         icon = ''
+    elif title.endswith('NVIM'):
+        icon = ''
     elif application == 'Terminal':
         icon = ''
 
     elif title.endswith(' - Chromium'):
         title = title[0:-11]
-        if 'YouTube - ' in title:
+        if 'YouTube' in title:
             icon = ''
-        elif ' - Kibana - ' in title:
+        elif 'Kibana' in title:
             icon = ''
-        elif 'Twitter - ' in title:
+        elif 'Twitter' in title:
             icon = ''
         elif title.endswith(' - Google Search'):
             icon = ''
@@ -52,7 +54,7 @@ def print_title(window):
 
     elif 'JIRA' in title:
         icon = ''
-    elif title == 'oskim' or title == 'daily':
+    elif any(x in title for x in ['feedly', 'oskim', 'daily']):
         icon = ''
     elif title.endswith(' - Google Play Music'):
         title = title[0:-20]
@@ -60,7 +62,7 @@ def print_title(window):
         # icon = ''
     elif 'Transmission Web Interface' in title:
         icon = ''
-    elif 'Plex' in title or 'Trakt' in title:
+    elif any(x in title for x in ['Plex', 'Trakt']):
         icon = ''
     else:
         icon = ''
