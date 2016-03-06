@@ -26,6 +26,7 @@ def print_title(window):
     elif application == 'Signal':
         icon = ''
     elif title.startswith('Slack'):
+        title = title[8:]
         icon = ''
     elif title.endswith('NVIM'):
         icon = ''
