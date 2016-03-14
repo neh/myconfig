@@ -144,7 +144,6 @@ bindsym XF86MonBrightnessDown exec --no-startup-id dbus-send --print-reply --ses
 bindsym XF86Display exec --no-startup-id autorandr --change
 bindsym XF86Battery exec gnome-power-statistics
 
-exec --no-startup-id xautolock -time 10 -bell 0 -locker "i3lock -d -c 000000 -e"
 bindsym XF86Lock exec --no-startup-id xautolock -locknow
 bindsym XF86ScreenSaver exec --no-startup-id xautolock -locknow
 bindsym XF86Sleep exec --no-startup-id xautolock -locknow && sudo pm-suspend
@@ -281,6 +280,8 @@ exec --no-startup-id sleep 0.5 && xcape
 # Set up xkbmap to allow alt+shift to toggle keyboard layout
 exec --no-startup-id setxkbmap -option grp:switch,grp:alt_shift_toggle,grp_led:scroll us,dvorak
 exec --no-startup-id setxkbmap -option ctrl:nocaps
+exec --no-startup-id xautolock -time 15 -bell 0 -locker "i3lock --dpms -c 000000 -e"
+exec --no-startup-id xset dpms 0 0 600
 exec gnome-terminal
 
 new_window none
