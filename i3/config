@@ -274,7 +274,6 @@ force_display_urgency_hint 1500 ms
 exec --no-startup-id unity-settings-daemon
 exec --no-startup-id compton
 exec --no-startup-id hsetroot #222222
-exec nm-applet
 exec --no-startup-id dunst
 exec --no-startup-id sleep 0.5 && xcape
 # Set up xkbmap to allow alt+shift to toggle keyboard layout
