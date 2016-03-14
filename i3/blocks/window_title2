@@ -73,7 +73,7 @@ class WindowMonitor:
             # icon = ''
         elif 'Transmission Web Interface' in title:
             icon = ''
-        elif any(x in title for x in ['Plex', 'Trakt']):
+        elif any(x in title for x in ['Plex', 'Trakt', '▶']):
             icon = ''
         else:
             icon = ''
