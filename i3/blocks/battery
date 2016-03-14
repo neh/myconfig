@@ -45,16 +45,18 @@ if ($acpi =~ /(\d\d):(\d\d):/) {
 
 if ($status eq 'Discharging' && $hour == 0 && $minutes < 20) {
 	$full_text = '<span foreground="#ff0000"></span>  ';
-} elsif ($status eq 'Discharging' && $percent >= 50) {
+} elsif ($status eq 'Discharging' && $percent >= 40) {
 	$full_text = '<span foreground="#00aa00"></span>  ';
 } elsif ($status eq 'Discharging' && $percent < 40) {
 	$full_text = '<span foreground="#ffde00"></span>  ';
 } elsif ($status eq 'Charging') {
 	$full_text = '<span foreground="#00aa00"></span>  ';
-} elsif ($status eq 'Full') {
+} elsif ($status eq 'Full' or $percent >= 80) {
 	$full_text = '<span foreground="#00aa00"></span> ';
+} elsif ($percent >= 40) {
+	$full_text = '<span foreground="#00aa00"></span> ';
 } else {
-	$full_text = '<span foreground="#00aa00"></span> ';
+	$full_text = '<span foreground="#ff0000"></span> ';
 }
 $full_text .= "$percent%";
 
