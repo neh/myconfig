@@ -271,14 +271,10 @@ bar {
 
 force_display_urgency_hint 1500 ms
 
-exec --no-startup-id unity-settings-daemon
 exec --no-startup-id compton
 exec --no-startup-id hsetroot #222222
 exec --no-startup-id dunst
 exec --no-startup-id sleep 0.5 && xcape
-# Set up xkbmap to allow alt+shift to toggle keyboard layout
-exec --no-startup-id setxkbmap -option grp:switch,grp:alt_shift_toggle,grp_led:scroll us,dvorak
-exec --no-startup-id setxkbmap -option ctrl:nocaps
 exec --no-startup-id xautolock -time 15 -bell 0 -locker "i3lock --dpms -c 000000 -e"
 exec --no-startup-id xset dpms 0 0 600
 exec gnome-terminal
