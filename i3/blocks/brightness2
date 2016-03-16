@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo '<span foreground="#00aa00"></span> '$(printf "%.0f" "$(xbacklight -get)")'%'

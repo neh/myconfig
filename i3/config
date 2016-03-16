@@ -139,8 +139,8 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl set-sink-mute @DEFAULT_SINK@ 0 && pkill -RTMIN+11 i3blocks
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+11 i3blocks
 
-bindsym XF86MonBrightnessUp exec --no-startup-id dbus-send --print-reply --session --dest="org.gnome.SettingsDaemon" /org/gnome/SettingsDaemon/Power org.gnome.SettingsDaemon.Power.Screen.StepUp
-bindsym XF86MonBrightnessDown exec --no-startup-id dbus-send --print-reply --session --dest="org.gnome.SettingsDaemon" /org/gnome/SettingsDaemon/Power org.gnome.SettingsDaemon.Power.Screen.StepDown
+bindsym XF86MonBrightnessUp exec --no-startup-id brightness up && pkill -RTMIN+12 i3blocks
+bindsym XF86MonBrightnessDown exec --no-startup-id brightness down && pkill -RTMIN+12 i3blocks
 
 bindsym XF86Display exec --no-startup-id autorandr --change
 
