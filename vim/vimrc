@@ -246,7 +246,7 @@ hi scmLineAdded ctermfg=green
 hi scmLineChanged ctermfg=yellow
 hi scmLineRemoved ctermfg=red
 
-hi EndOfBuffer ctermbg=black guibg=#161616
+hi EndOfBuffer ctermbg=black guibg=#000000
 
 " }}}
 " General options {{{ ---------------------------------------------------------
@@ -353,7 +353,7 @@ set listchars=tab:➜\ ,trail:·,extends:❱,precedes:❰
 
 " Mark column 80, method depending on vim version
 if exists('+colorcolumn')
-    hi ColorColumn ctermbg=233 guibg=#161616
+    " hi ColorColumn ctermbg=233 guibg=#161616
     " set cc=80
     " let &colorcolumn=join(range(81,300), ",")
 endif
@@ -765,7 +765,7 @@ if exists('+colorcolumn')
                     let l:width=winwidth(i)
                 endif
                 let l:range = join(range(1, l:width), ',')
-                hi ColorColumn guibg=#161616
+                hi ColorColumn guibg=#000000
             else
                 " let l:range = join(range(81, 300), ',')
                 " hi ColorColumn guibg=#161616
