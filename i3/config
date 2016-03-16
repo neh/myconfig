@@ -143,7 +143,6 @@ bindsym XF86MonBrightnessUp exec --no-startup-id dbus-send --print-reply --sessi
 bindsym XF86MonBrightnessDown exec --no-startup-id dbus-send --print-reply --session --dest="org.gnome.SettingsDaemon" /org/gnome/SettingsDaemon/Power org.gnome.SettingsDaemon.Power.Screen.StepDown
 
 bindsym XF86Display exec --no-startup-id autorandr --change
-bindsym XF86Battery exec gnome-power-statistics
 
 bindsym XF86Lock exec --no-startup-id xautolock -locknow
 bindsym XF86ScreenSaver exec --no-startup-id xautolock -locknow
