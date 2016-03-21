@@ -19,7 +19,7 @@ nm_props = dbus.Interface(nm_obj, dbus.PROPERTIES_IFACE)
 
 state = nm_props.Get('org.freedesktop.NetworkManager', 'State')
 if state == 60:  # connected, but no internet
-    print("<span foreground=\"#ffde00\"> </span>")
+    print("<span foreground=\"#ffde00\"> </span>")
 elif state == 70:  # connected to all the things
     print("<span foreground=\"#00aa00\"> </span>")
 else:  # no connectivity
