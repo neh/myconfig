@@ -379,6 +379,9 @@ set guioptions-=b
 " }}}
 " Key mappings {{{ ------------------------------------------------------------
 
+" easier terminal escape
+tnoremap <Leader><ESC> <C-\><C-n>
+
 " highlight last inserted text
 nnoremap gV `[v`]
 
