@@ -46,7 +46,7 @@ capability() { # Return "Capture" if the device is a capture device
 volume() {
   amixer -D $MIXER get $SCONTROL $(capability)
 }
-# use  when headphones plugged in
+# use   when headphones plugged in, and  when < 50%
 format() {
   perl_filter='if (/.*\[(\d+%)\] (\[(-?\d+.\d+dB)\] )?\[(on|off)\]/)'
   perl_filter+='{CORE::say $4 eq "off" ? "<span foreground=\"#ffde00\"> </span> 0%" : " '
