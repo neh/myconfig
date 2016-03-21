@@ -96,6 +96,7 @@ Plug 'fmoralesc/vim-pad'
 Plug 'justinmk/vim-sneak'
 Plug 'diepm/vim-rest-console'
 Plug 'ktonga/vim-follow-my-lead'
+Plug 'pearofducks/ansible-vim'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
@@ -192,9 +193,6 @@ let php_sql_query = 1
 let php_htmlInStrings = 1
 let php_parent_error_close = 1
 let php_parent_error_open = 1
-
-autocmd BufRead,BufNewFile */host_vars/* setlocal filetype=yaml
-autocmd BufRead,BufNewFile */group_vars/* setlocal filetype=yaml
 
 
 " }}}
@@ -510,6 +508,12 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" ansible-vim
+" let g:ansible_extra_syntaxes = ''
+" let g:ansible_attribute_highlight = 'ad'
+let g:ansible_name_highlight = 'b'
+let g:ansible_extra_keywords_highlight = 1
 
 " gruvbox colorscheme
 let g:gruvbox_contrast_dark = 'hard'
