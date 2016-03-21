@@ -232,6 +232,7 @@ bar {
 
         output eDP1
         output LVDS1
+        output LVDS-1
         output DP1
         output DP2-1
         output VGA-0
