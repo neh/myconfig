@@ -379,6 +379,9 @@ set guioptions-=b
 " }}}
 " Key mappings {{{ ------------------------------------------------------------
 
+" highlight last inserted text
+nnoremap gV `[v`]
+
 " quick vundle maps
 nmap <leader>pi :PlugInstall<cr>
 nmap <leader>pu :PlugUpdate<cr>
