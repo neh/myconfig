@@ -585,7 +585,10 @@ let g:airline_symbols.readonly=' '
 let g:airline_section_z='%p%% %l:%c'
 let g:airline#extensions#whitespace#trailing_format = '%s·'
 let g:airline#extensions#whitespace#mixed_indent_format = '%s➜'
-let g:airline#extensions#branch#empty_message = 'No SCM'
+let g:airline#extensions#branch#empty_message = ''
+let g:airline#extensions#hunks#enabled = 0
+let g:airline#extensions#tagbar#enabled = 0
+call airline#parts#define_condition('ffenc', '&fenc != "utf-8" || &ff != "unix"')
 
 " gitv
 let g:Gitv_CommitStep = '500'
