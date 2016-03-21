@@ -80,7 +80,7 @@ class WindowMonitor:
 
         if len(title) > 78:
             title = title[0:78]+' …'
-        print('<span foreground="#00aa00"> '+icon+'</span><i> </i> ' + GObject.markup_escape_text(title) + ' ')
+        print(icon+'<i> </i> ' + GObject.markup_escape_text(title))
 
     def get_title(self, the_screen, prev_window=False):
         try:

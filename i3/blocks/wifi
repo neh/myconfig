@@ -33,7 +33,7 @@ elif [[ -e /sys/class/net/$INTERFACE/wireless ]]; then
   if [[ $QUALITY -le 50 ]]; then
     SYMBOL="<span foreground=\"#FFDE00\"> </span>"
   else
-    SYMBOL="<span foreground=\"#00aa00\"> </span>"
+    SYMBOL=" "
   fi
 
   echo "$SYMBOL $ESSID  $IP"

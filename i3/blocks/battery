@@ -52,7 +52,7 @@ if ($status eq 'Discharging' && $hour == 0 && $minutes < 20) {
 } elsif ($status eq 'Charging') {
 	$full_text = '<span foreground="#00aa00"></span>  ';
 } elsif ($status eq 'Full' or $percent >= 80) {
-	$full_text = '<span foreground="#00aa00"></span> ';
+	$full_text = ' ';
 } elsif ($percent >= 40) {
 	$full_text = '<span foreground="#00aa00"></span> ';
 } else {
