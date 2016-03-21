@@ -97,6 +97,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'diepm/vim-rest-console'
 Plug 'ktonga/vim-follow-my-lead'
 Plug 'pearofducks/ansible-vim'
+Plug 'ConradIrwin/vim-bracketed-paste'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
