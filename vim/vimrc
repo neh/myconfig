@@ -99,6 +99,7 @@ Plug 'diepm/vim-rest-console'
 Plug 'ktonga/vim-follow-my-lead'
 Plug 'pearofducks/ansible-vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'jreybert/vimagit'
 Plug 'blueyed/vim-diminactive'
 
@@ -431,8 +432,6 @@ sunmap n
 sunmap N
 
 " Window nav mappings
-nmap <C-n> :call SwitchWindowOrBuffer('b')<CR>
-nmap <C-t> :call SwitchWindowOrBuffer('f')<CR>
 nmap <F4> <C-W>o
 nmap <F5> <C-W>c
 nmap <F6> <C-W>=
@@ -526,6 +525,14 @@ autocmd User VimagitEnterCommit startinsert
 let g:diminactive_use_colorcolumn = 1
 let g:diminactive_use_syntax = 1
 let g:diminactive_enable_focus = 1
+
+" vim-tmux-navigator
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-t> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-n> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-s> :TmuxNavigateRight<cr>
+" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
 " ansible-vim
 " let g:ansible_extra_syntaxes = ''
@@ -816,24 +823,6 @@ function! s:NumberTextObject(whole)
         while col('.') > 1 && getline('.')[col('.') - 2] =~# '\v[0-9]'
             normal! h
         endwhile
-    endif
-endfunction
-
-
-" Switch windows/buffers, depending on whether multiple windows exist.
-function! SwitchWindowOrBuffer(d)
-    if winbufnr(2) == -1
-        if a:d == 'f'
-            execute 'normal :bnext'
-        elseif a:d == 'b'
-            execute 'normal :bprev'
-        endif
-    else
-        if a:d == 'f'
-            execute 'normal :wincmd w'
-        elseif a:d == 'b'
-            execute 'normal :wincmd W'
-        endif
     endif
 endfunction
 
