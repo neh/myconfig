@@ -88,6 +88,7 @@ Plug 'kana/vim-textobj-lastpat'
 Plug 'tpope/vim-commentary'
 Plug 'jamessan/vim-gnupg'
 Plug 'dyng/ctrlsf.vim'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 Plug 'blindFS/vim-taskwarrior'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install --all' }
