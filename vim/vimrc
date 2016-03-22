@@ -8,10 +8,10 @@ filetype plugin indent on
 syntax on
 
 " Make vim update screen window title
-if &term =~ "^screen"
-    set t_ts=k
-    set t_fs=\
-endif
+" if &term =~ "^screen"
+"     set t_ts=k
+"     set t_fs=\
+" endif
 " Workaround to make italics work in tmux sessions
 if $TMUX != '' && &term =~ "xterm-256color"
     set t_so=[7m
@@ -22,8 +22,8 @@ endif
 autocmd BufEnter * let &titlestring = expand("%:t")
 
 " Set up man page viewing
-let $PAGER=''
-runtime! ftplugin/man.vim
+" let $PAGER=''
+" runtime! ftplugin/man.vim
 
 runtime macros/matchit.vim
 
@@ -56,8 +56,6 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'leshill/vim-json'
 Plug 'tpope/vim-markdown'
 Plug 'ehamberg/vim-cute-python'
-Plug 'marijnh/tern_for_vim'
-Plug 'derekwyatt/vim-scala'
 Plug 'fatih/vim-go'
 
 " The Rest
@@ -66,12 +64,8 @@ Plug 'Raimondi/delimitMate'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/gist-vim'
-Plug 'gregsexton/gitv'
-Plug 'msanders/snipmate.vim'
 Plug 'vim-scripts/dbext.vim'
-Plug 'neh/vim-scratch'
 Plug 'scrooloose/syntastic'
-Plug 'sjl/clam.vim'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-unimpaired'
@@ -79,7 +73,6 @@ Plug 'vim-scripts/AnsiEsc.vim'
 Plug 'tpope/vim-sleuth'
 " Plug 'vim-scripts/easytags.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-"Plug 'Shougo/unite.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mmalecki/vim-node.js'
@@ -95,8 +88,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'fmoralesc/vim-pad'
 Plug 'justinmk/vim-sneak'
-Plug 'diepm/vim-rest-console'
-Plug 'ktonga/vim-follow-my-lead'
 Plug 'pearofducks/ansible-vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'christoomey/vim-tmux-navigator'
@@ -177,9 +168,6 @@ autocmd BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \   exe "normal g`\"" |
       \ endif
-
-" Make yssp wrap a line in php tags
-autocmd FileType php let b:surround_112 = "<?php \r ?>"
 
 " folding setup
 let php_folding = 1
@@ -431,16 +419,6 @@ sunmap t
 sunmap n
 sunmap N
 
-" Window nav mappings
-nmap <F4> <C-W>o
-nmap <F5> <C-W>c
-nmap <F6> <C-W>=
-nmap <F7> <C-W><
-nmap <F8> <C-W>-
-nmap <F9> <C-W>+
-nmap <F10> <C-W>>
-nmap <F11> <C-W>_
-
 " Buffer delete maps
 nmap <Leader>bd :bd<CR>
 nmap <Leader>BD :bd!<CR>
@@ -462,13 +440,6 @@ vnoremap / /\v
 " Toggle wrapping
 nnoremap <Leader>w :setlocal nowrap! nolist!<cr>
 
-" Move a line of text
-" TODO these don't actually work (the mappings, I mean).
-nmap <M-t> mz:m+<cr>`z
-nmap <M-n> mz:m-2<cr>`z
-vmap <M-t> :m'<-2<cr>`>my`<mzgv`yo`z
-vmap <M-n> :m'>+<cr>`<my`>mzgv`yo`z
-
 " quickly turn off search highlighting
 map <Leader><space> :noh<cr>
 
@@ -486,9 +457,6 @@ nmap <Leader>rt :1,$retab<cr>
 " In visual mode press * or # to search for the current selection
 vnoremap <silent> * :call VisualSearch('f')<CR>zzzv
 vnoremap <silent> # :call VisualSearch('b')<CR>zzzv
-
-" Searches for the current selection using Ack
-vnoremap <silent> gf :call VisualSearch('gf')<CR>
 
 " Quickfix window maps
 nmap <Leader>co :copen<cr>
@@ -585,19 +553,6 @@ let g:gitgutter_sign_modified = '◆'
 let g:gitgutter_sign_removed = '◀'
 let g:gitgutter_sign_modified_removed = '◆'
 
-" signify
-let g:signify_vcs_list = ['git', 'hg']
-let g:signify_sign_add = '▶'
-let g:signify_sign_change = '◆'
-let g:signify_sign_delete = '◀'
-let g:signify_sign_delete_first_line = '◀'
-hi SignifySignAdd ctermfg=green
-hi SignifySignChange ctermfg=yellow
-hi SignifySignDelete ctermfg=red
-
-" yankring
-let yankring_enabled = 0
-
 " vim-airline
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -614,14 +569,6 @@ let g:airline#extensions#branch#empty_message = ''
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#tagbar#enabled = 0
 call airline#parts#define_condition('ffenc', '&fenc != "utf-8" || &ff != "unix"')
-
-" gitv
-let g:Gitv_CommitStep = '500'
-let g:Gitv_OpenHorizontal = 1
-let g:Gitv_WrapLines = 0
-nmap <leader>gv :Gitv --all<cr>
-nmap <leader>gV :Gitv! --all<cr>
-vmap <leader>gV :Gitv! --all<cr>
 
 " CamelCaseMotion (need this in after/plugin as well)
 map <silent> w <Plug>CamelCaseMotion_w
@@ -661,14 +608,6 @@ call s:SetMarkColours()
 
 " bufmru
 let g:bufmru_switchkey = "<c-e>"
-
-" Neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_max_list = 40
-let g:neocomplcache_auto_completion_start_length = 3
 
 " Syntastic
 let g:syntastic_auto_loc_list=2
@@ -715,9 +654,6 @@ let g:tagbar_type_yaml = {
         \ 'k:tasks'
     \ ]
 \ }
-
-" Scratch
-nmap <Leader>' :SscratchToggle<cr>
 
 " dbext
 let g:dbext_default_use_sep_result_buffer = 1
