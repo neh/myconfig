@@ -56,12 +56,11 @@ class WindowMonitor:
                 title = title [0:-17]
                 icon = ''
             else:
-                icon = ''
-                # icon = ''
+                icon = ''
 
-        # elif title.endswith(' - Mozilla Firefox'):
-        #     title = title[0:-18]
-        #     icon = ''
+        elif title.endswith(' - Mozilla Firefox'):
+            title = title[0:-18]
+            icon = ''
 
         elif 'JIRA' in title:
             icon = ''
