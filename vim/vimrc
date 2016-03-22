@@ -99,6 +99,7 @@ Plug 'diepm/vim-rest-console'
 Plug 'ktonga/vim-follow-my-lead'
 Plug 'pearofducks/ansible-vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'blueyed/vim-diminactive'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
@@ -353,7 +354,7 @@ set listchars=tab:➜\ ,trail:·,extends:❱,precedes:❰
 
 " Mark column 80, method depending on vim version
 if exists('+colorcolumn')
-    " hi ColorColumn ctermbg=233 guibg=#161616
+    hi ColorColumn ctermbg=black guibg=#000000
     " set cc=80
     " let &colorcolumn=join(range(81,300), ",")
 endif
@@ -516,6 +517,11 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" vim-dim-inactive
+let g:diminactive_use_colorcolumn = 1
+let g:diminactive_use_syntax = 1
+let g:diminactive_enable_focus = 1
 
 " ansible-vim
 " let g:ansible_extra_syntaxes = ''
@@ -759,42 +765,6 @@ nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
 
 " }}}
 " Custom functions and commands {{{ -------------------------------------------
-
-" Dim inactive windows using 'colorcolumn' setting
-" This tends to slow down redrawing, but is very useful.
-" Based on https://groups.google.com/d/msg/vim_use/IJU-Vk-QLJE/xz4hjPjCRBUJ
-" XXX: this will only work with lines containing text (i.e. not '~')
-" from 
-if exists('+colorcolumn')
-    function! s:DimInactiveWindows(which)
-        for i in range(1, tabpagewinnr(tabpagenr(), '$'))
-            let l:range = ""
-            if i != winnr() || a:which == 'all'
-                if &wrap
-                    " HACK: when wrapping lines is enabled, we use the maximum number
-                    " of columns getting highlighted. This might get calculated by
-                    " looking for the longest visible line and using a multiple of
-                    " winwidth().
-                    let l:width=256 " max
-                else
-                    let l:width=winwidth(i)
-                endif
-                let l:range = join(range(1, l:width), ',')
-                hi ColorColumn guibg=#000000
-            else
-                " let l:range = join(range(81, 300), ',')
-                " hi ColorColumn guibg=#161616
-            endif
-            call setwinvar(i, '&colorcolumn', l:range)
-        endfor
-    endfunction
-    augroup DimInactiveWindows
-        au!
-        au WinEnter,FocusGained * call s:DimInactiveWindows('most')
-        au FocusLost * call s:DimInactiveWindows('all')
-    augroup END
-endif
-
 
 function! ReloadAirline()
     execute ":AirlineTheme " . g:airline_theme
