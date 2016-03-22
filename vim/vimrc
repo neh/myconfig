@@ -534,6 +534,13 @@ hi link SneakPluginTarget Search
 
 " vim-pad
 let g:pad#set_mappings = 0
+let g:pad#dir = "~/notes"
+let g:pad#open_in_split = 0
+let g:pad#search_backend = 'ag'
+let g:pad#title_first_line = 1
+nmap <leader>nn <Plug>(pad-new)
+nmap <leader>nl <Plug>(pad-list)
+nmap <leader>ns <Plug>(pad-incremental-search)
 
 " ctrlsf
 let g:ctrlsf_position = 'right'
