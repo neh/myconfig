@@ -99,6 +99,7 @@ Plug 'diepm/vim-rest-console'
 Plug 'ktonga/vim-follow-my-lead'
 Plug 'pearofducks/ansible-vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'jreybert/vimagit'
 Plug 'blueyed/vim-diminactive'
 
 " Colors
@@ -517,6 +518,9 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" vimagit
+autocmd User VimagitEnterCommit startinsert
 
 " vim-dim-inactive
 let g:diminactive_use_colorcolumn = 1
