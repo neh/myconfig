@@ -225,7 +225,6 @@ bindsym Mod4+minus bar mode toggle
 bar {
         id blocks
         position top
-        tray_output primary
         binding_mode_indicator yes
         modifier Mod1
         status_command ~/bin/i3blocks
@@ -252,7 +251,6 @@ bar {
 bar {
         id secondary
         position top
-        tray_output primary
         binding_mode_indicator yes
         modifier Mod1
 
