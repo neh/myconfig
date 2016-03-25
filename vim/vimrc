@@ -90,6 +90,7 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'jreybert/vimagit'
 Plug 'blueyed/vim-diminactive'
+Plug 'nhooyr/neoman.vim'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
