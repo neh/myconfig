@@ -521,12 +521,18 @@ nmap <Leader>e :Buffers<cr>
 
 
 " vim-sneak
-nmap f <Plug>Sneak_s
-nmap F <Plug>Sneak_S
-xmap f <Plug>Sneak_s
-xmap F <Plug>Sneak_S
-omap f <Plug>Sneak_s
-omap F <Plug>Sneak_S
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+xmap f <Plug>Sneak_f
+xmap F <Plug>Sneak_F
+omap f <Plug>Sneak_f
+omap F <Plug>Sneak_F
+nmap k <Plug>Sneak_t
+nmap K <Plug>Sneak_T
+xmap k <Plug>Sneak_t
+xmap K <Plug>Sneak_T
+omap k <Plug>Sneak_t
+omap K <Plug>Sneak_T
 
 nmap ? <Plug>SneakPrevious
 
