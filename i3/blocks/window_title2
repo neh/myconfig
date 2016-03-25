@@ -37,7 +37,7 @@ class WindowMonitor:
         elif title.startswith('Slack'):
             title = title[8:]
             icon = ''
-        elif title.endswith('NVIM'):
+        elif title.endswith('VIM'):
             icon = ''
         elif application == 'Terminal':
             icon = ''
