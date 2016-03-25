@@ -52,11 +52,9 @@ Plug 'godlygeek/tabular'
 Plug 'coderifous/textobj-word-column.vim'
 
 " Language/filetype-specific
-Plug 'jelera/vim-javascript-syntax'
-Plug 'leshill/vim-json'
-Plug 'tpope/vim-markdown'
 Plug 'ehamberg/vim-cute-python'
 Plug 'fatih/vim-go'
+Plug 'sheerun/vim-polyglot'
 
 " The Rest
 Plug 'airblade/vim-gitgutter'
@@ -75,7 +73,6 @@ Plug 'tpope/vim-sleuth'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'mmalecki/vim-node.js'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-lastpat'
 Plug 'tpope/vim-commentary'
