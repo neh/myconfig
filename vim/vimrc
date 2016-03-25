@@ -112,6 +112,12 @@ call plug#end()
 set background=dark
 if has('nvim')
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+    " gruvbox colorscheme
+    let g:gruvbox_italic = 1
+    let g:gruvbox_contrast_dark = 'hard'
+    let g:gruvbox_contrast_light = 'hard'
+    let g:gruvbox_invert_selection = 0
     colo gruvbox
 else
     " Set up color settings and scheme based on terminal type
@@ -507,12 +513,6 @@ nnoremap <silent> <C-s> :TmuxNavigateRight<cr>
 " let g:ansible_attribute_highlight = 'ad'
 let g:ansible_name_highlight = 'b'
 let g:ansible_extra_keywords_highlight = 1
-
-" gruvbox colorscheme
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_contrast_light = 'hard'
-let g:gruvbox_invert_selection = 0
-" let g:gruvbox_sign_column = ''
 
 " fzf
 nmap <Leader>f :execute 'Files' fnameescape(getcwd())<cr>
