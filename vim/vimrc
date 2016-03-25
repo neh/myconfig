@@ -19,7 +19,7 @@ if $TMUX != '' && &term =~ "xterm-256color"
 endif
 
 " Set titlestring when switching buffers (kept short for screen window names)
-autocmd BufEnter * let &titlestring = expand("%:t")
+autocmd BufEnter * let &titlestring = expand("%:t").' - VIM'
 
 " Set up man page viewing
 " let $PAGER=''
