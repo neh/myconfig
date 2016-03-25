@@ -308,6 +308,9 @@ set scrolloff=3
 set sidescroll=1
 set sidescrolloff=2
 
+set splitright
+set splitbelow
+
 set completeopt=longest,menuone
 
 if has("wildmenu")
