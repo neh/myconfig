@@ -223,15 +223,35 @@ bindsym Mod4+m mode "media"
 bindsym Mod4+minus bar mode toggle
 
 bar {
-        id blocks
+        id laptop
         position top
         binding_mode_indicator yes
         modifier Mod1
-        status_command ~/bin/i3blocks
+        status_command ~/bin/i3blocks -c ~/.config/i3blocks/laptop
 
         output eDP1
         output LVDS1
         output LVDS-1
+
+        separator_symbol " | "
+
+        colors {
+                background #222222
+                statusline #dddddd
+                focused_workspace #dd4814 #dd4814 #dfd8c3
+                active_workspace #dfd8c3 #dfd8c3 #222222
+                inactive_workspace #222222 #222222 #666666
+                urgent_workspace #d7c529 #d7c529 #222222
+        }
+}
+
+bar {
+        id external_primary
+        position top
+        binding_mode_indicator yes
+        modifier Mod1
+        status_command ~/bin/i3blocks -c ~/.config/i3blocks/external_primary
+
         output DP1
         output DP2-1
         output VGA-0
