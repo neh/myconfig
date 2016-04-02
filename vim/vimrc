@@ -91,6 +91,9 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'jreybert/vimagit'
 Plug 'blueyed/vim-diminactive'
 Plug 'nhooyr/neoman.vim'
+Plug 'vimoutliner/vimoutliner'
+Plug 'jceb/vim-orgmode'
+Plug 'tpope/vim-speeddating'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
@@ -247,6 +250,7 @@ hi EndOfBuffer ctermbg=black guibg=#000000
 " General options {{{ ---------------------------------------------------------
 
 let mapleader=","
+let maplocalleader="\\"
 set updatetime=750
 set number
 set relativenumber
@@ -492,6 +496,9 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" vim-orgmode
+let g:org_heading_shade_leading_stars = 1
 
 " vimagit
 autocmd User VimagitEnterCommit startinsert
