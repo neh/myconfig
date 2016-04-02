@@ -139,6 +139,7 @@ autocmd BufRead,BufNewFile *.erb setlocal filetype=eruby
 autocmd BufRead,BufNewFile Berksfile setlocal filetype=ruby
 autocmd BufRead,BufNewFile *.snippet? setlocal filetype=snippet sts=8 sw=8 noet
 autocmd BufRead,BufNewFile *.mustache,*.ms setlocal filetype=mustache
+autocmd BufRead,BufNewFile *.md setlocal filetype=markdown
 
 " some files need real tabs (I default to spaces for indentation)
 autocmd FileType make setlocal noexpandtab
