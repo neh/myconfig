@@ -1,0 +1,157 @@
+#!/usr/bin/env python3
+# coding=utf-8
+
+import time
+import gi
+from gi.repository import GObject
+GObject.threads_init()
+
+from dbus import glib
+glib.init_threads()
+import dbus
+bus = dbus.SystemBus()
+
+from subprocess import check_output, PIPE
+
+class Battery:
+
+    def __init__(self, line):
+        data = line.replace(',', '').split(" ")
+        time = False
+        if len(data) == 4:
+            _, _, self.state, percentage = data
+        elif len(data) > 4:
+            _, _, self.state, percentage, time, *_ = data
+
+        if time:
+            self.time = time[:-3].lstrip('0')
+
+        self.percentage = int(percentage.rstrip('%'))
+        if self.state == 'Unknown':
+            if int(self.percentage) <= 5:
+                self.state = 'Empty'
+            elif int(self.percentage) >= 95:
+                self.state = 'Full'
+            else:
+                self.state = 'Partial'
+
+    def show(self, plug_changed=False):
+        if self.percentage <= 10 and self.state != 'Charging':
+            colour = '#ff0000'
+        elif self.percentage <= 25 and self.state != 'Charging':
+            colour = '#ffde00'
+        else:
+            colour = '#00aa00'
+
+        if self.state == 'Charging':
+            out = "<span foreground=\"%s\"></span> %i%%" % (colour, self.percentage)
+            if not plug_changed:
+                out += " %s" % self.time
+            return out
+        elif self.state == 'Discharging':
+            out = "<span foreground=\"%s\"></span> %i%%" % (colour, self.percentage)
+            if not plug_changed:
+                out += " %s" % self.time
+            return out
+        elif self.state == 'Empty':
+            return "<span foreground=\"%s\"></span>" % colour
+        elif self.state == 'Partial':
+            return ""
+        elif self.state == 'Full':
+            return ""
+
+
+class PowerMonitor:
+
+    def __init__(self):
+        self.updated = False
+        self.plug_changed = False
+        self.batteries = []
+        self.timer_id = False
+
+        self.upower_obj = bus.get_object('org.freedesktop.UPower', '/org/freedesktop/UPower')
+        self.upower = dbus.Interface(self.upower_obj, 'org.freedesktop.UPower')
+        self.upower_props = dbus.Interface(self.upower_obj, dbus.PROPERTIES_IFACE)
+
+        self.update()
+        self.reset_timer()
+
+        bus.add_signal_receiver(
+            self.update,
+            signal_name='PropertiesChanged',
+            dbus_interface='org.freedesktop.DBus.Properties',
+            path='/org/freedesktop/UPower/devices/line_power_AC'
+        )
+
+        loop = GObject.MainLoop()
+        loop.run()
+
+    def update(self, *args, **kwargs):
+        self.plug_status()
+        self.get_batteries()
+
+        if args:
+            self.plug_changed = True
+            self.reset_timer()
+        else:
+            self.plug_changed = False
+
+        self.show()
+        if self.plugged_full():
+            self.reset_timer(interval=3600000)
+
+        return True
+
+    def reset_timer(self, interval=15000):
+        # print(interval)
+        if self.timer_id:
+            GObject.source_remove(self.timer_id)
+            self.timer_id = False
+        self.timer_id = GObject.timeout_add(interval, self.update)
+
+    def plug_status(self):
+        self.plugged_in = not bool(self.upower_props.Get('org.freedesktop.UPower', 'OnBattery'))
+
+    def plugged_full(self):
+        if self.plugged_in and all(battery.state == 'Full' for battery in self.batteries):
+            return True
+        return False
+
+    def get_batteries(self):
+        self.batteries = []
+
+        for line in check_output(['acpi', '-b'], stdin=PIPE).rstrip().decode().split('\n'):
+            # try:
+            battery = Battery(line)
+                # print(battery)
+            self.batteries.append(battery)
+            # except:
+                # pass
+
+    def show(self):
+        if self.plugged_full():
+            print("")
+        else:
+            discharging = []
+            charging = []
+            empty = []
+            partial = []
+            full = []
+
+            for battery in self.batteries:
+                if battery.state == 'Discharging':
+                    discharging.append(battery.show(plug_changed=self.plug_changed))
+                if battery.state == 'Charging':
+                    charging.append(battery.show(plug_changed=self.plug_changed))
+                if battery.state == 'Empty':
+                    empty.append(battery.show(plug_changed=self.plug_changed))
+                if battery.state == 'Partial':
+                    partial.append(battery.show(plug_changed=self.plug_changed))
+                if battery.state == 'Full':
+                    full.append(battery.show(plug_changed=self.plug_changed))
+
+            print('<b> </b><i> </i> '.join(discharging + charging + empty + partial + full))
+
+
+PowerMonitor()
+
