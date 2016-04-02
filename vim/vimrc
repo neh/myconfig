@@ -94,6 +94,7 @@ Plug 'nhooyr/neoman.vim'
 Plug 'vimoutliner/vimoutliner'
 Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
+Plug 'junegunn/goyo.vim'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
@@ -497,6 +498,27 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" goyo
+nmap <Leader>cl :Goyo<cr>
+
+function! s:goyo_enter()
+  silent !tmux set status off
+  silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  set noshowmode
+  set noshowcmd
+  set scrolloff=999
+endfunction
+function! s:goyo_leave()
+  silent !tmux set status on
+  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  set showmode
+  set showcmd
+  set scrolloff=3
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " vim-orgmode
 let g:org_heading_shade_leading_stars = 1
