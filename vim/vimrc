@@ -95,6 +95,7 @@ Plug 'vimoutliner/vimoutliner'
 Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
 Plug 'junegunn/goyo.vim'
+Plug 'terryma/vim-expand-region'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
@@ -499,6 +500,10 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" vim-expand-region
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 " goyo
 nmap <Leader>cl :Goyo<cr>
