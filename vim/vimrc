@@ -442,7 +442,7 @@ vmap Q gq
 nmap Q gqap
 
 " Fast save mapping
-nmap <Leader><return> :w<cr>
+nmap <Leader><space> :w<cr>
 
 " Save files that you need sudo for, but didn't open as root
 cmap W! silent w !sudo tee % >/dev/null
