@@ -455,7 +455,7 @@ vnoremap / /\v
 nnoremap <Leader>w :setlocal nowrap! nolist!<cr>
 
 " quickly turn off search highlighting
-map <Leader><space> :noh<cr>
+nmap <silent> <C-l> :noh<cr>
 
 " Load vimrc in a split window and switch to it
 nmap <Leader>V :vs ~/.vimrc<cr>
