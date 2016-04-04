@@ -452,7 +452,7 @@ nnoremap / /\v
 vnoremap / /\v
 
 " Toggle wrapping
-nnoremap <Leader>w :setlocal nowrap! nolist!<cr>
+nnoremap <silent> <Leader>w :setlocal nowrap! nolist!<cr>
 
 " quickly turn off search highlighting
 nmap <silent> <C-l> :noh<cr>
