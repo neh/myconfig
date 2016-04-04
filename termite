@@ -1,0 +1,6 @@
+[options]
+font = Noto Mono 9.5
+
+[colors]
+foreground = #eeeeee
+background = #101010
