@@ -252,6 +252,7 @@ hi EndOfBuffer ctermbg=black guibg=#000000
 " General options {{{ ---------------------------------------------------------
 
 let mapleader=","
+map <Space> <Leader>
 let maplocalleader="\\"
 set updatetime=750
 set number
@@ -397,8 +398,8 @@ nmap <leader>pu :PlugUpdate<cr>
 nmap <leader>pc :PlugClean<cr>
 
 " toggle folds
-nnoremap <space> za
-vnoremap <space> za
+nnoremap <cr> za
+vnoremap <cr> za
 
 " recursively open folds
 nnoremap z<space> zCzO
