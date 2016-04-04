@@ -230,6 +230,7 @@ bar {
         status_command ~/bin/i3blocks -c ~/.config/i3blocks/laptop
 
         output eDP1
+        output eDP-1
         output LVDS1
         output LVDS-1
 
