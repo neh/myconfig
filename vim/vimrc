@@ -214,25 +214,11 @@ hi Todo term=bold cterm=bold ctermfg=red ctermbg=yellow
 " popup menu
 hi Pmenu term=none cterm=none ctermfg=250 ctermbg=238
 hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=250
-" diff viewer
-hi DiffAdd term=none cterm=none ctermfg=black ctermbg=120
-hi DiffDelete term=none cterm=none ctermfg=233 ctermbg=233
-hi DiffChange term=none cterm=none ctermfg=248 ctermbg=237
-hi DiffText term=none cterm=none ctermfg=234 ctermbg=120
-" cursor line
-hi CursorLine term=none cterm=none ctermfg=7 ctermbg=22 gui=none guibg=#333333
-" folding
-hi Folded term=none cterm=bold ctermbg=236 ctermfg=244 gui=none guibg=#333333
-hi FoldColumn term=none cterm=none ctermbg=236 ctermfg=244 gui=none guibg=#333333
 
 if $TMUX != '' || $TERM == 'rxvt-256color'
     hi Folded cterm=italic gui=italic
     hi Comment cterm=italic gui=italic
 endif
-
-" The bg color for the sign/num columns sucks in the sorcerer theme
-" hi SignColumn cterm=none ctermbg=235
-" hi LineNr cterm=italic ctermbg=235
 
 " make special chars (tabs, trailing spaces, etc) barely visible
 hi SpecialKey cterm=none ctermfg=red
