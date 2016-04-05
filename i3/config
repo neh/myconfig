@@ -297,6 +297,7 @@ exec --no-startup-id dunst
 exec --no-startup-id sleep 0.5 && xcape
 exec --no-startup-id xautolock -time 15 -locker "i3lock -c 000000 -e"
 exec --no-startup-id xset dpms 0 0 600
+exec --no-startup-id redshift
 exec $terminal
 
 new_window none
