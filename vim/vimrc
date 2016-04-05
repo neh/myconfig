@@ -552,8 +552,7 @@ let g:ansible_name_highlight = 'b'
 let g:ansible_extra_keywords_highlight = 1
 
 " fzf
-nmap <Leader>f :execute 'Files' fnameescape(getcwd())<cr>
-nmap <Leader>h :execute 'Files' expand('%:p:h')<cr>
+nmap <Leader>o :execute 'Files' fnameescape(getcwd())<cr>
 nmap <Leader>e :Buffers<cr>
 
 
