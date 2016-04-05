@@ -96,6 +96,7 @@ Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
 Plug 'junegunn/goyo.vim'
 Plug 'terryma/vim-expand-region'
+Plug 'thirtythreeforty/lessspace.vim'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
