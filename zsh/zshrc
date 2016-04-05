@@ -226,6 +226,18 @@ ssh-reagent () {
     echo "Cannot find ssh agent - maybe you should reconnect and forward it?"
 }
 
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
 # }}}
 # Completions {{{ -------------------------------------------------------------
 
