@@ -1,3 +1,12 @@
 #!/bin/bash
 
-echo ' '$(printf "%.0f" "$(xbacklight -get)")'%'
+if [ -x /usr/bin/light ]; then
+    cmd='light -G'
+elif [ -x /usr/bin/xbacklight ]; then
+    cmd='xbacklight -get'
+else
+    echo 'No backlight adjustment tool found.'
+    exit 1
+fi
+
+echo ' '$(printf "%.0f" "$($cmd)")'%'

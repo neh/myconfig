@@ -3,6 +3,7 @@
 import sys
 from subprocess import check_output, call
 import math
+import os.path
 
 try:
     # TODO make arbitrary step sizes actually work
@@ -10,7 +11,24 @@ try:
 except IndexError:
     STEP = 10
 
-current = int(float((check_output(['xbacklight', '-get']).rstrip().decode())))
+if os.path.exists('/usr/bin/light'):
+    METHOD = 'light'
+elif os.path.exists('/usr/bin/xbacklight'):
+    METHOD = 'xbacklight'
+else:
+    sys.exit('No backlight adjustment tool found.')
+
+def get_current():
+    if METHOD == 'light':
+        return int(float((check_output(['light', '-G']).rstrip().decode())))
+    elif METHOD == 'xbacklight':
+        return int(float((check_output(['xbacklight', '-get']).rstrip().decode())))
+
+def set_brightness(brightness):
+    if METHOD == 'light':
+        call(['light', '-S', target])
+    elif METHOD == 'xbacklight':
+        call(['xbacklight', '-set', target])
 
 try:
     direction = sys.argv[1]
@@ -18,13 +36,13 @@ except IndexError:
     sys.exit("You need to pass a command like 'up' or 'down'.")
 
 if direction in ['inc', 'up']:
-    target = current + STEP
+    target = get_current() + STEP
 elif direction in ['dec', 'down']:
-    target = current - STEP
+    target = get_current() - STEP
 
 if target % STEP < 5:
     target = str(int(math.floor(target / STEP)) * STEP)
-    call(['xbacklight', '-set', target])
+    set_brightness(target)
 else:
     target = str(int(math.ceil(target / STEP)) * STEP)
-    call(['xbacklight', '-set', target])
+    set_brightness(target)
