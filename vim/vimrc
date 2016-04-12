@@ -518,6 +518,7 @@ let g:org_heading_shade_leading_stars = 1
 
 " vimagit
 autocmd User VimagitEnterCommit startinsert
+nnoremap <Leader>M :MagitOnly<cr>
 
 " vim-dim-inactive
 let g:diminactive_use_colorcolumn = 1
