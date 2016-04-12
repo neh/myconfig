@@ -39,7 +39,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Essential
-Plug 'vim-scripts/bufmru.vim'
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-fugitive'
 Plug 'michaeljsmith/vim-indent-object'
@@ -50,6 +49,7 @@ Plug 'chrisbra/SudoEdit.vim'
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
 Plug 'coderifous/textobj-word-column.vim'
+Plug 'qpkorr/vim-bufkill'
 
 " Language/filetype-specific
 Plug 'ehamberg/vim-cute-python'
@@ -421,10 +421,6 @@ sunmap t
 sunmap n
 sunmap N
 
-" Buffer delete maps
-nmap <Leader>bd :bd<CR>
-nmap <Leader>BD :bd!<CR>
-
 " No more Ex mode mapping. Do something useful instead.
 vmap Q gq
 nmap Q gqap
@@ -487,6 +483,10 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" vim-bufkill
+nnoremap <Leader>bd :BD<cr>
+nnoremap <C-e> :BA<cr>
 
 " vim-expand-region
 vmap v <Plug>(expand_region_expand)
@@ -641,9 +641,6 @@ function! s:SetMarkColours()
 endfunction
 autocmd ColorScheme * call s:SetMarkColours()
 call s:SetMarkColours()
-
-" bufmru
-let g:bufmru_switchkey = "<c-e>"
 
 " Syntastic
 let g:syntastic_auto_loc_list=2
