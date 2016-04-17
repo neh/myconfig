@@ -49,6 +49,7 @@ Plug 'chrisbra/SudoEdit.vim'
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
 Plug 'coderifous/textobj-word-column.vim'
+Plug 'vim-scripts/bufmru.vim'
 Plug 'qpkorr/vim-bufkill'
 
 " Language/filetype-specific
@@ -484,9 +485,11 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" bufmru
+let g:bufmru_switchkey = "<C-e>"
+
 " vim-bufkill
 nnoremap <Leader>bd :BD<cr>
-nnoremap <C-e> :BA<cr>
 
 " vim-expand-region
 vmap v <Plug>(expand_region_expand)
