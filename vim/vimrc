@@ -168,6 +168,9 @@ autocmd BufRead *vimrc,init.vim,*zshrc,*tmux.conf setlocal foldmethod=marker
 autocmd BufRead,BufNewFile *.zsh-theme setlocal filetype=zsh
 autocmd BufRead,BufNewFile *tmux.conf setlocal filetype=tmux
 
+" Auto-delete fugitive buffers when hidden
+autocmd BufHidden fugitive://* bd %
+
 " Useful when customizing xterm
 autocmd BufWritePost *Xdefaults*,*Xresources* :!xrdb ~/.Xresources
 " give machine-specific X setting files the proper filetype
