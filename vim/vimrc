@@ -107,7 +107,12 @@ Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'morhetz/gruvbox'
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+function! DoRemote(arg)
+    UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'zchee/deoplete-jedi'
 
 call plug#end()
 
@@ -487,6 +492,9 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
 
 " bufmru
 let g:bufmru_switchkey = "<C-e>"
