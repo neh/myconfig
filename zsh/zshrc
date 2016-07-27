@@ -58,7 +58,7 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 # }}}
 # Settings {{{ ----------------------------------------------------------------
 
-export EDITOR=vim
+export EDITOR=nvim
 
 export GOPATH=$HOME
 
