@@ -1,5 +1,5 @@
 [global]
-    font = "DejaVu Sans 11.5"
+    font = "Droid Sans 11.5"
     allow_markup = yes
     format = "<b><i>%s %p</i></b>\n%b"
     sort = yes
@@ -26,7 +26,7 @@
 
 [frame]
     width = 1
-    color = "#222222"
+    color = "#ff6600"
 
 [shortcuts]
     close = ctrl+space
@@ -35,12 +35,12 @@
     context = ctrl+shift+minus
 
 [urgency_low]
-    background = "#101010"
-    foreground = "#cccccc"
+    background = "#ff6600"
+    foreground = "#ffffff"
     timeout = 20
 
 [urgency_normal]
-    background = "#101010"
+    background = "#ff6600"
     foreground = "#ffffff"
     timeout = 30
 
