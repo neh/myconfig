@@ -774,9 +774,6 @@ vmap <Leader>s <Plug>Vsurround
 vmap <Leader>S <Plug>Vsurround
 
 " NERDTree
-nmap <Leader>nt :NERDTreeToggle<CR>
-nmap <Leader>nm :NERDTreeMirror<CR>
-nmap <Leader>nh :NERDTreeFind<CR>
 let g:NERDTreeMapOpenInTab="a"
 let g:NERDTreeMapOpenInTabSilent="A"
 let g:NERDTreeMapJumpFirstChild="N"
@@ -786,6 +783,19 @@ let g:NERDTreeMapJumpPrevSibling="<C-S-N>"
 let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeAutoCenter=1
 let g:NERDTreeAutoCenterThreshold=6
+let g:NerdtreeCmdMenu = {
+    \ 'title': 'Plugins',
+    \ 'commands': [
+        \ 'abort',
+        \ 'NERDTreeToggle',
+        \ 'NERDTreeFind',
+        \ ],
+    \ 'options': [
+        \ 'open &tree',
+        \ 'open &here',
+        \ ],
+\ }
+nmap <Leader>t :call CmdMenu(NerdtreeCmdMenu)<cr>
 
 " fugitive (git)
 let g:GitCmdMenu = {
