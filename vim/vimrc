@@ -99,6 +99,8 @@ Plug 'junegunn/goyo.vim'
 Plug 'terryma/vim-expand-region'
 Plug 'thirtythreeforty/lessspace.vim'
 Plug 'Konfekt/FastFold'
+Plug 'ktonga/vim-follow-my-lead'
+let g:fml_all_sources = 1
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Colors
