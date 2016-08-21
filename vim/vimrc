@@ -532,7 +532,6 @@ let g:org_heading_shade_leading_stars = 1
 
 " vimagit
 autocmd User VimagitEnterCommit startinsert
-nnoremap <Leader>M :MagitOnly<cr>
 
 " vim-dim-inactive
 let g:diminactive_use_colorcolumn = 1
@@ -741,18 +740,31 @@ let g:NERDTreeAutoCenter=1
 let g:NERDTreeAutoCenterThreshold=6
 
 " fugitive (git)
-nmap <Leader>gs :Gstatus<cr>
-nmap <Leader>gd :Gvdiff<cr>
-nmap <Leader>gg :Ggrep 
-nmap <Leader>glg :Glog<cr>
-nmap <Leader>gc :Gcommit<cr>
-nmap <Leader>gmv :Gmove 
-nmap <Leader>grm :Gremove
-nmap <Leader>gpu :Git push<cr>
-nmap <Leader>gt :w<cr>:bd<cr>:diffoff!<cr>
-nmap <Leader>gta :Gread<cr>:w<cr>:bd<cr>:diffoff!<cr>
-" clean up all those buffers fugitive leaves behind
-nmap <Leader>gbd :bdelete fugitive://<C-A><cr>
+let g:GitCmdMenu = {
+    \ 'title': 'Git',
+    \ 'commands': [
+        \ 'abort',
+        \ 'Gstatus',
+        \ 'Gvdiff',
+        \ 'Gcommit',
+        \ ['w', 'bd', 'diffoff!'],
+        \ ['Gread', 'w', 'bd', 'diffoff!'],
+        \ 'MagitOnly',
+        \ 'Gpush',
+        \ 'Gpull',
+        \ ],
+    \ 'options': [
+        \ '&status',
+        \ '&diff',
+        \ '&commit',
+        \ 's&tage',
+        \ 'stage &all',
+        \ '&magit',
+        \ '&push',
+        \ 'pul&l',
+        \ ],
+\ }
+nmap <Leader>g :call CmdMenu(GitCmdMenu)<cr>
 
 " Jsbeautify
 nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
@@ -760,6 +772,48 @@ nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
 
 " }}}
 " Custom functions and commands {{{ -------------------------------------------
+
+
+function! CmdMenu(conf)
+    " This menu function takes a dictionary like this one:
+    "
+    " example = {
+    "     \ 'title': 'Menu Title',
+    "     \ 'commands': [
+    "         \ 'abort',
+    "         \ 'something that `exe` can run',
+    "     \],
+    "     \ 'options': [
+    "         \ '&nice name for the command',
+    "     \],
+    " \}
+    "
+    " The 'options' list will be displayed as menu options. The ampersand indicates
+    " the shortcut key to press for that option. The 'commands' list must be in the
+    " same order as the options, as the list index is used for selection, and must
+    " be full of commands that `execute` can run. If an item is a list of commands,
+    " they will all be run.
+    "
+    " The 'abort' option should be left as a filler. Hitting escape cancels the
+    " menu.
+    "
+    " The idea for this came from http://marcotrosi.tumblr.com/post/134219004828/vim-confirm-function
+
+    let l:choice = 0
+    let l:choice = confirm(a:conf.title, join(a:conf.options, "\n"))
+    if l:choice != 0
+        " type 1 == string
+        if type(a:conf.commands[l:choice]) == 1
+            exe a:conf.commands[l:choice]
+        " type 3 == list
+        elseif type(a:conf.commands[l:choice]) == 3
+            for l:cmd in a:conf.commands[l:choice]
+                execute l:cmd
+            endfor
+        endif
+    endif
+endfunction
+
 
 function! ReloadAirline()
     execute ":AirlineTheme " . g:airline_theme
