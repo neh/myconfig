@@ -616,6 +616,11 @@ let g:diminactive_enable_focus = 1
 
 " vim-tmux-navigator
 let g:tmux_navigator_no_mappings = 1
+" There's an issue with <C-h> maps and neovim described here:
+" https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
+" The following commands fix it:
+"   infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
+"   tic $TERM.ti
 nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-t> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-n> :TmuxNavigateUp<cr>
