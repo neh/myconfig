@@ -72,8 +72,32 @@ Plug 'vim-scripts/AnsiEsc.vim'
 Plug 'tpope/vim-sleuth'
 " Plug 'vim-scripts/easytags.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+
+" lightline
+Plug 'itchyny/lightline.vim'
+let g:lightline = {
+    \ 'colorscheme': 'powerline',
+    \ 'separator': { 'left': '', 'right': '' },
+    \ 'subseparator': { 'left': '•', 'right': '•' },
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'fugitive', 'filename' ],
+    \   ],
+    \   'right': [ [ 'syntastic' ],
+    \              [ 'fileformat', 'fileencoding', 'filetype' ],
+    \              [ 'lineinfo' ],
+    \   ],
+    \ },
+    \ 'component_function': {
+    \   'readonly': 'LLReadonly',
+    \   'fugitive': 'LLFugitive',
+    \   'filename': 'LLFilename',
+    \   'fileencoding': 'LLFileEncoding',
+    \   'fileformat': 'LLFileFormat',
+    \   'lineinfo': 'LLLineinfo',
+    \ },
+\}
+
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-lastpat'
 Plug 'tpope/vim-commentary'
@@ -171,7 +195,7 @@ autocmd FileType ruby setlocal sts=2 sw=2 ts=2
 autocmd BufReadPost quickfix setlocal nowrap
 
 " re-read vimrc after writing it
-autocmd BufWritePost *vimrc source $HOME/.vimrc | call ReloadAirline()
+autocmd BufWritePost *vimrc source $HOME/.vimrc | call lightline#init() | call lightline#colorscheme() | call lightline#update()
 autocmd BufRead *vimrc,init.vim,*zshrc,*tmux.conf setlocal foldmethod=marker
 
 autocmd BufRead,BufNewFile *.zsh-theme setlocal filetype=zsh
@@ -548,7 +572,7 @@ endfunction
 function! s:goyo_leave()
   silent !tmux set status on
   silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  set showmode
+  set noshowmode
   set showcmd
   set scrolloff=3
 endfunction
@@ -653,36 +677,6 @@ let g:gitgutter_sign_added = '▶'
 let g:gitgutter_sign_modified = '◆'
 let g:gitgutter_sign_removed = '◀'
 let g:gitgutter_sign_modified_removed = '◆'
-
-" vim-airline
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_theme='tomorrow'
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_symbols.branch=''
-let g:airline_symbols.readonly=' '
-let g:airline_section_z='%p%% %l:%c'
-let g:airline#extensions#whitespace#trailing_format = '%s·'
-let g:airline#extensions#whitespace#mixed_indent_format = '%s➜'
-let g:airline#extensions#branch#empty_message = ''
-let g:airline#extensions#hunks#enabled = 0
-let g:airline#extensions#tagbar#enabled = 0
-call airline#parts#define_condition('ffenc', '&fenc != "utf-8" || &ff != "unix"')
-let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'c'  : 'C',
-    \ 'v'  : 'V',
-    \ 'V'  : 'V',
-    \ '' : 'V',
-    \ 's'  : 'S',
-    \ 'S'  : 'S',
-    \ '' : 'S',
-    \ }
 
 " CamelCaseMotion (need this in after/plugin as well)
 map <silent> w <Plug>CamelCaseMotion_w
@@ -850,6 +844,55 @@ nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
 
 " }}}
 " Custom functions and commands {{{ -------------------------------------------
+
+" Lightline functions
+function! LLReadonly()
+    if &filetype == "help"
+        return ""
+    elseif &readonly
+        return ""
+    else
+        return ""
+    endif
+endfunction
+
+function! LLModified()
+    if &filetype == "help"
+        return ""
+    elseif &modified
+        return ""
+    elseif &modifiable
+        return ""
+    else
+        return ""
+    endif
+endfunction
+
+function! LLFugitive()
+    if exists("*fugitive#head")
+        let branch = fugitive#head()
+        return branch !=# '' ? ' '.branch : ''
+    endif
+    return ''
+endfunction
+
+function! LLFilename()
+    return ('' != LLReadonly() ? LLReadonly() . ' ' : '') .
+         \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+         \ ('' != LLModified() ? ' ' . LLModified() : '')
+endfunction
+
+function! LLFileEncoding()
+    return &fenc != 'utf-8' ? &fenc : ''
+endfunction
+
+function! LLFileFormat()
+    return &fileformat != 'unix' ? &fileformat : ''
+endfunction
+
+function! LLLineinfo()
+    return line('.') * 100 / line('$') . '%' . ' ' . line('.') . ':' . getcurpos()[2]
+endfunction
 
 
 function! CmdMenu(conf)
