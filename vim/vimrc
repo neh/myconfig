@@ -696,6 +696,7 @@ nmap <Leader>a :call CmdMenu(SearchCmdMenu)<cr>
 let g:go_bin_path = expand("~/bin")
 
 " gitgutter
+let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_added = '▶'
 let g:gitgutter_sign_modified = '◆'
 let g:gitgutter_sign_removed = '◀'
