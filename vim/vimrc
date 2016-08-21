@@ -99,6 +99,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'terryma/vim-expand-region'
 Plug 'thirtythreeforty/lessspace.vim'
 Plug 'Konfekt/FastFold'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
@@ -488,6 +489,19 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" nerdtree git plugin
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "",
+    \ "Staged"    : "",
+    \ "Untracked" : "",
+    \ "Renamed"   : "",
+    \ "Unmerged"  : "",
+    \ "Deleted"   : "",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "",
+    \ "Unknown"   : "?",
+\ }
 
 " plug
 let g:PlugCmdMenu = {
