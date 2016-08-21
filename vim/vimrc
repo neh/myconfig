@@ -784,7 +784,7 @@ let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeAutoCenter=1
 let g:NERDTreeAutoCenterThreshold=6
 let g:NerdtreeCmdMenu = {
-    \ 'title': 'Plugins',
+    \ 'title': 'NERDTree',
     \ 'commands': [
         \ 'abort',
         \ 'NERDTreeToggle',
