@@ -752,6 +752,8 @@ let g:GitCmdMenu = {
         \ 'MagitOnly',
         \ 'Gpush',
         \ 'Gpull',
+        \ ':Gmove ',
+        \ ':Gremove',
         \ ],
     \ 'options': [
         \ '&status',
@@ -762,6 +764,8 @@ let g:GitCmdMenu = {
         \ '&magit',
         \ '&push',
         \ 'pul&l',
+        \ 'mo&ve',
+        \ '&remove',
         \ ],
 \ }
 nmap <Leader>g :call CmdMenu(GitCmdMenu)<cr>
@@ -782,6 +786,8 @@ function! CmdMenu(conf)
     "     \ 'commands': [
     "         \ 'abort',
     "         \ 'something that `exe` can run',
+    "         \ ['each', 'list', 'item', 'will', 'be', 'executed'],
+    "         \ ':user will be prompted for input',
     "     \],
     "     \ 'options': [
     "         \ '&nice name for the command',
@@ -804,7 +810,12 @@ function! CmdMenu(conf)
     if l:choice != 0
         " type 1 == string
         if type(a:conf.commands[l:choice]) == 1
-            exe a:conf.commands[l:choice]
+            if a:conf.commands[l:choice] =~ '^:.*'
+                let l:cmd = input('', a:conf.commands[l:choice])
+                execute l:cmd
+            else
+                execute a:conf.commands[l:choice]
+            endif
         " type 3 == list
         elseif type(a:conf.commands[l:choice]) == 3
             for l:cmd in a:conf.commands[l:choice]
