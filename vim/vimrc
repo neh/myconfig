@@ -389,11 +389,6 @@ tnoremap <Leader><ESC> <C-\><C-n>
 " highlight last inserted text
 nnoremap gV `[v`]
 
-" quick vundle maps
-nmap <leader>pi :PlugInstall<cr>
-nmap <leader>pu :PlugUpdate<cr>
-nmap <leader>pc :PlugClean<cr>
-
 " toggle folds
 nnoremap <cr> za
 vnoremap <cr> za
@@ -492,6 +487,23 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" plug
+let g:PlugCmdMenu = {
+    \ 'title': 'Plugins',
+    \ 'commands': [
+        \ 'abort',
+        \ 'PlugInstall',
+        \ 'PlugUpdate',
+        \ 'PlugClean',
+        \ ],
+    \ 'options': [
+        \ '&install',
+        \ '&update',
+        \ '&clean',
+        \ ],
+\ }
+nmap <Leader>p :call CmdMenu(PlugCmdMenu)<cr>
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
