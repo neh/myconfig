@@ -601,10 +601,20 @@ nmap <Leader>n :call CmdMenu(PadCmdMenu)<cr>
 let g:ctrlsf_position = 'right'
 let g:ctrlsf_winsize = '80%'
 let g:ctrlsf_leading_space = '8'
-nmap <Leader>a <Plug>CtrlSFPrompt
-nmap <Leader>A <Plug>CtrlSFOpen
 vmap a <Plug>CtrlSFVwordExec
-vmap A <Plug>CtrlSFVwordPath
+let g:SearchCmdMenu = {
+    \ 'title': 'Search in Files',
+    \ 'commands': [
+        \ 'abort',
+        \ ':CtrlSF ',
+        \ 'CtrlSFOpen',
+        \ ],
+    \ 'options': [
+        \ 'se&arch',
+        \ 're&open',
+        \ ],
+\ }
+nmap <Leader>a :call CmdMenu(SearchCmdMenu)<cr>
 
 " vim-go
 let g:go_bin_path = expand("~/bin")
