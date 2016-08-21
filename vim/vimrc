@@ -435,10 +435,10 @@ map <leader>dtr :%s/\s\+$//e<cr>
 map Y y$
 
 " A few dvorak movement adjustments
-noremap s l
+noremap <silent> <expr> s "@='l'<cr>"
 noremap S L
-noremap t gj
-noremap n gk
+noremap <silent> <expr> t (v:count == 0 ? 'gj' : "@='j'<cr>")
+noremap <silent> <expr> n (v:count == 0 ? 'gk' : "@='k'<cr>")
 noremap l n
 noremap L N
 noremap j J
