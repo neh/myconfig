@@ -603,6 +603,8 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 let g:org_heading_shade_leading_stars = 1
 
 " vimagit
+" No way to disable this mapping entirely :-(
+let g:magit_show_magit_mapping="'"
 autocmd User VimagitEnterCommit startinsert
 
 " vim-dim-inactive
