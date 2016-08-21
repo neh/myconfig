@@ -518,6 +518,26 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
 
+" bufkill
+let g:BufKillCreateMappings = 0
+let g:BufferCmdMenu = {
+    \ 'title': 'Buffers',
+    \ 'commands': [
+        \ 'abort',
+        \ 'bnext',
+        \ 'bprevious',
+        \ 'BD',
+        \ 'bwipeout',
+        \ ],
+    \ 'options': [
+        \ '&next',
+        \ '&previous',
+        \ '&delete',
+        \ '&wipe',
+        \ ],
+\ }
+nmap <Leader>b :call CmdMenu(BufferCmdMenu)<cr>
+
 " nerdtree git plugin
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "",
@@ -553,9 +573,6 @@ let g:deoplete#enable_at_startup = 1
 
 " bufmru
 let g:bufmru_switchkey = "<C-e>"
-
-" vim-bufkill
-nnoremap <Leader>bd :BD<cr>
 
 " vim-expand-region
 vmap v <Plug>(expand_region_expand)
