@@ -126,6 +126,7 @@ Plug 'Konfekt/FastFold'
 Plug 'ktonga/vim-follow-my-lead'
 let g:fml_all_sources = 1
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'christoomey/vim-sort-motion'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
