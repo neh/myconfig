@@ -641,6 +641,19 @@ let g:airline#extensions#branch#empty_message = ''
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#tagbar#enabled = 0
 call airline#parts#define_condition('ffenc', '&fenc != "utf-8" || &ff != "unix"')
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '' : 'V',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
 
 " CamelCaseMotion (need this in after/plugin as well)
 map <silent> w <Plug>CamelCaseMotion_w
