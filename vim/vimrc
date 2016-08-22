@@ -925,6 +925,7 @@ function! LLLineinfo()
 endfunction
 
 
+if !exists("*CmdMenu")
 function! CmdMenu(conf)
     " This menu function takes a dictionary like this one:
     "
@@ -971,6 +972,7 @@ function! CmdMenu(conf)
         endif
     endif
 endfunction
+endif
 
 
 function! ReloadAirline()
