@@ -653,9 +653,6 @@ xmap k <Plug>Sneak_t
 xmap K <Plug>Sneak_T
 omap k <Plug>Sneak_t
 omap K <Plug>Sneak_T
-
-nmap ? <Plug>SneakPrevious
-
 hi link SneakPluginTarget Search
 
 " vim-pad
