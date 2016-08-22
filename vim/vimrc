@@ -723,20 +723,30 @@ let g:PadCmdMenu = {
 nmap <Leader>n :call CmdMenu(PadCmdMenu)<cr>
 
 " ctrlsf
-let g:ctrlsf_position = 'right'
-let g:ctrlsf_winsize = '80%'
-let g:ctrlsf_leading_space = '8'
+let g:ctrlsf_position = 'bottom'
+let g:ctrlsf_winsize = '60%'
+let g:ctrlsf_leading_space = '4'
 vmap a <Plug>CtrlSFVwordExec
+let g:ctrlsf_mapping = {
+    \ "next": "<C-J>",
+    \ "prev": "<C-K>",
+    \ "tab": "",
+    \ "tabb": "",
+\ }
 let g:SearchCmdMenu = {
     \ 'title': 'Search in Files',
     \ 'commands': [
         \ 'abort',
         \ ':CtrlSF ',
-        \ 'CtrlSFOpen',
+        \ 'CtrlSFUpdate',
+        \ 'CtrlSFToggle',
+        \ ':CtrlSFQuickfix ',
         \ ],
     \ 'options': [
         \ 'se&arch',
-        \ 're&open',
+        \ '&update',
+        \ '&toggle',
+        \ '&quickfix',
         \ ],
 \ }
 nmap <Leader>a :call CmdMenu(SearchCmdMenu)<cr>
