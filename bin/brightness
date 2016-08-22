@@ -39,6 +39,8 @@ if direction in ['inc', 'up']:
     target = get_current() + STEP
 elif direction in ['dec', 'down']:
     target = get_current() - STEP
+elif int(direction):
+    target = int(direction)
 
 if target % STEP < 5:
     target = str(int(math.floor(target / STEP)) * STEP)
