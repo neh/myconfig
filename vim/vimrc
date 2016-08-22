@@ -468,9 +468,6 @@ cmap W! silent w !sudo tee % >/dev/null
 nnoremap / /\v
 vnoremap / /\v
 
-" Toggle wrapping
-nnoremap <silent> <Leader>w :setlocal nowrap! nolist!<cr>
-
 " quickly turn off search highlighting
 nmap <silent> <C-l> :noh<cr>
 
@@ -508,6 +505,18 @@ nnoremap <Leader>fb VaBzf
 " fast file format conversion
 nnoremap <Leader>ffd :setlocal ff=dos<CR>
 nnoremap <Leader>ffu :setlocal ff=unix<CR>
+
+let g:FormatCmdMenu = {
+    \ 'title': 'Formatting',
+    \ 'commands': [
+        \ 'abort',
+        \ 'setlocal nowrap! nolist!',
+        \ ],
+    \ 'options': [
+        \ '&wrap',
+        \ ],
+\ }
+nmap <Leader>F :call CmdMenu(FormatCmdMenu)<cr>
 
 
 " }}}
