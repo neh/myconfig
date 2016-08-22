@@ -104,6 +104,19 @@ let g:lightline = {
     \   'lineinfo': 'LLLineinfo',
     \ },
 \}
+let g:lightline.mode_map = {
+    \ 'n' : 'N',
+    \ 'i' : 'I',
+    \ 'R' : 'R',
+    \ 'v' : 'V',
+    \ 'V' : 'V-LINE',
+    \ "\<C-v>": 'V-BLOCK',
+    \ 'c' : 'C',
+    \ 's' : 'S',
+    \ 'S' : 'S-LINE',
+    \ "\<C-s>": 'S-BLOCK',
+    \ 't': 'TERMINAL',
+\ }
 
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-lastpat'
