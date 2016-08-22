@@ -128,6 +128,8 @@ let g:fml_all_sources = 1
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'christoomey/vim-sort-motion'
 Plug 'thalesmello/vim-textobj-methodcall'
+Plug 'junegunn/vim-pseudocl'
+Plug 'junegunn/vim-oblique'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
@@ -246,8 +248,8 @@ let php_parent_error_open = 1
 hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red ctermbg=black
 
 " Change some highlight group colours, overriding the colour scheme search terms
-hi Search term=none cterm=bold ctermfg=252 ctermbg=22
-hi IncSearch term=none cterm=none ctermfg=232 ctermbg=41
+" hi Search term=underline cterm=underline ctermfg=25
+" hi IncSearch term=underline cterm=underline ctermfg=23 ctermbg=0
 " todo
 hi Todo term=bold cterm=bold ctermfg=red ctermbg=yellow
 " popup menu
@@ -440,8 +442,6 @@ noremap <silent> <expr> s "@='l'<cr>"
 noremap S L
 noremap <silent> <expr> t (v:count == 0 ? 'gj' : "@='j'<cr>")
 noremap <silent> <expr> n (v:count == 0 ? 'gk' : "@='k'<cr>")
-noremap l n
-noremap L N
 noremap j J
 
 " Keep line containing search term centered and unfold as needed
@@ -452,8 +452,6 @@ nnoremap L Nzzzv
 sunmap s
 sunmap S
 sunmap t
-sunmap n
-sunmap N
 
 " No more Ex mode mapping. Do something useful instead.
 vmap Q gq
@@ -486,10 +484,6 @@ nmap <Leader>cd :lcd %:h<cr>
 " Set up retabbing on a source file
 nmap <Leader>rt :1,$retab<cr>
 
-" In visual mode press * or # to search for the current selection
-vnoremap <silent> * :call VisualSearch('f')<CR>zzzv
-vnoremap <silent> # :call VisualSearch('b')<CR>zzzv
-
 " Quickfix window maps
 nmap <Leader>co :copen<cr>
 nmap <Leader>cx :cclose<cr>
@@ -517,6 +511,12 @@ nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
 " }}}
 " Plugin configs {{{ ----------------------------------------------------------
+
+" oblique
+nmap / <Plug>(Oblique-F/)
+nmap ? <Plug>(Oblique-F?)
+nmap l <Plug>(Oblique-n)
+nmap L <Plug>(Oblique-N)
 
 " bufkill
 let g:BufKillCreateMappings = 0
@@ -1049,29 +1049,6 @@ endfunction
 "autocmd CursorMoved,CursorMovedI * call s:Cursor_Moved()
 let g:last_screen_pos = 0
 let g:last_file_pos = 0
-
-
-" A visual search mode function. Searches for the current selection
-" forwards, backwards, or with Ack.
-" from: http://amix.dk/vim/vimrc.html (but slightly customized)
-function! VisualSearch(direction) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-
-    let l:pattern = escape(@", '\\/.*$^~[]')
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-    if a:direction == 'b'
-        execute "normal ?" . l:pattern . ""
-    elseif a:direction == 'gf'
-        execute "normal :LAck " . l:pattern . ""
-    elseif a:direction == 'f'
-        execute "normal /" . l:pattern . ""
-    endif
-
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
 
 
 " Show syntax highlighting groups for word under cursor
