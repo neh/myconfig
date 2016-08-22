@@ -930,6 +930,8 @@ let g:GitCmdMenu = {
         \ ],
 \ }
 nmap <Leader>g :call CmdMenu(GitCmdMenu)<cr>
+nmap [c <Plug>GitGutterPrevHunk
+nmap ]c <Plug>GitGutterNextHunk
 
 " Jsbeautify
 nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
