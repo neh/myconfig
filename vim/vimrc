@@ -42,7 +42,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-fugitive'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'dimasg/vim-mark'
+" Plug 'dimasg/vim-mark'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-repeat'
 Plug 'chrisbra/SudoEdit.vim'
@@ -775,7 +775,17 @@ if executable($HOME . "/myconfig/phpctags/phpctags")
 endif
 
 " Mark
-nmap <Leader><Leader><Leader>/ <Plug>MarkSearchAnyNext
+let g:MarkCmdMenu = {
+    \ 'title': 'Marks',
+    \ 'commands': [
+        \ 'abort',
+        \ 'MarkSet',
+        \ ],
+    \ 'options': [
+        \ '&new',
+        \ ],
+\ }
+nmap <Leader>M :call CmdMenu(MarkCmdMenu)<cr>
 function! s:SetMarkColours()
     highlight MarkWord1 ctermbg=208 ctermfg=Black guibg=#F2891F guifg=Black
     highlight MarkWord2 ctermbg=148 ctermfg=Black guibg=#BCFA37 guifg=Black
