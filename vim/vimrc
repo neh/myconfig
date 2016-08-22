@@ -88,12 +88,19 @@ let g:lightline = {
     \              [ 'lineinfo' ],
     \   ],
     \ },
+    \ 'inactive': {
+    \   'right': [ [ 'fileformat', 'fileencoding', 'filetype' ],
+    \              [ 'lineinfo' ],
+    \   ],
+    \ },
     \ 'component_function': {
+    \   'mode': 'LLMode',
     \   'readonly': 'LLReadonly',
     \   'fugitive': 'LLFugitive',
     \   'filename': 'LLFilename',
     \   'fileencoding': 'LLFileEncoding',
     \   'fileformat': 'LLFileFormat',
+    \   'filetype': 'LLFileType',
     \   'lineinfo': 'LLLineinfo',
     \ },
 \}
@@ -922,9 +929,13 @@ function! LLModified()
 endfunction
 
 function! LLFugitive()
-    if exists("*fugitive#head")
-        let branch = fugitive#head()
-        return branch !=# '' ? ' '.branch : ''
+    if &filetype == "help"
+        return ""
+    else
+        if exists("*fugitive#head")
+            let branch = fugitive#head()
+            return branch !=# '' ? ' '.branch : ''
+        endif
     endif
     return ''
 endfunction
@@ -943,8 +954,20 @@ function! LLFileFormat()
     return &fileformat != 'unix' ? &fileformat : ''
 endfunction
 
+function! LLFileType()
+    return &filetype == "help" ? '' : &filetype
+endfunction
+
 function! LLLineinfo()
-    return line('.') * 100 / line('$') . '%' . ' ' . line('.') . ':' . getcurpos()[2]
+    if &filetype == "help"
+        return line('.') * 100 / line('$') . '%'
+    else
+        return line('.') * 100 / line('$') . '%' . ' ' . line('.') . ':' . getcurpos()[2]
+    endif
+endfunction
+
+function! LLMode()
+    return &filetype == "help" ? '' : lightline#mode()
 endfunction
 
 
