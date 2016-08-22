@@ -605,8 +605,9 @@ let g:org_heading_shade_leading_stars = 1
 " vimagit
 " No way to disable this mapping entirely :-(
 let g:magit_show_magit_mapping="'"
-let g:magit_close_mapping='"'
 autocmd FileType magit nnoremap <buffer> q :BD<cr>
+autocmd FileType magit nnoremap <buffer> P :execute 'normal zt' <bar> :call magit#jump_hunk('P')<cr>
+autocmd FileType magit nnoremap <buffer> N :execute 'normal zt' <bar> :call magit#jump_hunk('N')<cr>
 autocmd User VimagitEnterCommit startinsert
 
 " vim-dim-inactive
