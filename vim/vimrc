@@ -506,6 +506,22 @@ nnoremap <Leader>fb VaBzf
 nnoremap <Leader>ffd :setlocal ff=dos<CR>
 nnoremap <Leader>ffu :setlocal ff=unix<CR>
 
+let g:WindowCmdMenu = {
+    \ 'title': 'Windows',
+    \ 'commands': [
+        \ 'abort',
+        \ 'wincmd c',
+        \ 'wincmd x',
+        \ 'wincmd L',
+        \ ],
+    \ 'options': [
+        \ '&close',
+        \ '&swap next',
+        \ 'move &right',
+        \ ],
+\ }
+nmap <Leader>w :call CmdMenu(WindowCmdMenu)<cr>
+
 let g:FormatCmdMenu = {
     \ 'title': 'Formatting',
     \ 'commands': [
