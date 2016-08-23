@@ -433,9 +433,6 @@ nnoremap z<space> zCzO
 " refocus folds
 nnoremap zf zMzvzz
 
-" delete trailing whitespace
-map <leader>dtr :%s/\s\+$//e<cr>
-
 " make Y behave like other capitals
 map Y y$
 
@@ -512,12 +509,14 @@ let g:FormatCmdMenu = {
     \ 'commands': [
         \ 'abort',
         \ 'setlocal nowrap! nolist!',
+        \ '%s/\s\+$//e',
         \ 'call g:Jsbeautify()',
         \ 'setlocal ff=dos',
         \ 'setlocal ff=unix',
         \ ],
     \ 'options': [
         \ '&wrap',
+        \ 'rm white&space',
         \ '&jsbeautify',
         \ 'ff2&dos',
         \ 'ff2&unix',
