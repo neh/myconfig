@@ -892,10 +892,9 @@ let g:GitCmdMenu = {
         \ 'abort',
         \ 'Gstatus',
         \ 'Gvdiff',
-        \ 'Gcommit',
-        \ ['w', 'bd', 'diffoff!'],
-        \ ['Gread', 'w', 'bd', 'diffoff!'],
         \ 'MagitOnly',
+        \ 'call CmdMenu(g:GitStageCmdMenu)',
+        \ 'Gcommit',
         \ 'Gpush',
         \ 'Gpull',
         \ ':Gmove ',
@@ -904,14 +903,29 @@ let g:GitCmdMenu = {
     \ 'options': [
         \ '&status',
         \ '&diff',
-        \ '&commit',
-        \ 's&tage',
-        \ 'stage &all',
         \ '&magit',
+        \ 's&tage',
+        \ '&commit',
         \ '&push',
         \ 'pul&l',
         \ 'mo&ve',
         \ '&remove',
+        \ ],
+\ }
+let g:GitStageCmdMenu = {
+    \ 'title': 'Git staging',
+    \ 'commands': [
+        \ 'abort',
+        \ 'Gwrite',
+        \ "call gitgutter#stage_hunk()",
+        \ ['w', 'bd', 'diffoff!'],
+        \ ['Gread', 'w', 'bd', 'diffoff!'],
+        \ ],
+    \ 'options': [
+        \ '&file',
+        \ '&hunk',
+        \ 's&tage',
+        \ 'stage &all',
         \ ],
 \ }
 nmap <Leader>g :call CmdMenu(GitCmdMenu)<cr>
