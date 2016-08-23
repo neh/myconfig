@@ -151,6 +151,7 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'thalesmello/vim-textobj-methodcall'
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-oblique'
+Plug 'tmhedberg/SimpylFold'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
