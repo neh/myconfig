@@ -1017,26 +1017,38 @@ function! CmdMenu(conf)
     " The 'abort' option should be left as a filler. Hitting escape cancels the
     " menu.
     "
+    " If the argument has a key named 'persist', then it will remain active
+    " until the user exits with <c-c> or <esc>. Useful for things like a
+    " quickfix navigation menu.
+    "
     " The idea for this came from http://marcotrosi.tumblr.com/post/134219004828/vim-confirm-function
 
-    let l:choice = 0
-    let l:choice = confirm(a:conf.title, join(a:conf.options, "\n"))
-    if l:choice != 0
-        " type 1 == string
-        if type(a:conf.commands[l:choice]) == 1
-            if a:conf.commands[l:choice] =~ '^:.*'
-                let l:cmd = input('', a:conf.commands[l:choice])
-                execute l:cmd
-            else
-                execute a:conf.commands[l:choice]
+    while 1
+        let l:choice = 0
+        let l:choice = confirm(a:conf.title, join(a:conf.options, "\n"))
+        if l:choice != 0
+            " type 1 == string
+            if type(a:conf.commands[l:choice]) == 1
+                if a:conf.commands[l:choice] =~ '^:.*'
+                    let l:cmd = input('', a:conf.commands[l:choice])
+                    execute l:cmd
+                else
+                    execute a:conf.commands[l:choice]
+                endif
+            " type 3 == list
+            elseif type(a:conf.commands[l:choice]) == 3
+                for l:cmd in a:conf.commands[l:choice]
+                    execute l:cmd
+                endfor
             endif
-        " type 3 == list
-        elseif type(a:conf.commands[l:choice]) == 3
-            for l:cmd in a:conf.commands[l:choice]
-                execute l:cmd
-            endfor
         endif
-    endif
+        " Clear and redraw to get rid of previous output on persistent menus
+        silent execute 'redraw!'
+        " If this is a single run menu or <esc> was pressed, break out
+        if ! has_key(a:conf, 'persist') || l:choice == 0
+            break
+        endif
+    endwhile
 endfunction
 endif
 
