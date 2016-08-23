@@ -504,7 +504,7 @@ let g:WindowCmdMenu = {
         \ '&only',
         \ ],
 \ }
-nmap <Leader>w :call CmdMenu(WindowCmdMenu)<cr>
+nmap <silent> <Leader>w :call CmdMenu(WindowCmdMenu)<cr>
 
 let g:FormatCmdMenu = {
     \ 'title': 'Formatting',
@@ -524,7 +524,7 @@ let g:FormatCmdMenu = {
         \ 'ff2&unix',
         \ ],
 \ }
-nmap <Leader>F :call CmdMenu(FormatCmdMenu)<cr>
+nmap <silent> <Leader>F :call CmdMenu(FormatCmdMenu)<cr>
 
 
 " }}}
@@ -559,7 +559,7 @@ let g:BufferCmdMenu = {
         \ '&wipe',
         \ ],
 \ }
-nmap <Leader>b :call CmdMenu(BufferCmdMenu)<cr>
+nmap <silent> <Leader>b :call CmdMenu(BufferCmdMenu)<cr>
 
 " nerdtree git plugin
 let g:NERDTreeIndicatorMapCustom = {
@@ -589,7 +589,7 @@ let g:PlugCmdMenu = {
         \ '&clean',
         \ ],
 \ }
-nmap <Leader>p :call CmdMenu(PlugCmdMenu)<cr>
+nmap <silent> <Leader>p :call CmdMenu(PlugCmdMenu)<cr>
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
@@ -697,7 +697,7 @@ let g:PadCmdMenu = {
         \ 'list &all',
         \ ],
 \ }
-nmap <Leader>n :call CmdMenu(PadCmdMenu)<cr>
+nmap <silent> <Leader>n :call CmdMenu(PadCmdMenu)<cr>
 
 " ctrlsf
 let g:ctrlsf_position = 'bottom'
@@ -726,7 +726,7 @@ let g:SearchCmdMenu = {
         \ '&quickfix',
         \ ],
 \ }
-nmap <Leader>a :call CmdMenu(SearchCmdMenu)<cr>
+nmap <silent> <Leader>a :call CmdMenu(SearchCmdMenu)<cr>
 
 " vim-go
 let g:go_bin_path = expand("~/bin")
@@ -772,7 +772,7 @@ let g:MarkCmdMenu = {
         \ '&new',
         \ ],
 \ }
-nmap <Leader>M :call CmdMenu(MarkCmdMenu)<cr>
+nmap <silent> <Leader>M :call CmdMenu(MarkCmdMenu)<cr>
 function! s:SetMarkColours()
     highlight MarkWord1 ctermbg=208 ctermfg=Black guibg=#F2891F guifg=Black
     highlight MarkWord2 ctermbg=148 ctermfg=Black guibg=#BCFA37 guifg=Black
@@ -870,7 +870,7 @@ let g:NerdtreeCmdMenu = {
         \ 'open &here',
         \ ],
 \ }
-nmap <Leader>t :call CmdMenu(NerdtreeCmdMenu)<cr>
+nmap <silent> <Leader>t :call CmdMenu(NerdtreeCmdMenu)<cr>
 
 " fugitive (git)
 let g:GitCmdMenu = {
@@ -917,7 +917,7 @@ let g:GitStageCmdMenu = {
         \ 'stage &all',
         \ ],
 \ }
-nmap <Leader>g :call CmdMenu(GitCmdMenu)<cr>
+nmap <silent> <Leader>g :call CmdMenu(GitCmdMenu)<cr>
 nmap [c <Plug>GitGutterPrevHunk
 nmap ]c <Plug>GitGutterNextHunk
 
