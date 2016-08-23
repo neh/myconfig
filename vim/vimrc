@@ -548,9 +548,11 @@ let g:FormatCmdMenu = {
     \ 'commands': [
         \ 'abort',
         \ 'setlocal nowrap! nolist!',
+        \ 'call g:Jsbeautify()',
         \ ],
     \ 'options': [
         \ '&wrap',
+        \ '&jsbeautify',
         \ ],
 \ }
 nmap <Leader>F :call CmdMenu(FormatCmdMenu)<cr>
@@ -933,9 +935,6 @@ let g:GitCmdMenu = {
 nmap <Leader>g :call CmdMenu(GitCmdMenu)<cr>
 nmap [c <Plug>GitGutterPrevHunk
 nmap ]c <Plug>GitGutterNextHunk
-
-" Jsbeautify
-nnoremap <silent> <leader>jb :call g:Jsbeautify()<cr>
 
 
 " }}}
