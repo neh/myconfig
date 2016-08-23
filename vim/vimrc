@@ -490,9 +490,6 @@ nmap <Leader>VS :so ~/.vimrc<cr>
 " cd to the dir containing the current file
 nmap <Leader>cd :lcd %:h<cr>
 
-" Set up retabbing on a source file
-nmap <Leader>rt :1,$retab<cr>
-
 " Quickfix window maps
 nmap <Leader>co :copen<cr>
 nmap <Leader>cx :cclose<cr>
