@@ -194,7 +194,6 @@ endif
 " Filetype specific options {{{ -----------------------------------------------
 
 " add filetype to files that need it
-"autocmd BufRead,BufNewFile COMMIT_EDITMSG setlocal filetype git
 autocmd BufRead,BufNewFile *.snippet? setlocal filetype=snippet sts=8 sw=8 noet
 autocmd BufRead,BufNewFile *.mustache,*.ms setlocal filetype=mustache
 autocmd BufRead,BufNewFile *.md setlocal filetype=markdown
@@ -258,15 +257,6 @@ autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 " Highlight error logging functions (php error_log, js console.log, etc)
 " Terms to be highlighted are defined in ~/.vim/after/syntax/*
 hi ErrorLogFunction term=inverse,bold cterm=inverse,bold ctermfg=red ctermbg=black
-
-" Change some highlight group colours, overriding the colour scheme search terms
-" hi Search term=underline cterm=underline ctermfg=25
-" hi IncSearch term=underline cterm=underline ctermfg=23 ctermbg=0
-" todo
-hi Todo term=bold cterm=bold ctermfg=red ctermbg=yellow
-" popup menu
-hi Pmenu term=none cterm=none ctermfg=250 ctermbg=238
-hi PmenuSel term=bold cterm=bold ctermfg=black ctermbg=250
 
 if $TMUX != '' || $TERM == 'rxvt-256color'
     hi Folded cterm=italic gui=italic
