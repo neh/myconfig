@@ -60,12 +60,10 @@ Plug 'sheerun/vim-polyglot'
 " The Rest
 Plug 'airblade/vim-gitgutter'
 Plug 'Raimondi/delimitMate'
-Plug 'AndrewRadev/splitjoin.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/gist-vim'
 Plug 'vim-scripts/dbext.vim'
 Plug 'scrooloose/syntastic'
-Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/AnsiEsc.vim'
@@ -135,7 +133,6 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'jreybert/vimagit'
 Plug 'blueyed/vim-diminactive'
-Plug 'nhooyr/neoman.vim'
 Plug 'vimoutliner/vimoutliner'
 Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
@@ -198,8 +195,6 @@ endif
 
 " add filetype to files that need it
 "autocmd BufRead,BufNewFile COMMIT_EDITMSG setlocal filetype git
-autocmd BufRead,BufNewFile *.erb setlocal filetype=eruby
-autocmd BufRead,BufNewFile Berksfile setlocal filetype=ruby
 autocmd BufRead,BufNewFile *.snippet? setlocal filetype=snippet sts=8 sw=8 noet
 autocmd BufRead,BufNewFile *.mustache,*.ms setlocal filetype=mustache
 autocmd BufRead,BufNewFile *.md setlocal filetype=markdown
@@ -255,11 +250,6 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-
-let php_sql_query = 1
-let php_htmlInStrings = 1
-let php_parent_error_close = 1
-let php_parent_error_open = 1
 
 
 " }}}
@@ -514,9 +504,6 @@ nmap <Leader>lx :lclose<cr>
 " Turn off diff options
 nmap <Leader>do :diffoff<cr>
 nmap <Leader>do! :diffoff!<cr>
-
-" Quick PHP syntax check (CTRL-l)
-autocmd FileType php noremap <Leader>phpl :!/usr/bin/php -l %<CR>
 
 " Create folds for objects (tags, paras, blocks, etc.)
 nnoremap <Leader>ft Vatzf
@@ -869,11 +856,6 @@ let g:dbext_default_DBI_list_proc_SQLAnywhere =
 let g:dbext_default_DBI_desc_proc_PGSQL = 'select p.* from pg_proc p, pg_language l where p.prolang = l.oid and p.proname = ''proc_percentiles'' order by p.pronargs'
 "let g:dbext_default_DBI_desc_proc_PGSQL = "select p.* from pg_proc p, pg_language l where p.prolang = l.oid and p.proname = ''dbext_replace_name'' order by p.pronargs"
 
-" Gundo
-nmap <Leader>un :GundoToggle<CR>
-let g:gundo_map_move_older="t"
-let g:gundo_map_move_newer="n"
-
 " Surround
 " Change visual mode surround mappings so s works for movement again
 vmap <Leader>s <Plug>Vsurround
@@ -1055,10 +1037,6 @@ function! CmdMenu(conf)
 endfunction
 endif
 
-
-function! ReloadAirline()
-    execute ":AirlineTheme " . g:airline_theme
-endfunction
 
 function! SmartAlign(mode)
     let cur_line = getline('.')
