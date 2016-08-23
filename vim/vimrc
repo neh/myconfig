@@ -494,12 +494,14 @@ let g:WindowCmdMenu = {
         \ 'wincmd x',
         \ 'wincmd L',
         \ 'sb #',
+        \ 'wincmd o',
         \ ],
     \ 'options': [
         \ '&close',
         \ '&swap next',
         \ 'move &right',
         \ 's&plit',
+        \ '&only',
         \ ],
 \ }
 nmap <Leader>w :call CmdMenu(WindowCmdMenu)<cr>
