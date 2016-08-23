@@ -1038,23 +1038,6 @@ endfunction
 endif
 
 
-function! SmartAlign(mode)
-    let cur_line = getline('.')
-
-    if a:mode =~ "[vV]"
-        let range = "'<,'>"
-    else
-        let range = ''
-    endif
-
-    if cur_line =~ ":"
-        execute "normal! :" . range . "Tabularize first_colon"
-    elseif cur_line =~ "="
-        execute "normal! :" . range . "Tabularize assignment"
-    endif
-endfunction
-
-
 " I keep hitting :W when saving. It may as well work.
 command! W :w
 
