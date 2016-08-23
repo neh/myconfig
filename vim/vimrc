@@ -510,10 +510,6 @@ nnoremap <Leader>ft Vatzf
 nnoremap <Leader>fp Vapzf
 nnoremap <Leader>fb VaBzf
 
-" fast file format conversion
-nnoremap <Leader>ffd :setlocal ff=dos<CR>
-nnoremap <Leader>ffu :setlocal ff=unix<CR>
-
 let g:WindowCmdMenu = {
     \ 'title': 'Windows',
     \ 'commands': [
@@ -538,10 +534,14 @@ let g:FormatCmdMenu = {
         \ 'abort',
         \ 'setlocal nowrap! nolist!',
         \ 'call g:Jsbeautify()',
+        \ 'setlocal ff=dos',
+        \ 'setlocal ff=unix',
         \ ],
     \ 'options': [
         \ '&wrap',
         \ '&jsbeautify',
+        \ 'ff2&dos',
+        \ 'ff2&unix',
         \ ],
 \ }
 nmap <Leader>F :call CmdMenu(FormatCmdMenu)<cr>
