@@ -456,10 +456,6 @@ noremap <silent> <expr> t (v:count == 0 ? 'gj' : "@='j'<cr>")
 noremap <silent> <expr> n (v:count == 0 ? 'gk' : "@='k'<cr>")
 noremap j J
 
-" Keep line containing search term centered and unfold as needed
-nnoremap l nzzzv
-nnoremap L Nzzzv
-
 " Unmap my dvorak movement keys in select mode so Snipmate snippets don't suck
 sunmap s
 sunmap S
@@ -474,10 +470,6 @@ nmap <Leader><space> :w<cr>
 
 " Save files that you need sudo for, but didn't open as root
 cmap W! silent w !sudo tee % >/dev/null
-
-" Change regex handling
-nnoremap / /\v
-vnoremap / /\v
 
 " quickly turn off search highlighting
 nmap <silent> <C-l> :noh<cr>
@@ -548,8 +540,13 @@ nmap <Leader>F :call CmdMenu(FormatCmdMenu)<cr>
 " Plugin configs {{{ ----------------------------------------------------------
 
 " oblique
-nmap / <Plug>(Oblique-F/)
-nmap ? <Plug>(Oblique-F?)
+autocmd! User Oblique
+autocmd! User ObliqueStar
+autocmd! User ObliqueRepeat
+autocmd User Oblique       normal! zzzv
+autocmd User ObliqueStar   normal! zzzv
+autocmd User ObliqueRepeat normal! zzzv
+" let g:oblique#prefix = '\v'
 nmap l <Plug>(Oblique-n)
 nmap L <Plug>(Oblique-N)
 
