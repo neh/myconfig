@@ -149,6 +149,7 @@ Plug 'thalesmello/vim-textobj-methodcall'
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-oblique'
 Plug 'tmhedberg/SimpylFold'
+Plug 'wellle/tmux-complete.vim'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
@@ -614,6 +615,9 @@ let g:deoplete#enable_at_startup = 1
 
 " bufmru
 let g:bufmru_switchkey = "<C-e>"
+
+" tmux-complete
+let g:tmuxcomplete#trigger = 'omnifunc'
 
 " vim-expand-region
 vmap v <Plug>(expand_region_expand)
