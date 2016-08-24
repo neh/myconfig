@@ -165,6 +165,8 @@ function! DoRemote(arg)
 endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'zchee/deoplete-jedi'
+Plug 'Shougo/neco-vim'
+Plug 'Shougo/neoinclude.vim'
 
 call plug#end()
 
