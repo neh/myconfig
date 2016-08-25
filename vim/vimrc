@@ -150,6 +150,8 @@ Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-oblique'
 Plug 'tmhedberg/SimpylFold'
 Plug 'wellle/tmux-complete.vim'
+Plug 'szw/vim-maximizer'
+let g:maximizer_set_default_mapping = 0
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
@@ -494,6 +496,9 @@ let g:WindowCmdMenu = {
         \ 'wincmd L',
         \ 'sb #',
         \ 'wincmd o',
+        \ 'wincmd x',
+        \ 'MaximizerToggle',
+        \ 'wincmd =',
         \ ],
     \ 'options': [
         \ '&close',
@@ -501,6 +506,9 @@ let g:WindowCmdMenu = {
         \ 'move &right',
         \ 's&plit',
         \ '&only',
+        \ '&rotate',
+        \ 'ma&ximize',
+        \ 'e&qualize',
         \ ],
 \ }
 nmap <silent> <Leader>w :call CmdMenu(WindowCmdMenu)<cr>
