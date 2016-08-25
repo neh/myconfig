@@ -431,6 +431,8 @@ nnoremap gV `[v`]
 " toggle folds
 nnoremap <cr> za
 vnoremap <cr> za
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
 
 " recursively open folds
 nnoremap z<space> zCzO
