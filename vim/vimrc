@@ -432,6 +432,7 @@ nnoremap gV `[v`]
 nnoremap <cr> za
 vnoremap <cr> za
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+autocmd BufReadPost *CtrlSF* nnoremap <buffer> <CR> <CR>
 autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
 
 " recursively open folds
