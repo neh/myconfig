@@ -255,6 +255,8 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 
+autocmd BufLeave,WinLeave,FocusLost * setlocal number norelativenumber
+autocmd BufEnter,WinEnter,FocusGained * setlocal number relativenumber
 
 " }}}
 " Custom highlighting {{{ -----------------------------------------------------
