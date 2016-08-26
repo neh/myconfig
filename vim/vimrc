@@ -740,6 +740,8 @@ let g:ctrlsf_mapping = {
     \ "prev": "<C-K>",
     \ "tab": "",
     \ "tabb": "",
+    \ "popen": "p",
+    \ "quit": "q",
 \ }
 let g:SearchCmdMenu = {
     \ 'title': 'Search in Files',
