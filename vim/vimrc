@@ -734,6 +734,7 @@ let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_winsize = '60%'
 let g:ctrlsf_leading_space = '4'
 vmap a <Plug>CtrlSFVwordExec
+vmap A <Plug>CtrlSFQuickfixVwordExec
 let g:ctrlsf_mapping = {
     \ "next": "<C-J>",
     \ "prev": "<C-K>",
