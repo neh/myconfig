@@ -152,6 +152,7 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'wellle/tmux-complete.vim'
 Plug 'szw/vim-maximizer'
 let g:maximizer_set_default_mapping = 0
+Plug 'tpope/vim-endwise'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
