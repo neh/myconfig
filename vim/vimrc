@@ -945,7 +945,7 @@ let g:GitStageCmdMenu = {
     \ 'commands': [
         \ 'abort',
         \ 'Gwrite',
-        \ "call gitgutter#stage_hunk()",
+        \ "normal \<Plug>GitGutterStageHunk",
         \ ['w', 'bd', 'diffoff!'],
         \ ['Gread', 'w', 'bd', 'diffoff!'],
         \ ],
