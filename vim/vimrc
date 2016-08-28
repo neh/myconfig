@@ -154,6 +154,7 @@ Plug 'szw/vim-maximizer'
 let g:maximizer_set_default_mapping = 0
 Plug 'tpope/vim-endwise'
 Plug 'cespare/vim-toml'
+Plug 'dohsimpson/vim-macroeditor'
 
 " Colors
 Plug 'rainux/vim-desert-warm-256'
